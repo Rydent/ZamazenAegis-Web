@@ -2652,12 +2652,34 @@
     }
 
     @media (max-width: 767px) {
+      .container {
+        width: min(var(--max-width), calc(100% - 28px));
+      }
+
+      .header {
+        height: 72px;
+      }
+
       .header-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 40px;
+        align-items: center;
         gap: 8px;
       }
 
       .brand {
         gap: 7px;
+        max-width: calc(100vw - 90px);
+      }
+
+      .nav-wrapper {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: min(320px, calc(100vw - 28px));
+        min-width: 0;
+        justify-self: auto;
+        margin-left: 0;
       }
 
       .brand-mark {
@@ -2679,9 +2701,37 @@
       }
 
       .nav-toggle {
+        position: fixed;
+        top: 16px;
+        right: 14px;
         display: inline-grid;
         width: 40px;
         height: 40px;
+        transform: none;
+        z-index: 120;
+        color: #02120d;
+        background:
+          radial-gradient(circle at 30% 18%, rgba(255, 255, 255, 0.52), transparent 42%),
+          linear-gradient(135deg, var(--green), var(--blue));
+        border-color: rgba(94, 240, 189, 0.42);
+        box-shadow:
+          0 0 0 1px rgba(94, 240, 189, 0.14),
+          0 0 22px rgba(94, 240, 189, 0.28);
+      }
+
+      .nav-toggle-line,
+      .nav-toggle-line::before,
+      .nav-toggle-line::after {
+        background: #02120d;
+      }
+
+      .nav-toggle::after {
+        content: "";
+        position: absolute;
+        inset: -6px;
+        border-radius: 18px;
+        border: 1px solid rgba(94, 240, 189, 0.26);
+        pointer-events: none;
       }
 
       .control-switchers .language-switcher,
@@ -2699,8 +2749,67 @@
       }
 
       .nav {
-        top: calc(100% + 116px);
-        width: min(320px, calc(100vw - 32px));
+        top: calc(100% + 118px);
+        width: min(320px, calc(100vw - 28px));
+      }
+
+      .control-switchers {
+        top: calc(100% + 12px);
+        width: min(320px, calc(100vw - 28px));
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 48px 0 56px;
+      }
+
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 34px;
+      }
+
+      .hero-copy,
+      .hero p,
+      .hero-subline,
+      .hero-points {
+        max-width: 100%;
+        min-width: 0;
+      }
+
+      .hero h1 {
+        max-width: 100%;
+        font-size: clamp(2.18rem, 11.4vw, 3.35rem);
+        line-height: 1.06;
+        overflow-wrap: break-word;
+        text-wrap: balance;
+      }
+
+      .hero p,
+      .hero-subline {
+        font-size: 0.98rem;
+        overflow-wrap: break-word;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+      }
+
+      .hero-actions .cta-primary,
+      .hero-actions .cta-secondary {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .cta-microcopy {
+        max-width: 100%;
+      }
+
+      .hero-visual,
+      .phone-shell {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
       }
 
       .rune {
@@ -2732,11 +2841,55 @@
 
       .cookie-actions,
       .cookie-panel-actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
         align-items: stretch;
+        width: 100%;
       }
 
       .cookie-button {
-        flex: 1 1 auto;
+        width: 100%;
+        min-width: 0;
+        justify-content: center;
+        text-align: center;
+        white-space: normal;
+      }
+
+      .cookie-banner {
+        left: 12px;
+        right: 12px;
+        bottom: max(12px, env(safe-area-inset-bottom));
+        max-height: calc(100svh - 24px);
+        overflow: auto;
+        gap: 14px;
+        padding: 16px;
+        border-radius: 18px;
+      }
+
+      .cookie-copy strong {
+        font-size: 0.98rem;
+      }
+
+      .cookie-copy p {
+        font-size: 0.9rem;
+        line-height: 1.55;
+        overflow-wrap: break-word;
+      }
+
+      .cookie-panel {
+        max-height: calc(100svh - 24px);
+        padding: 18px;
+        border-radius: 20px;
+      }
+
+      .cookie-panel-header {
+        gap: 12px;
+      }
+
+      .cookie-category {
+        grid-template-columns: minmax(0, 1fr);
+        align-items: flex-start;
+        gap: 12px;
       }
     }
   </style>
@@ -2755,11 +2908,11 @@
           </div>
         </a>
 
-        <div class="nav-wrapper" id="navWrapper">
-          <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Abrir menú">
-            <span class="nav-toggle-line"></span>
-          </button>
+        <a class="nav-toggle" id="navToggle" href="#siteNav" role="button" aria-expanded="false" aria-controls="siteNav" aria-label="Abrir menú">
+          <span class="nav-toggle-line"></span>
+        </a>
 
+        <div class="nav-wrapper" id="navWrapper">
           <nav class="nav" id="siteNav" aria-label="Principal">
             <a href="#inicio" data-i18n="nav.home">Inicio</a>
             <a href="#funciones" data-i18n="nav.features">Funciones</a>
@@ -5370,7 +5523,8 @@
     }
 
     if (navToggle) {
-      navToggle.addEventListener("click", () => {
+      navToggle.addEventListener("click", (event) => {
+        event.preventDefault();
         const isOpen = navWrapper.classList.toggle("nav-open");
         navToggle.setAttribute("aria-expanded", String(isOpen));
       });
