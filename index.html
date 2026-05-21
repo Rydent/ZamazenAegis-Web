@@ -2398,6 +2398,72 @@
       }
     }
 
+    @media (max-width: 1179px) {
+      .header-inner {
+        position: relative;
+        min-height: 56px;
+        padding-right: 56px;
+      }
+
+      .nav-wrapper {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        gap: 0;
+        transform: translateY(-50%);
+      }
+
+      .nav-toggle {
+        position: relative;
+        z-index: 4;
+      }
+
+      .control-switchers {
+        display: none;
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        z-index: 3;
+        width: min(360px, calc(100vw - 32px));
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+        padding: 12px;
+        border-radius: 18px;
+        border: 1px solid rgba(111, 150, 232, 0.16);
+        background: rgba(7, 14, 29, 0.96);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-open .control-switchers {
+        display: grid;
+      }
+
+      .control-switchers .language-switcher,
+      .control-switchers .text-size-switcher {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        box-shadow: none;
+      }
+
+      .language-button,
+      .text-size-button {
+        flex: 1 1 58px;
+        min-width: 0;
+      }
+
+      .nav {
+        top: calc(100% + 136px);
+        right: 0;
+        width: min(360px, calc(100vw - 32px));
+        z-index: 3;
+      }
+
+      .nav-wrapper > .cta-primary {
+        display: none;
+      }
+    }
+
     @media (min-width: 1180px) {
       .nav-toggle {
         display: none;
@@ -2454,7 +2520,6 @@
 
     @media (max-width: 767px) {
       .header-inner {
-        position: relative;
         gap: 8px;
       }
 
@@ -2479,42 +2544,16 @@
         display: none;
       }
 
-      .nav-wrapper {
-        position: absolute;
-        top: 50%;
-        right: 0;
-        gap: 8px;
-        transform: translateY(-50%);
-      }
-
       .nav-toggle {
         display: inline-grid;
         width: 40px;
         height: 40px;
-        position: relative;
-        z-index: 3;
-      }
-
-      .control-switchers {
-        display: none;
-        position: absolute;
-        top: calc(100% + 10px);
-        right: 0;
-        z-index: 2;
-        grid-template-columns: 1fr;
-        gap: 2px;
       }
 
       .control-switchers .language-switcher,
       .control-switchers .text-size-switcher {
-        position: static;
-        display: inline-flex;
         padding: 3px;
         border-radius: 14px;
-      }
-
-      .nav-open .control-switchers {
-        display: grid;
       }
 
       .language-button {
@@ -2526,14 +2565,8 @@
       }
 
       .nav {
-        top: calc(100% + 58px);
-        left: auto;
-        right: 0;
+        top: calc(100% + 100px);
         width: min(320px, calc(100vw - 32px));
-      }
-
-      .nav-wrapper > .cta-primary {
-        display: none;
       }
 
       .rune {
