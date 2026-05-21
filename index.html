@@ -10,8 +10,15 @@
     data-i18n-attr="content:meta.description"
     content="Zamazen Aegis protege llamadas, SMS y enlaces con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo."
   >
+  <meta name="keywords" content="Zamazen Aegis, seguridad móvil, protección inteligente, privacidad, escudo digital, IA de seguridad, antiestafas, ciberseguridad móvil, phishing, spam, protección Android">
+  <meta name="application-name" content="Zamazen Aegis">
+  <meta name="author" content="Zamazen Aegis">
   <link rel="canonical" href="https://rydent.github.io/ZamazenAegis-Web/">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050816'/%3E%3Cpath d='M32 7 51 16v14c0 12.5-7.5 22.7-19 27-11.5-4.3-19-14.5-19-27V16L32 7Z' fill='none' stroke='%235ef0bd' stroke-width='3'/%3E%3Cpath d='M32 17v30M22 29l10-12 10 12M22 39l10 8 10-8' fill='none' stroke='%235ba8ff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#050816">
   <meta name="robots" content="index,follow">
   <meta property="og:site_name" content="Zamazen Aegis">
@@ -20,14 +27,17 @@
   <meta property="og:title" data-i18n-attr="content:meta.title" content="Zamazen Aegis | Seguridad Inteligente contra Estafas, Spam y Phishing">
   <meta property="og:description" data-i18n-attr="content:meta.description" content="Zamazen Aegis protege llamadas, SMS y enlaces con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo.">
   <meta property="og:image" content="https://rydent.github.io/ZamazenAegis-Web/assets/og-zamazen-aegis.png">
+  <meta property="og:image:alt" content="Zamazen Aegis, escudo digital azul con identidad futurista">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" data-i18n-attr="content:meta.title" content="Zamazen Aegis | Seguridad Inteligente contra Estafas, Spam y Phishing">
   <meta name="twitter:description" data-i18n-attr="content:meta.description" content="Zamazen Aegis protege llamadas, SMS y enlaces con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo.">
   <meta name="twitter:image" content="https://rydent.github.io/ZamazenAegis-Web/assets/og-zamazen-aegis.png">
-  <link rel="alternate" hreflang="es" href="?lang=es">
-  <link rel="alternate" hreflang="en" href="?lang=en">
-  <link rel="alternate" hreflang="fr" href="?lang=fr">
-  <link rel="alternate" hreflang="pt" href="?lang=pt">
+  <meta name="twitter:image:alt" content="Zamazen Aegis, escudo digital azul con identidad futurista">
+  <link rel="alternate" hreflang="es" href="https://rydent.github.io/ZamazenAegis-Web/?lang=es">
+  <link rel="alternate" hreflang="en" href="https://rydent.github.io/ZamazenAegis-Web/?lang=en">
+  <link rel="alternate" hreflang="fr" href="https://rydent.github.io/ZamazenAegis-Web/?lang=fr">
+  <link rel="alternate" hreflang="pt" href="https://rydent.github.io/ZamazenAegis-Web/?lang=pt">
+  <link rel="alternate" hreflang="x-default" href="https://rydent.github.io/ZamazenAegis-Web/">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -209,40 +219,63 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 13px;
       min-width: 0;
-      max-width: min(320px, 52vw);
+      max-width: min(340px, 52vw);
       flex: 0 1 auto;
     }
 
     .brand-mark {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
+      width: 54px;
+      height: 54px;
+      flex: 0 0 54px;
+      border-radius: 17px;
       position: relative;
+      overflow: hidden;
+      isolation: isolate;
       background:
-        linear-gradient(180deg, rgba(91, 168, 255, 0.22), rgba(15, 27, 55, 0.9)),
-        linear-gradient(135deg, rgba(94, 240, 189, 0.2), transparent);
-      border: 1px solid rgba(122, 224, 255, 0.28);
+        radial-gradient(circle at 50% 28%, rgba(94, 240, 189, 0.22), transparent 42%),
+        linear-gradient(180deg, rgba(91, 168, 255, 0.22), rgba(4, 11, 25, 0.96));
+      border: 1px solid rgba(130, 217, 255, 0.4);
       box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.08),
-        0 0 28px rgba(47, 124, 255, 0.2);
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        inset 0 -18px 26px rgba(0, 0, 0, 0.32),
+        0 0 0 1px rgba(94, 240, 189, 0.08),
+        0 0 26px rgba(47, 124, 255, 0.34),
+        0 12px 28px rgba(0, 0, 0, 0.32);
     }
 
     .brand-mark::before,
     .brand-mark::after {
       content: "";
       position: absolute;
-      inset: 11px;
-      border-radius: 12px 12px 18px 18px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      clip-path: polygon(50% 0%, 100% 18%, 87% 100%, 13% 100%, 0% 18%);
+      pointer-events: none;
+    }
+
+    .brand-mark::before {
+      inset: -34%;
+      background:
+        conic-gradient(from 190deg, transparent, rgba(94, 240, 189, 0.22), rgba(91, 168, 255, 0.4), transparent 62%);
+      opacity: 0.72;
+      animation: brandGlow 8s linear infinite;
+      z-index: -1;
     }
 
     .brand-mark::after {
-      inset: 17px;
-      border-color: rgba(94, 240, 189, 0.55);
-      box-shadow: 0 0 16px rgba(94, 240, 189, 0.22);
+      inset: 5px;
+      border-radius: 13px;
+      border: 1px solid rgba(185, 234, 255, 0.18);
+      box-shadow:
+        inset 0 0 18px rgba(91, 168, 255, 0.18),
+        0 0 18px rgba(94, 240, 189, 0.16);
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.1);
+      filter: saturate(1.18) contrast(1.08) brightness(1.04);
     }
 
     .brand-copy {
@@ -251,23 +284,27 @@
 
     .brand-copy strong {
       display: block;
-      font-size: 1rem;
-      letter-spacing: 0.06em;
+      font-size: 0.98rem;
+      letter-spacing: 0.085em;
       text-transform: uppercase;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      text-shadow:
+        0 0 12px rgba(91, 168, 255, 0.22),
+        0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
     .brand-copy span {
       display: block;
       font-size: 0.74rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
+      color: #bcd2f5;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      margin-top: 2px;
     }
 
     .nav-toggle {
@@ -543,7 +580,7 @@
       margin: 18px 0 16px;
       font-size: clamp(2.5rem, 6vw, 4.9rem);
       line-height: 0.98;
-      letter-spacing: -0.04em;
+      letter-spacing: 0;
       max-width: 11ch;
     }
 
@@ -859,7 +896,7 @@
     .meter-bar span {
       display: block;
       height: 100%;
-      width: 87%;
+      width: 80%;
       border-radius: inherit;
       background: linear-gradient(90deg, var(--blue), var(--green));
       box-shadow: 0 0 16px rgba(94, 240, 189, 0.34);
@@ -1225,7 +1262,7 @@
       margin: 14px 0 12px;
       font-size: clamp(1.8rem, 4vw, 3rem);
       line-height: 1.08;
-      letter-spacing: -0.03em;
+      letter-spacing: 0;
     }
 
     .problem-panel p,
@@ -1297,7 +1334,7 @@
 
     .trust-stat strong {
       font-size: clamp(1.5rem, 4vw, 2.3rem);
-      letter-spacing: -0.04em;
+      letter-spacing: 0;
     }
 
     .section-head {
@@ -1318,7 +1355,7 @@
       margin: 0 0 14px;
       font-size: clamp(1.9rem, 4vw, 3.2rem);
       line-height: 1.05;
-      letter-spacing: -0.03em;
+      letter-spacing: 0;
     }
 
     .section-head p {
@@ -1637,7 +1674,7 @@
     .protection-value {
       font-size: clamp(2.2rem, 6vw, 4.6rem);
       font-weight: 800;
-      letter-spacing: -0.05em;
+      letter-spacing: 0;
       line-height: 1;
       text-shadow: 0 0 24px rgba(94, 240, 189, 0.18);
     }
@@ -2303,6 +2340,10 @@
       50% { transform: scale(1.06); opacity: 1; }
     }
 
+    @keyframes brandGlow {
+      to { transform: rotate(360deg); }
+    }
+
     @keyframes drift {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-10px); }
@@ -2398,23 +2439,27 @@
       }
     }
 
-    @media (max-width: 1399px) {
+    @media (max-width: 1023px) {
       .header-inner {
         position: relative;
         min-height: 56px;
-        padding-right: 56px;
+        padding-right: 0;
       }
 
       .nav-wrapper {
-        position: absolute;
-        top: 50%;
-        right: 0;
+        position: static;
+        top: auto;
+        right: auto;
         gap: 0;
-        transform: translateY(-50%);
+        transform: none;
+        margin-left: auto;
       }
 
       .nav-toggle {
-        position: relative;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
         z-index: 4;
       }
 
@@ -2473,7 +2518,82 @@
       }
     }
 
-    @media (min-width: 1400px) {
+    @media (min-width: 1024px) and (max-width: 1699px) {
+      :root {
+        --header-height: 126px;
+      }
+
+      .header-inner {
+        flex-wrap: wrap;
+        align-content: center;
+        gap: 8px 18px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      .brand {
+        max-width: min(330px, 34vw);
+      }
+
+      .nav-wrapper {
+        flex: 1 1 calc(100% - 360px);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 8px 10px;
+      }
+
+      .nav-toggle {
+        display: none;
+      }
+
+      .nav {
+        position: static;
+        display: flex;
+        flex: 1 1 auto;
+        justify-content: flex-end;
+        align-items: center;
+        flex-wrap: wrap;
+        width: auto;
+        gap: 2px;
+        padding: 0;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+      }
+
+      .nav a {
+        padding: 8px 9px;
+        font-size: 0.86rem;
+      }
+
+      .nav a:last-child {
+        display: none;
+      }
+
+      .control-switchers {
+        width: 100%;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      .language-switcher,
+      .text-size-switcher {
+        box-shadow: none;
+      }
+
+      .nav-wrapper > .cta-primary {
+        min-height: 44px;
+        padding: 0 16px;
+        border-radius: 14px;
+      }
+    }
+
+    @media (min-width: 1700px) {
       .nav-toggle {
         display: none;
       }
@@ -2505,6 +2625,10 @@
 
       .nav a {
         padding: 12px 14px;
+      }
+
+      .nav a:last-child {
+        display: none;
       }
     }
 
@@ -2539,6 +2663,7 @@
       .brand-mark {
         width: 36px;
         height: 36px;
+        flex-basis: 36px;
         border-radius: 13px;
       }
 
@@ -2574,7 +2699,7 @@
       }
 
       .nav {
-        top: calc(100% + 100px);
+        top: calc(100% + 116px);
         width: min(320px, calc(100vw - 32px));
       }
 
@@ -2621,7 +2746,9 @@
     <header class="header" id="top">
       <div class="container header-inner">
         <a class="brand" href="#inicio" aria-label="Ir al inicio de Zamazen Aegis">
-          <div class="brand-mark" aria-hidden="true"></div>
+          <div class="brand-mark" aria-hidden="true">
+            <img src="assets/brand/zamazen-aegis-icon.png" alt="">
+          </div>
           <div class="brand-copy">
             <strong data-i18n="brand.name">Zamazen Aegis</strong>
             <span data-i18n="brand.tagline">Seguridad Inteligente</span>
@@ -2772,7 +2899,7 @@
                   <h3 data-i18n="phone.card3Title">Nivel de defensa</h3>
                   <div class="screen-meter">
                     <div class="meter-bar"><span></span></div>
-                    <p data-i18n="phone.card3Body">87% de cobertura activa con respuesta automática mejorada.</p>
+                    <p data-i18n="phone.card3Body">Escudo operativo con respuesta activa y módulos públicos claros.</p>
                   </div>
                 </div>
               </div>
@@ -3010,8 +3137,8 @@
                   <p data-i18n="trust.stat1">Análisis de llamadas, mensajes y enlaces en pruebas reales del sistema para validar detección y consistencia.</p>
                 </div>
                 <div class="trust-stat">
-                  <strong>87%</strong>
-                  <p data-i18n="trust.stat2">De cobertura activa visible en simulaciones de protección para que el usuario entienda que su escudo está trabajando.</p>
+                  <strong data-i18n="trust.stat2Title">Escudo operativo</strong>
+                  <p data-i18n="trust.stat2">Cobertura avanzada mostrada como estado cualitativo, no como porcentaje absoluto ni promesa de protección total.</p>
                 </div>
                 <div class="trust-stat">
                   <strong>24/7</strong>
@@ -3228,7 +3355,7 @@
                 <span class="section-tag" data-i18n="level.badge">Nivel de protección</span>
                 <h3 id="protectionTitle" data-i18n="level.title">Estado general del escudo</h3>
               </div>
-              <div class="protection-value" id="protectionValue">87%</div>
+              <div class="protection-value" id="protectionValue">Alto</div>
             </header>
 
             <div class="protection-track" aria-hidden="true">
@@ -3804,7 +3931,7 @@
           alert3Body: "Dominio verificado sin anomalías",
           alert3Tag: "Seguro",
           card3Title: "Nivel de defensa",
-          card3Body: "87% de cobertura activa con respuesta automática mejorada."
+          card3Body: "Escudo operativo con respuesta activa y módulos públicos claros."
         },
         problem: {
           badge: "Riesgo real",
@@ -3863,7 +3990,8 @@
           title: "Un sistema de defensa transmite más valor cuando demuestra consistencia.",
           body: "Zamazen Aegis está planteado para inspirar seguridad desde el primer contacto: análisis constantes, respuestas claras y una sensación de control que se nota en cada interacción.",
           stat1: "Análisis de llamadas, mensajes y enlaces en pruebas reales del sistema para validar detección y consistencia.",
-          stat2: "De cobertura activa visible en simulaciones de protección para que el usuario entienda que su escudo está trabajando.",
+          stat2Title: "Escudo operativo",
+          stat2: "Cobertura avanzada mostrada como estado cualitativo, no como porcentaje absoluto ni promesa de protección total.",
           stat3: "Protección persistente con enfoque ligero, claro y orientado a prevención real en uso continuo."
         },
         security: {
@@ -4059,7 +4187,7 @@
           alert3Body: "Verified domain with no anomalies",
           alert3Tag: "Safe",
           card3Title: "Defense level",
-          card3Body: "87% active coverage with enhanced automatic response."
+          card3Body: "Operational shield with active response and clear public modules."
         },
         problem: {
           badge: "Real risk",
@@ -4118,7 +4246,8 @@
           title: "A defense system feels more valuable when it proves consistency.",
           body: "Zamazen Aegis is built to inspire confidence from the first contact: constant analysis, clear responses and a sense of control you can feel in every interaction.",
           stat1: "Call, message and link analyses performed in real system tests to validate detection and consistency.",
-          stat2: "Visible active coverage in protection simulations so users understand their shield is working.",
+          stat2Title: "Operational shield",
+          stat2: "Advanced coverage shown as a qualitative status, not as an absolute percentage or a promise of total protection.",
           stat3: "Persistent protection with a lightweight, clear approach focused on real prevention in continuous use."
         },
         security: {
@@ -4309,7 +4438,7 @@
           alert3Body: "Domaine vérifié sans anomalie",
           alert3Tag: "Sûr",
           card3Title: "Niveau de défense",
-          card3Body: "87 % de couverture active avec réponse automatique renforcée."
+          card3Body: "Bouclier opérationnel avec réponse active et modules publics clairs."
         },
         problem: {
           badge: "Risque réel",
@@ -4368,7 +4497,8 @@
           title: "Un système de défense paraît plus précieux lorsqu'il prouve sa constance.",
           body: "Zamazen Aegis est pensé pour inspirer confiance dès le premier contact : analyses constantes, réponses claires et sensation de contrôle perceptible à chaque interaction.",
           stat1: "Analyses d'appels, de messages et de liens réalisées lors de tests réels du système pour valider la détection et la constance.",
-          stat2: "De couverture active visible en simulations de protection pour que l'utilisateur comprenne que son bouclier travaille.",
+          stat2Title: "Bouclier opérationnel",
+          stat2: "Couverture avancée affichée comme état qualitatif, pas comme pourcentage absolu ni promesse de protection totale.",
           stat3: "Protection persistante avec une approche légère, claire et orientée vers la prévention réelle en usage continu."
         },
         security: {
@@ -4559,7 +4689,7 @@
           alert3Body: "Domínio verificado sem anomalias",
           alert3Tag: "Seguro",
           card3Title: "Nível de defesa",
-          card3Body: "87% de cobertura ativa com resposta automática aprimorada."
+          card3Body: "Escudo operacional com resposta ativa e módulos públicos claros."
         },
         problem: {
           badge: "Risco real",
@@ -4618,7 +4748,8 @@
           title: "Um sistema de defesa transmite mais valor quando demonstra consistência.",
           body: "Zamazen Aegis foi pensado para inspirar segurança desde o primeiro contato: análises constantes, respostas claras e uma sensação de controle perceptível em cada interação.",
           stat1: "Análises de chamadas, mensagens e links em testes reais do sistema para validar detecção e consistência.",
-          stat2: "De cobertura ativa visível em simulações de proteção para que o usuário entenda que seu escudo está funcionando.",
+          stat2Title: "Escudo operacional",
+          stat2: "Cobertura avançada mostrada como estado qualitativo, não como porcentagem absoluta nem promessa de proteção total.",
           stat3: "Proteção persistente com abordagem leve, clara e orientada à prevenção real em uso contínuo."
         },
         security: {
@@ -5327,18 +5458,23 @@
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
 
-          const target = 87;
-          protectionFill.style.width = target + "%";
+          const publicModuleStatus = [
+            { name: "Llamadas", active: true },
+            { name: "SMS", active: true },
+            { name: "Enlaces", active: true },
+            { name: "Privacidad", active: true },
+            { name: "Backend cloud", active: false }
+          ];
+          const activeModules = publicModuleStatus.filter((module) => module.active).length;
+          const totalModules = publicModuleStatus.length;
+          const moduleCoverage = Math.round((activeModules / totalModules) * 100);
 
-          let current = 0;
-          const timer = setInterval(() => {
-            current += 1;
-            protectionValue.textContent = current + "%";
-
-            if (current >= target) {
-              clearInterval(timer);
-            }
-          }, 16);
+          protectionFill.style.width = moduleCoverage + "%";
+          protectionValue.textContent = "Alto";
+          protectionValue.setAttribute(
+            "aria-label",
+            `Nivel alto: ${activeModules} de ${totalModules} grupos públicos están activos o preparados localmente.`
+          );
 
           protectionObserver.disconnect();
         });
