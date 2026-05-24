@@ -393,7 +393,45 @@
       }
 
       .nav {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         justify-content: flex-start;
+      }
+
+      .nav a,
+      .pill-link {
+        min-width: 0;
+        text-align: center;
+        white-space: normal;
+      }
+
+      .hero {
+        padding-top: 28px;
+      }
+
+      .hero-panel,
+      .card,
+      .legal-index {
+        border-radius: 20px;
+      }
+
+      .hero-panel,
+      .card {
+        padding: 20px;
+      }
+
+      h1 {
+        max-width: 100%;
+        font-size: clamp(1.85rem, 9vw, 2.55rem);
+        line-height: 1.08;
+        overflow-wrap: normal;
+      }
+
+      .lead,
+      .card p,
+      .card li {
+        overflow-wrap: anywhere;
       }
 
       .brand-copy span {
