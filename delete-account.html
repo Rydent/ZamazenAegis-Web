@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zamazen Aegis | Eliminación de cuenta y datos</title>
+  <meta name="description" content="Página oficial de Zamazen Aegis para solicitar la eliminación de una cuenta y de los datos asociados.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://rydent.github.io/ZamazenAegis-Web/delete-account.html">
+  <meta name="theme-color" content="#050816">
+  <style>
+    :root {
+      --bg: #050816;
+      --panel: rgba(8, 15, 30, 0.88);
+      --panel-strong: rgba(5, 11, 22, 0.94);
+      --line: rgba(134, 171, 255, 0.16);
+      --line-strong: rgba(94, 240, 189, 0.34);
+      --text: #edf5ff;
+      --muted: #9caece;
+      --blue: #5ba8ff;
+      --green: #5ef0bd;
+      --gold: #f4c84a;
+      --danger: #ff8fa3;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", "Arial Nova", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(47, 124, 255, 0.18), transparent 34%),
+        radial-gradient(circle at 100% 10%, rgba(27, 207, 146, 0.12), transparent 28%),
+        linear-gradient(180deg, #07101f 0%, #040812 55%, #02050c 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.5;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.035), transparent 38%),
+        linear-gradient(45deg, rgba(94,240,189,0.03), transparent 42%),
+        repeating-linear-gradient(
+          115deg,
+          rgba(255,255,255,0.018) 0,
+          rgba(255,255,255,0.018) 2px,
+          transparent 2px,
+          transparent 14px
+        );
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus-visible {
+      color: #dffdf7;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(111, 150, 232, 0.14);
+      background: rgba(5, 8, 22, 0.84);
+      backdrop-filter: blur(18px);
+    }
+
+    .header-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      flex: 0 0 44px;
+      border-radius: 16px;
+      border: 1px solid rgba(94, 240, 189, 0.44);
+      background:
+        linear-gradient(145deg, rgba(94,240,189,0.22), rgba(91,168,255,0.16)),
+        rgba(5, 11, 22, 0.88);
+      box-shadow: 0 0 28px rgba(94, 240, 189, 0.18);
+      position: relative;
+    }
+
+    .brand-mark::before {
+      content: "ᛉ";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      font-size: 1.55rem;
+      text-shadow: 0 0 14px rgba(94, 240, 189, 0.55);
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 2px;
+    }
+
+    .brand-copy strong {
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .brand-copy span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .nav a,
+    .pill-link {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border: 1px solid rgba(111, 150, 232, 0.16);
+      border-radius: 999px;
+      background: rgba(8, 15, 30, 0.68);
+      color: #d7e5ff;
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .hero {
+      padding: clamp(40px, 8vw, 82px) 0 24px;
+    }
+
+    .hero-panel,
+    .card,
+    .legal-index {
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(94, 240, 189, 0.075), transparent 42%),
+        var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel {
+      padding: clamp(24px, 4vw, 44px);
+      border-radius: var(--radius-xl);
+    }
+
+    .section-tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(94, 240, 189, 0.24);
+      color: var(--green);
+      background: rgba(94, 240, 189, 0.08);
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 840px;
+      margin: 16px 0 14px;
+      font-size: clamp(2.15rem, 7vw, 4.65rem);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 0;
+      color: #d7e5ff;
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    .legal-layout {
+      display: grid;
+      gap: 18px;
+      padding: 18px 0 48px;
+    }
+
+    .legal-index {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+      padding: 18px;
+      border-radius: var(--radius-lg);
+    }
+
+    .legal-index a {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border: 1px solid rgba(111, 150, 232, 0.14);
+      border-radius: 14px;
+      color: #d7e5ff;
+      background: rgba(255, 255, 255, 0.035);
+      font-weight: 800;
+    }
+
+    .legal-index a::after {
+      content: "#";
+      color: var(--green);
+      opacity: 0.78;
+    }
+
+    .docs-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .card {
+      padding: 22px;
+      border-radius: var(--radius-lg);
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.22rem, 3vw, 1.68rem);
+    }
+
+    .card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .card ol,
+    .card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #cfe0ff;
+      line-height: 1.72;
+    }
+
+    .card li + li {
+      margin-top: 8px;
+    }
+
+    .mailbox {
+      display: grid;
+      gap: 12px;
+      margin: 16px 0;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(94, 240, 189, 0.24);
+      background: rgba(5, 18, 30, 0.72);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      color: #02120d;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      font-weight: 900;
+      box-shadow: 0 18px 38px rgba(94, 240, 189, 0.18);
+    }
+
+    .note {
+      border-left: 3px solid var(--gold);
+      padding: 10px 0 10px 14px;
+      color: #ffecc0;
+      background: rgba(244, 200, 74, 0.045);
+    }
+
+    .warning {
+      color: var(--danger);
+    }
+
+    .social-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .social-link {
+      min-height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(94, 240, 189, 0.18);
+      background: rgba(8, 15, 30, 0.72);
+      color: #dffdf7;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .social-link svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      color: var(--green);
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .social-link--youtube svg,
+    .social-link--facebook svg,
+    .social-link--reddit svg,
+    .social-link--linkedin svg,
+    .social-link--discord svg {
+      fill: currentColor;
+      stroke: none;
+    }
+
+    footer {
+      padding: 30px 0 42px;
+      border-top: 1px solid rgba(111, 150, 232, 0.12);
+      background: rgba(2, 5, 12, 0.5);
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: grid;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      max-width: 68ch;
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    @media (min-width: 820px) {
+      .legal-layout {
+        grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.28fr);
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .brand-copy span {
+        display: none;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html#inicio" aria-label="Volver al inicio de Zamazen Aegis">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-copy">
+          <strong>Zamazen Aegis</strong>
+          <span>Seguridad Inteligente</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Navegación legal">
+        <a href="index.html#inicio">Inicio</a>
+        <a href="index.html#politica-privacidad">Privacidad</a>
+        <a href="index.html#eliminar-cuenta">Eliminar cuenta</a>
+        <a href="index.html#contacto-soporte">Soporte</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-panel">
+          <span class="section-tag">Privacidad y cuenta</span>
+          <h1>Eliminar cuenta y datos asociados</h1>
+          <p class="lead">
+            Esta es la página oficial de Zamazen Aegis para solicitar la eliminación de una cuenta y de los datos asociados. Está integrada con la web principal y preparada para Google Play.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container legal-layout" aria-label="Información sobre eliminación de cuenta">
+      <aside class="legal-index">
+        <span class="section-tag">Legal claro</span>
+        <a href="#solicitud">Solicitud</a>
+        <a href="#datos-eliminados">Datos eliminados</a>
+        <a href="#conservacion">Datos conservados</a>
+        <a href="#plazo">Plazo</a>
+        <a href="#datos-locales">Datos locales</a>
+      </aside>
+
+      <div class="docs-list">
+        <article class="card" id="solicitud">
+          <h2>Cómo solicitar la eliminación</h2>
+          <p>
+            Escribe a <a href="mailto:zamazenaegissupport@gmail.com">zamazenaegissupport@gmail.com</a> desde el correo vinculado a tu cuenta.
+          </p>
+          <ol>
+            <li>Usa el asunto: <strong>Solicitud de eliminación de cuenta</strong>.</li>
+            <li>Indica que quieres eliminar tu cuenta de Zamazen Aegis y los datos asociados.</li>
+            <li>No incluyas contraseñas, códigos, datos bancarios completos ni información sensible innecesaria.</li>
+            <li>Si tienes una suscripción activa, revisa también su gestión en Google Play. La eliminación de cuenta no sustituye la cancelación de una suscripción en Google Play.</li>
+          </ol>
+          <div class="mailbox">
+            <strong>Correo oficial de privacidad y cuenta</strong>
+            <a class="button" href="mailto:zamazenaegissupport@gmail.com?subject=Solicitud%20de%20eliminaci%C3%B3n%20de%20cuenta">Enviar solicitud</a>
+          </div>
+          <a class="pill-link" href="index.html#eliminar-cuenta">Ver esta sección dentro de la web principal</a>
+        </article>
+
+        <article class="card" id="datos-eliminados">
+          <h2>Qué datos se eliminarán</h2>
+          <p>Cuando podamos verificar la solicitud, se eliminarán los datos asociados a la cuenta que estén bajo control de Zamazen Aegis, como:</p>
+          <ul>
+            <li>identificadores de cuenta, correo vinculado y datos de perfil que hayas facilitado;</li>
+            <li>preferencias de cuenta, sesión y dispositivos vinculados si existen en servicios conectados;</li>
+            <li>datos de sincronización o servicios conectados activados por el usuario, cuando estén disponibles;</li>
+            <li>solicitudes o datos asociados a soporte cuando proceda eliminarlos.</li>
+          </ul>
+        </article>
+
+        <article class="card" id="conservacion">
+          <h2>Datos que podrían conservarse</h2>
+          <p>
+            Algunos datos podrían conservarse durante el tiempo mínimo necesario si existe una obligación legal o una necesidad legítima de seguridad, prevención de fraude, resolución de disputas, cumplimiento normativo o contabilidad.
+          </p>
+          <p class="note">
+            En esos casos, Zamazen Aegis conservará solo lo necesario y no lo usará para fines incompatibles con la solicitud.
+          </p>
+        </article>
+
+        <article class="card" id="plazo">
+          <h2>Plazo del proceso</h2>
+          <p>
+            Una vez recibida la solicitud, revisaremos la petición y eliminaremos la cuenta y los datos asociados en un plazo razonable, normalmente hasta 30 días desde la verificación, salvo aquellos datos que deban conservarse por motivos legales, seguridad, prevención de fraude o cumplimiento normativo.
+          </p>
+        </article>
+
+        <article class="card" id="datos-locales">
+          <h2>Datos locales en el dispositivo</h2>
+          <p>
+            Zamazen Aegis prioriza funciones locales. Algunos datos pueden estar solo en tu dispositivo, como preferencias, historial local o elementos del Bunker. Puedes borrarlos desde la app cuando la función esté disponible o desinstalando la app del dispositivo.
+          </p>
+          <p class="warning">
+            No prometemos borrar datos que técnicamente solo estén almacenados en tu móvil y a los que Zamazen Aegis no pueda acceder de forma remota.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p class="footer-copy">
+        Zamazen Aegis respeta la privacidad del usuario y permite solicitar la eliminación de cuenta de forma clara, accesible y coherente con la web oficial.
+      </p>
+      <nav class="social-grid" aria-label="Redes sociales oficiales de Zamazen Aegis">
+        <a class="social-link social-link--youtube" href="https://www.youtube.com/@ZamazenAegis" target="_blank" rel="noopener noreferrer" aria-label="YouTube oficial de Zamazen Aegis">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M21.7 7.1a3.1 3.1 0 0 0-2.2-2.2C17.6 4.4 12 4.4 12 4.4s-5.6 0-7.5.5a3.1 3.1 0 0 0-2.2 2.2A32.2 32.2 0 0 0 1.8 12c0 1.7.1 3.4.5 4.9a3.1 3.1 0 0 0 2.2 2.2c1.9.5 7.5.5 7.5.5s5.6 0 7.5-.5a3.1 3.1 0 0 0 2.2-2.2c.4-1.5.5-3.2.5-4.9s-.1-3.4-.5-4.9zM10 15.5v-7l6 3.5-6 3.5z" />
+          </svg>
+          <span>YouTube</span>
+        </a>
+        <a class="social-link social-link--tiktok" href="https://www.tiktok.com/@officialzamazenaegis" target="_blank" rel="noopener noreferrer" aria-label="TikTok oficial de Zamazen Aegis">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M15.2 3.2c.5 2.5 1.9 4 4.3 4.3v3.1c-1.6 0-3-.5-4.2-1.4v5.8c0 3.5-2.2 5.8-5.5 5.8-2.8 0-5.1-2-5.1-4.8 0-3.1 2.4-5 5.6-5 .4 0 .8 0 1.1.1v3.2c-.3-.1-.7-.2-1.1-.2-1.4 0-2.3.7-2.3 1.8 0 1 .8 1.7 1.8 1.7 1.4 0 2.1-.8 2.1-2.5V3.2h3.3z" />
+          </svg>
+          <span>TikTok</span>
+        </a>
+        <a class="social-link social-link--x" href="https://x.com/zamazenaegis" target="_blank" rel="noopener noreferrer" aria-label="X oficial de Zamazen Aegis">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M4 4l16 16" />
+            <path d="M20 4L4 20" />
+          </svg>
+          <span>X</span>
+        </a>
+        <a class="social-link social-link--facebook" href="https://www.facebook.com/profile.php?id=61590513834451" target="_blank" rel="noopener noreferrer" aria-label="Facebook oficial de Zamazen Aegis">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M14 8h2V4h-2.7C10.4 4 9 5.7 9 8.5V11H7v4h2v5h4v-5h2.6l.4-4h-3V8.7c0-.5.2-.7 1-.7z" />
+          </svg>
+          <span>Facebook</span>
+        </a>
+        <a class="social-link social-link--instagram" href="https://www.instagram.com/zamazenaegis/" target="_blank" rel="noopener noreferrer" aria-label="Instagram oficial de Zamazen Aegis">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="4" y="4" width="16" height="16" rx="5" />
+            <circle cx="12" cy="12" r="3.5" />
+            <circle cx="17" cy="7" r="0.8" fill="currentColor" stroke="none" />
+          </svg>
+          <span>Instagram</span>
+        </a>
+        <a class="social-link social-link--reddit" href="https://www.reddit.com/user/Fun-Mind3914/" target="_blank" rel="noopener noreferrer" aria-label="Reddit oficial de Zamazen Aegis">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm4.7 10.4c0 2.1-2.1 3.7-4.7 3.7s-4.7-1.6-4.7-3.7c0-1.4 1-2.7 2.5-3.3l.7-3 3.4.8c.3-.5.8-.8 1.4-.8.9 0 1.6.7 1.6 1.6 0 .3-.1.6-.2.8l1 .9a1.8 1.8 0 0 1 1.2-.4 1.7 1.7 0 0 1 1.7 1.7c0 .8-.6 1.5-1.4 1.7z" />
+          </svg>
+          <span>Reddit</span>
+        </a>
+        <a class="social-link social-link--linkedin" href="https://www.linkedin.com/in/zamazen-aegis-897839410/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn oficial de Zamazen Aegis">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M5 8.5h3.1V20H5V8.5zm1.6-5A1.8 1.8 0 1 1 6.5 7a1.8 1.8 0 0 1 .1-3.5zM10.2 8.5h3v1.6h.1c.4-.8 1.5-1.9 3.1-1.9 3.3 0 3.9 2.2 3.9 5V20h-3.1v-6c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3V20h-3V8.5z" />
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+        <a class="social-link social-link--discord" href="https://discord.gg/Task2dUwA" target="_blank" rel="noopener noreferrer" aria-label="Discord oficial de Zamazen Aegis">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M19.6 5.4A16.8 16.8 0 0 0 15.5 4l-.2.4c1.5.4 2.2 1 2.2 1a13.4 13.4 0 0 0-10.9 0s.7-.6 2.3-1L8.7 4a16.8 16.8 0 0 0-4.1 1.4c-2.6 3.8-3.3 7.5-2.9 11.2A16.9 16.9 0 0 0 6.8 19s.6-.8 1.1-1.5a7.2 7.2 0 0 1-1.8-.9l.4-.3a11.7 11.7 0 0 0 11 0l.4.3a7.2 7.2 0 0 1-1.8.9c.5.7 1.1 1.5 1.1 1.5a16.9 16.9 0 0 0 5.1-2.4c.5-4.3-.7-7.9-2.7-11.2zM8.7 14.3c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z" />
+          </svg>
+          <span>Discord</span>
+        </a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
