@@ -78,7 +78,8 @@
     }
 
     .container {
-      width: min(var(--max-width), calc(100% - 32px));
+      width: calc(100vw - 32px);
+      max-width: var(--max-width);
       margin: 0 auto;
     }
 
@@ -386,6 +387,21 @@
     }
 
     @media (max-width: 680px) {
+      html,
+      body {
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+
+      .container,
+      .hero-panel,
+      .legal-layout,
+      .legal-index,
+      .card {
+        min-width: 0;
+        max-width: calc(100vw - 32px);
+      }
+
       .header-inner {
         align-items: flex-start;
         flex-direction: column;
@@ -402,8 +418,11 @@
       .nav a,
       .pill-link {
         min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
         text-align: center;
         white-space: normal;
+        overflow-wrap: anywhere;
       }
 
       .hero {
