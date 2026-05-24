@@ -2511,8 +2511,8 @@
       }
 
       .container {
-        width: calc(100vw - 32px);
-        max-width: calc(100vw - 32px);
+        width: min(calc(100vw - 32px), 358px);
+        max-width: min(calc(100vw - 32px), 358px);
       }
 
       .header-inner {
@@ -2644,8 +2644,9 @@
         left: 12px;
         right: 12px;
         bottom: 12px;
-        max-width: calc(100vw - 24px);
+        max-width: min(calc(100vw - 24px), 366px);
         max-height: calc(100vh - 24px);
+        margin: 0 auto;
         overflow: auto;
       }
 
