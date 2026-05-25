@@ -223,7 +223,7 @@
     .brand-mark {
       width: 48px;
       height: 48px;
-      border-radius: 16px;
+      border-radius: 15px;
       position: relative;
       overflow: hidden;
       flex: 0 0 48px;
@@ -242,7 +242,8 @@
     .brand-logo {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      transform: scale(0.96);
     }
 
     .brand-copy {
@@ -1612,6 +1613,31 @@
       letter-spacing: 0.01em;
     }
 
+    .founder-panel {
+      margin-top: 22px;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(244, 200, 74, 0.36);
+      background: linear-gradient(180deg, rgba(244, 200, 74, 0.08), rgba(8, 15, 30, 0.72));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .founder-panel h3 {
+      margin: 0 0 10px;
+      color: #f4c84a;
+      font-size: 1.18rem;
+    }
+
+    .founder-panel p {
+      margin: 0 0 10px;
+      color: #d7e5ff;
+      line-height: 1.7;
+    }
+
+    .founder-panel p:last-child {
+      margin-bottom: 0;
+    }
+
     .protection-meter {
       padding: 28px;
       border-radius: var(--radius-xl);
@@ -2465,7 +2491,7 @@
       }
     }
 
-    @media (min-width: 768px) and (max-width: 1319px) {
+    @media (min-width: 768px) and (max-width: 1439px) {
       .nav-wrapper > .cta-primary {
         display: none;
       }
@@ -2498,7 +2524,7 @@
       }
     }
 
-    @media (min-width: 1320px) {
+    @media (min-width: 1440px) {
       .nav-toggle {
         display: none;
       }
@@ -2511,7 +2537,7 @@
         margin-left: auto;
         display: flex;
         align-items: center;
-        gap: 18px;
+        gap: 14px;
       }
 
       .nav {
@@ -2529,8 +2555,9 @@
       }
 
       .nav a {
-        padding: 12px 11px;
+        padding: 12px 9px;
         white-space: nowrap;
+        font-size: 0.92rem;
       }
     }
 
@@ -3248,8 +3275,10 @@
             <a href="#politica-privacidad" data-i18n="legalDocs.privacyShort">Política de privacidad</a>
             <a href="#gestionar-datos" data-i18n="legalDocs.dataShort">Gestionar datos</a>
             <a href="#eliminar-cuenta" data-i18n="legalDocs.deleteShort">Eliminar cuenta y datos</a>
+            <a href="#cobertura-wifi" data-i18n="legalDocs.coverageShort">Cobertura y WiFi</a>
             <a href="#politica-cookies" data-i18n="legalDocs.cookiesShort">Política de cookies</a>
             <a href="#politica-producto" data-i18n="legalDocs.productShort">Política de producto</a>
+            <a href="#cobertura-wifi" data-i18n="legalDocs.coverageShort">Cobertura y WiFi</a>
             <a href="#contrato-licencia" data-i18n="legalDocs.licenseShort">Contrato de licencia / EULA</a>
             <a href="#acerca-de-zamazen-aegis" data-i18n="legalDocs.aboutShort">Acerca de Zamazen Aegis</a>
             <a href="#contacto-soporte" data-i18n="legalDocs.contactShort">Contacto / soporte</a>
@@ -3345,6 +3374,19 @@
                 <li data-i18n="legalDocs.productPoint1">La app informa y recomienda acciones cuando hay base técnica para hacerlo; solo bloquea si la función existe, está permitida y el usuario la activa.</li>
                 <li data-i18n="legalDocs.productPoint2">Si una función necesita permisos o conexión, se indica de forma clara.</li>
                 <li data-i18n="legalDocs.productPoint3">No se venden milagros: ninguna app puede eliminar todo riesgo ni sustituir el criterio del usuario.</li>
+              </ul>
+            </article>
+
+            <article class="legal-doc-card reveal" id="cobertura-wifi">
+              <h3 data-i18n="legalDocs.coverageTitle">Cobertura, internet móvil y WiFi</h3>
+              <p data-i18n="legalDocs.coverageBody">
+                Zamazen Aegis no puede elegir una antena concreta ni crear cobertura, pero puede ayudarte a detectar problemas de red, buscar alternativas reales y guiarte hacia una conexión más estable.
+              </p>
+              <ul>
+                <li data-i18n="legalDocs.coveragePoint1">Puede avisar de pérdida de conexión, WiFi débil, red abierta o señal inestable cuando Android permite leer esa información.</li>
+                <li data-i18n="legalDocs.coveragePoint2">Puede sugerir acciones reales: modo avión, probar 4G/5G, llamadas WiFi si tu operador lo permite, moverte a una zona con mejor señal o usar una WiFi segura.</li>
+                <li data-i18n="legalDocs.coveragePoint3">No promete cambiar automáticamente a una antena lejana, saltarse límites del operador ni mejorar físicamente la señal.</li>
+                <li data-i18n="legalDocs.coveragePoint4">Los reportes de cobertura o WiFi mediante Red Neo deben ser opcionales, con consentimiento y sin publicar ubicación exacta innecesaria.</li>
               </ul>
             </article>
 
@@ -3465,6 +3507,13 @@
                   <li data-i18n="premium.card4Point2">Permisos y límites explicados antes de activarse</li>
                 </ul>
               </article>
+            </div>
+
+            <div class="founder-panel">
+              <h3 data-i18n="premium.founderTitle">Rango fundador: EINHERJAR</h3>
+              <p data-i18n="premium.founderBody1">Quienes apoyen Zamazen Aegis desde esta etapa inicial conservarán el precio original mientras mantengan su apoyo, aunque el precio suba en el futuro.</p>
+              <p data-i18n="premium.founderBody2">En Zamazen Aegis 2.0 recibirán el rango especial EINHERJAR: reconocimiento para quienes confiaron cuando el proyecto aún estaba empezando. Cuando llegue la 2.0, el rango dejará de estar disponible para nuevos usuarios.</p>
+              <p data-i18n="premium.founderBody3">A futuro podrá incluir insignias, detalles visuales, agradecimientos y ventajas simbólicas sin prometer recompensas imposibles. Es gratitud real, no presión.</p>
             </div>
 
             <div style="margin-top: 22px;">
@@ -4093,6 +4142,10 @@
           card4Body: "Cuenta Zamazen cloud, Google OAuth completo, promos de producción y música oficial se marcarán como próximas hasta conectar backend real.",
           card4Point1: "Sin prometer funciones falsas",
           card4Point2: "Permisos y límites explicados antes de activarse",
+          founderTitle: "Rank fundador: EINHERJAR",
+          founderBody1: "Quienes apoyen Zamazen Aegis desde esta etapa inicial conservarán el precio original mientras mantengan su apoyo, aunque el precio suba en el futuro.",
+          founderBody2: "En Zamazen Aegis 2.0 recibirán el rango especial EINHERJAR: reconocimiento para quienes confiaron cuando el proyecto aún estaba empezando. Cuando llegue la 2.0, el rango dejará de estar disponible para nuevos usuarios.",
+          founderBody3: "A futuro podrá incluir insignias, detalles visuales, agradecimientos y ventajas simbólicas sin prometer recompensas imposibles. Es gratitud real, no presión.",
           cta: "Ver disponibilidad"
         },
         download: {
@@ -4335,6 +4388,10 @@
           card4Body: "Zamazen cloud account, full Google OAuth, production promos and official music stay marked as coming soon until a real backend is connected.",
           card4Point1: "No false feature promises",
           card4Point2: "Permissions and limits explained before activation",
+          founderTitle: "Founder rank: EINHERJAR",
+          founderBody1: "People who support Zamazen Aegis during this early stage will keep the original price while they maintain their support, even if the price rises later.",
+          founderBody2: "In Zamazen Aegis 2.0 they will receive the special EINHERJAR rank: recognition for those who trusted the project when it was just beginning. When 2.0 arrives, the rank will no longer be available to new users.",
+          founderBody3: "In the future it may include badges, visual details, thanks and symbolic advantages without promising impossible rewards. It is real gratitude, not pressure.",
           cta: "Check availability"
         },
         download: {
@@ -4577,6 +4634,10 @@
           card4Body: "Compte cloud Zamazen, Google OAuth complet, promos de production et musique officielle restent bientôt disponibles jusqu'au backend réel.",
           card4Point1: "Aucune fausse promesse",
           card4Point2: "Permissions et limites expliquées avant activation",
+          founderTitle: "Rang fondateur: EINHERJAR",
+          founderBody1: "Les personnes qui soutiennent Zamazen Aegis pendant cette étape initiale conserveront le prix d'origine tant qu'elles maintiennent leur soutien, même si le prix augmente plus tard.",
+          founderBody2: "Dans Zamazen Aegis 2.0, elles recevront le rang spécial EINHERJAR: une reconnaissance pour celles et ceux qui ont fait confiance au projet dès le début. À l'arrivée de la 2.0, ce rang ne sera plus disponible pour les nouveaux utilisateurs.",
+          founderBody3: "À l'avenir, il pourra inclure des badges, détails visuels, remerciements et avantages symboliques sans promettre de récompenses impossibles. C'est une vraie gratitude, pas une pression.",
           cta: "Voir la disponibilité"
         },
         download: {
@@ -4819,6 +4880,10 @@
           card4Body: "Conta cloud Zamazen, Google OAuth completo, promos de produção e música oficial ficam como em breve até conectar backend real.",
           card4Point1: "Sem promessas falsas",
           card4Point2: "Permissões e limites explicados antes de ativar",
+          founderTitle: "Rango fundador: EINHERJAR",
+          founderBody1: "Quem apoiar Zamazen Aegis nesta etapa inicial conservará o preço original enquanto mantiver o apoio, mesmo que o preço suba no futuro.",
+          founderBody2: "Em Zamazen Aegis 2.0 receberá o rank especial EINHERJAR: reconhecimento para quem confiou quando o projeto ainda estava começando. Quando a 2.0 chegar, esse rank deixará de estar disponível para novos usuários.",
+          founderBody3: "No futuro poderá incluir insígnias, detalhes visuais, agradecimentos e vantagens simbólicas sem prometer recompensas impossíveis. É gratidão real, não pressão.",
           cta: "Ver disponibilidade"
         },
         download: {
@@ -4913,6 +4978,7 @@
           privacyShort: "Política de privacidad",
           dataShort: "Gestionar datos",
           deleteShort: "Eliminar cuenta y datos",
+          coverageShort: "Cobertura y WiFi",
           cookiesShort: "Política de cookies",
           productShort: "Política de producto",
           licenseShort: "Contrato de licencia / EULA",
@@ -4956,6 +5022,12 @@
           productPoint1: "La app informa y recomienda acciones cuando hay base técnica para hacerlo; solo bloquea si la función existe, está permitida y el usuario la activa.",
           productPoint2: "Si una función necesita permisos o conexión, se indica de forma clara.",
           productPoint3: "No se venden milagros: ninguna app puede eliminar todo riesgo ni sustituir el criterio del usuario.",
+          coverageTitle: "Cobertura, internet móvil y WiFi",
+          coverageBody: "Zamazen Aegis no puede elegir una antena concreta ni crear cobertura, pero puede ayudarte a detectar problemas de red, buscar alternativas reales y guiarte hacia una conexión más estable.",
+          coveragePoint1: "Puede avisar de pérdida de conexión, WiFi débil, red abierta o señal inestable cuando Android permite leer esa información.",
+          coveragePoint2: "Puede sugerir acciones reales: modo avión, probar 4G/5G, llamadas WiFi si tu operador lo permite, moverte a una zona con mejor señal o usar una WiFi segura.",
+          coveragePoint3: "No promete cambiar automáticamente a una antena lejana, saltarse límites del operador ni mejorar físicamente la señal.",
+          coveragePoint4: "Los reportes de cobertura o WiFi mediante Red Neo deben ser opcionales, con consentimiento y sin publicar ubicación exacta innecesaria.",
           licenseTitle: "Contrato de licencia / EULA",
           licenseBody: "El uso de Zamazen Aegis concede una licencia personal, limitada y revocable para usar la app y sus servicios asociados conforme a la ley, Play Store y las condiciones publicadas.",
           licensePoint1: "No está permitido manipular, revender, explotar o intentar romper los sistemas de protección.",
@@ -5003,6 +5075,7 @@
           privacyShort: "Privacy Policy",
           dataShort: "Manage data",
           deleteShort: "Delete account and data",
+          coverageShort: "Coverage and WiFi",
           cookiesShort: "Cookie Policy",
           productShort: "Product Policy",
           licenseShort: "License Agreement / EULA",
@@ -5046,6 +5119,12 @@
           productPoint1: "The app informs and recommends actions when there is a technical basis; it only blocks when the feature exists, is allowed and the user enables it.",
           productPoint2: "If a feature needs permissions or connectivity, it is explained clearly.",
           productPoint3: "No miracles are sold: no app can remove every risk or replace user judgment.",
+          coverageTitle: "Coverage, mobile internet and WiFi",
+          coverageBody: "Zamazen Aegis cannot choose a specific antenna or create coverage, but it can help detect network problems, find real alternatives and guide you toward a more stable connection.",
+          coveragePoint1: "It can warn about lost connectivity, weak WiFi, open networks or unstable signal when Android allows that information to be read.",
+          coveragePoint2: "It can suggest real actions: airplane mode, trying 4G/5G, WiFi calling if your carrier supports it, moving to a better signal area or using a secure WiFi.",
+          coveragePoint3: "It does not promise to switch automatically to a distant antenna, bypass carrier limits or physically improve signal.",
+          coveragePoint4: "Coverage or WiFi reports through Neo Network must be optional, consent-based and avoid publishing unnecessary exact location.",
           licenseTitle: "License Agreement / EULA",
           licenseBody: "Using Zamazen Aegis grants a personal, limited and revocable license to use the app and associated services under the law, Play Store rules and published terms.",
           licensePoint1: "You may not manipulate, resell, exploit or attempt to break the protection systems.",
@@ -5093,6 +5172,7 @@
           privacyShort: "Politique de confidentialité",
           dataShort: "Gérer les données",
           deleteShort: "Supprimer le compte et les données",
+          coverageShort: "Couverture et WiFi",
           cookiesShort: "Politique de cookies",
           productShort: "Politique produit",
           licenseShort: "Contrat de licence / EULA",
@@ -5136,6 +5216,12 @@
           productPoint1: "L'app informe et recommande des actions lorsqu'une base technique le permet; elle ne bloque que si la fonction existe, est autorisée et activée par l'utilisateur.",
           productPoint2: "Si une fonction nécessite des autorisations ou une connexion, c'est indiqué clairement.",
           productPoint3: "Aucun miracle n'est vendu: aucune app ne peut supprimer tous les risques ni remplacer le jugement de l'utilisateur.",
+          coverageTitle: "Couverture, internet mobile et WiFi",
+          coverageBody: "Zamazen Aegis ne peut pas choisir une antenne précise ni créer de couverture, mais peut aider à détecter les problèmes réseau, chercher des alternatives réelles et guider vers une connexion plus stable.",
+          coveragePoint1: "L'app peut signaler perte de connexion, WiFi faible, réseau ouvert ou signal instable quand Android permet de lire cette information.",
+          coveragePoint2: "Elle peut suggérer des actions réelles: mode avion, essayer 4G/5G, appels WiFi si l'opérateur le permet, changer d'endroit ou utiliser un WiFi sûr.",
+          coveragePoint3: "Elle ne promet pas de basculer automatiquement vers une antenne lointaine, de contourner l'opérateur ni d'améliorer physiquement le signal.",
+          coveragePoint4: "Les rapports de couverture ou WiFi via Réseau Neo doivent être optionnels, consentis et éviter la localisation exacte inutile.",
           licenseTitle: "Contrat de licence / EULA",
           licenseBody: "L'utilisation de Zamazen Aegis accorde une licence personnelle, limitée et révocable pour utiliser l'app et ses services associés conformément à la loi, aux règles du Play Store et aux conditions publiées.",
           licensePoint1: "Il est interdit de manipuler, revendre, exploiter ou tenter de casser les systèmes de protection.",
@@ -5183,6 +5269,7 @@
           privacyShort: "Política de privacidade",
           dataShort: "Gerir dados",
           deleteShort: "Eliminar conta e dados",
+          coverageShort: "Cobertura e WiFi",
           cookiesShort: "Política de cookies",
           productShort: "Política de produto",
           licenseShort: "Contrato de licença / EULA",
@@ -5226,6 +5313,12 @@
           productPoint1: "O app informa e recomenda ações quando existe base técnica para isso; só bloqueia se a função existir, for permitida e o usuário ativar.",
           productPoint2: "Se uma função precisa de permissões ou conexão, isso é explicado claramente.",
           productPoint3: "Não vendemos milagres: nenhum app pode eliminar todo risco nem substituir o julgamento do usuário.",
+          coverageTitle: "Cobertura, internet móvel e WiFi",
+          coverageBody: "Zamazen Aegis não pode escolher uma antena concreta nem criar cobertura, mas pode ajudar a detectar problemas de rede, procurar alternativas reais e guiar para uma conexão mais estável.",
+          coveragePoint1: "Pode avisar sobre perda de ligação, WiFi fraco, rede aberta ou sinal instável quando Android permite ler essa informação.",
+          coveragePoint2: "Pode sugerir ações reais: modo avião, testar 4G/5G, chamadas WiFi se o operador permitir, mudar de local ou usar uma WiFi segura.",
+          coveragePoint3: "Não promete mudar automaticamente para uma antena distante, contornar limites do operador nem melhorar fisicamente o sinal.",
+          coveragePoint4: "Relatos de cobertura ou WiFi pela Rede Neo devem ser opcionais, com consentimento e sem publicar localização exata desnecessária.",
           licenseTitle: "Contrato de licença / EULA",
           licenseBody: "O uso de Zamazen Aegis concede uma licença pessoal, limitada e revogável para usar o app e seus serviços associados conforme a lei, a Play Store e os termos publicados.",
           licensePoint1: "Não é permitido manipular, revender, explorar ou tentar quebrar os sistemas de proteção.",
