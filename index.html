@@ -203,6 +203,10 @@
       border-bottom: 1px solid rgba(111, 150, 232, 0.14);
     }
 
+    .header .container {
+      --max-width: 1760px;
+    }
+
     .header-inner {
       height: 100%;
       display: flex;
@@ -2521,47 +2525,6 @@
       .text-size-button {
         min-width: 34px;
         padding: 0 8px;
-      }
-    }
-
-    @media (min-width: 1440px) {
-      .nav-toggle {
-        display: none;
-      }
-
-      .header-inner {
-        gap: 28px;
-      }
-
-      .nav-wrapper {
-        margin-left: auto;
-        display: flex;
-        align-items: center;
-        gap: 14px;
-      }
-
-      .nav {
-        position: static;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        padding: 0;
-        background: transparent;
-        border: 0;
-        box-shadow: none;
-        opacity: 1;
-        transform: none;
-        pointer-events: auto;
-      }
-
-      .nav a {
-        padding: 12px 9px;
-        white-space: nowrap;
-        font-size: 0.92rem;
-      }
-
-      .nav a[href="#descargar"] {
-        display: none;
       }
     }
 
