@@ -8,7 +8,7 @@
     id="metaDescription"
     name="description"
     data-i18n-attr="content:meta.description"
-    content="Zamazen Aegis ayuda a detectar señales de riesgo en llamadas, SMS y enlaces con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo."
+    content="Zamazen Aegis ayuda a revisar señales de riesgo en llamadas, SMS y enlaces reportados con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo."
   >
   <link rel="canonical" href="https://zamazenaegis.app/">
   <link rel="icon" href="favicon.ico" sizes="any">
@@ -23,11 +23,11 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://zamazenaegis.app/">
   <meta property="og:title" data-i18n-attr="content:meta.title" content="Zamazen Aegis | Seguridad Inteligente contra Estafas, Spam y Phishing">
-  <meta property="og:description" data-i18n-attr="content:meta.description" content="Zamazen Aegis ayuda a detectar señales de riesgo en llamadas, SMS y enlaces con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo.">
+  <meta property="og:description" data-i18n-attr="content:meta.description" content="Zamazen Aegis ayuda a revisar señales de riesgo en llamadas, SMS y enlaces reportados con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo.">
   <meta property="og:image" content="https://zamazenaegis.app/assets/og-zamazen-aegis.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" data-i18n-attr="content:meta.title" content="Zamazen Aegis | Seguridad Inteligente contra Estafas, Spam y Phishing">
-  <meta name="twitter:description" data-i18n-attr="content:meta.description" content="Zamazen Aegis ayuda a detectar señales de riesgo en llamadas, SMS y enlaces con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo.">
+  <meta name="twitter:description" data-i18n-attr="content:meta.description" content="Zamazen Aegis ayuda a revisar señales de riesgo en llamadas, SMS y enlaces reportados con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo.">
   <meta name="twitter:image" content="https://zamazenaegis.app/assets/og-zamazen-aegis.png">
   <link rel="alternate" hreflang="es" href="?lang=es">
   <link rel="alternate" hreflang="en" href="?lang=en">
@@ -40,7 +40,7 @@
       "name": "Zamazen Aegis",
       "applicationCategory": "SecurityApplication",
       "operatingSystem": "Android",
-      "description": "Zamazen Aegis ayuda a detectar señales de riesgo en llamadas, SMS y enlaces con una experiencia protectora guiada por Neo.",
+      "description": "Zamazen Aegis ayuda a revisar señales de riesgo en llamadas, SMS y enlaces reportados con una experiencia protectora guiada por Neo.",
       "publisher": {
         "@type": "Organization",
         "name": "Zamazen Aegis",
@@ -160,7 +160,14 @@
     .rune:focus-visible,
     .language-button:focus-visible,
     .text-size-button:focus-visible,
-    .nav-toggle:focus-visible {
+    .nav-toggle:focus-visible,
+    .header-icon-button:focus-visible,
+    .user-avatar-button:focus-visible,
+    .context-actions-toggle:focus-visible,
+    .quick-menu-toggle:focus-visible,
+    .quick-menu a:focus-visible,
+    .auth-mode-button:focus-visible,
+    .aegis-switch:focus-visible {
       outline: 2px solid var(--green);
       outline-offset: 4px;
       box-shadow: 0 0 0 4px rgba(94, 240, 189, 0.12);
@@ -295,6 +302,192 @@
       margin-left: auto;
     }
 
+    .header-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .header-status,
+    .header-icon-button,
+    .user-avatar-button {
+      min-height: 42px;
+      border-radius: 14px;
+      border: 1px solid rgba(111, 150, 232, 0.18);
+      background: rgba(10, 19, 39, 0.78);
+      color: var(--text);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 12px;
+      color: #dffdf7;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 14px rgba(94, 240, 189, 0.72);
+      flex: 0 0 auto;
+    }
+
+    .status-dot--warning {
+      background: #f4c84a;
+      box-shadow: 0 0 14px rgba(244, 200, 74, 0.54);
+    }
+
+    .status-dot--muted {
+      background: rgba(156, 174, 206, 0.68);
+      box-shadow: none;
+    }
+
+    .header-icon-button,
+    .user-avatar-button {
+      width: 42px;
+      display: inline-grid;
+      place-items: center;
+      font-size: 1.1rem;
+    }
+
+    .user-panel {
+      position: relative;
+    }
+
+    .user-avatar-button {
+      padding: 0;
+    }
+
+    .user-avatar {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      color: #06110f;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      font-weight: 900;
+    }
+
+    .user-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      width: min(320px, calc(100vw - 32px));
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(94, 240, 189, 0.22);
+      background:
+        linear-gradient(135deg, rgba(91, 168, 255, 0.14), transparent 42%),
+        rgba(6, 12, 26, 0.96);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      opacity: 0;
+      transform: translateY(-8px) scale(0.98);
+      transform-origin: top right;
+      pointer-events: none;
+      visibility: hidden;
+      transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+    }
+
+    .user-panel.is-open .user-menu {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+      visibility: visible;
+    }
+
+    .user-menu-header {
+      display: grid;
+      grid-template-columns: 54px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(111, 150, 232, 0.14);
+    }
+
+    .user-menu-avatar {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      color: #06110f;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      font-weight: 900;
+      box-shadow: 0 0 24px rgba(94, 240, 189, 0.2);
+    }
+
+    .user-menu-header strong,
+    .user-menu-header span {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .user-menu-header strong {
+      color: #f5fbff;
+      font-size: 1rem;
+    }
+
+    .user-menu-header span {
+      color: var(--muted);
+      font-size: 0.84rem;
+      margin-top: 2px;
+    }
+
+    .user-level {
+      display: inline-flex;
+      width: fit-content;
+      margin-top: 8px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      color: #06110f;
+      background: linear-gradient(135deg, var(--green), #a7ffd8);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .user-menu-links {
+      display: grid;
+      gap: 8px;
+      padding-top: 12px;
+    }
+
+    .user-menu-links a,
+    .user-menu-links button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      padding: 0 10px;
+      border-radius: 12px;
+      color: #dbeaff;
+      background: transparent;
+      text-align: left;
+    }
+
+    .user-menu-links a:hover,
+    .user-menu-links a:focus-visible,
+    .user-menu-links button:hover,
+    .user-menu-links button:focus-visible {
+      background: rgba(91, 168, 255, 0.12);
+      color: var(--text);
+    }
+
     .nav-toggle-line,
     .nav-toggle-line::before,
     .nav-toggle-line::after {
@@ -334,6 +527,7 @@
       opacity: 0;
       transform: translateY(-10px);
       pointer-events: none;
+      visibility: hidden;
       transition: opacity 0.25s ease, transform 0.25s ease;
     }
 
@@ -422,6 +616,7 @@
       opacity: 1;
       transform: translateY(0);
       pointer-events: auto;
+      visibility: visible;
     }
 
     .nav-open .nav-toggle-line {
@@ -493,6 +688,14 @@
         0 0 0 1px rgba(94, 240, 189, 0.3),
         0 20px 46px rgba(27, 207, 146, 0.36),
         0 0 22px rgba(94, 240, 189, 0.26);
+    }
+
+    .cta-primary:disabled,
+    .cta-primary[aria-disabled="true"] {
+      cursor: wait;
+      opacity: 0.72;
+      transform: none;
+      box-shadow: 0 0 0 1px rgba(94, 240, 189, 0.16);
     }
 
     .cta-secondary:hover,
@@ -646,8 +849,7 @@
       border-color: rgba(94, 240, 189, 0.24);
     }
 
-    .shield-aura .rune-sigil,
-    .neo-core .rune-sigil {
+    .shield-aura .rune-sigil {
       position: absolute;
       inset: 50% auto auto 50%;
       transform: translate(-50%, -50%);
@@ -1010,7 +1212,7 @@
       --rune-accent: rgba(91, 168, 255, 0.28);
     }
 
-    .rune--tiwaz {
+    .rune--thurisaz {
       --rune-glow: rgba(91, 168, 255, 0.34);
       --rune-accent: rgba(245, 91, 91, 0.2);
     }
@@ -1030,9 +1232,9 @@
       --rune-accent: rgba(94, 240, 189, 0.18);
     }
 
-    .rune--gebo {
-      --rune-glow: rgba(177, 137, 255, 0.3);
-      --rune-accent: rgba(94, 240, 189, 0.2);
+    .rune--fehu {
+      --rune-glow: rgba(244, 200, 74, 0.32);
+      --rune-accent: rgba(94, 240, 189, 0.18);
     }
 
     .rune--othala {
@@ -1040,7 +1242,7 @@
       --rune-accent: rgba(202, 226, 255, 0.18);
     }
 
-    .rune--dagaz {
+    .rune--uruz {
       --rune-glow: rgba(202, 226, 255, 0.28);
       --rune-accent: rgba(94, 240, 189, 0.24);
     }
@@ -1257,7 +1459,7 @@
     }
 
     .proof-card::after {
-      content: "ᛞ";
+      content: "ᚲ";
       position: absolute;
       right: 16px;
       top: 14px;
@@ -1503,7 +1705,7 @@
 
     .neo-core {
       position: relative;
-      width: min(100%, 320px);
+      width: min(100%, 360px);
       aspect-ratio: 1;
       margin: 0 auto;
       display: grid;
@@ -1530,32 +1732,52 @@
       border-color: rgba(255, 255, 255, 0.1);
     }
 
-    .neo-core-mark {
+    .neo-core-image-frame {
       position: relative;
-      width: 42%;
+      width: 64%;
       aspect-ratio: 1;
       border-radius: 50%;
+      overflow: hidden;
       background:
-        radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.26), transparent 24%),
-        linear-gradient(180deg, rgba(91, 168, 255, 0.5), rgba(94, 240, 189, 0.4));
+        radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.2), transparent 26%),
+        linear-gradient(180deg, rgba(4, 14, 28, 0.98), rgba(1, 7, 16, 0.98));
+      border: 1px solid rgba(94, 240, 189, 0.28);
       box-shadow:
-        0 0 30px rgba(47, 124, 255, 0.28),
-        0 0 44px rgba(94, 240, 189, 0.18);
+        0 0 0 8px rgba(47, 124, 255, 0.08),
+        0 0 38px rgba(47, 124, 255, 0.34),
+        0 0 54px rgba(94, 240, 189, 0.2);
       animation: pulse 5s ease-in-out infinite;
     }
 
-    .neo-core-mark::before,
-    .neo-core-mark::after {
+    .neo-core-image-frame::before,
+    .neo-core-image-frame::after {
       content: "";
       position: absolute;
-      inset: 28%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .neo-core-image-frame::before {
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 42%, transparent 28%, rgba(1, 7, 16, 0.16) 74%),
+        linear-gradient(180deg, rgba(94, 240, 189, 0.08), rgba(91, 168, 255, 0.04));
+      mix-blend-mode: screen;
+    }
+
+    .neo-core-image-frame::after {
+      inset: 8%;
       border-radius: 50%;
       border: 1px solid rgba(255, 255, 255, 0.16);
     }
 
-    .neo-core-mark::after {
-      inset: 8%;
-      border-color: rgba(94, 240, 189, 0.22);
+    .neo-core-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 38%;
+      transform: scale(1.18);
+      filter: saturate(1.08) contrast(1.05);
     }
 
     .neo-copy ul,
@@ -1799,7 +2021,7 @@
       font-size: 0.88rem;
     }
 
-    .music-coming-soon {
+    .music-status {
       margin-top: 24px;
       display: inline-flex;
       align-items: center;
@@ -1888,6 +2110,326 @@
       color: var(--green);
       font-size: 0.88rem;
       line-height: 1.5;
+    }
+
+    #cuenta .account-grid > .account-panel,
+    #cuenta .account-grid > .auth-shell {
+      grid-column: 1 / -1;
+    }
+
+    .context-actions {
+      position: relative;
+      width: fit-content;
+      max-width: 100%;
+      margin-top: 18px;
+    }
+
+    .context-actions-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 16px;
+      border-radius: 14px;
+      color: var(--text);
+      background: rgba(10, 19, 39, 0.78);
+      border: 1px solid rgba(111, 150, 232, 0.18);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+      font-weight: 800;
+    }
+
+    .context-actions-toggle::after {
+      content: "⌄";
+      color: var(--green);
+      transition: transform 0.22s ease;
+    }
+
+    .context-actions.is-open .context-actions-toggle::after {
+      transform: rotate(180deg);
+    }
+
+    .context-actions-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      z-index: 5;
+      width: min(280px, calc(100vw - 32px));
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(94, 240, 189, 0.2);
+      background: rgba(6, 12, 26, 0.96);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      opacity: 0;
+      transform: translateY(-8px) scale(0.98);
+      pointer-events: none;
+      visibility: hidden;
+      transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+    }
+
+    .context-actions.is-open .context-actions-menu {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+      visibility: visible;
+    }
+
+    .context-actions-menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      padding: 0 10px;
+      border-radius: 12px;
+      color: #dbeaff;
+    }
+
+    .context-actions-menu a:hover,
+    .context-actions-menu a:focus-visible {
+      background: rgba(91, 168, 255, 0.12);
+      color: var(--text);
+    }
+
+    .auth-shell {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      min-height: 560px;
+      margin-top: 18px;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(94, 240, 189, 0.2);
+      background:
+        radial-gradient(circle at 8% 8%, rgba(91, 168, 255, 0.16), transparent 32%),
+        linear-gradient(180deg, rgba(8, 15, 30, 0.94), rgba(5, 11, 22, 0.94));
+      box-shadow: var(--shadow);
+    }
+
+    .auth-form {
+      display: none;
+      align-content: center;
+      gap: 12px;
+      padding: clamp(22px, 4vw, 38px);
+      min-width: 0;
+    }
+
+    .auth-shell[data-mode="login"] .auth-form--login {
+      display: grid;
+      grid-column: 1;
+    }
+
+    .auth-shell[data-mode="register"] .auth-form--register {
+      display: grid;
+      grid-column: 2;
+    }
+
+    .auth-form h3 {
+      margin: 0;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      line-height: 1.08;
+    }
+
+    .auth-form p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .auth-recovery {
+      width: fit-content;
+      color: var(--green);
+      font-weight: 800;
+      font-size: 0.88rem;
+    }
+
+    .auth-visual {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 50%;
+      display: grid;
+      align-content: center;
+      gap: 14px;
+      padding: clamp(24px, 4vw, 44px);
+      border-left: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        radial-gradient(circle at 28% 16%, rgba(255, 255, 255, 0.16), transparent 18%),
+        radial-gradient(circle at 70% 78%, rgba(94, 240, 189, 0.2), transparent 30%),
+        linear-gradient(145deg, rgba(91, 168, 255, 0.34), rgba(10, 19, 39, 0.88));
+      box-shadow: -18px 0 60px rgba(0, 0, 0, 0.24);
+      transition: transform 0.46s cubic-bezier(0.2, 0.78, 0.2, 1), border-color 0.22s ease;
+    }
+
+    .auth-shell[data-mode="register"] .auth-visual {
+      transform: translateX(-100%);
+      border-left-color: transparent;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .auth-visual h3 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+    }
+
+    .auth-visual p {
+      margin: 0;
+      max-width: 34ch;
+      color: #dbeaff;
+      line-height: 1.7;
+    }
+
+    .auth-mode-button {
+      width: fit-content;
+      min-height: 48px;
+      padding: 0 16px;
+      border-radius: 14px;
+      color: #06110f;
+      background: linear-gradient(135deg, var(--green), #a7ffd8);
+      font-weight: 900;
+      box-shadow: 0 16px 34px rgba(94, 240, 189, 0.18);
+    }
+
+    .auth-rune {
+      font-size: clamp(2.8rem, 10vw, 6.6rem);
+      line-height: 0.9;
+      color: rgba(255, 255, 255, 0.18);
+      text-shadow: 0 0 34px rgba(94, 240, 189, 0.24);
+    }
+
+    .live-status-panel {
+      margin-top: 22px;
+      padding: 20px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(94, 240, 189, 0.2);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 42%),
+        rgba(7, 14, 29, 0.56);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 22px 58px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(18px);
+    }
+
+    .live-status-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .live-status-head h4 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .digital-clock {
+      display: grid;
+      gap: 2px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .digital-clock strong {
+      color: #f5fbff;
+      font-size: clamp(1.45rem, 4vw, 2.2rem);
+      line-height: 1;
+    }
+
+    .digital-clock span {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .live-status-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .live-status-card {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      min-height: 82px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(111, 150, 232, 0.14);
+      background: rgba(4, 10, 21, 0.58);
+    }
+
+    .live-status-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #f5fbff;
+    }
+
+    .live-status-card span:last-child,
+    .live-status-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 0.9rem;
+    }
+
+    .aegis-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      margin-top: 14px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(111, 150, 232, 0.18);
+      color: var(--text);
+      background: rgba(4, 10, 21, 0.6);
+      font-weight: 800;
+    }
+
+    .switch-track {
+      position: relative;
+      width: 58px;
+      height: 30px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(111, 150, 232, 0.18);
+      transition: background 0.24s ease, border-color 0.24s ease;
+    }
+
+    .switch-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      color: #06110f;
+      background: linear-gradient(135deg, var(--green), #a7ffd8);
+      font-size: 0.8rem;
+      transition: transform 0.24s ease, background 0.24s ease;
+    }
+
+    .aegis-switch.is-on .switch-track {
+      background: rgba(94, 240, 189, 0.16);
+      border-color: rgba(94, 240, 189, 0.34);
+    }
+
+    .aegis-switch.is-on .switch-thumb {
+      transform: translateX(28px);
+    }
+
+    .motion-softened .neo-core-image-frame,
+    .motion-softened .rune {
+      animation: none !important;
     }
 
     .inline-actions {
@@ -2219,6 +2761,95 @@
       font-size: 0.9rem;
     }
 
+    .quick-launcher {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 75;
+      display: grid;
+      justify-items: end;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .quick-menu-toggle {
+      pointer-events: auto;
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      color: #06110f;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow:
+        0 18px 42px rgba(0, 0, 0, 0.34),
+        0 0 26px rgba(94, 240, 189, 0.22);
+      font-size: 1.25rem;
+      font-weight: 900;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .quick-launcher.is-open .quick-menu-toggle {
+      transform: rotate(45deg);
+    }
+
+    .quick-menu {
+      pointer-events: auto;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 9px;
+      width: min(286px, calc(100vw - 32px));
+      padding: 12px;
+      border-radius: 22px;
+      border: 1px solid rgba(94, 240, 189, 0.22);
+      background:
+        linear-gradient(135deg, rgba(91, 168, 255, 0.14), transparent 42%),
+        rgba(6, 12, 26, 0.96);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      opacity: 0;
+      transform: translateY(12px) scale(0.92);
+      transform-origin: bottom right;
+      visibility: hidden;
+      transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+    }
+
+    .quick-launcher.is-open .quick-menu {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      visibility: visible;
+    }
+
+    .quick-menu a {
+      display: grid;
+      place-items: center;
+      gap: 6px;
+      min-height: 74px;
+      padding: 8px 6px;
+      border-radius: 16px;
+      color: #dbeaff;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(111, 150, 232, 0.12);
+      text-align: center;
+      font-size: 0.76rem;
+      font-weight: 800;
+    }
+
+    .quick-menu a:hover,
+    .quick-menu a:focus-visible {
+      color: var(--text);
+      border-color: rgba(94, 240, 189, 0.28);
+      background: rgba(94, 240, 189, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .quick-menu-icon {
+      font-size: 1.18rem;
+      line-height: 1;
+      color: var(--green);
+    }
+
     .cookie-banner {
       position: fixed;
       left: 16px;
@@ -2448,6 +3079,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .live-status-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
       .faq-shell {
         grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
         align-items: start;
@@ -2526,6 +3161,11 @@
         min-width: 34px;
         padding: 0 8px;
       }
+
+      .header-status,
+      .header-icon-button {
+        display: none;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -2594,6 +3234,25 @@
         right: 0;
         gap: 8px;
         transform: translateY(-50%);
+      }
+
+      .header-actions {
+        gap: 6px;
+      }
+
+      .header-status,
+      .header-icon-button {
+        display: none;
+      }
+
+      .user-avatar-button {
+        width: 40px;
+        min-height: 40px;
+      }
+
+      .user-menu {
+        right: 0;
+        width: min(310px, calc(100vw - 32px));
       }
 
       .nav-toggle {
@@ -2719,6 +3378,66 @@
       .legal-button {
         width: 100%;
       }
+
+      .auth-shell {
+        grid-template-columns: minmax(0, 1fr);
+        min-height: 0;
+      }
+
+      .auth-shell[data-mode="login"] .auth-form--login,
+      .auth-shell[data-mode="register"] .auth-form--register {
+        grid-column: 1;
+      }
+
+      .auth-visual {
+        position: relative;
+        width: auto;
+        min-height: 240px;
+        order: -1;
+        border-left: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        transform: none !important;
+      }
+
+      .auth-shell[data-mode="register"] .auth-visual {
+        border-right: 0;
+      }
+
+      .auth-form {
+        padding: 22px;
+      }
+
+      .live-status-head,
+      .digital-clock {
+        text-align: left;
+      }
+
+      .context-actions,
+      .context-actions-toggle {
+        width: 100%;
+      }
+
+      .context-actions-menu {
+        position: static;
+        width: 100%;
+        margin-top: 10px;
+        display: none;
+        transform: none;
+      }
+
+      .context-actions.is-open .context-actions-menu {
+        display: grid;
+      }
+
+      .quick-launcher {
+        right: 12px;
+        bottom: 12px;
+      }
+
+      .quick-menu {
+        width: min(286px, calc(100vw - 24px));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
   </style>
 </head>
@@ -2774,6 +3493,37 @@
             </div>
           </div>
 
+          <div class="header-actions" aria-label="Estado y usuario" data-i18n-attr="aria-label:topbar.actionsLabel">
+            <a class="header-status" href="#nivel">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span data-i18n="topbar.status">Escudo activo</span>
+            </a>
+            <a class="header-icon-button" href="#neo" aria-label="Abrir Neo" data-i18n-attr="aria-label:topbar.neoAction">ᚨ</a>
+            <div class="user-panel" id="userPanel">
+              <button class="user-avatar-button" id="userPanelToggle" type="button" aria-expanded="false" aria-controls="userMenu" aria-label="Abrir panel de usuario" data-i18n-attr="aria-label:userPanel.open">
+                <span class="user-avatar" aria-hidden="true">ᛟ</span>
+              </button>
+              <div class="user-menu" id="userMenu" role="dialog" aria-label="Panel de usuario" data-i18n-attr="aria-label:userPanel.label">
+                <div class="user-menu-header">
+                  <span class="user-menu-avatar" aria-hidden="true">ᛟ</span>
+                  <div>
+                    <strong id="userPanelName" data-i18n="userPanel.guestName">Invitado local</strong>
+                    <span id="userPanelEmail" data-i18n="userPanel.guestEmail">Sin sesión online en esta web</span>
+                    <span class="user-level" id="userPanelLevel" data-i18n="userPanel.levelCore">Core</span>
+                  </div>
+                </div>
+                <div class="user-menu-links">
+                  <a href="#cuenta"><span aria-hidden="true">ᛟ</span><span data-i18n="userPanel.profile">Perfil</span></a>
+                  <a href="#gestionar-datos"><span aria-hidden="true">ᚱ</span><span data-i18n="userPanel.settings">Ajustes</span></a>
+                  <a href="#seguridad"><span aria-hidden="true">ᛉ</span><span data-i18n="userPanel.security">Seguridad</span></a>
+                  <a href="#premium"><span aria-hidden="true">ᚠ</span><span data-i18n="userPanel.subscription">Suscripción</span></a>
+                  <a href="#faq"><span aria-hidden="true">ᚲ</span><span data-i18n="userPanel.help">Ayuda</span></a>
+                  <button type="button" id="userPanelLogout"><span aria-hidden="true">×</span><span data-i18n="userPanel.logout">Limpiar vista local</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <a class="cta-primary" href="#descargar" data-i18n="nav.cta">Activar escudo</a>
         </div>
       </div>
@@ -2799,6 +3549,7 @@
                 <p class="cta-microcopy" data-i18n="hero.microcopy">Sin registro obligatorio. Cuenta Zamazen opcional para reforzar sesiones y privacidad.</p>
               </div>
               <a class="cta-secondary" href="#funciones" data-i18n="hero.secondaryCta">Ver cómo funciona</a>
+              <a class="cta-secondary" href="#cuenta" data-i18n="hero.accountCta">Acceder / crear cuenta</a>
             </div>
 
             <div class="hero-points" aria-label="Puntos clave">
@@ -2815,8 +3566,8 @@
                 <span data-i18n="hero.proof1Body">Número desconocido detectado como posible spam comercial y marcado para revisión.</span>
               </div>
               <div class="proof-card">
-                <strong data-i18n="hero.proof2Title">Ejemplo real del sistema: SMS de phishing detectado</strong>
-                <span data-i18n="hero.proof2Body">Mensaje que imitaba a una entidad bancaria, marcado como intento de suplantación antes de abrir el enlace.</span>
+                <strong data-i18n="hero.proof2Title">Ejemplo de Red Neo: SMS de phishing reportado</strong>
+                <span data-i18n="hero.proof2Body">Mensaje que imitaba a una entidad bancaria, marcado para revisión antes de abrir el enlace.</span>
               </div>
             </div>
           </div>
@@ -2840,7 +3591,7 @@
             <div class="phone-frame">
               <div class="phone-screen">
                 <div class="screen-top">
-                  <div class="signal" aria-label="Señal activa">
+                  <div class="signal" aria-hidden="true">
                     <span></span><span></span><span></span><span></span>
                   </div>
                   <div class="status-badge" data-i18n="phone.status">Sistema activo</div>
@@ -2848,7 +3599,7 @@
 
                 <div class="screen-card">
                   <h3 data-i18n="phone.card1Title">Protección en tiempo real</h3>
-                  <p data-i18n="phone.card1Body">Neo revisa llamadas, mensajes y enlaces con contexto, no con alertas vacías.</p>
+                  <p data-i18n="phone.card1Body">Neo revisa señales reportadas, mensajes y enlaces con contexto, no con alertas vacías.</p>
                 </div>
 
                 <div class="screen-card">
@@ -2863,8 +3614,8 @@
                     </div>
                     <div class="alert-item">
                       <div>
-                        <strong data-i18n="phone.alert2Title">SMS analizado</strong>
-                        <p data-i18n="phone.alert2Body">Intento de suplantación bancaria</p>
+                        <strong data-i18n="phone.alert2Title">SMS reportado</strong>
+                        <p data-i18n="phone.alert2Body">Intento de suplantación marcado para revisar</p>
                       </div>
                       <span class="risk risk-high" data-i18n="phone.alert2Tag">Fraude</span>
                     </div>
@@ -2934,15 +3685,15 @@
               Cada módulo está diseñado para actuar con claridad: frena amenazas, explica el riesgo
               y mantiene una experiencia ligera para que protegerte no se convierta en otra carga.
             </p>
-            <div class="section-runes" aria-hidden="true">ᛞ ᚨ ᛉ</div>
+            <div class="section-runes" aria-hidden="true">ᚦ ᚨ ᛉ</div>
           </div>
 
           <div class="feature-grid">
             <article class="card feature-card reveal">
               <div class="feature-rune-anchor">
-                <div class="rune rune--tiwaz" tabindex="0" aria-label="Smart threat review">
-                  <span class="rune__symbol">ᛏ</span>
-                  <span class="rune__tooltip">Smart threat review</span>
+                <div class="rune rune--thurisaz" tabindex="0" aria-label="Smart threat review">
+                  <span class="rune__symbol">ᚦ</span>
+                  <span class="rune__tooltip">Threat review</span>
                 </div>
               </div>
               <div class="feature-icon">☎</div>
@@ -2952,14 +3703,14 @@
 
             <article class="card feature-card reveal">
               <div class="feature-rune-anchor">
-                <div class="rune rune--tiwaz" tabindex="0" aria-label="Smart threat review">
-                  <span class="rune__symbol">ᛏ</span>
-                  <span class="rune__tooltip">Smart threat review</span>
+                <div class="rune rune--thurisaz" tabindex="0" aria-label="Smart threat review">
+                  <span class="rune__symbol">ᚦ</span>
+                  <span class="rune__tooltip">Threat review</span>
                 </div>
               </div>
               <div class="feature-icon">✉</div>
-              <h3 data-i18n="features.card2Title">Protección de SMS</h3>
-              <p data-i18n="features.card2Body">Detecta patrones de fraude, urgencia artificial y mensajes de suplantación.</p>
+              <h3 data-i18n="features.card2Title">Guía ante SMS sospechosos</h3>
+              <p data-i18n="features.card2Body">Ayuda a reconocer patrones de fraude, urgencia artificial y mensajes de suplantación.</p>
             </article>
 
             <article class="card feature-card reveal">
@@ -2976,8 +3727,8 @@
 
             <article class="card feature-card reveal">
               <div class="feature-rune-anchor">
-                <div class="rune rune--kenaz" tabindex="0" aria-label="Device security scanner">
-                  <span class="rune__symbol">ᚲ</span>
+                <div class="rune rune--thurisaz" tabindex="0" aria-label="Device security scanner">
+                  <span class="rune__symbol">ᚦ</span>
                   <span class="rune__tooltip">Device security scanner</span>
                 </div>
               </div>
@@ -3054,12 +3805,24 @@
 
       <section class="section" id="neo">
         <div class="container neo-panel reveal">
-          <span class="corner-rune top-right" aria-hidden="true">ᛉ ᛞ</span>
+          <span class="corner-rune top-right" aria-hidden="true">ᛉ ᚨ</span>
           <span class="corner-rune bottom-left" aria-hidden="true">ᚨ ᛟ</span>
-          <div class="neo-core" aria-hidden="true">
+          <div class="neo-core">
             <div class="neo-ring"></div>
-            <div class="neo-core-mark"></div>
-            <span class="rune-sigil">ᛞ</span>
+            <div class="neo-core-image-frame">
+              <img
+                class="neo-core-image"
+                src="images/neo/neo_guardian_hologram.png"
+                srcset="images/neo/neo_guardian_hologram.png 1024w, images/neo/neo_guardian_web_4k.png 2160w"
+                sizes="(max-width: 720px) 58vw, 320px"
+                width="2160"
+                height="3240"
+                loading="lazy"
+                decoding="async"
+                alt="Neo, guardián de Zamazen Aegis"
+                data-i18n-attr="alt:neo.imageAlt"
+              >
+            </div>
           </div>
           <div class="neo-core-rune">
             <div class="rune rune--ansuz" tabindex="0" aria-label="Neo AI security assistant">
@@ -3087,7 +3850,7 @@
       <section class="trust-strip" id="confianza">
         <div class="container">
           <div class="trust-panel reveal">
-            <span class="corner-rune top-right" aria-hidden="true">ᛏ ᛉ</span>
+            <span class="corner-rune top-right" aria-hidden="true">ᚦ ᛉ</span>
             <div class="trust-rune-anchor">
               <div class="rune rune--othala" tabindex="0" aria-label="Privacy and data protection">
                 <span class="rune__symbol">ᛟ</span>
@@ -3103,13 +3866,13 @@
                   análisis constantes, respuestas claras y una sensación de control que se nota en cada interacción.
                 </p>
                 <div class="community-rune-band" aria-label="Semantic rune system">
-                  <div class="rune rune--gebo" tabindex="0" aria-label="Community-powered protection">
-                    <span class="rune__symbol">ᚷ</span>
+                  <div class="rune rune--ansuz" tabindex="0" aria-label="Community-powered protection">
+                    <span class="rune__symbol">ᚨ</span>
                     <span class="rune__tooltip">Community-powered protection</span>
                   </div>
-                  <div class="rune rune--dagaz" tabindex="0" aria-label="Everything is under control">
-                    <span class="rune__symbol">ᛞ</span>
-                    <span class="rune__tooltip">Everything is under control</span>
+                  <div class="rune rune--algiz" tabindex="0" aria-label="Guardian protection signal">
+                    <span class="rune__symbol">ᛉ</span>
+                    <span class="rune__tooltip">Guardian protection signal</span>
                   </div>
                 </div>
               </div>
@@ -3133,6 +3896,68 @@
         </div>
       </section>
 
+      <section class="section" id="pilares">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="section-tag" data-i18n="virtues.badge">Pilares del Guardián</span>
+            <h2 data-i18n="virtues.title">Las 9 virtudes que sostienen Zamazen Aegis</h2>
+            <p data-i18n="virtues.body">
+              No son frases de marketing: son criterios de producto. Cada módulo debe proteger con claridad,
+              respetar la privacidad y ganarse la confianza del usuario en cada decisión.
+            </p>
+            <div class="section-runes" aria-hidden="true">ᛉ ᚨ ᛟ</div>
+          </div>
+
+          <div class="feature-grid">
+            <article class="card feature-card reveal">
+              <div class="feature-icon" aria-hidden="true">⟡</div>
+              <h3 data-i18n="virtues.card1Title">Coraje</h3>
+              <p data-i18n="virtues.card1Body">Actuar frente al riesgo con guía útil, sin convertir la seguridad en miedo.</p>
+            </article>
+            <article class="card feature-card reveal">
+              <div class="feature-icon" aria-hidden="true">◈</div>
+              <h3 data-i18n="virtues.card2Title">Verdad</h3>
+              <p data-i18n="virtues.card2Body">Explicar límites reales y evitar promesas imposibles de protección absoluta.</p>
+            </article>
+            <article class="card feature-card reveal">
+              <div class="feature-icon" aria-hidden="true">⬒</div>
+              <h3 data-i18n="virtues.card3Title">Honor</h3>
+              <p data-i18n="virtues.card3Body">Tratar privacidad, Bunker, cuenta y nube como información sensible por defecto.</p>
+            </article>
+            <article class="card feature-card reveal">
+              <div class="feature-icon" aria-hidden="true">∞</div>
+              <h3 data-i18n="virtues.card4Title">Lealtad</h3>
+              <p data-i18n="virtues.card4Body">Acompañar al usuario con una protección constante, coherente y comprensible.</p>
+            </article>
+            <article class="card feature-card reveal">
+              <div class="feature-icon" aria-hidden="true">▦</div>
+              <h3 data-i18n="virtues.card5Title">Disciplina</h3>
+              <p data-i18n="virtues.card5Body">Mantener calidad, pruebas, orden y mejora continua antes de añadir ruido.</p>
+            </article>
+            <article class="card feature-card reveal">
+              <div class="feature-icon" aria-hidden="true">⌂</div>
+              <h3 data-i18n="virtues.card6Title">Hospitalidad</h3>
+              <p data-i18n="virtues.card6Body">Hacer que la app sea accesible, clara y usable para cualquier persona.</p>
+            </article>
+            <article class="card feature-card reveal">
+              <div class="feature-icon" aria-hidden="true">↗</div>
+              <h3 data-i18n="virtues.card7Title">Productividad</h3>
+              <p data-i18n="virtues.card7Body">Reducir pasos, ahorrar tiempo y ayudar a decidir mejor ante señales dudosas.</p>
+            </article>
+            <article class="card feature-card reveal">
+              <div class="feature-icon" aria-hidden="true">⟳</div>
+              <h3 data-i18n="virtues.card8Title">Perseverancia</h3>
+              <p data-i18n="virtues.card8Body">Evolucionar ante nuevas amenazas sin romper lo que ya funciona.</p>
+            </article>
+            <article class="card feature-card reveal">
+              <div class="feature-icon" aria-hidden="true">◆</div>
+              <h3 data-i18n="virtues.card9Title">Confianza</h3>
+              <p data-i18n="virtues.card9Body">La virtud central: cada decisión debe reforzar la confianza del usuario.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="seguridad">
         <div class="container">
           <div class="section-head reveal">
@@ -3142,15 +3967,15 @@
               La defensa no vive en una sola pantalla. Zamazen Aegis acompaña llamadas, mensajes y navegación
               con una presencia siempre activa y una arquitectura pensada para responder rápido.
             </p>
-            <div class="section-runes" aria-hidden="true">ᛉ ᚱ ᛞ</div>
+            <div class="section-runes" aria-hidden="true">ᛉ ᚱ ᚦ</div>
           </div>
 
           <div class="security-grid">
             <article class="card security-card reveal">
               <div class="security-rune-anchor">
-                <div class="rune rune--tiwaz" tabindex="0" aria-label="Smart threat review">
-                  <span class="rune__symbol">ᛏ</span>
-                  <span class="rune__tooltip">Smart threat review</span>
+                <div class="rune rune--thurisaz" tabindex="0" aria-label="Smart threat review">
+                  <span class="rune__symbol">ᚦ</span>
+                  <span class="rune__tooltip">Threat review</span>
                 </div>
               </div>
               <h3 data-i18n="security.card1Title">Señales en llamadas</h3>
@@ -3227,7 +4052,7 @@
               <li data-i18n="privacy.point1">Sin registro obligatorio para empezar.</li>
               <li data-i18n="privacy.point2">Permisos explicados antes de activar cada capa.</li>
               <li data-i18n="privacy.point3">Datos bajo control del usuario.</li>
-              <li data-i18n="privacy.point4">Cuenta Zamazen opcional para mejorar sincronización y recuperación.</li>
+              <li data-i18n="privacy.point4">Cuenta Zamazen opcional con sesión online cuando el backend está disponible; Red Neo solo comparte indicadores saneados con consentimiento.</li>
               <li data-i18n="privacy.point5">Borrado de datos preparado para la versión publicada.</li>
               <li data-i18n="privacy.point6">Transparencia como parte de la experiencia, no como letra pequeña.</li>
             </ul>
@@ -3267,8 +4092,10 @@
               </p>
               <ul>
                 <li data-i18n="legalDocs.privacyPoint1">Los permisos se piden con contexto y pueden desactivarse desde Ajustes.</li>
-                <li data-i18n="legalDocs.privacyPoint2">La cuenta Zamazen es opcional y está pensada para sincronización, recuperación y control de dispositivos.</li>
+                <li data-i18n="legalDocs.privacyPoint2">Cuenta Zamazen, Red Neo online y diagnósticos usan datos mínimos, saneados y consentidos cuando el usuario activa servicios conectados.</li>
                 <li data-i18n="legalDocs.privacyPoint3">No se promete vigilancia secreta ni protección absoluta; Neo informa, ayuda y actúa con consentimiento.</li>
+                <li>Neo Call Guardian puede usar registro de llamadas y cribado solo con permiso y consentimiento para detectar llamadas sospechosas o números bloqueados por el usuario.</li>
+                <li>SMS sospechoso usa SMS entrantes para detectar smishing; no envía SMS, no borra conversaciones y no solicita lectura completa de mensajes antiguos.</li>
               </ul>
               <p class="legal-callout">
                 <span data-i18n="legalDocs.deleteCallout">Si tienes una cuenta Zamazen, puedes solicitar la eliminación de la cuenta y datos asociados desde la página pública de eliminación.</span>
@@ -3282,7 +4109,7 @@
                 Además de eliminar la cuenta completa, Zamazen Aegis permite controlar datos concretos desde la app cuando esos datos existen en el dispositivo o están bajo control de Zamazen Aegis.
               </p>
               <ul>
-                <li data-i18n="legalDocs.dataPoint1">Puedes eliminar historial local, registros de actividad, memoria local de Red Neo, caché interna y preferencias guardadas en este dispositivo.</li>
+                <li data-i18n="legalDocs.dataPoint1">Puedes eliminar historial local, registros de actividad, memoria y cola local de Red Neo, caché interna y preferencias guardadas en este dispositivo.</li>
                 <li data-i18n="legalDocs.dataPoint2">Puedes borrar datos del Bunker desde la app si decides eliminar credenciales, registros bancarios o archivos protegidos guardados localmente.</li>
                 <li data-i18n="legalDocs.dataPoint3">La eliminación parcial no cancela una suscripción ni elimina una cuenta remota; para eso existe la solicitud de eliminación de cuenta.</li>
                 <li data-i18n="legalDocs.dataPoint4">Android no permite que Zamazen Aegis borre datos privados de otras apps. Cuando haya una limitación del sistema, la app lo indicará y guiará al usuario a Ajustes.</li>
@@ -3303,6 +4130,7 @@
                 <li data-i18n="legalDocs.deleteStep2">Usa el asunto: Solicitud de eliminación de cuenta.</li>
                 <li data-i18n="legalDocs.deleteStep3">Indica que quieres eliminar tu cuenta de Zamazen Aegis y los datos asociados.</li>
                 <li data-i18n="legalDocs.deleteStep4">No incluyas contraseñas, códigos, datos bancarios completos ni información sensible innecesaria.</li>
+                <li data-i18n="legalDocs.deleteStep5">Si hace falta verificar la titularidad de una cuenta online, soporte indicará un paso seguro. Nunca envíes tu contraseña, códigos de dos pasos ni códigos de recuperación por correo.</li>
               </ol>
               <div class="legal-mailbox">
                 <strong data-i18n="legalDocs.deleteEmailTitle">Correo oficial de privacidad y cuenta</strong>
@@ -3335,7 +4163,7 @@
             <article class="legal-doc-card reveal" id="politica-producto">
               <h3 data-i18n="legalDocs.productTitle">Política de producto</h3>
               <p data-i18n="legalDocs.productBody">
-                Zamazen Aegis ayuda a detectar señales de riesgo en llamadas, SMS, enlaces, comportamiento y eventos del sistema, siempre dentro de las limitaciones técnicas y legales de Android.
+                Zamazen Aegis ayuda a revisar señales de riesgo reportadas en llamadas, SMS, enlaces, comportamiento y eventos del sistema, siempre dentro de las limitaciones técnicas y legales de Android.
               </p>
               <ul>
                 <li data-i18n="legalDocs.productPoint1">La app informa y recomienda acciones cuando hay base técnica para hacerlo; solo bloquea si la función existe, está permitida y el usuario la activa.</li>
@@ -3414,6 +4242,48 @@
               <span data-i18n="level.label1">Base segura</span>
               <span data-i18n="level.label2">Protección activa en tiempo real</span>
             </div>
+
+            <div class="live-status-panel" aria-labelledby="liveStatusTitle">
+              <div class="live-status-head">
+                <div>
+                  <span class="section-tag" data-i18n="live.badge">Sistema vivo</span>
+                  <h4 id="liveStatusTitle" data-i18n="live.title">Actividad útil en tiempo real</h4>
+                </div>
+                <div class="digital-clock" aria-live="polite">
+                  <strong id="digitalClock">--:--:--</strong>
+                  <span id="digitalDate" data-i18n="live.loadingDate">Sincronizando fecha</span>
+                </div>
+              </div>
+
+              <div class="live-status-grid">
+                <article class="live-status-card" data-live-card="protection">
+                  <span class="status-dot" aria-hidden="true"></span>
+                  <div>
+                    <strong data-i18n="live.protectionTitle">Protección</strong>
+                    <span id="liveProtectionStatus" data-i18n="live.protectionReady">Escudo web listo y sin datos sensibles.</span>
+                  </div>
+                </article>
+                <article class="live-status-card" data-live-card="neo">
+                  <span class="status-dot" aria-hidden="true"></span>
+                  <div>
+                    <strong data-i18n="live.neoTitle">Neo</strong>
+                    <span id="liveNeoStatus" data-i18n="live.neoReady">Guía contextual preparada para llamadas, SMS y enlaces.</span>
+                  </div>
+                </article>
+                <article class="live-status-card" data-live-card="network">
+                  <span class="status-dot status-dot--warning" id="liveNetworkDot" aria-hidden="true"></span>
+                  <div>
+                    <strong data-i18n="live.networkTitle">Red Neo</strong>
+                    <span id="liveNetworkStatus" data-i18n="live.networkChecking">Comprobando API online...</span>
+                  </div>
+                </article>
+              </div>
+
+              <button class="aegis-switch is-on" id="liveMotionSwitch" type="button" aria-pressed="true">
+                <span class="switch-track" aria-hidden="true"><span class="switch-thumb">ᛉ</span></span>
+                <span id="liveMotionLabel" data-i18n="live.motionOn">Movimiento útil activado</span>
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -3433,24 +4303,24 @@
           <div class="premium-panel reveal">
             <p class="premium-hook" data-i18n="premium.hook">Monetización honesta: pagar debe sentirse útil, no obligatorio.</p>
             <p class="premium-lead" data-i18n="premium.lead">
-              Core ayuda con señales de llamadas spam, SMS sospechosos, phishing básico, limpieza segura, historial básico y Red Neo manual.
-              Valhalla añade permisos, enlaces, privacidad, contexto y Bunker mejorado. Ragnarok completa banca, credenciales,
-              Bunker total, Red Neo completa y resolución guiada.
+              Core ayuda con reportes de llamadas spam, SMS sospechosos, phishing básico, limpieza segura, historial básico y Red Neo con cola online saneada.
+              Valhalla añade permisos, enlaces, privacidad, tendencias online, contexto y Bunker mejorado. Ragnarok completa banca, credenciales,
+              Bunker total, Red Neo prioritaria y resolución guiada.
             </p>
 
             <div class="premium-grid">
               <article class="card premium-card">
                 <h3 data-i18n="premium.card1Title">Core: protección esencial</h3>
-                <p data-i18n="premium.card1Body">Escáner manual, historial básico, Red Neo manual, limpieza segura y avisos esenciales sin quitar protección por no pagar.</p>
+                <p data-i18n="premium.card1Body">Escáner manual, historial básico, Red Neo con envío online saneado cuando hay conexión, limpieza segura y avisos esenciales sin quitar protección por no pagar.</p>
                 <ul class="premium-list">
-                  <li data-i18n="premium.card1Point1">Llamadas spam, SMS sospechosos y phishing básico</li>
+                  <li data-i18n="premium.card1Point1">Reportes de llamadas spam, SMS sospechosos y phishing básico</li>
                   <li data-i18n="premium.card1Point2">Estado local y salud del sistema honesta</li>
                 </ul>
               </article>
 
               <article class="card premium-card">
                 <h3 data-i18n="premium.card2Title">Valhalla: protección social y digital</h3>
-                <p data-i18n="premium.card2Body">Más contexto para apps, permisos excesivos, enlaces, privacidad, redes sociales y Red Neo ampliada.</p>
+                <p data-i18n="premium.card2Body">Más contexto para apps, permisos excesivos, enlaces, privacidad, redes sociales, tendencias online de Red Neo y Bunker mejorado.</p>
                 <ul class="premium-list">
                   <li data-i18n="premium.card2Point1">Detector contextual avanzado y avisos inteligentes</li>
                   <li data-i18n="premium.card2Point2">Modo banco seguro, NFC seguro y Bunker mejorado</li>
@@ -3459,16 +4329,16 @@
 
               <article class="card premium-card">
                 <h3 data-i18n="premium.card3Title">Ragnarok: protección suprema</h3>
-                <p data-i18n="premium.card3Body">Experiencia completa para banca, credenciales, identidad digital, Bunker total y riesgos complejos.</p>
+                <p data-i18n="premium.card3Body">Experiencia completa para banca, credenciales, identidad digital, Red Neo prioritaria, Bunker total y riesgos complejos.</p>
                 <ul class="premium-list">
-                  <li data-i18n="premium.card3Point1">Red Neo completa, IA avanzada e historial profundo</li>
+                  <li data-i18n="premium.card3Point1">Red Neo prioritaria, IA avanzada e historial profundo</li>
                   <li data-i18n="premium.card3Point2">Resolución guiada sin fingir reparaciones</li>
                 </ul>
               </article>
 
               <article class="card premium-card">
-                <h3 data-i18n="premium.card4Title">Funciones en preparación</h3>
-                <p data-i18n="premium.card4Body">Cuenta Zamazen cloud, Google OAuth completo, promos de producción y música oficial se marcarán como próximas hasta conectar backend real.</p>
+                <h3 data-i18n="premium.card4Title">Límites transparentes</h3>
+                <p data-i18n="premium.card4Body">Cuenta Zamazen, perfil cloud, Red Neo y diagnósticos usan backend propio con datos mínimos y cola local; Bunker cloud solo acepta paquetes cifrados por el usuario.</p>
                 <ul class="premium-list">
                   <li data-i18n="premium.card4Point1">Sin prometer funciones falsas</li>
                   <li data-i18n="premium.card4Point2">Permisos y límites explicados antes de activarse</li>
@@ -3493,12 +4363,9 @@
       <section class="section" id="musica">
         <div class="container">
           <div class="music-panel reveal">
-            <span class="section-tag" data-i18n="music.badge">Próximamente</span>
-            <h2 data-i18n="music.title">Experiencia musical próximamente</h2>
-            <p data-i18n="music.body">
-              La experiencia musical de Zamazen Aegis se activará cuando esté preparada para lanzamiento público.
-            </p>
-            <div class="music-coming-soon" data-i18n="music.soon">Próximamente</div>
+            <span class="section-tag" data-i18n="music.badge">Identidad sonora</span>
+            <h2 data-i18n="music.title">Música oficial de Neo</h2>
+            <div class="music-status" data-i18n="music.soon">Próximamente</div>
           </div>
         </div>
       </section>
@@ -3515,7 +4382,7 @@
             <span class="section-tag" data-i18n="download.badge">Activación</span>
             <h3 data-i18n="download.title">Empieza a protegerte en menos de 1 minuto</h3>
             <p data-i18n="download.body">
-              Instala Zamazen Aegis, activa tu escudo y deja que Neo empiece a vigilar llamadas, SMS y enlaces
+              Instala Zamazen Aegis, activa tu escudo y deja que Neo empiece a guiarte ante llamadas, SMS y enlaces sospechosos
               con una configuración clara desde el primer momento.
             </p>
             <ul class="download-list">
@@ -3523,22 +4390,22 @@
               <li data-i18n="download.point2">Interfaz clara para uso diario</li>
               <li data-i18n="download.point3">Preparada para crecer contigo</li>
             </ul>
-            <p class="cta-microcopy" style="margin-top: 16px;" data-i18n="download.microcopy">Sin registro obligatorio. Crear cuenta Zamazen ayuda a gestionar sesiones, dispositivos y borrado de datos.</p>
+            <p class="cta-microcopy" style="margin-top: 16px;" data-i18n="download.microcopy">Sin registro obligatorio. Puedes usar perfil local o cuenta Zamazen online; Red Neo funciona con consentimiento.</p>
           </div>
 
           <div class="download-panel reveal">
             <div class="download-rune-anchor">
-              <div class="rune rune--dagaz" tabindex="0" aria-label="Everything is under control">
-                <span class="rune__symbol">ᛞ</span>
-                <span class="rune__tooltip">Everything is under control</span>
+              <div class="rune rune--raidho" tabindex="0" aria-label="Testing and release path">
+                <span class="rune__symbol">ᚱ</span>
+                <span class="rune__tooltip">Testing and release path</span>
               </div>
             </div>
             <span class="section-tag" data-i18n="store.badge">Tienda</span>
-            <h3 data-i18n="store.title">Próximamente en Google Play</h3>
+            <h3 data-i18n="store.title">Testing privado y Google Play</h3>
             <p style="margin: 0 0 18px; color: var(--muted); line-height: 1.7;" data-i18n="store.body">
-              El enlace real se añadirá cuando la ficha pública esté lista. La página queda preparada para integrarlo sin cambiar la estructura.
+              La versión de prueba y el material de Play Store se preparan con builds reales, política de privacidad y permisos explicados con claridad.
             </p>
-            <a class="store-button is-disabled" href="#" aria-disabled="true" data-store-placeholder aria-label="Disponible próximamente para Android" data-i18n="store.cta" data-i18n-attr="aria-label:store.aria">Disponible próximamente para Android</a>
+            <a class="store-button" href="mailto:zamazenaegissupport@gmail.com?subject=Acceso%20testing%20Zamazen%20Aegis" aria-label="Solicitar acceso de prueba por correo" data-i18n="store.cta" data-i18n-attr="aria-label:store.aria">Solicitar acceso de prueba</a>
           </div>
         </div>
       </section>
@@ -3549,27 +4416,47 @@
             <span class="section-tag" data-i18n="account.badge">Cuenta Zamazen</span>
             <h2 data-i18n="account.title">Una cuenta opcional para proteger mejor tus sesiones</h2>
             <p data-i18n="account.body">
-              Zamazen Aegis funciona desde el primer momento, pero una cuenta ayuda a gestionar dispositivos,
-              recuperar acceso, borrar datos y preparar sincronización segura cuando esté disponible.
+              Zamazen Aegis funciona desde el primer momento sin obligarte a crear cuenta. La cuenta Zamazen online permite sesión, perfil cloud y recuperación cuando el backend está disponible; Google se valida desde la app con Credential Manager. Red Neo y diagnósticos usan datos saneados con consentimiento, sin subir contraseñas ni datos del Bunker en claro.
             </p>
             <ul class="account-list">
-              <li data-i18n="account.point1">Más control sobre sesiones y dispositivos vinculados.</li>
-              <li data-i18n="account.point2">Borrado y recuperación de datos más claros.</li>
-              <li data-i18n="account.point3">Base preparada para web, escritorio, familia, Red Neo y cloud.</li>
+              <li data-i18n="account.point1">Más control sobre sesión, perfil, borrado y dispositivos vinculados cuando activas cuenta.</li>
+              <li data-i18n="account.point2">Bunker cloud solo acepta paquetes cifrados por el usuario; la app conserva protección local si la nube no responde.</li>
+              <li data-i18n="account.point3">Cuenta online, Google y cloud comparten una arquitectura única; Red Neo sigue separada y saneada por privacidad.</li>
             </ul>
-            <div class="inline-actions">
-              <a class="cta-secondary" href="#gestionar-datos" data-i18n="account.dataAction">Gestionar datos</a>
-              <a class="cta-secondary" href="#eliminar-cuenta" data-i18n="account.deleteAction">Eliminar cuenta</a>
+            <div class="context-actions" id="accountContextActions">
+              <button class="context-actions-toggle" id="accountActionsToggle" type="button" aria-expanded="false" aria-controls="accountActionsMenu" data-i18n="account.actionsToggle">Acciones de cuenta</button>
+              <div class="context-actions-menu" id="accountActionsMenu">
+                <a href="#gestionar-datos"><span aria-hidden="true">ᚱ</span><span data-i18n="account.dataAction">Gestionar datos</span></a>
+                <a href="#eliminar-cuenta"><span aria-hidden="true">ᛟ</span><span data-i18n="account.deleteAction">Eliminar cuenta</span></a>
+                <a href="#politica-privacidad"><span aria-hidden="true">ᛉ</span><span data-i18n="account.privacyAction">Privacidad</span></a>
+              </div>
             </div>
           </div>
 
-          <div class="account-panel reveal">
-            <span class="section-tag" data-i18n="account.formBadge">Crear usuario</span>
-            <h3 data-i18n="account.formTitle">Crear cuenta Zamazen</h3>
-            <p data-i18n="account.formBody">
-              Esta base web guarda una vista previa local en tu navegador. El registro real debe conectarse a un backend seguro antes de publicar.
-            </p>
-            <form class="account-form" id="accountForm">
+          <div class="auth-shell reveal" id="authShell" data-mode="login">
+            <form class="account-form auth-form auth-form--login" id="loginForm">
+              <span class="section-tag" data-i18n="auth.loginBadge">Santuario Aegis</span>
+              <h3 data-i18n="auth.loginTitle">Accede a tu cuenta Zamazen</h3>
+              <p data-i18n="auth.loginBody">Usa tu cuenta online cuando la API esté disponible. Esta web no guarda tu contraseña.</p>
+              <div class="form-row">
+                <label for="loginEmail" data-i18n="auth.loginEmailLabel">Usuario o correo</label>
+                <input class="form-input" id="loginEmail" name="email" type="email" autocomplete="username" required>
+              </div>
+              <div class="form-row">
+                <label for="loginPassword" data-i18n="account.passwordLabel">Contraseña</label>
+                <input class="form-input" id="loginPassword" name="password" type="password" autocomplete="current-password" required>
+              </div>
+              <a class="auth-recovery" href="mailto:zamazenaegissupport@gmail.com?subject=Recuperar%20cuenta%20Zamazen%20Aegis" data-i18n="auth.recover">Recuperar contraseña</a>
+              <button class="cta-primary" type="submit" data-i18n="auth.loginSubmit">Entrar</button>
+              <p class="account-status" id="loginStatus" role="status" aria-live="polite"></p>
+            </form>
+
+            <form class="account-form auth-form auth-form--register" id="accountForm">
+              <span class="section-tag" data-i18n="account.formBadge">Cuenta online</span>
+              <h3 data-i18n="account.formTitle">Crear cuenta Zamazen</h3>
+              <p data-i18n="account.formBody">
+                Esta página intenta crear una cuenta real en la API Zamazen. Si no hay conexión, guarda una vista local transparente para que no pierdas el formulario.
+              </p>
               <div class="form-row">
                 <label for="accountName" data-i18n="account.nameLabel">Nombre</label>
                 <input class="form-input" id="accountName" name="name" autocomplete="name" required>
@@ -3578,9 +4465,21 @@
                 <label for="accountEmail" data-i18n="account.emailLabel">Email</label>
                 <input class="form-input" id="accountEmail" name="email" type="email" autocomplete="email" required>
               </div>
-              <button class="cta-primary" type="submit" data-i18n="account.submit">Crear cuenta</button>
+              <div class="form-row">
+                <label for="accountPassword" data-i18n="account.passwordLabel">Contraseña</label>
+                <input class="form-input" id="accountPassword" name="password" type="password" minlength="10" autocomplete="new-password" required>
+              </div>
+              <button class="cta-primary" type="submit" data-i18n="account.submit">Crear cuenta Zamazen</button>
               <p class="account-status" id="accountStatus" role="status" aria-live="polite"></p>
             </form>
+
+            <aside class="auth-visual" aria-live="polite">
+              <div class="auth-rune" aria-hidden="true">ᛉ</div>
+              <span class="section-tag" id="authVisualBadge" data-i18n="auth.visualBadgeLogin">Despertar Guardián</span>
+              <h3 id="authVisualTitle" data-i18n="auth.visualTitleLogin">¿Nuevo en Zamazen?</h3>
+              <p id="authVisualBody" data-i18n="auth.visualBodyLogin">Crea tu cuenta para activar perfil cloud, sesiones y recuperación sin perder la protección local.</p>
+              <button class="auth-mode-button" id="authModeToggle" type="button" data-auth-target="register" data-i18n="auth.toRegister">Crear cuenta</button>
+            </aside>
           </div>
         </div>
       </section>
@@ -3640,7 +4539,7 @@
               </button>
               <div class="faq-answer">
                 <div>
-                  <p data-i18n="faq.a4">Los permisos dependen de las capas que actives, como llamadas, SMS o análisis de enlaces. La idea es solicitar solo lo necesario para proteger mejor cada canal.</p>
+                  <p data-i18n="faq.a4">Los permisos dependen de las capas que actives, como reportes de llamadas/SMS o análisis de enlaces. La idea es solicitar solo lo necesario para proteger mejor cada canal.</p>
                 </div>
               </div>
             </article>
@@ -3652,11 +4551,11 @@
         <div class="container">
           <div class="impact-panel reveal">
             <span class="corner-rune top-right" aria-hidden="true">ᛉ ᚦ</span>
-            <span class="corner-rune bottom-left" aria-hidden="true">ᛞ ᛟ</span>
+            <span class="corner-rune bottom-left" aria-hidden="true">ᛉ ᛟ</span>
             <div class="impact-rune-anchor">
-              <div class="rune rune--dagaz" tabindex="0" aria-label="Everything is under control">
-                <span class="rune__symbol">ᛞ</span>
-                <span class="rune__tooltip">Everything is under control</span>
+              <div class="rune rune--algiz" tabindex="0" aria-label="Guardian protection signal">
+                <span class="rune__symbol">ᛉ</span>
+                <span class="rune__tooltip">Guardian protection signal</span>
               </div>
             </div>
             <span class="section-tag" data-i18n="impact.badge">Cierre</span>
@@ -3678,15 +4577,15 @@
               <strong data-i18n="footer.brand">Zamazen Aegis</strong>
               <span data-i18n="footer.tagline">Guardián digital inteligente</span>
             </div>
-            <p data-i18n="footer.body">Un escudo digital moderno para llamadas, SMS y enlaces con carácter serio, protector y confiable.</p>
+            <p data-i18n="footer.body">Un escudo digital moderno para enlaces, reportes y decisiones de seguridad con carácter serio, protector y confiable.</p>
             <div class="footer-rune-row" aria-label="Zamazen Aegis semantic rune system">
               <div class="rune rune--algiz" tabindex="0" aria-label="Real-time device protection">
                 <span class="rune__symbol">ᛉ</span>
                 <span class="rune__tooltip">Real-time device protection</span>
               </div>
-              <div class="rune rune--tiwaz" tabindex="0" aria-label="Smart threat review">
-                <span class="rune__symbol">ᛏ</span>
-                <span class="rune__tooltip">Smart threat review</span>
+              <div class="rune rune--thurisaz" tabindex="0" aria-label="Smart threat review">
+                <span class="rune__symbol">ᚦ</span>
+                <span class="rune__tooltip">Threat review</span>
               </div>
               <div class="rune rune--ansuz" tabindex="0" aria-label="Neo AI security assistant">
                 <span class="rune__symbol">ᚨ</span>
@@ -3700,17 +4599,17 @@
                 <span class="rune__symbol">ᚲ</span>
                 <span class="rune__tooltip">Device security scanner</span>
               </div>
-              <div class="rune rune--gebo" tabindex="0" aria-label="Community-powered protection">
-                <span class="rune__symbol">ᚷ</span>
-                <span class="rune__tooltip">Community-powered protection</span>
+              <div class="rune rune--fehu" tabindex="0" aria-label="Premium value">
+                <span class="rune__symbol">ᚠ</span>
+                <span class="rune__tooltip">Premium value</span>
               </div>
               <div class="rune rune--othala" tabindex="0" aria-label="Privacy and data protection">
                 <span class="rune__symbol">ᛟ</span>
                 <span class="rune__tooltip">Privacy and data protection</span>
               </div>
-              <div class="rune rune--dagaz" tabindex="0" aria-label="Everything is under control">
-                <span class="rune__symbol">ᛞ</span>
-                <span class="rune__tooltip">Everything is under control</span>
+              <div class="rune rune--uruz" tabindex="0" aria-label="System resilience">
+                <span class="rune__symbol">ᚢ</span>
+                <span class="rune__tooltip">System resilience</span>
               </div>
             </div>
             <nav class="footer-social" aria-label="Redes sociales oficiales de Zamazen Aegis">
@@ -3815,6 +4714,18 @@
     </footer>
   </div>
 
+  <div class="quick-launcher" id="quickLauncher">
+    <nav class="quick-menu" id="quickMenu" aria-label="Accesos rápidos" data-i18n-attr="aria-label:quickMenu.label">
+      <a href="#nivel"><span class="quick-menu-icon" aria-hidden="true">ᛉ</span><span data-i18n="quickMenu.shield">Escudo</span></a>
+      <a href="#neo"><span class="quick-menu-icon" aria-hidden="true">ᚨ</span><span data-i18n="quickMenu.neo">Neo</span></a>
+      <a href="#seguridad"><span class="quick-menu-icon" aria-hidden="true">ᚦ</span><span data-i18n="quickMenu.security">Seguridad</span></a>
+      <a href="#cuenta"><span class="quick-menu-icon" aria-hidden="true">ᛟ</span><span data-i18n="quickMenu.account">Cuenta</span></a>
+      <a href="#premium"><span class="quick-menu-icon" aria-hidden="true">ᚠ</span><span data-i18n="quickMenu.premium">Premium</span></a>
+      <a href="#faq"><span class="quick-menu-icon" aria-hidden="true">ᚲ</span><span data-i18n="quickMenu.help">Ayuda</span></a>
+    </nav>
+    <button class="quick-menu-toggle" id="quickMenuToggle" type="button" aria-expanded="false" aria-controls="quickMenu" aria-label="Abrir accesos rápidos" data-i18n-attr="aria-label:quickMenu.open">ᛉ</button>
+  </div>
+
   <section class="cookie-banner" id="cookieBanner" aria-live="polite" aria-label="Preferencias de privacidad y cookies">
     <div class="cookie-copy">
       <span class="section-tag" data-i18n="cookie.badge">Privacidad</span>
@@ -3897,6 +4808,30 @@
     const revealItems = document.querySelectorAll(".reveal");
     const accountForm = document.getElementById("accountForm");
     const accountStatus = document.getElementById("accountStatus");
+    const loginForm = document.getElementById("loginForm");
+    const loginStatus = document.getElementById("loginStatus");
+    const authShell = document.getElementById("authShell");
+    const authModeToggle = document.getElementById("authModeToggle");
+    const authVisualBadge = document.getElementById("authVisualBadge");
+    const authVisualTitle = document.getElementById("authVisualTitle");
+    const authVisualBody = document.getElementById("authVisualBody");
+    const accountContextActions = document.getElementById("accountContextActions");
+    const accountActionsToggle = document.getElementById("accountActionsToggle");
+    const userPanel = document.getElementById("userPanel");
+    const userPanelToggle = document.getElementById("userPanelToggle");
+    const userPanelName = document.getElementById("userPanelName");
+    const userPanelEmail = document.getElementById("userPanelEmail");
+    const userPanelLevel = document.getElementById("userPanelLevel");
+    const userPanelLogout = document.getElementById("userPanelLogout");
+    const quickLauncher = document.getElementById("quickLauncher");
+    const quickMenuToggle = document.getElementById("quickMenuToggle");
+    const quickMenuLinks = document.querySelectorAll(".quick-menu a");
+    const digitalClock = document.getElementById("digitalClock");
+    const digitalDate = document.getElementById("digitalDate");
+    const liveNetworkDot = document.getElementById("liveNetworkDot");
+    const liveNetworkStatus = document.getElementById("liveNetworkStatus");
+    const liveMotionSwitch = document.getElementById("liveMotionSwitch");
+    const liveMotionLabel = document.getElementById("liveMotionLabel");
     const storePlaceholderLinks = document.querySelectorAll("[data-store-placeholder]");
     const cookieBanner = document.getElementById("cookieBanner");
     const cookiePanelBackdrop = document.getElementById("cookiePanelBackdrop");
@@ -3917,6 +4852,10 @@
     const STORAGE_TEXT_SIZE_KEY = "zamazen_aegis_text_size";
     const STORAGE_ACCOUNT_KEY = "zamazen_aegis_account_preview";
     const STORAGE_COOKIE_KEY = "zamazen_aegis_cookie_preferences";
+    const STORAGE_MOTION_KEY = "zamazen_aegis_live_motion";
+    const ZAMAZEN_API_BASE_URL = "https://api.zamazenaegis.com";
+    const ACCOUNT_API_TIMEOUT_MS = 10000;
+    const HEALTH_API_TIMEOUT_MS = 3500;
     const SUPPORTED_LANGUAGES = ["es", "en", "fr", "pt"];
     const SUPPORTED_TEXT_SIZES = ["normal", "medium", "large"];
     const COOKIE_DEFAULTS = {
@@ -3930,7 +4869,7 @@
       es: {
         meta: {
           title: "Zamazen Aegis | Seguridad Inteligente contra Estafas, Spam y Phishing",
-          description: "Zamazen Aegis ayuda a detectar señales de riesgo en llamadas, SMS y enlaces con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo."
+          description: "Zamazen Aegis ayuda a revisar señales de riesgo en llamadas, SMS y enlaces reportados con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo."
         },
         brand: {
           name: "Zamazen Aegis",
@@ -3960,25 +4899,26 @@
           subline: "Protección que se anticipa al impacto, para que no tengas que reaccionar tarde.",
           primaryCta: "Proteger mi móvil",
           secondaryCta: "Ver cómo funciona",
+          accountCta: "Acceder / crear cuenta",
           microcopy: "Sin registro obligatorio. Cuenta Zamazen opcional para reforzar sesiones y privacidad.",
           point1: "Bloquea amenazas antes de que se conviertan en un problema real.",
           point2: "Neo explica cada riesgo como un asistente, no como una alarma vacía.",
           point3: "Protección firme, ligera y pensada para un uso diario sin fricción.",
           proof1Title: "Ejemplo del sistema: llamada sospechosa señalada",
           proof1Body: "Número desconocido detectado como posible spam comercial y marcado para revisión.",
-          proof2Title: "Ejemplo real del sistema: SMS de phishing detectado",
-          proof2Body: "Mensaje que imitaba a una entidad bancaria, marcado como intento de suplantación antes de abrir el enlace."
+          proof2Title: "Ejemplo de Red Neo: SMS de phishing reportado",
+          proof2Body: "Mensaje que imitaba a una entidad bancaria, marcado para revisión antes de abrir el enlace."
         },
         phone: {
           status: "Sistema activo",
           card1Title: "Protección en tiempo real",
-          card1Body: "Neo revisa llamadas, mensajes y enlaces con contexto, no con alertas vacías.",
+          card1Body: "Neo revisa señales reportadas, mensajes y enlaces con contexto, no con alertas vacías.",
           card2Title: "Actividad reciente",
           alert1Title: "Llamada sospechosa",
           alert1Body: "Spam comercial detectado",
           alert1Tag: "Riesgo alto",
-          alert2Title: "SMS analizado",
-          alert2Body: "Intento de suplantación bancaria",
+          alert2Title: "SMS reportado",
+          alert2Body: "Intento de suplantación marcado para revisar",
           alert2Tag: "Fraude",
           alert3Title: "Enlace seguro",
           alert3Body: "Dominio verificado sin anomalías",
@@ -4003,8 +4943,8 @@
           body: "Cada módulo está diseñado para actuar con claridad: frena amenazas, explica el riesgo y mantiene una experiencia ligera para que protegerte no se convierta en otra carga.",
           card1Title: "Señales de llamadas spam",
           card1Body: "Ayuda a identificar llamadas molestas o sospechosas con avisos claros y configuración segura.",
-          card2Title: "Protección de SMS",
-          card2Body: "Detecta patrones de fraude, urgencia artificial y mensajes de suplantación.",
+          card2Title: "Guía ante SMS sospechosos",
+          card2Body: "Ayuda a reconocer patrones de fraude, urgencia artificial y mensajes de suplantación.",
           card3Title: "Análisis de enlaces",
           card3Body: "Evalúa dominios y señales de riesgo para que no pulses donde no debes.",
           card4Title: "Detección de estafas",
@@ -4034,22 +4974,46 @@
           badge: "Neo",
           title: "Neo no avisa. Neo protege.",
           body: "La IA de Zamazen Aegis está pensada para reaccionar con criterio. No abruma con ruido: identifica señales, interpreta riesgos y te acompaña con decisiones claras.",
+          imageAlt: "Neo, guardián de Zamazen Aegis",
           point1: "Explica riesgos sin lenguaje técnico innecesario.",
-          point2: "Guía decisiones cuando una llamada, SMS o enlace parece dudoso.",
+          point2: "Guía decisiones cuando una llamada, SMS o enlace reportado parece dudoso.",
           point3: "Reacciona en tiempo real con una lógica centrada en protección útil."
         },
         trust: {
           badge: "Confianza y credibilidad",
           title: "Un sistema de defensa transmite más valor cuando demuestra consistencia.",
           body: "Zamazen Aegis está planteado para inspirar seguridad desde el primer contacto: análisis constantes, respuestas claras y una sensación de control que se nota en cada interacción.",
-          stat1: "Análisis de llamadas, mensajes y enlaces en pruebas reales del sistema para validar detección y consistencia.",
+          stat1: "Análisis de reportes, mensajes y enlaces en pruebas reales del sistema para validar detección y consistencia.",
           stat2: "De cobertura activa visible en simulaciones de protección para que el usuario entienda que su escudo está trabajando.",
           stat3: "Protección persistente con enfoque ligero, claro y orientado a prevención real en uso continuo."
+        },
+        virtues: {
+          badge: "Pilares del Guardián",
+          title: "Las 9 virtudes que sostienen Zamazen Aegis",
+          body: "No son frases de marketing: son criterios de producto. Cada módulo debe proteger con claridad, respetar la privacidad y ganarse la confianza del usuario en cada decisión.",
+          card1Title: "Coraje",
+          card1Body: "Actuar frente al riesgo con guía útil, sin convertir la seguridad en miedo.",
+          card2Title: "Verdad",
+          card2Body: "Explicar límites reales y evitar promesas imposibles de protección absoluta.",
+          card3Title: "Honor",
+          card3Body: "Tratar privacidad, Bunker, cuenta y nube como información sensible por defecto.",
+          card4Title: "Lealtad",
+          card4Body: "Acompañar al usuario con una protección constante, coherente y comprensible.",
+          card5Title: "Disciplina",
+          card5Body: "Mantener calidad, pruebas, orden y mejora continua antes de añadir ruido.",
+          card6Title: "Hospitalidad",
+          card6Body: "Hacer que la app sea accesible, clara y usable para cualquier persona.",
+          card7Title: "Productividad",
+          card7Body: "Reducir pasos, ahorrar tiempo y ayudar a decidir mejor ante señales dudosas.",
+          card8Title: "Perseverancia",
+          card8Body: "Evolucionar ante nuevas amenazas sin romper lo que ya funciona.",
+          card9Title: "Confianza",
+          card9Body: "La virtud central: cada decisión debe reforzar la confianza del usuario."
         },
         security: {
           badge: "Seguridad",
           title: "Protección continua sobre todo lo que más expone un móvil",
-          body: "La defensa no vive en una sola pantalla. Zamazen Aegis acompaña llamadas, mensajes y navegación con una presencia siempre activa y una arquitectura pensada para responder rápido.",
+          body: "La defensa no vive en una sola pantalla. Zamazen Aegis acompaña reportes, mensajes y navegación con una presencia siempre activa y una arquitectura pensada para responder rápido.",
           card1Title: "Señales en llamadas",
           card1Body: "Ayuda a identificar contactos sospechosos y señales de spam o fraude sin pedir permisos innecesarios.",
           card1Point1: "Aviso inmediato",
@@ -4074,7 +5038,7 @@
           point1: "Sin registro obligatorio para empezar.",
           point2: "Permisos explicados antes de activar cada capa.",
           point3: "Datos bajo control del usuario.",
-          point4: "Cuenta Zamazen opcional para mejorar sincronización y recuperación.",
+          point4: "Cuenta Zamazen opcional con sesión online cuando el backend está disponible; Red Neo solo comparte indicadores saneados con consentimiento.",
           point5: "Borrado de datos preparado para la versión publicada.",
           point6: "Transparencia como parte de la experiencia, no como letra pequeña."
         },
@@ -4087,26 +5051,93 @@
           label1: "Base segura",
           label2: "Protección activa en tiempo real"
         },
+        topbar: {
+          actionsLabel: "Estado y usuario",
+          status: "Escudo activo",
+          neoAction: "Abrir Neo"
+        },
+        userPanel: {
+          open: "Abrir panel de usuario",
+          label: "Panel de usuario",
+          guestName: "Invitado local",
+          guestEmail: "Sin sesión online en esta web",
+          levelCore: "Core",
+          levelOnline: "Online",
+          profile: "Perfil",
+          settings: "Ajustes",
+          security: "Seguridad",
+          subscription: "Suscripción",
+          help: "Ayuda",
+          logout: "Limpiar vista local"
+        },
+        live: {
+          badge: "Sistema vivo",
+          title: "Actividad útil en tiempo real",
+          loadingDate: "Sincronizando fecha",
+          protectionTitle: "Protección",
+          protectionReady: "Escudo web listo y sin datos sensibles.",
+          neoTitle: "Neo",
+          neoReady: "Guía contextual preparada para llamadas, SMS y enlaces.",
+          networkTitle: "Red Neo",
+          networkChecking: "Comprobando API online...",
+          networkOffline: "Sin conexión local. La web conserva la experiencia básica.",
+          networkLocal: "Modo local de desarrollo: la API online se comprueba en despliegue HTTPS real.",
+          networkOnline: "API online disponible para cuenta, nube y Red Neo.",
+          networkLimited: "API no disponible ahora. La app mantiene modo local y cola segura.",
+          motionOn: "Movimiento útil activado",
+          motionOff: "Movimiento suavizado"
+        },
+        quickMenu: {
+          label: "Accesos rápidos",
+          open: "Abrir accesos rápidos",
+          shield: "Escudo",
+          neo: "Neo",
+          security: "Seguridad",
+          account: "Cuenta",
+          premium: "Premium",
+          help: "Ayuda"
+        },
+        auth: {
+          loginBadge: "Santuario Aegis",
+          loginTitle: "Accede a tu cuenta Zamazen",
+          loginBody: "Usa tu cuenta online cuando la API esté disponible. Esta web no guarda tu contraseña.",
+          loginEmailLabel: "Usuario o correo",
+          recover: "Recuperar contraseña",
+          loginSubmit: "Entrar",
+          loginPending: "Comprobando cuenta Zamazen...",
+          loginSuccess: "Sesión online verificada. La contraseña no se guarda en esta web.",
+          twoFactorRequired: "Esta cuenta requiere dos pasos. Continúa desde la app para completar el acceso.",
+          loginError: "No se pudo iniciar sesión. Revisa los datos o inténtalo más tarde.",
+          loginOffline: "No se pudo contactar con la API. No se ha creado ninguna sesión local falsa.",
+          visualBadgeLogin: "Despertar Guardián",
+          visualTitleLogin: "¿Nuevo en Zamazen?",
+          visualBodyLogin: "Crea tu cuenta para activar perfil cloud, sesiones y recuperación sin perder la protección local.",
+          toRegister: "Crear cuenta",
+          visualBadgeRegister: "Santuario Aegis",
+          visualTitleRegister: "¿Ya tienes cuenta?",
+          visualBodyRegister: "Vuelve al acceso para entrar con tu cuenta Zamazen cuando la API online esté disponible.",
+          toLogin: "Volver al login"
+        },
         premium: {
           badge: "Premium",
           title: "Core protege. Valhalla mejora. Ragnarok completa.",
           body: "Las ediciones están pensadas para aportar valor real sin presión: Core mantiene protección esencial, Valhalla refuerza la vida digital y Ragnarok desbloquea la experiencia completa cuando Android lo permite.",
           hook: "Monetización honesta: pagar debe sentirse útil, no obligatorio.",
-          lead: "Core ayuda con señales de llamadas spam, SMS sospechosos, phishing básico, limpieza segura, historial básico y Red Neo manual. Valhalla añade permisos, enlaces, privacidad, contexto y Bunker mejorado. Ragnarok completa banca, credenciales, Bunker total, Red Neo completa y resolución guiada.",
+          lead: "Core ayuda con reportes de llamadas spam, SMS sospechosos, phishing básico, limpieza segura, historial básico y Red Neo con cola online saneada. Valhalla añade permisos, enlaces, privacidad, tendencias online, contexto y Bunker mejorado. Ragnarok completa banca, credenciales, Bunker total, Red Neo prioritaria y resolución guiada.",
           card1Title: "Core: protección esencial",
-          card1Body: "Escáner manual, historial básico, Red Neo manual, limpieza segura y avisos esenciales sin quitar protección por no pagar.",
-          card1Point1: "Llamadas spam, SMS sospechosos y phishing básico",
+          card1Body: "Escáner manual, historial básico, Red Neo con envío online saneado cuando hay conexión, limpieza segura y avisos esenciales sin quitar protección por no pagar.",
+          card1Point1: "Reportes de llamadas spam, SMS sospechosos y phishing básico",
           card1Point2: "Estado local y salud del sistema honesta",
           card2Title: "Valhalla: protección social y digital",
-          card2Body: "Más contexto para apps, permisos excesivos, enlaces, privacidad, redes sociales y Red Neo ampliada.",
+          card2Body: "Más contexto para apps, permisos excesivos, enlaces, privacidad, redes sociales, tendencias online de Red Neo y Bunker mejorado.",
           card2Point1: "Detector contextual avanzado y avisos inteligentes",
           card2Point2: "Modo banco seguro, NFC seguro y Bunker mejorado",
           card3Title: "Ragnarok: protección suprema",
-          card3Body: "Experiencia completa para banca, credenciales, identidad digital, Bunker total y riesgos complejos.",
-          card3Point1: "Red Neo completa, IA avanzada e historial profundo",
+          card3Body: "Experiencia completa para banca, credenciales, identidad digital, Red Neo prioritaria, Bunker total y riesgos complejos.",
+          card3Point1: "Red Neo prioritaria, IA avanzada e historial profundo",
           card3Point2: "Resolución guiada sin fingir reparaciones",
-          card4Title: "Funciones en preparación",
-          card4Body: "Cuenta Zamazen cloud, Google OAuth completo, promos de producción y música oficial se marcarán como próximas hasta conectar backend real.",
+          card4Title: "Límites transparentes",
+          card4Body: "Cuenta Zamazen, perfil cloud, Red Neo y diagnósticos usan backend propio con datos mínimos y cola local; Bunker cloud solo acepta paquetes cifrados por el usuario.",
           card4Point1: "Sin prometer funciones falsas",
           card4Point2: "Permisos y límites explicados antes de activarse",
           founderTitle: "Rank fundador: EINHERJAR",
@@ -4118,45 +5149,48 @@
         download: {
           badge: "Activación",
           title: "Empieza a protegerte en menos de 1 minuto",
-          body: "Instala Zamazen Aegis, activa tu escudo y deja que Neo empiece a vigilar llamadas, SMS y enlaces con una configuración clara desde el primer momento.",
+          body: "Instala Zamazen Aegis, activa tu escudo y deja que Neo empiece a guiarte ante llamadas, SMS y enlaces sospechosos con una configuración clara desde el primer momento.",
           point1: "Configuración rápida y directa",
           point2: "Interfaz clara para uso diario",
           point3: "Preparada para crecer contigo",
-          microcopy: "Sin registro obligatorio. Crear cuenta Zamazen ayuda a gestionar sesiones, dispositivos y borrado de datos."
+          microcopy: "Sin registro obligatorio. Puedes usar perfil local o cuenta Zamazen online; Red Neo funciona con consentimiento."
         },
         store: {
           badge: "Tienda",
-          title: "Próximamente en Google Play",
-          body: "El enlace real se añadirá cuando la ficha pública esté lista. La página queda preparada para integrarlo sin cambiar la estructura.",
-          cta: "Disponible próximamente para Android",
-          aria: "Disponible próximamente para Android"
+          title: "Testing privado y Google Play",
+          body: "La versión de prueba y el material de Play Store se preparan con builds reales, política de privacidad y permisos explicados con claridad.",
+          cta: "Solicitar acceso de prueba",
+          aria: "Solicitar acceso de prueba por correo"
         },
         music: {
-          badge: "Próximamente",
-          title: "Experiencia musical próximamente",
-          body: "La experiencia musical de Zamazen Aegis se activará cuando esté preparada para lanzamiento público.",
-          soon: "Próximamente",
-          play: "Play",
-          pause: "Pausa",
-          back: "Retroceder 15s",
-          forward: "Adelantar 15s"
+          badge: "Identidad sonora",
+          title: "Música oficial de Neo",
+          body: "Próximamente",
+          soon: "Próximamente"
         },
         account: {
           badge: "Cuenta Zamazen",
           title: "Una cuenta opcional para proteger mejor tus sesiones",
-          body: "Zamazen Aegis funciona sin cuenta desde el primer momento. La cuenta Zamazen será opcional para mejorar control, recuperación, sincronización y borrado de datos cuando el backend seguro esté listo.",
-          point1: "Más control sobre sesiones y dispositivos vinculados.",
-          point2: "Borrado y recuperación de datos más claros.",
-          point3: "Base preparada para web, escritorio, familia, Red Neo y cloud sin vender datos.",
-          formBadge: "Crear usuario",
+          body: "Zamazen Aegis funciona sin obligarte a crear cuenta. La cuenta Zamazen online permite sesión, perfil cloud y recuperación cuando el backend está disponible; Google se valida desde la app con Credential Manager. Red Neo y diagnósticos usan datos saneados con consentimiento, sin subir contraseñas ni datos del Bunker en claro.",
+          point1: "Más control sobre sesión, perfil, borrado y dispositivos vinculados cuando activas cuenta.",
+          point2: "Bunker cloud solo acepta paquetes cifrados por el usuario; la app conserva protección local si la nube no responde.",
+          point3: "Cuenta online, Google y cloud comparten una arquitectura única; Red Neo sigue separada y saneada por privacidad.",
+          formBadge: "Cuenta online",
           formTitle: "Crear cuenta Zamazen",
-          formBody: "Esta base web guarda una vista previa local en tu navegador. El registro real debe conectarse a un backend seguro antes de publicar.",
+          formBody: "Esta página intenta crear una cuenta real en la API Zamazen. Si no hay conexión, guarda una copia local sin contraseña para que no pierdas el formulario.",
           nameLabel: "Nombre",
           emailLabel: "Email",
-          submit: "Crear cuenta",
+          passwordLabel: "Contraseña",
+          submit: "Crear cuenta Zamazen",
+          actionsToggle: "Acciones de cuenta",
           dataAction: "Gestionar datos",
           deleteAction: "Eliminar cuenta",
-          success: "Cuenta Zamazen preparada en este navegador. La versión publicada debe conectarse a autenticación segura."
+          privacyAction: "Privacidad",
+          pending: "Creando cuenta Zamazen...",
+          success: "Cuenta Zamazen creada online. La contraseña no se guarda en esta página.",
+          fallback: "No se pudo contactar con la API. Se ha guardado solo nombre y email en este navegador; no se ha guardado la contraseña.",
+          exists: "Ya existe una cuenta Zamazen con ese email. Inicia sesión desde la app o solicita ayuda si no la reconoces.",
+          error: "No se pudo crear la cuenta ahora. Revisa los datos, la conexión o inténtalo más tarde."
         },
         faq: {
           badge: "FAQ",
@@ -4169,7 +5203,7 @@
           q3: "¿Es segura?",
           a3: "La propuesta del producto está centrada en reducir exposición, señalar fraude y explicarte qué ocurre con claridad. La confianza se construye con visibilidad y control.",
           q4: "¿Qué permisos necesita?",
-          a4: "Los permisos dependen de las capas que actives, como llamadas, SMS o análisis de enlaces. La idea es solicitar solo lo necesario para proteger mejor cada canal."
+          a4: "Los permisos dependen de las capas que actives, como reportes de llamadas/SMS o análisis de enlaces. La idea es solicitar solo lo necesario para proteger mejor cada canal."
         },
         impact: {
           badge: "Cierre",
@@ -4179,7 +5213,7 @@
         footer: {
           brand: "Zamazen Aegis",
           tagline: "Guardián digital inteligente",
-          body: "Un escudo digital moderno para llamadas, SMS y enlaces con carácter serio, protector y confiable.",
+          body: "Un escudo digital moderno para enlaces, reportes y decisiones de seguridad con carácter serio, protector y confiable.",
           linksTitle: "Enlaces",
           productTitle: "Producto",
           ecosystemTitle: "Ecosistema",
@@ -4199,7 +5233,7 @@
       en: {
         meta: {
           title: "Zamazen Aegis | Intelligent Security Against Scams, Spam and Phishing",
-          description: "Zamazen Aegis helps detect risk signals in calls, SMS and links with Neo, clear privacy and a futuristic experience designed to anticipate risk."
+          description: "Zamazen Aegis helps review reported risk signals in calls, SMS and links with Neo, clear privacy and a futuristic experience designed to anticipate risk."
         },
         brand: { name: "Zamazen Aegis", tagline: "Intelligent Security" },
         nav: { home: "Home", features: "Features", security: "Security", account: "Account", data: "Data", deleteAccount: "Delete account", premium: "Premium", music: "Music", faq: "FAQ", cta: "Activate shield" },
@@ -4211,25 +5245,26 @@
           subline: "Protection that anticipates the impact, so you do not have to react too late.",
           primaryCta: "Protect my phone",
           secondaryCta: "See how it works",
+          accountCta: "Sign in / create account",
           microcopy: "No mandatory sign-up. Zamazen account is optional for stronger sessions and privacy.",
           point1: "Blocks threats before they become a real problem.",
           point2: "Neo explains every risk like an assistant, not like an empty alarm.",
           point3: "Firm, lightweight protection designed for daily use without friction.",
           proof1Title: "System example: suspicious call flagged",
           proof1Body: "Unknown number detected as possible commercial spam and marked for review.",
-          proof2Title: "Real system example: phishing SMS detected",
-          proof2Body: "Message imitating a bank was flagged as impersonation before the link was opened."
+          proof2Title: "Neo Network example: phishing SMS reported",
+          proof2Body: "Message imitating a bank was marked for review before the link was opened."
         },
         phone: {
           status: "System active",
           card1Title: "Real-time protection",
-          card1Body: "Neo reviews calls, messages and links with context, not empty alerts.",
+          card1Body: "Neo reviews reported signals, messages and links with context, not empty alerts.",
           card2Title: "Recent activity",
           alert1Title: "Suspicious call",
           alert1Body: "Commercial spam detected",
           alert1Tag: "High risk",
-          alert2Title: "SMS analyzed",
-          alert2Body: "Bank impersonation attempt",
+          alert2Title: "SMS reported",
+          alert2Body: "Bank impersonation marked for review",
           alert2Tag: "Fraud",
           alert3Title: "Safe link",
           alert3Body: "Verified domain with no anomalies",
@@ -4254,8 +5289,8 @@
           body: "Each module is built to act clearly: stop threats, explain the risk and keep the experience light so protection never becomes another burden.",
           card1Title: "Spam call signals",
           card1Body: "Helps identify unwanted or suspicious calls with clear alerts and safe configuration.",
-          card2Title: "SMS protection",
-          card2Body: "Detects fraud patterns, artificial urgency and impersonation messages.",
+          card2Title: "Suspicious SMS guidance",
+          card2Body: "Helps recognize fraud patterns, artificial urgency and impersonation messages.",
           card3Title: "Link analysis",
           card3Body: "Evaluates domains and risk signals so you do not tap where you should not.",
           card4Title: "Scam detection",
@@ -4285,22 +5320,46 @@
           badge: "Neo",
           title: "Neo does not warn. Neo protects.",
           body: "Zamazen Aegis AI is designed to react with judgment. It does not overwhelm with noise: it identifies signals, interprets risks and supports you with clear decisions.",
+          imageAlt: "Neo, guardian of Zamazen Aegis",
           point1: "Explains risks without unnecessary technical language.",
-          point2: "Guides decisions when a call, SMS or link seems suspicious.",
+          point2: "Guides decisions when a reported call, SMS or link seems suspicious.",
           point3: "Reacts in real time with logic centered on useful protection."
         },
         trust: {
           badge: "Trust and credibility",
           title: "A defense system feels more valuable when it proves consistency.",
           body: "Zamazen Aegis is built to inspire confidence from the first contact: constant analysis, clear responses and a sense of control you can feel in every interaction.",
-          stat1: "Call, message and link analyses performed in real system tests to validate detection and consistency.",
+          stat1: "Report, message and link analyses performed in real system tests to validate detection and consistency.",
           stat2: "Visible active coverage in protection simulations so users understand their shield is working.",
           stat3: "Persistent protection with a lightweight, clear approach focused on real prevention in continuous use."
+        },
+        virtues: {
+          badge: "Guardian principles",
+          title: "The 9 virtues behind Zamazen Aegis",
+          body: "They are not marketing lines: they are product criteria. Every module must protect clearly, respect privacy and earn user trust in each decision.",
+          card1Title: "Courage",
+          card1Body: "Act when risk appears with useful guidance, without turning security into fear.",
+          card2Title: "Truth",
+          card2Body: "Explain real limits and avoid impossible promises of absolute protection.",
+          card3Title: "Honor",
+          card3Body: "Treat privacy, Bunker, accounts and cloud data as sensitive by default.",
+          card4Title: "Loyalty",
+          card4Body: "Stay beside the user with protection that is constant, coherent and clear.",
+          card5Title: "Discipline",
+          card5Body: "Keep quality, tests, order and continuous improvement ahead of noise.",
+          card6Title: "Hospitality",
+          card6Body: "Make the app accessible, understandable and usable for every person.",
+          card7Title: "Productivity",
+          card7Body: "Reduce steps, save time and help users decide better when signals are unclear.",
+          card8Title: "Perseverance",
+          card8Body: "Evolve against new threats without breaking what already works.",
+          card9Title: "Trust",
+          card9Body: "The central virtue: every decision must strengthen user trust."
         },
         security: {
           badge: "Security",
           title: "Continuous protection over what exposes a phone the most",
-          body: "Defense does not live on a single screen. Zamazen Aegis supports calls, messages and browsing with a constant presence and an architecture built to respond quickly.",
+          body: "Defense does not live on a single screen. Zamazen Aegis supports reports, messages and browsing with a constant presence and an architecture built to respond quickly.",
           card1Title: "Call protection",
           card1Body: "Helps identify suspicious contacts and spam or fraud signals without requesting unnecessary permissions.",
           card1Point1: "Clear warnings",
@@ -4325,7 +5384,7 @@
           point1: "No mandatory account to begin.",
           point2: "Permissions explained before each layer is enabled.",
           point3: "Data remains under the user's control.",
-          point4: "Optional Zamazen account for better sync and recovery.",
+          point4: "Optional Zamazen account with online session when the backend is available; Neo Network only shares sanitized indicators with consent.",
           point5: "Data deletion prepared for the published version.",
           point6: "Transparency is part of the experience, not fine print."
         },
@@ -4333,26 +5392,93 @@
           note: "Zamazen Aegis helps detect risk signals, but no tool can guarantee absolute protection. The user always remains in control."
         },
         level: { badge: "Protection level", title: "Overall shield status", label1: "Secure base", label2: "Real-time active protection" },
+        topbar: {
+          actionsLabel: "Status and user",
+          status: "Shield active",
+          neoAction: "Open Neo"
+        },
+        userPanel: {
+          open: "Open user panel",
+          label: "User panel",
+          guestName: "Local guest",
+          guestEmail: "No online session on this website",
+          levelCore: "Core",
+          levelOnline: "Online",
+          profile: "Profile",
+          settings: "Settings",
+          security: "Security",
+          subscription: "Subscription",
+          help: "Help",
+          logout: "Clear local view"
+        },
+        live: {
+          badge: "Live system",
+          title: "Useful real-time activity",
+          loadingDate: "Syncing date",
+          protectionTitle: "Protection",
+          protectionReady: "Web shield ready without sensitive data.",
+          neoTitle: "Neo",
+          neoReady: "Contextual guidance ready for calls, SMS and links.",
+          networkTitle: "Neo Network",
+          networkChecking: "Checking online API...",
+          networkOffline: "No local connection. The website keeps the basic experience.",
+          networkLocal: "Local development mode: the online API is checked on a real HTTPS deployment.",
+          networkOnline: "Online API available for account, cloud and Neo Network.",
+          networkLimited: "API is unavailable right now. The app keeps local mode and safe queue.",
+          motionOn: "Useful motion enabled",
+          motionOff: "Motion softened"
+        },
+        quickMenu: {
+          label: "Quick access",
+          open: "Open quick access",
+          shield: "Shield",
+          neo: "Neo",
+          security: "Security",
+          account: "Account",
+          premium: "Premium",
+          help: "Help"
+        },
+        auth: {
+          loginBadge: "Aegis Sanctuary",
+          loginTitle: "Access your Zamazen account",
+          loginBody: "Use your online account when the API is available. This website does not store your password.",
+          loginEmailLabel: "User or email",
+          recover: "Recover password",
+          loginSubmit: "Sign in",
+          loginPending: "Checking Zamazen account...",
+          loginSuccess: "Online session verified. The password is not stored on this website.",
+          twoFactorRequired: "This account requires two-factor verification. Continue in the app to complete access.",
+          loginError: "Sign-in failed. Check the details or try again later.",
+          loginOffline: "The API could not be reached. No fake local session was created.",
+          visualBadgeLogin: "Guardian awakening",
+          visualTitleLogin: "New to Zamazen?",
+          visualBodyLogin: "Create your account to enable cloud profile, sessions and recovery without losing local protection.",
+          toRegister: "Create account",
+          visualBadgeRegister: "Aegis Sanctuary",
+          visualTitleRegister: "Already have an account?",
+          visualBodyRegister: "Return to sign-in to access your Zamazen account when the online API is available.",
+          toLogin: "Back to login"
+        },
         premium: {
           badge: "Premium",
           title: "Core protects. Valhalla improves. Ragnarok completes.",
           body: "Each edition adds real value without pressure: Core keeps essential protection, Valhalla reinforces digital life and Ragnarok unlocks the complete experience where Android allows it.",
           hook: "Honest monetization: paying should feel useful, not forced.",
-          lead: "Core covers spam calls, suspicious SMS, basic phishing, safe cleanup, basic history and manual Neo Network. Valhalla adds permissions, links, privacy, context and improved Bunker. Ragnarok completes banking, credentials, full Bunker, full Neo Network and guided resolution.",
+          lead: "Core covers spam call reports, suspicious SMS, basic phishing, safe cleanup, basic history and Neo Network with a sanitized online queue. Valhalla adds permissions, links, privacy, online trends, context and improved Bunker. Ragnarok completes banking, credentials, full Bunker, priority Neo Network and guided resolution.",
           card1Title: "Core: essential protection",
-          card1Body: "Manual scanner, basic history, manual Neo Network, safe cleanup and essential alerts without removing protection for non-paying users.",
-          card1Point1: "Spam calls, suspicious SMS and basic phishing",
+          card1Body: "Manual scanner, basic history, Neo Network with sanitized online sending when connected, safe cleanup and essential alerts without removing protection for non-paying users.",
+          card1Point1: "Spam call reports, suspicious SMS and basic phishing",
           card1Point2: "Local status and honest system health",
           card2Title: "Valhalla: social and digital protection",
-          card2Body: "More context for apps, excessive permissions, links, privacy, social risks and expanded Neo Network.",
+          card2Body: "More context for apps, excessive permissions, links, privacy, social risks, online Neo Network trends and improved Bunker.",
           card2Point1: "Advanced context detector and smarter alerts",
           card2Point2: "Safe banking mode, NFC safe mode and improved Bunker",
           card3Title: "Ragnarok: supreme protection",
-          card3Body: "Complete experience for banking, credentials, digital identity, full Bunker and complex risks.",
-          card3Point1: "Full Neo Network, advanced AI and deeper history",
+          card3Body: "Complete experience for banking, credentials, digital identity, priority Neo Network, full Bunker and complex risks.",
+          card3Point1: "Priority Neo Network, advanced AI and deeper history",
           card3Point2: "Guided resolution without fake fixes",
-          card4Title: "Features in preparation",
-          card4Body: "Zamazen cloud account, full Google OAuth, production promos and official music stay marked as coming soon until a real backend is connected.",
+          card4Title: "Transparent limits",
+          card4Body: "Zamazen account, cloud profile, Neo Network and diagnostics use a dedicated backend with minimal data and a local queue; Bunker cloud only accepts user-encrypted packages.",
           card4Point1: "No false feature promises",
           card4Point2: "Permissions and limits explained before activation",
           founderTitle: "Founder rank: EINHERJAR",
@@ -4364,45 +5490,48 @@
         download: {
           badge: "Activation",
           title: "Start protecting yourself in under 1 minute",
-          body: "Install Zamazen Aegis, activate your shield and let Neo start watching calls, SMS and links with a clear setup from the very first moment.",
+          body: "Install Zamazen Aegis, activate your shield and let Neo guide you through suspicious calls, SMS and links with a clear setup from the very first moment.",
           point1: "Fast, direct setup",
           point2: "Clear interface for everyday use",
           point3: "Built to grow with you",
-          microcopy: "No mandatory sign-up. A Zamazen account helps manage sessions, devices and data deletion."
+          microcopy: "No mandatory sign-up. You can use a local profile or a Zamazen online account; Neo Network works with consent."
         },
         store: {
           badge: "Store",
-          title: "Coming soon to Google Play",
-          body: "The real link will be added when the public listing is ready. This page is prepared to integrate it without changing the structure.",
-          cta: "Coming soon for Android",
-          aria: "Coming soon for Android"
+          title: "Private testing and Google Play",
+          body: "The test version and Google Play material are prepared with real builds, privacy policy and clearly explained permissions.",
+          cta: "Request test access",
+          aria: "Request test access by email"
         },
         music: {
-          badge: "Coming soon",
-          title: "Music experience coming soon",
-          body: "The Zamazen Aegis music experience will open when it is ready for a public release.",
-          soon: "Coming soon",
-          play: "Play",
-          pause: "Pause",
-          back: "Back 15s",
-          forward: "Forward 15s"
+          badge: "Sound identity",
+          title: "Official Neo music",
+          body: "Coming soon",
+          soon: "Coming soon"
         },
         account: {
           badge: "Zamazen Account",
           title: "An optional account to protect your sessions better",
-          body: "Zamazen Aegis works without an account from the first moment. A Zamazen account will be optional for better control, recovery, sync and data deletion when the secure backend is ready.",
-          point1: "More control over sessions and linked devices.",
-          point2: "Clearer data deletion and recovery.",
-          point3: "Foundation for web, desktop, family, Neo Network and cloud without selling data.",
-          formBadge: "Create user",
+          body: "Zamazen Aegis works from the first moment without forcing an account. The Zamazen online account enables session, cloud profile and recovery when the backend is available; Google is verified from the app through Credential Manager. Neo Network and diagnostics use sanitized data with consent, without uploading passwords or Bunker data in clear text.",
+          point1: "More control over session, profile, deletion and linked devices when you enable an account.",
+          point2: "Bunker cloud only accepts user-encrypted packages; the app keeps local protection if cloud is unavailable.",
+          point3: "Online account, Google and cloud share one architecture; Neo Network stays separated and sanitized for privacy.",
+          formBadge: "Online account",
           formTitle: "Create Zamazen account",
-          formBody: "This web base stores a local preview in your browser. Real registration must connect to a secure backend before publication.",
+          formBody: "This page tries to create a real account in the Zamazen API. If there is no connection, it saves a local copy without the password so the form is not lost.",
           nameLabel: "Name",
           emailLabel: "Email",
-          submit: "Create account",
+          passwordLabel: "Password",
+          submit: "Create Zamazen account",
+          actionsToggle: "Account actions",
           dataAction: "Manage data",
           deleteAction: "Delete account",
-          success: "Zamazen account prepared in this browser. The published version must connect to secure authentication."
+          privacyAction: "Privacy",
+          pending: "Creating Zamazen account...",
+          success: "Zamazen account created online. The password is not stored on this page.",
+          fallback: "The API could not be reached. Only name and email were saved in this browser; the password was not stored.",
+          exists: "A Zamazen account already exists with that email. Sign in from the app or contact support if you do not recognize it.",
+          error: "The account could not be created right now. Check the details, connection or try again later."
         },
         faq: {
           badge: "FAQ",
@@ -4415,7 +5544,7 @@
           q3: "Is it safe?",
           a3: "The product is built to reduce exposure, flag fraud and explain what is happening clearly. Trust is built through visibility and control.",
           q4: "What permissions does it need?",
-          a4: "Permissions depend on the protection layers you activate, such as calls, SMS or link analysis. The goal is to request only what is needed to protect each channel better."
+          a4: "Permissions depend on the protection layers you activate, such as call/SMS reports or link analysis. The goal is to request only what is needed to protect each channel better."
         },
         impact: {
           badge: "Closing",
@@ -4425,7 +5554,7 @@
         footer: {
           brand: "Zamazen Aegis",
           tagline: "Intelligent digital guardian",
-          body: "A modern digital shield for calls, SMS and links with a serious, protective and trustworthy character.",
+          body: "A modern digital shield for links, reports and security decisions with a serious, protective and trustworthy character.",
           linksTitle: "Links",
           productTitle: "Product",
           ecosystemTitle: "Ecosystem",
@@ -4445,7 +5574,7 @@
       fr: {
         meta: {
           title: "Zamazen Aegis | Sécurité Intelligente contre les Arnaques, le Spam et le Phishing",
-          description: "Zamazen Aegis aide à détecter les signaux de risque dans les appels, SMS et liens avec Neo, une confidentialité claire et une expérience futuriste conçue pour anticiper le risque."
+          description: "Zamazen Aegis aide à examiner les signaux de risque signalés dans les appels, SMS et liens avec Neo, une confidentialité claire et une expérience futuriste conçue pour anticiper le risque."
         },
         brand: { name: "Zamazen Aegis", tagline: "Sécurité Intelligente" },
         nav: { home: "Accueil", features: "Fonctions", security: "Sécurité", account: "Compte", data: "Données", deleteAccount: "Supprimer le compte", premium: "Premium", music: "Musique", faq: "FAQ", cta: "Activer le bouclier" },
@@ -4457,13 +5586,14 @@
           subline: "Une protection qui anticipe l'impact, pour que vous n'ayez pas à réagir trop tard.",
           primaryCta: "Protéger mon mobile",
           secondaryCta: "Voir comment ça marche",
+          accountCta: "Accéder / créer un compte",
           microcopy: "Sans inscription obligatoire. Le compte Zamazen reste optionnel pour renforcer sessions et confidentialité.",
           point1: "Bloque les menaces avant qu'elles ne deviennent un vrai problème.",
           point2: "Neo explique chaque risque comme un assistant, pas comme une alerte vide.",
           point3: "Une protection ferme, légère et pensée pour l'usage quotidien sans friction.",
           proof1Title: "Exemple du système : appel suspect signalé",
           proof1Body: "Numéro inconnu détecté comme possible spam commercial et marqué pour révision.",
-          proof2Title: "Exemple réel du système : SMS de phishing détecté",
+          proof2Title: "Exemple Red Neo : SMS de phishing signalé",
           proof2Body: "Message imitant une banque signalé comme usurpation avant l'ouverture du lien."
         },
         phone: {
@@ -4474,7 +5604,7 @@
           alert1Title: "Appel suspect",
           alert1Body: "Spam commercial détecté",
           alert1Tag: "Risque élevé",
-          alert2Title: "SMS analysé",
+          alert2Title: "SMS signalé",
           alert2Body: "Tentative d'usurpation bancaire",
           alert2Tag: "Fraude",
           alert3Title: "Lien sûr",
@@ -4531,8 +5661,9 @@
           badge: "Neo",
           title: "Neo n'avertit pas. Neo protège.",
           body: "L'IA de Zamazen Aegis est conçue pour réagir avec discernement. Elle ne noie pas l'utilisateur sous le bruit : elle identifie les signaux, interprète les risques et vous accompagne avec des décisions claires.",
+          imageAlt: "Neo, gardien de Zamazen Aegis",
           point1: "Explique les risques sans jargon technique inutile.",
-          point2: "Guide les décisions lorsqu'un appel, un SMS ou un lien paraît douteux.",
+          point2: "Guide les décisions lorsqu'un appel, un SMS ou un lien signalé paraît douteux.",
           point3: "Réagit en temps réel avec une logique centrée sur une protection utile."
         },
         trust: {
@@ -4542,6 +5673,29 @@
           stat1: "Analyses d'appels, de messages et de liens réalisées lors de tests réels du système pour valider la détection et la constance.",
           stat2: "De couverture active visible en simulations de protection pour que l'utilisateur comprenne que son bouclier travaille.",
           stat3: "Protection persistante avec une approche légère, claire et orientée vers la prévention réelle en usage continu."
+        },
+        virtues: {
+          badge: "Piliers du Gardien",
+          title: "Les 9 vertus qui soutiennent Zamazen Aegis",
+          body: "Ce ne sont pas des slogans: ce sont des critères produit. Chaque module doit protéger clairement, respecter la vie privée et gagner la confiance de l'utilisateur.",
+          card1Title: "Courage",
+          card1Body: "Agir face au risque avec une aide utile, sans transformer la sécurité en peur.",
+          card2Title: "Vérité",
+          card2Body: "Expliquer les limites réelles et éviter les promesses impossibles de protection absolue.",
+          card3Title: "Honneur",
+          card3Body: "Traiter confidentialité, Bunker, compte et cloud comme sensibles par défaut.",
+          card4Title: "Loyauté",
+          card4Body: "Accompagner l'utilisateur avec une protection constante, cohérente et compréhensible.",
+          card5Title: "Discipline",
+          card5Body: "Garder qualité, tests, ordre et amélioration continue avant le bruit.",
+          card6Title: "Hospitalité",
+          card6Body: "Rendre l'app accessible, claire et utilisable par toute personne.",
+          card7Title: "Productivité",
+          card7Body: "Réduire les étapes, gagner du temps et aider à mieux décider face aux signaux douteux.",
+          card8Title: "Persévérance",
+          card8Body: "Évoluer face aux nouvelles menaces sans casser ce qui fonctionne.",
+          card9Title: "Confiance",
+          card9Body: "La vertu centrale: chaque décision doit renforcer la confiance de l'utilisateur."
         },
         security: {
           badge: "Sécurité",
@@ -4571,7 +5725,7 @@
           point1: "Aucun compte obligatoire pour commencer.",
           point2: "Permissions expliquées avant d'activer chaque couche.",
           point3: "Données sous le contrôle de l'utilisateur.",
-          point4: "Compte Zamazen optionnel pour améliorer synchronisation et récupération.",
+          point4: "Compte Zamazen optionnel avec session en ligne lorsque le backend est disponible; Red Neo ne partage que des indicateurs assainis avec consentement.",
           point5: "Suppression des données préparée pour la version publiée.",
           point6: "La transparence fait partie de l'expérience, pas des petites lignes."
         },
@@ -4579,26 +5733,93 @@
           note: "Zamazen Aegis aide à détecter des signaux de risque, mais aucun outil ne peut garantir une protection absolue. L'utilisateur garde toujours le contrôle."
         },
         level: { badge: "Niveau de protection", title: "État général du bouclier", label1: "Base sûre", label2: "Protection active en temps réel" },
+        topbar: {
+          actionsLabel: "État et utilisateur",
+          status: "Bouclier actif",
+          neoAction: "Ouvrir Neo"
+        },
+        userPanel: {
+          open: "Ouvrir le panneau utilisateur",
+          label: "Panneau utilisateur",
+          guestName: "Invité local",
+          guestEmail: "Aucune session en ligne sur ce site",
+          levelCore: "Core",
+          levelOnline: "En ligne",
+          profile: "Profil",
+          settings: "Réglages",
+          security: "Sécurité",
+          subscription: "Abonnement",
+          help: "Aide",
+          logout: "Effacer la vue locale"
+        },
+        live: {
+          badge: "Système vivant",
+          title: "Activité utile en temps réel",
+          loadingDate: "Synchronisation de la date",
+          protectionTitle: "Protection",
+          protectionReady: "Bouclier web prêt sans données sensibles.",
+          neoTitle: "Neo",
+          neoReady: "Guidage contextuel prêt pour appels, SMS et liens.",
+          networkTitle: "Red Neo",
+          networkChecking: "Vérification de l'API en ligne...",
+          networkOffline: "Aucune connexion locale. Le site garde l'expérience de base.",
+          networkLocal: "Mode local de développement: l'API en ligne est vérifiée sur un vrai déploiement HTTPS.",
+          networkOnline: "API en ligne disponible pour compte, cloud et Red Neo.",
+          networkLimited: "API indisponible maintenant. L'app garde le mode local et la file sûre.",
+          motionOn: "Mouvement utile activé",
+          motionOff: "Mouvement adouci"
+        },
+        quickMenu: {
+          label: "Accès rapides",
+          open: "Ouvrir les accès rapides",
+          shield: "Bouclier",
+          neo: "Neo",
+          security: "Sécurité",
+          account: "Compte",
+          premium: "Premium",
+          help: "Aide"
+        },
+        auth: {
+          loginBadge: "Sanctuaire Aegis",
+          loginTitle: "Accédez à votre compte Zamazen",
+          loginBody: "Utilisez votre compte en ligne lorsque l'API est disponible. Ce site n'enregistre pas votre mot de passe.",
+          loginEmailLabel: "Utilisateur ou email",
+          recover: "Récupérer le mot de passe",
+          loginSubmit: "Se connecter",
+          loginPending: "Vérification du compte Zamazen...",
+          loginSuccess: "Session en ligne vérifiée. Le mot de passe n'est pas stocké sur ce site.",
+          twoFactorRequired: "Ce compte exige une vérification en deux étapes. Continuez dans l'app pour terminer l'accès.",
+          loginError: "Connexion impossible. Vérifiez les données ou réessayez plus tard.",
+          loginOffline: "Impossible de joindre l'API. Aucune fausse session locale n'a été créée.",
+          visualBadgeLogin: "Éveil du Gardien",
+          visualTitleLogin: "Nouveau sur Zamazen ?",
+          visualBodyLogin: "Créez votre compte pour activer profil cloud, sessions et récupération sans perdre la protection locale.",
+          toRegister: "Créer un compte",
+          visualBadgeRegister: "Sanctuaire Aegis",
+          visualTitleRegister: "Vous avez déjà un compte ?",
+          visualBodyRegister: "Revenez à la connexion pour accéder à votre compte Zamazen lorsque l'API en ligne est disponible.",
+          toLogin: "Retour au login"
+        },
         premium: {
           badge: "Premium",
           title: "Core protège. Valhalla améliore. Ragnarok complète.",
           body: "Chaque édition apporte une valeur réelle sans pression: Core garde la protection essentielle, Valhalla renforce la vie numérique et Ragnarok ouvre l'expérience complète quand Android le permet.",
           hook: "Monétisation honnête: payer doit être utile, pas forcé.",
-          lead: "Core couvre appels spam, SMS suspects, phishing basique, nettoyage sûr, historique basique et Red Neo manuel. Valhalla ajoute permissions, liens, confidentialité, contexte et Bunker amélioré. Ragnarok complète banque, identifiants, Bunker total, Red Neo complet et résolution guidée.",
+          lead: "Core couvre les signalements d'appels spam, SMS suspects, phishing basique, nettoyage sûr, historique basique et Red Neo avec file en ligne assainie. Valhalla ajoute permissions, liens, confidentialité, tendances en ligne, contexte et Bunker amélioré. Ragnarok complète banque, identifiants, Bunker total, Red Neo prioritaire et résolution guidée.",
           card1Title: "Core: protection essentielle",
-          card1Body: "Scanner manuel, historique basique, Red Neo manuel, nettoyage sûr et alertes essentielles sans retirer la protection aux utilisateurs gratuits.",
+          card1Body: "Scanner manuel, historique basique, Red Neo avec envoi en ligne assaini quand la connexion existe, nettoyage sûr et alertes essentielles sans retirer la protection aux utilisateurs gratuits.",
           card1Point1: "Appels spam, SMS suspects et phishing basique",
           card1Point2: "État local et santé système honnête",
           card2Title: "Valhalla: protection sociale et numérique",
-          card2Body: "Plus de contexte pour apps, permissions excessives, liens, confidentialité, risques sociaux et Red Neo élargi.",
+          card2Body: "Plus de contexte pour apps, permissions excessives, liens, confidentialité, risques sociaux, tendances en ligne de Red Neo et Bunker amélioré.",
           card2Point1: "Détecteur contextuel avancé et alertes plus intelligentes",
           card2Point2: "Mode banque sûre, NFC sûr et Bunker amélioré",
           card3Title: "Ragnarok: protection suprême",
-          card3Body: "Expérience complète pour banque, identifiants, identité numérique, Bunker total et risques complexes.",
-          card3Point1: "Red Neo complet, IA avancée et historique plus profond",
+          card3Body: "Expérience complète pour banque, identifiants, identité numérique, Red Neo prioritaire, Bunker total et risques complexes.",
+          card3Point1: "Red Neo prioritaire, IA avancée et historique plus profond",
           card3Point2: "Résolution guidée sans fausses réparations",
-          card4Title: "Fonctions en préparation",
-          card4Body: "Compte cloud Zamazen, Google OAuth complet, promos de production et musique officielle restent bientôt disponibles jusqu'au backend réel.",
+          card4Title: "Limites transparentes",
+          card4Body: "Le compte Zamazen, le profil cloud, Red Neo et les diagnostics utilisent un backend dédié avec données minimales et file locale; le Bunker cloud n'accepte que des paquets chiffrés par l'utilisateur.",
           card4Point1: "Aucune fausse promesse",
           card4Point2: "Permissions et limites expliquées avant activation",
           founderTitle: "Rang fondateur: EINHERJAR",
@@ -4610,45 +5831,48 @@
         download: {
           badge: "Activation",
           title: "Commencez à vous protéger en moins d'une minute",
-          body: "Installez Zamazen Aegis, activez votre bouclier et laissez Neo surveiller appels, SMS et liens avec une configuration claire dès le premier instant.",
+          body: "Installez Zamazen Aegis, activez votre bouclier et laissez Neo vous guider face aux appels, SMS et liens suspects avec une configuration claire dès le premier instant.",
           point1: "Configuration rapide et directe",
           point2: "Interface claire pour l'usage quotidien",
           point3: "Prête à évoluer avec vous",
-          microcopy: "Sans inscription obligatoire. Un compte Zamazen aide à gérer sessions, appareils et suppression des données."
+          microcopy: "Sans inscription obligatoire. Vous pouvez utiliser un profil local ou un compte Zamazen en ligne; Red Neo fonctionne avec consentement."
         },
         store: {
           badge: "Store",
-          title: "Bientôt sur Google Play",
-          body: "Le vrai lien sera ajouté lorsque la fiche publique sera prête. Cette page est préparée pour l'intégrer sans changer la structure.",
-          cta: "Bientôt disponible pour Android",
-          aria: "Bientôt disponible pour Android"
+          title: "Test privé et Google Play",
+          body: "La version de test et les éléments Google Play sont préparés avec des builds réels, une politique de confidentialité et des permissions clairement expliquées.",
+          cta: "Demander un accès test",
+          aria: "Demander un accès test par email"
         },
         music: {
-          badge: "Bientôt",
-          title: "Expérience musicale bientôt disponible",
-          body: "L'expérience musicale de Zamazen Aegis sera activée lorsqu'elle sera prête pour une sortie publique.",
-          soon: "Bientôt",
-          play: "Play",
-          pause: "Pause",
-          back: "Reculer 15s",
-          forward: "Avancer 15s"
+          badge: "Identité sonore",
+          title: "Musique officielle de Neo",
+          body: "Bientôt",
+          soon: "Bientôt"
         },
         account: {
           badge: "Compte Zamazen",
           title: "Un compte optionnel pour mieux protéger vos sessions",
-          body: "Zamazen Aegis fonctionne sans compte dès le premier instant. Le compte Zamazen sera optionnel pour améliorer le contrôle, la récupération, la synchronisation et la suppression des données lorsque le backend sécurisé sera prêt.",
-          point1: "Plus de contrôle sur les sessions et appareils liés.",
-          point2: "Suppression et récupération des données plus claires.",
-          point3: "Base préparée pour web, bureau, famille, Réseau Neo et cloud sans vendre de données.",
-          formBadge: "Créer utilisateur",
+          body: "Zamazen Aegis fonctionne dès le premier instant sans imposer de compte. Le compte Zamazen en ligne permet session, profil cloud et récupération lorsque le backend est disponible; Google est vérifié depuis l'app via Credential Manager. Red Neo et les diagnostics utilisent des données assainies avec consentement, sans envoyer de mots de passe ni de données du Bunker en clair.",
+          point1: "Plus de contrôle sur la session, le profil, la suppression et les appareils liés lorsque vous activez un compte.",
+          point2: "Le Bunker cloud n'accepte que des paquets chiffrés par l'utilisateur; l'app conserve la protection locale si le cloud ne répond pas.",
+          point3: "Compte en ligne, Google et cloud partagent une architecture unique; Red Neo reste séparé et assaini pour la confidentialité.",
+          formBadge: "Compte en ligne",
           formTitle: "Créer un compte Zamazen",
-          formBody: "Cette base web garde un aperçu local dans votre navigateur. L'inscription réelle doit être connectée à un backend sécurisé avant publication.",
+          formBody: "Cette page tente de créer un vrai compte dans l'API Zamazen. S'il n'y a pas de connexion, elle garde une copie locale sans mot de passe pour ne pas perdre le formulaire.",
           nameLabel: "Nom",
           emailLabel: "Email",
-          submit: "Créer compte",
+          passwordLabel: "Mot de passe",
+          submit: "Créer un compte Zamazen",
+          actionsToggle: "Actions du compte",
           dataAction: "Gérer les données",
           deleteAction: "Supprimer le compte",
-          success: "Compte Zamazen préparé dans ce navigateur. La version publiée doit se connecter à une authentification sécurisée."
+          privacyAction: "Confidentialité",
+          pending: "Création du compte Zamazen...",
+          success: "Compte Zamazen créé en ligne. Le mot de passe n'est pas enregistré sur cette page.",
+          fallback: "Impossible de joindre l'API. Seuls le nom et l'e-mail ont été enregistrés dans ce navigateur; le mot de passe n'a pas été stocké.",
+          exists: "Un compte Zamazen existe déjà avec cet e-mail. Connectez-vous depuis l'app ou contactez l'assistance si vous ne le reconnaissez pas.",
+          error: "Impossible de créer le compte maintenant. Vérifiez les données, la connexion ou réessayez plus tard."
         },
         faq: {
           badge: "FAQ",
@@ -4661,7 +5885,7 @@
           q3: "Est-ce sécurisé ?",
           a3: "Le produit est pensé pour réduire l'exposition, signaler la fraude et expliquer clairement ce qui se passe. La confiance se construit avec de la visibilité et du contrôle.",
           q4: "Quelles permissions sont nécessaires ?",
-          a4: "Les permissions dépendent des couches de protection que vous activez, comme les appels, SMS ou l'analyse des liens. L'objectif est de demander uniquement ce qui est nécessaire pour mieux protéger chaque canal."
+          a4: "Les permissions dépendent des couches de protection que vous activez, comme les signalements d'appels/SMS ou l'analyse des liens. L'objectif est de demander uniquement ce qui est nécessaire pour mieux protéger chaque canal."
         },
         impact: {
           badge: "Clôture",
@@ -4671,7 +5895,7 @@
         footer: {
           brand: "Zamazen Aegis",
           tagline: "Gardien numérique intelligent",
-          body: "Un bouclier numérique moderne pour les appels, SMS et liens, avec un caractère sérieux, protecteur et fiable.",
+          body: "Un bouclier numérique moderne pour les liens, signalements et décisions de sécurité, avec un caractère sérieux, protecteur et fiable.",
           linksTitle: "Liens",
           productTitle: "Produit",
           ecosystemTitle: "Écosystème",
@@ -4691,7 +5915,7 @@
       pt: {
         meta: {
           title: "Zamazen Aegis | Segurança Inteligente contra Golpes, Spam e Phishing",
-          description: "Zamazen Aegis ajuda a detectar sinais de risco em chamadas, SMS e links com Neo, privacidade clara e uma experiência futurista criada para antecipar riscos."
+          description: "Zamazen Aegis ajuda a revisar sinais de risco reportados em chamadas, SMS e links com Neo, privacidade clara e uma experiência futurista criada para antecipar riscos."
         },
         brand: { name: "Zamazen Aegis", tagline: "Segurança Inteligente" },
         nav: { home: "Início", features: "Funções", security: "Segurança", account: "Conta", data: "Dados", deleteAccount: "Eliminar conta", premium: "Premium", music: "Música", faq: "FAQ", cta: "Ativar escudo" },
@@ -4703,13 +5927,14 @@
           subline: "Proteção que se antecipa ao impacto, para que você não precise reagir tarde demais.",
           primaryCta: "Proteger meu celular",
           secondaryCta: "Ver como funciona",
+          accountCta: "Entrar / criar conta",
           microcopy: "Sem cadastro obrigatório. A conta Zamazen é opcional para reforçar sessões e privacidade.",
           point1: "Bloqueia ameaças antes que se tornem um problema real.",
           point2: "Neo explica cada risco como um assistente, não como um alerta vazio.",
           point3: "Proteção firme, leve e pensada para o uso diário sem atrito.",
           proof1Title: "Exemplo do sistema: chamada suspeita sinalizada",
           proof1Body: "Número desconhecido identificado como possível spam comercial e marcado para revisão.",
-          proof2Title: "Exemplo real do sistema: SMS de phishing detectado",
+          proof2Title: "Exemplo da Red Neo: SMS de phishing reportado",
           proof2Body: "Mensagem imitando um banco marcada como tentativa de fraude antes da abertura do link."
         },
         phone: {
@@ -4720,7 +5945,7 @@
           alert1Title: "Chamada suspeita",
           alert1Body: "Spam comercial detectado",
           alert1Tag: "Alto risco",
-          alert2Title: "SMS analisado",
+          alert2Title: "SMS reportado",
           alert2Body: "Tentativa de fraude bancária",
           alert2Tag: "Fraude",
           alert3Title: "Link seguro",
@@ -4746,7 +5971,7 @@
           body: "Cada módulo foi desenhado para agir com clareza: travar ameaças, explicar o risco e manter a experiência leve para que se proteger não vire mais um peso.",
           card1Title: "Sinais de chamadas spam",
           card1Body: "Filtra chamadas indesejadas ou suspeitas antes que elas interrompam você.",
-          card2Title: "Proteção de SMS",
+          card2Title: "Guia contra SMS suspeitos",
           card2Body: "Detecta padrões de fraude, urgência artificial e mensagens de falsificação.",
           card3Title: "Análise de links",
           card3Body: "Avalia domínios e sinais de risco para que você não toque onde não deve.",
@@ -4777,6 +6002,7 @@
           badge: "Neo",
           title: "Neo não avisa. Neo protege.",
           body: "A IA do Zamazen Aegis foi pensada para reagir com critério. Ela não sobrecarrega com ruído: identifica sinais, interpreta riscos e acompanha você com decisões claras.",
+          imageAlt: "Neo, guardião da Zamazen Aegis",
           point1: "Explica riscos sem linguagem técnica desnecessária.",
           point2: "Guia decisões quando uma chamada, um SMS ou um link parecem suspeitos.",
           point3: "Reage em tempo real com uma lógica centrada em proteção útil."
@@ -4788,6 +6014,29 @@
           stat1: "Análises de chamadas, mensagens e links em testes reais do sistema para validar detecção e consistência.",
           stat2: "De cobertura ativa visível em simulações de proteção para que o usuário entenda que seu escudo está funcionando.",
           stat3: "Proteção persistente com abordagem leve, clara e orientada à prevenção real em uso contínuo."
+        },
+        virtues: {
+          badge: "Pilares do Guardião",
+          title: "As 9 virtudes que sustentam Zamazen Aegis",
+          body: "Não são frases de marketing: são critérios de produto. Cada módulo deve proteger com clareza, respeitar a privacidade e conquistar a confiança do usuário.",
+          card1Title: "Coragem",
+          card1Body: "Agir diante do risco com orientação útil, sem transformar segurança em medo.",
+          card2Title: "Verdade",
+          card2Body: "Explicar limites reais e evitar promessas impossíveis de proteção absoluta.",
+          card3Title: "Honra",
+          card3Body: "Tratar privacidade, Bunker, conta e nuvem como informação sensível por padrão.",
+          card4Title: "Lealdade",
+          card4Body: "Acompanhar o usuário com proteção constante, coerente e compreensível.",
+          card5Title: "Disciplina",
+          card5Body: "Manter qualidade, testes, ordem e melhoria contínua antes de adicionar ruído.",
+          card6Title: "Hospitalidade",
+          card6Body: "Fazer o app ser acessível, claro e utilizável por qualquer pessoa.",
+          card7Title: "Produtividade",
+          card7Body: "Reduzir passos, poupar tempo e ajudar a decidir melhor diante de sinais duvidosos.",
+          card8Title: "Perseverança",
+          card8Body: "Evoluir contra novas ameaças sem quebrar o que já funciona.",
+          card9Title: "Confiança",
+          card9Body: "A virtude central: cada decisão deve reforçar a confiança do usuário."
         },
         security: {
           badge: "Segurança",
@@ -4817,7 +6066,7 @@
           point1: "Sem cadastro obrigatório para começar.",
           point2: "Permissões explicadas antes de ativar cada camada.",
           point3: "Dados sob controle do usuário.",
-          point4: "Conta Zamazen opcional para melhorar sincronização e recuperação.",
+          point4: "Conta Zamazen opcional com sessão online quando o backend está disponível; Red Neo só compartilha indicadores saneados com consentimento.",
           point5: "Exclusão de dados preparada para a versão publicada.",
           point6: "Transparência como parte da experiência, não como letra miúda."
         },
@@ -4825,26 +6074,93 @@
           note: "Zamazen Aegis ajuda a detectar sinais de risco, mas nenhuma ferramenta pode garantir proteção absoluta. O usuário mantém sempre o controle."
         },
         level: { badge: "Nível de proteção", title: "Estado geral do escudo", label1: "Base segura", label2: "Proteção ativa em tempo real" },
+        topbar: {
+          actionsLabel: "Estado e usuário",
+          status: "Escudo ativo",
+          neoAction: "Abrir Neo"
+        },
+        userPanel: {
+          open: "Abrir painel do usuário",
+          label: "Painel do usuário",
+          guestName: "Convidado local",
+          guestEmail: "Sem sessão online neste site",
+          levelCore: "Core",
+          levelOnline: "Online",
+          profile: "Perfil",
+          settings: "Ajustes",
+          security: "Segurança",
+          subscription: "Subscrição",
+          help: "Ajuda",
+          logout: "Limpar vista local"
+        },
+        live: {
+          badge: "Sistema vivo",
+          title: "Atividade útil em tempo real",
+          loadingDate: "Sincronizando data",
+          protectionTitle: "Proteção",
+          protectionReady: "Escudo web pronto sem dados sensíveis.",
+          neoTitle: "Neo",
+          neoReady: "Orientação contextual pronta para chamadas, SMS e links.",
+          networkTitle: "Red Neo",
+          networkChecking: "Verificando API online...",
+          networkOffline: "Sem conexão local. O site mantém a experiência básica.",
+          networkLocal: "Modo local de desenvolvimento: a API online é verificada em um deploy HTTPS real.",
+          networkOnline: "API online disponível para conta, nuvem e Red Neo.",
+          networkLimited: "API indisponível agora. O app mantém modo local e fila segura.",
+          motionOn: "Movimento útil ativado",
+          motionOff: "Movimento suavizado"
+        },
+        quickMenu: {
+          label: "Acessos rápidos",
+          open: "Abrir acessos rápidos",
+          shield: "Escudo",
+          neo: "Neo",
+          security: "Segurança",
+          account: "Conta",
+          premium: "Premium",
+          help: "Ajuda"
+        },
+        auth: {
+          loginBadge: "Santuário Aegis",
+          loginTitle: "Acesse sua conta Zamazen",
+          loginBody: "Use sua conta online quando a API estiver disponível. Este site não guarda sua senha.",
+          loginEmailLabel: "Usuário ou email",
+          recover: "Recuperar senha",
+          loginSubmit: "Entrar",
+          loginPending: "Verificando conta Zamazen...",
+          loginSuccess: "Sessão online verificada. A senha não fica guardada neste site.",
+          twoFactorRequired: "Esta conta exige verificação em dois passos. Continue pelo app para completar o acesso.",
+          loginError: "Não foi possível entrar. Verifique os dados ou tente mais tarde.",
+          loginOffline: "Não foi possível contactar a API. Nenhuma sessão local falsa foi criada.",
+          visualBadgeLogin: "Despertar Guardião",
+          visualTitleLogin: "Novo no Zamazen?",
+          visualBodyLogin: "Crie sua conta para ativar perfil cloud, sessões e recuperação sem perder a proteção local.",
+          toRegister: "Criar conta",
+          visualBadgeRegister: "Santuário Aegis",
+          visualTitleRegister: "Já tem conta?",
+          visualBodyRegister: "Volte ao login para acessar sua conta Zamazen quando a API online estiver disponível.",
+          toLogin: "Voltar ao login"
+        },
         premium: {
           badge: "Premium",
           title: "Core protege. Valhalla melhora. Ragnarok completa.",
           body: "Cada edição traz valor real sem pressão: Core mantém proteção essencial, Valhalla reforça a vida digital e Ragnarok libera a experiência completa quando o Android permite.",
           hook: "Monetização honesta: pagar deve parecer útil, não obrigatório.",
-          lead: "Core cobre chamadas spam, SMS suspeitos, phishing básico, limpeza segura, histórico básico e Red Neo manual. Valhalla adiciona permissões, links, privacidade, contexto e Bunker melhorado. Ragnarok completa banca, credenciais, Bunker total, Red Neo completa e resolução guiada.",
+          lead: "Core cobre chamadas spam, SMS suspeitos, phishing básico, limpeza segura, histórico básico e Red Neo com fila online saneada. Valhalla adiciona permissões, links, privacidade, tendências online, contexto e Bunker melhorado. Ragnarok completa banca, credenciais, Bunker total, Red Neo prioritária e resolução guiada.",
           card1Title: "Core: proteção essencial",
-          card1Body: "Scanner manual, histórico básico, Red Neo manual, limpeza segura e alertas essenciais sem retirar proteção de quem não paga.",
+          card1Body: "Scanner manual, histórico básico, Red Neo com envio online saneado quando há conexão, limpeza segura e alertas essenciais sem retirar proteção de quem não paga.",
           card1Point1: "Chamadas spam, SMS suspeitos e phishing básico",
           card1Point2: "Estado local e saúde do sistema honesta",
           card2Title: "Valhalla: proteção social e digital",
-          card2Body: "Mais contexto para apps, permissões excessivas, links, privacidade, riscos sociais e Red Neo ampliada.",
+          card2Body: "Mais contexto para apps, permissões excessivas, links, privacidade, riscos sociais, tendências online da Red Neo e Bunker melhorado.",
           card2Point1: "Detector contextual avançado e alertas inteligentes",
           card2Point2: "Modo banco seguro, NFC seguro e Bunker melhorado",
           card3Title: "Ragnarok: proteção suprema",
-          card3Body: "Experiência completa para banca, credenciais, identidade digital, Bunker total e riscos complexos.",
-          card3Point1: "Red Neo completa, IA avançada e histórico profundo",
+          card3Body: "Experiência completa para banca, credenciais, identidade digital, Red Neo prioritária, Bunker total e riscos complexos.",
+          card3Point1: "Red Neo prioritária, IA avançada e histórico profundo",
           card3Point2: "Resolução guiada sem falsas correções",
-          card4Title: "Funções em preparação",
-          card4Body: "Conta cloud Zamazen, Google OAuth completo, promos de produção e música oficial ficam como em breve até conectar backend real.",
+          card4Title: "Limites transparentes",
+          card4Body: "Conta Zamazen, perfil cloud, Red Neo e diagnósticos usam backend próprio com dados mínimos e fila local; o Bunker cloud só aceita pacotes cifrados pelo usuário.",
           card4Point1: "Sem promessas falsas",
           card4Point2: "Permissões e limites explicados antes de ativar",
           founderTitle: "Rango fundador: EINHERJAR",
@@ -4856,45 +6172,48 @@
         download: {
           badge: "Ativação",
           title: "Comece a se proteger em menos de 1 minuto",
-          body: "Instale Zamazen Aegis, ative seu escudo e deixe Neo começar a vigiar chamadas, SMS e links com uma configuração clara desde o primeiro momento.",
+          body: "Instale Zamazen Aegis, ative seu escudo e deixe Neo orientar você diante de chamadas, SMS e links suspeitos com uma configuração clara desde o primeiro momento.",
           point1: "Configuração rápida e direta",
           point2: "Interface clara para o uso diário",
           point3: "Preparada para crescer com você",
-          microcopy: "Sem cadastro obrigatório. Criar conta Zamazen ajuda a gerenciar sessões, dispositivos e exclusão de dados."
+          microcopy: "Sem cadastro obrigatório. Você pode usar perfil local ou conta Zamazen online; Red Neo funciona com consentimento."
         },
         store: {
           badge: "Loja",
-          title: "Em breve na Google Play",
-          body: "O link real será adicionado quando a ficha pública estiver pronta. Esta página está preparada para integrá-lo sem mudar a estrutura.",
-          cta: "Disponível em breve para Android",
-          aria: "Disponível em breve para Android"
+          title: "Teste privado e Google Play",
+          body: "A versão de teste e o material do Google Play são preparados com builds reais, política de privacidade e permissões explicadas com clareza.",
+          cta: "Solicitar acesso de teste",
+          aria: "Solicitar acesso de teste por email"
         },
         music: {
-          badge: "Em breve",
-          title: "Experiência musical em breve",
-          body: "A experiência musical do Zamazen Aegis será ativada quando estiver pronta para lançamento público.",
-          soon: "Em breve",
-          play: "Play",
-          pause: "Pausa",
-          back: "Voltar 15s",
-          forward: "Avançar 15s"
+          badge: "Identidade sonora",
+          title: "Música oficial do Neo",
+          body: "Em breve",
+          soon: "Em breve"
         },
         account: {
           badge: "Conta Zamazen",
           title: "Uma conta opcional para proteger melhor suas sessões",
-          body: "Zamazen Aegis funciona sem conta desde o primeiro momento. A conta Zamazen será opcional para melhorar controle, recuperação, sincronização e exclusão de dados quando o backend seguro estiver pronto.",
-          point1: "Mais controle sobre sessões e dispositivos vinculados.",
-          point2: "Exclusão e recuperação de dados mais claras.",
-          point3: "Base preparada para web, desktop, família, Rede Neo e cloud sem vender dados.",
-          formBadge: "Criar usuário",
+          body: "Zamazen Aegis funciona desde o primeiro momento sem obrigar você a criar conta. A conta Zamazen online permite sessão, perfil cloud e recuperação quando o backend está disponível; Google é verificado pelo app com Credential Manager. Red Neo e diagnósticos usam dados saneados com consentimento, sem enviar senhas nem dados do Bunker em claro.",
+          point1: "Mais controle sobre sessão, perfil, exclusão e dispositivos vinculados quando você ativa uma conta.",
+          point2: "O Bunker cloud só aceita pacotes cifrados pelo usuário; o app mantém proteção local se a nuvem não responder.",
+          point3: "Conta online, Google e cloud compartilham uma arquitetura única; Red Neo continua separada e saneada por privacidade.",
+          formBadge: "Conta online",
           formTitle: "Criar conta Zamazen",
-          formBody: "Esta base web guarda uma prévia local no navegador. O registro real deve se conectar a um backend seguro antes da publicação.",
+          formBody: "Esta página tenta criar uma conta real na API Zamazen. Se não houver conexão, guarda uma cópia local sem senha para você não perder o formulário.",
           nameLabel: "Nome",
           emailLabel: "Email",
-          submit: "Criar conta",
+          passwordLabel: "Senha",
+          submit: "Criar conta Zamazen",
+          actionsToggle: "Ações da conta",
           dataAction: "Gerir dados",
           deleteAction: "Eliminar conta",
-          success: "Conta Zamazen preparada neste navegador. A versão publicada deve se conectar a autenticação segura."
+          privacyAction: "Privacidade",
+          pending: "Criando conta Zamazen...",
+          success: "Conta Zamazen criada online. A senha não fica guardada nesta página.",
+          fallback: "Não foi possível contactar a API. Apenas nome e email foram guardados neste navegador; a senha não foi guardada.",
+          exists: "Já existe uma conta Zamazen com esse email. Inicie sessão pelo app ou peça ajuda se não a reconhecer.",
+          error: "Não foi possível criar a conta agora. Verifique os dados, a conexão ou tente mais tarde."
         },
         faq: {
           badge: "FAQ",
@@ -4907,7 +6226,7 @@
           q3: "É segura?",
           a3: "O produto foi criado para reduzir exposição, sinalizar fraudes e explicar com clareza o que está acontecendo. A confiança se constrói com visibilidade e controle.",
           q4: "Quais permissões são necessárias?",
-          a4: "As permissões dependem das camadas de proteção que você ativar, como chamadas, SMS ou análise de links. A ideia é solicitar apenas o necessário para proteger melhor cada canal."
+          a4: "As permissões dependem das camadas de proteção que você ativar, como reportes de chamadas/SMS ou análise de links. A ideia é solicitar apenas o necessário para proteger melhor cada canal."
         },
         impact: {
           badge: "Fecho",
@@ -4917,7 +6236,7 @@
         footer: {
           brand: "Zamazen Aegis",
           tagline: "Guardião digital inteligente",
-          body: "Um escudo digital moderno para chamadas, SMS e links com caráter sério, protetor e confiável.",
+          body: "Um escudo digital moderno para links, reportes e decisões de segurança com caráter sério, protetor e confiável.",
           linksTitle: "Links",
           productTitle: "Produto",
           ecosystemTitle: "Ecossistema",
@@ -4954,13 +6273,13 @@
           privacyTitle: "Política de privacidad",
           privacyBody: "Zamazen Aegis prioriza funciones locales y solo usa datos necesarios para analizar riesgos, guardar preferencias, mantener sesiones y mejorar la protección cuando el usuario activa servicios conectados.",
           privacyPoint1: "Los permisos se piden con contexto y pueden desactivarse desde Ajustes.",
-          privacyPoint2: "La cuenta Zamazen es opcional y está pensada para sincronización, recuperación y control de dispositivos.",
+          privacyPoint2: "Cuenta Zamazen, Red Neo online y diagnósticos usan datos mínimos, saneados y consentidos cuando el usuario activa servicios conectados.",
           privacyPoint3: "No se promete vigilancia secreta ni protección absoluta; Neo informa, ayuda y actúa con consentimiento.",
           deleteCallout: "Si tienes una cuenta Zamazen, puedes solicitar la eliminación de la cuenta y datos asociados desde la página pública de eliminación.",
           deleteAction: "Solicitar eliminación de cuenta",
           dataTitle: "Gestionar y eliminar datos parciales",
           dataBody: "Además de eliminar la cuenta completa, Zamazen Aegis permite controlar datos concretos desde la app cuando esos datos existen en el dispositivo o están bajo control de Zamazen Aegis.",
-          dataPoint1: "Puedes eliminar historial local, registros de actividad, memoria local de Red Neo, caché interna y preferencias guardadas en este dispositivo.",
+          dataPoint1: "Puedes eliminar historial local, registros de actividad, memoria y cola local de Red Neo, caché interna y preferencias guardadas en este dispositivo.",
           dataPoint2: "Puedes borrar datos del Bunker desde la app si decides eliminar credenciales, registros bancarios o archivos protegidos guardados localmente.",
           dataPoint3: "La eliminación parcial no cancela una suscripción ni elimina una cuenta remota; para eso existe la solicitud de eliminación de cuenta.",
           dataPoint4: "Android no permite que Zamazen Aegis borre datos privados de otras apps. Cuando haya una limitación del sistema, la app lo indicará y guiará al usuario a Ajustes.",
@@ -4972,6 +6291,7 @@
           deleteStep2: "Usa el asunto: Solicitud de eliminación de cuenta.",
           deleteStep3: "Indica que quieres eliminar tu cuenta de Zamazen Aegis y los datos asociados.",
           deleteStep4: "No incluyas contraseñas, códigos, datos bancarios completos ni información sensible innecesaria.",
+          deleteStep5: "Si hace falta verificar la titularidad de una cuenta online, soporte indicará un paso seguro. Nunca envíes tu contraseña, códigos de dos pasos ni códigos de recuperación por correo.",
           deleteEmailTitle: "Correo oficial de privacidad y cuenta",
           deleteEmailAction: "Enviar solicitud",
           deleteDataPoint1: "Se eliminarán identificadores de cuenta, correo vinculado, datos de perfil, preferencias, sesión, dispositivos vinculados y datos de servicios conectados cuando existan y estén bajo control de Zamazen Aegis.",
@@ -4985,7 +6305,7 @@
           cookiesPoint2: "Análisis, personalización y marketing/producto: opcionales y desactivadas por defecto.",
           cookiesPoint3: "Puedes cambiar tu decisión desde “Preferencias de cookies” en el pie de página.",
           productTitle: "Política de producto",
-          productBody: "Zamazen Aegis ayuda a detectar señales de riesgo en llamadas, SMS, enlaces, comportamiento y eventos del sistema, siempre dentro de las limitaciones técnicas y legales de Android.",
+          productBody: "Zamazen Aegis ayuda a revisar señales de riesgo reportadas en llamadas, SMS, enlaces, comportamiento y eventos del sistema, siempre dentro de las limitaciones técnicas y legales de Android.",
           productPoint1: "La app informa y recomienda acciones cuando hay base técnica para hacerlo; solo bloquea si la función existe, está permitida y el usuario la activa.",
           productPoint2: "Si una función necesita permisos o conexión, se indica de forma clara.",
           productPoint3: "No se venden milagros: ninguna app puede eliminar todo riesgo ni sustituir el criterio del usuario.",
@@ -5051,13 +6371,13 @@
           privacyTitle: "Privacy Policy",
           privacyBody: "Zamazen Aegis prioritizes local features and only uses data needed to analyze risks, save preferences, maintain sessions and improve protection when connected services are enabled.",
           privacyPoint1: "Permissions are requested with context and can be disabled from Settings.",
-          privacyPoint2: "A Zamazen account is optional and designed for synchronization, recovery and device control.",
+          privacyPoint2: "Zamazen account, online Neo Network and diagnostics use minimal, sanitized and consented data when the user enables connected services.",
           privacyPoint3: "No secret surveillance or absolute protection is promised; Neo informs, helps and acts with consent.",
           deleteCallout: "If you have a Zamazen account, you can request deletion of the account and associated data from the public deletion page.",
           deleteAction: "Request account deletion",
           dataTitle: "Manage and delete partial data",
           dataBody: "In addition to deleting the full account, Zamazen Aegis lets users control specific data from the app when that data exists on the device or is under Zamazen Aegis control.",
-          dataPoint1: "You can delete local history, activity records, local Neo Network memory, internal cache and preferences stored on this device.",
+          dataPoint1: "You can delete local history, activity records, Neo Network local memory and queue, internal cache and preferences stored on this device.",
           dataPoint2: "You can delete Bunker data from the app if you choose to remove credentials, banking records or protected files stored locally.",
           dataPoint3: "Partial deletion does not cancel a subscription or delete a remote account; the account deletion request exists for that.",
           dataPoint4: "Android does not allow Zamazen Aegis to erase private data from other apps. When there is a system limitation, the app explains it and guides the user to Settings.",
@@ -5069,6 +6389,7 @@
           deleteStep2: "Use the subject: Account deletion request.",
           deleteStep3: "State that you want to delete your Zamazen Aegis account and associated data.",
           deleteStep4: "Do not include passwords, codes, full banking details or unnecessary sensitive information.",
+          deleteStep5: "If online account ownership must be verified, support will indicate a secure step. Never send your password, two-factor codes or recovery codes by email.",
           deleteEmailTitle: "Official privacy and account email",
           deleteEmailAction: "Send request",
           deleteDataPoint1: "Account identifiers, linked email, profile data, preferences, session data, linked devices and connected-service data will be deleted when they exist and are under Zamazen Aegis control.",
@@ -5082,7 +6403,7 @@
           cookiesPoint2: "Analytics, personalization and marketing/product: optional and off by default.",
           cookiesPoint3: "You can change your choice from “Cookie preferences” in the footer.",
           productTitle: "Product Policy",
-          productBody: "Zamazen Aegis helps detect risk signals in calls, SMS, links, behavior and system events, within Android's technical and legal limits.",
+          productBody: "Zamazen Aegis helps review reported risk signals in calls, SMS, links, behavior and system events, within Android's technical and legal limits.",
           productPoint1: "The app informs and recommends actions when there is a technical basis; it only blocks when the feature exists, is allowed and the user enables it.",
           productPoint2: "If a feature needs permissions or connectivity, it is explained clearly.",
           productPoint3: "No miracles are sold: no app can remove every risk or replace user judgment.",
@@ -5148,13 +6469,13 @@
           privacyTitle: "Politique de confidentialité",
           privacyBody: "Zamazen Aegis privilégie les fonctions locales et n'utilise que les données nécessaires pour analyser les risques, enregistrer les préférences, maintenir les sessions et améliorer la protection lorsque les services connectés sont activés.",
           privacyPoint1: "Les autorisations sont demandées avec contexte et peuvent être désactivées depuis les réglages.",
-          privacyPoint2: "Le compte Zamazen est optionnel et prévu pour la synchronisation, la récupération et le contrôle des appareils.",
+          privacyPoint2: "Le compte Zamazen, Red Neo en ligne et les diagnostics utilisent des données minimales, assainies et consenties lorsque l'utilisateur active les services connectés.",
           privacyPoint3: "Aucune surveillance secrète ni protection absolue n'est promise; Neo informe, aide et agit avec consentement.",
           deleteCallout: "Si vous avez un compte Zamazen, vous pouvez demander la suppression du compte et des données associées depuis la page publique de suppression.",
           deleteAction: "Demander la suppression du compte",
           dataTitle: "Gérer et supprimer des données partielles",
           dataBody: "En plus de supprimer le compte complet, Zamazen Aegis permet de contrôler certaines données depuis l'app lorsqu'elles existent sur l'appareil ou sont sous le contrôle de Zamazen Aegis.",
-          dataPoint1: "Vous pouvez supprimer l'historique local, les journaux d'activité, la mémoire locale du Réseau Neo, le cache interne et les préférences enregistrées sur cet appareil.",
+          dataPoint1: "Vous pouvez supprimer l'historique local, les journaux d'activité, la mémoire et la file locale du Réseau Neo, le cache interne et les préférences enregistrées sur cet appareil.",
           dataPoint2: "Vous pouvez supprimer les données du Bunker depuis l'app si vous décidez de retirer identifiants, données bancaires ou fichiers protégés stockés localement.",
           dataPoint3: "La suppression partielle n'annule pas un abonnement et ne supprime pas un compte distant; la demande de suppression de compte sert à cela.",
           dataPoint4: "Android ne permet pas à Zamazen Aegis d'effacer les données privées d'autres apps. En cas de limite système, l'app l'explique et guide vers les réglages.",
@@ -5166,6 +6487,7 @@
           deleteStep2: "Utilisez l'objet: Demande de suppression de compte.",
           deleteStep3: "Indiquez que vous souhaitez supprimer votre compte Zamazen Aegis et les données associées.",
           deleteStep4: "N'incluez pas de mots de passe, codes, coordonnées bancaires complètes ni informations sensibles inutiles.",
+          deleteStep5: "Si la propriété d'un compte en ligne doit être vérifiée, l'assistance indiquera une étape sécurisée. N'envoyez jamais votre mot de passe, vos codes à deux facteurs ni vos codes de récupération par e-mail.",
           deleteEmailTitle: "E-mail officiel confidentialité et compte",
           deleteEmailAction: "Envoyer la demande",
           deleteDataPoint1: "Les identifiants de compte, l'e-mail lié, les données de profil, préférences, session, appareils associés et données de services connectés seront supprimés lorsqu'ils existent et sont sous le contrôle de Zamazen Aegis.",
@@ -5179,7 +6501,7 @@
           cookiesPoint2: "Analyse, personnalisation et marketing/produit: optionnels et désactivés par défaut.",
           cookiesPoint3: "Vous pouvez modifier votre choix depuis “Préférences de cookies” dans le pied de page.",
           productTitle: "Politique produit",
-          productBody: "Zamazen Aegis aide à détecter les signaux de risque dans les appels, SMS, liens, comportements et événements système, dans les limites techniques et légales d'Android.",
+          productBody: "Zamazen Aegis aide à examiner les signaux de risque signalés dans les appels, SMS, liens, comportements et événements système, dans les limites techniques et légales d'Android.",
           productPoint1: "L'app informe et recommande des actions lorsqu'une base technique le permet; elle ne bloque que si la fonction existe, est autorisée et activée par l'utilisateur.",
           productPoint2: "Si une fonction nécessite des autorisations ou une connexion, c'est indiqué clairement.",
           productPoint3: "Aucun miracle n'est vendu: aucune app ne peut supprimer tous les risques ni remplacer le jugement de l'utilisateur.",
@@ -5245,13 +6567,13 @@
           privacyTitle: "Política de privacidade",
           privacyBody: "Zamazen Aegis prioriza funções locais e usa apenas os dados necessários para analisar riscos, salvar preferências, manter sessões e melhorar a proteção quando serviços conectados são ativados.",
           privacyPoint1: "As permissões são solicitadas com contexto e podem ser desativadas nas Configurações.",
-          privacyPoint2: "A conta Zamazen é opcional e pensada para sincronização, recuperação e controle de dispositivos.",
+          privacyPoint2: "Conta Zamazen, Red Neo online e diagnósticos usam dados mínimos, saneados e consentidos quando o usuário ativa serviços conectados.",
           privacyPoint3: "Não há promessa de vigilância secreta nem proteção absoluta; Neo informa, ajuda e age com consentimento.",
           deleteCallout: "Se você tem uma conta Zamazen, pode solicitar a eliminação da conta e dos dados associados pela página pública de eliminação.",
           deleteAction: "Solicitar eliminação da conta",
           dataTitle: "Gerir e eliminar dados parciais",
           dataBody: "Além de eliminar a conta completa, Zamazen Aegis permite controlar dados específicos pelo app quando esses dados existem no dispositivo ou estão sob controle da Zamazen Aegis.",
-          dataPoint1: "Você pode eliminar histórico local, registros de atividade, memória local da Rede Neo, cache interna e preferências guardadas neste dispositivo.",
+          dataPoint1: "Você pode eliminar histórico local, registros de atividade, memória e fila local da Rede Neo, cache interna e preferências guardadas neste dispositivo.",
           dataPoint2: "Você pode eliminar dados do Bunker pelo app se decidir remover credenciais, registros bancários ou arquivos protegidos guardados localmente.",
           dataPoint3: "A eliminação parcial não cancela uma assinatura nem elimina uma conta remota; para isso existe a solicitação de eliminação de conta.",
           dataPoint4: "Android não permite que Zamazen Aegis apague dados privados de outros apps. Quando há limitação do sistema, o app explica e guia o usuário às Configurações.",
@@ -5263,6 +6585,7 @@
           deleteStep2: "Use o assunto: Solicitação de eliminação de conta.",
           deleteStep3: "Indique que deseja eliminar sua conta Zamazen Aegis e os dados associados.",
           deleteStep4: "Não inclua senhas, códigos, dados bancários completos nem informações sensíveis desnecessárias.",
+          deleteStep5: "Se for necessário verificar a titularidade de uma conta online, o suporte indicará uma etapa segura. Nunca envie sua senha, códigos de dois fatores nem códigos de recuperação por e-mail.",
           deleteEmailTitle: "E-mail oficial de privacidade e conta",
           deleteEmailAction: "Enviar solicitação",
           deleteDataPoint1: "Identificadores de conta, e-mail vinculado, dados de perfil, preferências, sessão, dispositivos vinculados e dados de serviços conectados serão eliminados quando existirem e estiverem sob controle da Zamazen Aegis.",
@@ -5276,7 +6599,7 @@
           cookiesPoint2: "Análise, personalização e marketing/produto: opcionais e desativadas por padrão.",
           cookiesPoint3: "Você pode alterar sua decisão em “Preferências de cookies” no rodapé.",
           productTitle: "Política de produto",
-          productBody: "Zamazen Aegis ajuda a detectar sinais de risco em chamadas, SMS, links, comportamento e eventos do sistema, dentro dos limites técnicos e legais do Android.",
+          productBody: "Zamazen Aegis ajuda a revisar sinais de risco reportados em chamadas, SMS, links, comportamento e eventos do sistema, dentro dos limites técnicos e legais do Android.",
           productPoint1: "O app informa e recomenda ações quando existe base técnica para isso; só bloqueia se a função existir, for permitida e o usuário ativar.",
           productPoint2: "Se uma função precisa de permissões ou conexão, isso é explicado claramente.",
           productPoint3: "Não vendemos milagres: nenhum app pode eliminar todo risco nem substituir o julgamento do usuário.",
@@ -5406,6 +6729,10 @@
       });
 
       updateLanguageButtons(selectedLanguage);
+      updateClock();
+      updateUserPanelPreview();
+      setAuthMode(authShell?.dataset.mode || "login");
+      setLiveMotion(localStorage.getItem(STORAGE_MOTION_KEY) !== "off");
 
       if (options.persist) {
         localStorage.setItem(STORAGE_LANGUAGE_KEY, selectedLanguage);
@@ -5542,6 +6869,184 @@
       }
     }
 
+    function getCurrentLanguage() {
+      return translations[document.documentElement.lang]
+        ? document.documentElement.lang
+        : detectLanguage();
+    }
+
+    function translate(key, language = getCurrentLanguage()) {
+      return getTranslationValue(language, key) || getTranslationValue("es", key) || "";
+    }
+
+    function setTranslatedText(element, key) {
+      if (!element) return;
+      element.dataset.i18n = key;
+      element.textContent = translate(key);
+    }
+
+    function readAccountPreview() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_ACCOUNT_KEY) || "null");
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function updateUserPanelPreview() {
+      const account = readAccountPreview();
+      const name = account && account.name ? String(account.name).slice(0, 80) : "";
+      const email = account && account.email ? String(account.email).slice(0, 120) : "";
+      const isOnline = account && account.provider === "zamazen-online-account";
+
+      if (userPanelName) {
+        if (name) {
+          userPanelName.removeAttribute("data-i18n");
+          userPanelName.textContent = name;
+        } else {
+          setTranslatedText(userPanelName, "userPanel.guestName");
+        }
+      }
+
+      if (userPanelEmail) {
+        if (email) {
+          userPanelEmail.removeAttribute("data-i18n");
+          userPanelEmail.textContent = email;
+        } else {
+          setTranslatedText(userPanelEmail, "userPanel.guestEmail");
+        }
+      }
+
+      if (userPanelLevel) {
+        setTranslatedText(userPanelLevel, isOnline ? "userPanel.levelOnline" : "userPanel.levelCore");
+      }
+    }
+
+    function closeUserPanel() {
+      if (!userPanel || !userPanelToggle) return;
+      userPanel.classList.remove("is-open");
+      userPanelToggle.setAttribute("aria-expanded", "false");
+    }
+
+    function closeQuickMenu() {
+      if (!quickLauncher || !quickMenuToggle) return;
+      quickLauncher.classList.remove("is-open");
+      quickMenuToggle.setAttribute("aria-expanded", "false");
+    }
+
+    function closeAccountActions() {
+      if (!accountContextActions || !accountActionsToggle) return;
+      accountContextActions.classList.remove("is-open");
+      accountActionsToggle.setAttribute("aria-expanded", "false");
+    }
+
+    function setAuthMode(mode) {
+      if (!authShell || !authModeToggle) return;
+      const selectedMode = mode === "register" ? "register" : "login";
+      authShell.dataset.mode = selectedMode;
+
+      if (selectedMode === "register") {
+        setTranslatedText(authVisualBadge, "auth.visualBadgeRegister");
+        setTranslatedText(authVisualTitle, "auth.visualTitleRegister");
+        setTranslatedText(authVisualBody, "auth.visualBodyRegister");
+        setTranslatedText(authModeToggle, "auth.toLogin");
+        authModeToggle.dataset.authTarget = "login";
+      } else {
+        setTranslatedText(authVisualBadge, "auth.visualBadgeLogin");
+        setTranslatedText(authVisualTitle, "auth.visualTitleLogin");
+        setTranslatedText(authVisualBody, "auth.visualBodyLogin");
+        setTranslatedText(authModeToggle, "auth.toRegister");
+        authModeToggle.dataset.authTarget = "register";
+      }
+    }
+
+    function updateClock() {
+      if (!digitalClock || !digitalDate) return;
+      const now = new Date();
+      const language = getCurrentLanguage();
+      digitalClock.textContent = new Intl.DateTimeFormat(language, {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      }).format(now);
+      digitalDate.textContent = new Intl.DateTimeFormat(language, {
+        weekday: "long",
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+      }).format(now);
+    }
+
+    function setNetworkState(state, key) {
+      if (liveNetworkDot) {
+        liveNetworkDot.classList.toggle("status-dot--warning", state === "checking" || state === "limited");
+        liveNetworkDot.classList.toggle("status-dot--muted", state === "offline");
+      }
+      if (liveNetworkStatus) {
+        setTranslatedText(liveNetworkStatus, key);
+      }
+    }
+
+    async function refreshOnlineStatus() {
+      if (!liveNetworkStatus) return;
+
+      if (!navigator.onLine) {
+        setNetworkState("offline", "live.networkOffline");
+        return;
+      }
+
+      const hostname = window.location.hostname;
+      const shouldCheckProductionApi = window.location.protocol === "https:"
+        && hostname !== "localhost"
+        && hostname !== "127.0.0.1"
+        && hostname !== "";
+
+      if (!shouldCheckProductionApi) {
+        setNetworkState("limited", "live.networkLocal");
+        return;
+      }
+
+      setNetworkState("checking", "live.networkChecking");
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), HEALTH_API_TIMEOUT_MS);
+
+      try {
+        const response = await fetch(`${ZAMAZEN_API_BASE_URL}/health`, {
+          cache: "no-store",
+          signal: controller.signal
+        });
+        const payload = await response.json().catch(() => ({}));
+        const ready = response.ok && payload && payload.ok === true && payload.online === true;
+        setNetworkState(ready ? "online" : "limited", ready ? "live.networkOnline" : "live.networkLimited");
+      } catch (error) {
+        setNetworkState("limited", "live.networkLimited");
+      } finally {
+        window.clearTimeout(timeoutId);
+      }
+    }
+
+    function setLiveMotion(enabled) {
+      const isEnabled = enabled !== false;
+      document.body.classList.toggle("motion-softened", !isEnabled);
+      localStorage.setItem(STORAGE_MOTION_KEY, isEnabled ? "on" : "off");
+
+      if (liveMotionSwitch) {
+        liveMotionSwitch.classList.toggle("is-on", isEnabled);
+        liveMotionSwitch.setAttribute("aria-pressed", String(isEnabled));
+      }
+
+      setTranslatedText(liveMotionLabel, isEnabled ? "live.motionOn" : "live.motionOff");
+    }
+
+    function revealVisibleItems() {
+      revealItems.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          item.classList.add("is-visible");
+        }
+      });
+    }
+
     if (navToggle) {
       navToggle.addEventListener("click", () => {
         const isOpen = navWrapper.classList.toggle("nav-open");
@@ -5597,24 +7102,236 @@
       });
     });
 
+    if (userPanelToggle && userPanel) {
+      userPanelToggle.addEventListener("click", () => {
+        const isOpen = userPanel.classList.toggle("is-open");
+        userPanelToggle.setAttribute("aria-expanded", String(isOpen));
+        closeQuickMenu();
+        closeAccountActions();
+      });
+    }
+
+    if (userPanelLogout) {
+      userPanelLogout.addEventListener("click", () => {
+        localStorage.removeItem(STORAGE_ACCOUNT_KEY);
+        updateUserPanelPreview();
+        closeUserPanel();
+      });
+    }
+
+    if (quickMenuToggle && quickLauncher) {
+      quickMenuToggle.addEventListener("click", () => {
+        const isOpen = quickLauncher.classList.toggle("is-open");
+        quickMenuToggle.setAttribute("aria-expanded", String(isOpen));
+        closeUserPanel();
+        closeAccountActions();
+      });
+    }
+
+    quickMenuLinks.forEach((link) => {
+      link.addEventListener("click", closeQuickMenu);
+    });
+
+    if (accountActionsToggle && accountContextActions) {
+      accountActionsToggle.addEventListener("click", () => {
+        const isOpen = accountContextActions.classList.toggle("is-open");
+        accountActionsToggle.setAttribute("aria-expanded", String(isOpen));
+        closeUserPanel();
+        closeQuickMenu();
+      });
+
+      accountContextActions.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeAccountActions);
+      });
+    }
+
+    if (authModeToggle) {
+      authModeToggle.addEventListener("click", () => {
+        setAuthMode(authModeToggle.dataset.authTarget);
+      });
+    }
+
+    if (liveMotionSwitch) {
+      liveMotionSwitch.addEventListener("click", () => {
+        setLiveMotion(liveMotionSwitch.getAttribute("aria-pressed") !== "true");
+      });
+    }
+
+    document.addEventListener("click", (event) => {
+      if (userPanel && !userPanel.contains(event.target)) closeUserPanel();
+      if (quickLauncher && !quickLauncher.contains(event.target)) closeQuickMenu();
+      if (accountContextActions && !accountContextActions.contains(event.target)) closeAccountActions();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeUserPanel();
+        closeQuickMenu();
+        closeAccountActions();
+      }
+    });
+
+    if (loginForm && loginStatus) {
+      loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(loginForm);
+        const selectedLanguage = document.documentElement.lang || localStorage.getItem(STORAGE_LANGUAGE_KEY) || "es";
+        const submitButton = loginForm.querySelector("button[type='submit']");
+        const passwordInput = loginForm.querySelector("#loginPassword");
+        const password = String(formData.get("password") || "");
+        const email = String(formData.get("email") || "").trim().toLowerCase();
+
+        const setStatus = (key) => {
+          loginStatus.textContent =
+            getTranslationValue(selectedLanguage, key) ||
+            getTranslationValue("es", key) ||
+            "";
+        };
+
+        setStatus("auth.loginPending");
+        loginForm.setAttribute("aria-busy", "true");
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.setAttribute("aria-disabled", "true");
+        }
+
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(() => controller.abort(), ACCOUNT_API_TIMEOUT_MS);
+
+        try {
+          const response = await fetch(`${ZAMAZEN_API_BASE_URL}/api/accounts/login`, {
+            method: "POST",
+            headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/json"
+            },
+            cache: "no-store",
+            signal: controller.signal,
+            body: JSON.stringify({ email, password })
+          });
+          const payload = await response.json().catch(() => ({}));
+
+          if (response.ok && payload && payload.ok) {
+            const profile = payload.profile || {};
+            localStorage.setItem(STORAGE_ACCOUNT_KEY, JSON.stringify({
+              name: profile.name || email,
+              email: profile.email || email,
+              provider: "zamazen-online-account",
+              onlineAccountId: profile.id || "",
+              signedInOnlineAt: new Date().toISOString()
+            }));
+            loginForm.reset();
+            updateUserPanelPreview();
+            setStatus("auth.loginSuccess");
+            return;
+          }
+
+          if (response.status === 401 && payload && payload.message === "two_factor_required") {
+            setStatus("auth.twoFactorRequired");
+            return;
+          }
+
+          setStatus("auth.loginError");
+        } catch (error) {
+          setStatus("auth.loginOffline");
+        } finally {
+          window.clearTimeout(timeoutId);
+          if (passwordInput) passwordInput.value = "";
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.removeAttribute("aria-disabled");
+          }
+          loginForm.removeAttribute("aria-busy");
+        }
+      });
+    }
+
     if (accountForm && accountStatus) {
-      accountForm.addEventListener("submit", (event) => {
+      accountForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         const formData = new FormData(accountForm);
+        const selectedLanguage = document.documentElement.lang || localStorage.getItem(STORAGE_LANGUAGE_KEY) || "es";
+        const submitButton = accountForm.querySelector("button[type='submit']");
+        const passwordInput = accountForm.querySelector("#accountPassword");
+        const password = String(formData.get("password") || "");
         const account = {
           name: String(formData.get("name") || "").trim(),
           email: String(formData.get("email") || "").trim().toLowerCase(),
           createdAt: new Date().toISOString(),
-          provider: "zamazen-web-preview"
+          provider: "zamazen-account-request-local-fallback"
         };
 
-        localStorage.setItem(STORAGE_ACCOUNT_KEY, JSON.stringify(account));
+        const setStatus = (key) => {
+          accountStatus.textContent =
+            getTranslationValue(selectedLanguage, key) ||
+            getTranslationValue("es", key) ||
+            "";
+        };
 
-        const selectedLanguage = document.documentElement.lang || localStorage.getItem(STORAGE_LANGUAGE_KEY) || "es";
-        accountStatus.textContent =
-          getTranslationValue(selectedLanguage, "account.success") ||
-          getTranslationValue("es", "account.success");
+        setStatus("account.pending");
+        accountForm.setAttribute("aria-busy", "true");
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.setAttribute("aria-disabled", "true");
+        }
+
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(() => controller.abort(), ACCOUNT_API_TIMEOUT_MS);
+
+        try {
+          const response = await fetch(`${ZAMAZEN_API_BASE_URL}/api/accounts/register`, {
+            method: "POST",
+            headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/json"
+            },
+            cache: "no-store",
+            signal: controller.signal,
+            body: JSON.stringify({
+              name: account.name,
+              email: account.email,
+              password
+            })
+          });
+          const payload = await response.json().catch(() => ({}));
+
+          if (response.ok && payload && payload.ok) {
+            localStorage.setItem(STORAGE_ACCOUNT_KEY, JSON.stringify({
+              ...account,
+              provider: "zamazen-online-account",
+              onlineAccountId: payload.profile && payload.profile.id ? payload.profile.id : "",
+              createdOnlineAt: new Date().toISOString()
+            }));
+            accountForm.reset();
+            updateUserPanelPreview();
+            setStatus("account.success");
+            return;
+          }
+
+          if (response.status === 409 || (payload && payload.message === "account_exists")) {
+            setStatus("account.exists");
+            return;
+          }
+
+          setStatus("account.error");
+        } catch (error) {
+          localStorage.setItem(STORAGE_ACCOUNT_KEY, JSON.stringify({
+            ...account,
+            attemptedOnlineAt: new Date().toISOString()
+          }));
+          updateUserPanelPreview();
+          setStatus("account.fallback");
+        } finally {
+          window.clearTimeout(timeoutId);
+          if (passwordInput) passwordInput.value = "";
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.removeAttribute("aria-disabled");
+          }
+          accountForm.removeAttribute("aria-busy");
+        }
       });
     }
 
@@ -5665,9 +7382,20 @@
     );
 
     revealItems.forEach((item) => revealObserver.observe(item));
+    window.requestAnimationFrame(revealVisibleItems);
+    window.addEventListener("hashchange", () => window.setTimeout(revealVisibleItems, 80));
     initializeLanguage();
     initializeTextSize();
     initializeCookieConsent();
+    setAuthMode(authShell?.dataset.mode || "login");
+    updateUserPanelPreview();
+    setLiveMotion(localStorage.getItem(STORAGE_MOTION_KEY) !== "off");
+    updateClock();
+    window.setInterval(updateClock, 1000);
+    refreshOnlineStatus();
+    window.setInterval(refreshOnlineStatus, 60000);
+    window.addEventListener("online", refreshOnlineStatus);
+    window.addEventListener("offline", refreshOnlineStatus);
   </script>
 </body>
 </html>
