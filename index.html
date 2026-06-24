@@ -384,6 +384,9 @@
       top: calc(100% + 12px);
       right: 0;
       width: min(320px, calc(100vw - 32px));
+      max-height: min(72vh, 560px);
+      overflow: auto;
+      z-index: 140;
       padding: 18px;
       border-radius: 22px;
       border: 1px solid rgba(94, 240, 189, 0.22);
@@ -2153,8 +2156,10 @@
       position: absolute;
       top: calc(100% + 10px);
       left: 0;
-      z-index: 5;
+      z-index: 120;
       width: min(280px, calc(100vw - 32px));
+      max-height: min(56vh, 360px);
+      overflow: auto;
       display: grid;
       gap: 8px;
       padding: 10px;
@@ -2226,6 +2231,11 @@
       grid-column: 2;
     }
 
+    .auth-shell[data-mode="recover"] .auth-form--recover {
+      display: grid;
+      grid-column: 1;
+    }
+
     .auth-form h3 {
       margin: 0;
       font-size: clamp(1.5rem, 3vw, 2rem);
@@ -2240,9 +2250,12 @@
 
     .auth-recovery {
       width: fit-content;
+      padding: 0;
       color: var(--green);
+      background: transparent;
       font-weight: 800;
       font-size: 0.88rem;
+      text-align: left;
     }
 
     .auth-visual {
@@ -2268,6 +2281,10 @@
       transform: translateX(-100%);
       border-left-color: transparent;
       border-right: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .auth-shell[data-mode="recover"] .auth-visual {
+      transform: translateX(0);
     }
 
     .auth-visual h3 {
@@ -2379,6 +2396,330 @@
       font-size: 0.9rem;
     }
 
+    .aegis-room-shell {
+      display: grid;
+      gap: 22px;
+      padding: clamp(22px, 4vw, 34px);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(94, 240, 189, 0.18);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 42%),
+        rgba(7, 14, 29, 0.62);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 26px 72px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+    }
+
+    .room-intro {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+      align-items: end;
+    }
+
+    .room-intro h2,
+    .room-panel h3 {
+      margin: 0;
+      color: #f8fbff;
+      line-height: 1.04;
+    }
+
+    .room-intro h2 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+    }
+
+    .room-intro p,
+    .room-panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .room-locale {
+      display: grid;
+      gap: 10px;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(111, 150, 232, 0.16);
+      background:
+        linear-gradient(145deg, rgba(91, 168, 255, 0.14), rgba(94, 240, 189, 0.08)),
+        rgba(4, 10, 21, 0.56);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .room-locale strong {
+      color: #f8fbff;
+    }
+
+    .room-locale span {
+      color: #c9d8ef;
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .room-tabs {
+      display: flex;
+      gap: 8px;
+      padding: 8px;
+      overflow-x: auto;
+      border-radius: 18px;
+      border: 1px solid rgba(111, 150, 232, 0.14);
+      background: rgba(4, 10, 21, 0.42);
+      scrollbar-width: thin;
+    }
+
+    .room-tab {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding: 0 14px;
+      border-radius: 12px;
+      color: #cfe0f8;
+      background: transparent;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .room-tab:hover,
+    .room-tab:focus-visible {
+      color: var(--text);
+      background: rgba(91, 168, 255, 0.12);
+    }
+
+    .room-tab.is-active {
+      color: #06110f;
+      background: linear-gradient(135deg, var(--green), #a7ffd8);
+      box-shadow: 0 12px 28px rgba(27, 207, 146, 0.22);
+    }
+
+    .room-stage {
+      position: relative;
+      min-height: 420px;
+      border-radius: 22px;
+      border: 1px solid rgba(94, 240, 189, 0.14);
+      background:
+        radial-gradient(circle at 18% 10%, rgba(91, 168, 255, 0.13), transparent 28%),
+        rgba(4, 10, 21, 0.54);
+      overflow: hidden;
+    }
+
+    .room-panel {
+      display: none;
+      gap: 20px;
+      padding: clamp(20px, 4vw, 30px);
+      animation: roomPanelIn 0.28s ease both;
+    }
+
+    .room-panel.is-active {
+      display: grid;
+    }
+
+    .room-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .room-grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .room-item,
+    .permission-row,
+    .profile-room,
+    .rune-row {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(111, 150, 232, 0.14);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.055), transparent 42%),
+        rgba(7, 14, 29, 0.62);
+    }
+
+    .room-item strong,
+    .permission-row strong,
+    .profile-room strong,
+    .rune-row strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #f5fbff;
+    }
+
+    .room-item span,
+    .permission-row span,
+    .profile-room span,
+    .rune-row span {
+      display: block;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.92rem;
+    }
+
+    .permission-list,
+    .rune-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .permission-row {
+      display: grid;
+      grid-template-columns: minmax(140px, 0.34fr) minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .room-copy-stack {
+      display: grid;
+      gap: 14px;
+      max-width: 78ch;
+    }
+
+    .profile-room {
+      display: grid;
+      gap: 10px;
+    }
+
+    .profile-room em {
+      color: var(--green);
+      font-style: normal;
+      font-weight: 800;
+    }
+
+    .room-neo-layout {
+      display: grid;
+      grid-template-columns: minmax(180px, 280px) minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .room-neo-image {
+      width: min(100%, 260px);
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: 30px;
+      border: 1px solid rgba(94, 240, 189, 0.2);
+      box-shadow: 0 0 42px rgba(47, 124, 255, 0.22);
+    }
+
+    .rune-row {
+      display: grid;
+      grid-template-columns: 54px minmax(120px, 0.3fr) minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+    }
+
+    .rune-glyph {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 15px;
+      color: var(--green);
+      background: rgba(94, 240, 189, 0.09);
+      border: 1px solid rgba(94, 240, 189, 0.18);
+      font-size: 1.5rem;
+      font-weight: 900;
+    }
+
+    .radial-launch {
+      position: relative;
+      min-height: 260px;
+      display: grid;
+      place-items: center;
+      margin-top: 6px;
+      border-radius: 22px;
+      border: 1px solid rgba(94, 240, 189, 0.12);
+      background: rgba(4, 10, 21, 0.38);
+    }
+
+    .radial-core-button {
+      position: relative;
+      z-index: 2;
+      width: 82px;
+      height: 82px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      color: #06110f;
+      background: linear-gradient(135deg, var(--green), #a7ffd8);
+      box-shadow: 0 0 0 12px rgba(94, 240, 189, 0.08), 0 20px 52px rgba(27, 207, 146, 0.28);
+      font-size: 1.7rem;
+      font-weight: 900;
+    }
+
+    .radial-menu {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .radial-menu a {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 72px;
+      height: 72px;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      color: #dffdf7;
+      border: 1px solid rgba(111, 150, 232, 0.18);
+      background: rgba(8, 15, 30, 0.9);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.26);
+      transform: translate(-50%, -50%) scale(0.4);
+      opacity: 0;
+      transition: transform 0.26s cubic-bezier(0.2, 0.78, 0.2, 1), opacity 0.2s ease, background 0.2s ease;
+    }
+
+    .radial-menu a:hover,
+    .radial-menu a:focus-visible {
+      background: rgba(91, 168, 255, 0.18);
+      color: var(--text);
+    }
+
+    .radial-launch.is-open .radial-menu {
+      pointer-events: auto;
+    }
+
+    .radial-launch.is-open .radial-menu a:nth-child(1) {
+      transform: translate(-50%, -50%) translate(0, -92px) scale(1);
+      opacity: 1;
+    }
+
+    .radial-launch.is-open .radial-menu a:nth-child(2) {
+      transform: translate(-50%, -50%) translate(92px, 0) scale(1);
+      opacity: 1;
+    }
+
+    .radial-launch.is-open .radial-menu a:nth-child(3) {
+      transform: translate(-50%, -50%) translate(0, 92px) scale(1);
+      opacity: 1;
+    }
+
+    .radial-launch.is-open .radial-menu a:nth-child(4) {
+      transform: translate(-50%, -50%) translate(-92px, 0) scale(1);
+      opacity: 1;
+    }
+
+    .room-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    @keyframes roomPanelIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .aegis-switch {
       display: inline-flex;
       align-items: center;
@@ -2428,7 +2769,8 @@
     }
 
     .motion-softened .neo-core-image-frame,
-    .motion-softened .rune {
+    .motion-softened .rune,
+    .motion-softened .room-panel {
       animation: none !important;
     }
 
@@ -3385,7 +3727,8 @@
       }
 
       .auth-shell[data-mode="login"] .auth-form--login,
-      .auth-shell[data-mode="register"] .auth-form--register {
+      .auth-shell[data-mode="register"] .auth-form--register,
+      .auth-shell[data-mode="recover"] .auth-form--recover {
         grid-column: 1;
       }
 
@@ -3410,6 +3753,31 @@
       .live-status-head,
       .digital-clock {
         text-align: left;
+      }
+
+      .room-intro,
+      .room-grid,
+      .room-grid.two,
+      .room-neo-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .room-stage {
+        min-height: 0;
+      }
+
+      .permission-row,
+      .rune-row {
+        grid-template-columns: 1fr;
+      }
+
+      .rune-row .rune-glyph {
+        width: 42px;
+        height: 42px;
+      }
+
+      .radial-launch {
+        min-height: 330px;
       }
 
       .context-actions,
@@ -3445,7 +3813,7 @@
   <div class="page-shell">
     <header class="header" id="top">
       <div class="container header-inner">
-        <a class="brand" href="#inicio" aria-label="Ir al inicio de Zamazen Aegis">
+        <a class="brand" href="#inicio" aria-label="Ir al inicio de Zamazen Aegis" data-i18n-attr="aria-label:brand.homeAria">
           <span class="brand-mark" aria-hidden="true">
             <img class="brand-logo" src="assets/brand/zamazen-aegis-icon.png" alt="">
           </span>
@@ -3463,6 +3831,7 @@
           <nav class="nav" id="siteNav" aria-label="Principal">
             <a href="#inicio" data-i18n="nav.home">Inicio</a>
             <a href="#funciones" data-i18n="nav.features">Funciones</a>
+            <a href="#centro-aegis" data-i18n="nav.center">Centro</a>
             <a href="#seguridad" data-i18n="nav.security">Seguridad</a>
             <a href="#cuenta" data-i18n="nav.account">Cuenta</a>
             <a href="#gestionar-datos" data-i18n="nav.data">Datos</a>
@@ -3549,7 +3918,7 @@
                 <p class="cta-microcopy" data-i18n="hero.microcopy">Sin registro obligatorio. Cuenta Zamazen opcional para reforzar sesiones y privacidad.</p>
               </div>
               <a class="cta-secondary" href="#funciones" data-i18n="hero.secondaryCta">Ver cómo funciona</a>
-              <a class="cta-secondary" href="#cuenta" data-i18n="hero.accountCta">Acceder / crear cuenta</a>
+              <a class="cta-secondary" href="#cuenta" data-open-auth="register" data-i18n="hero.accountCta">Acceder / crear cuenta</a>
             </div>
 
             <div class="hero-points" aria-label="Puntos clave">
@@ -3953,6 +4322,149 @@
               <div class="feature-icon" aria-hidden="true">◆</div>
               <h3 data-i18n="virtues.card9Title">Confianza</h3>
               <p data-i18n="virtues.card9Body">La virtud central: cada decisión debe reforzar la confianza del usuario.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="centro-aegis">
+        <div class="container aegis-room-shell reveal">
+          <div class="room-intro">
+            <div>
+              <span class="section-tag" data-i18n="center.badge">Centro Aegis</span>
+              <h2 data-i18n="center.title">La web también protege: todo Zamazen explicado por salas.</h2>
+              <p data-i18n="center.body">
+                Aquí se entiende qué hace la app, por qué nació, qué permisos puede necesitar, quién está detrás y qué simboliza Neo. La web no es un adorno: es el mapa público del Guardián.
+              </p>
+            </div>
+            <div class="room-locale" aria-live="polite">
+              <strong data-i18n="center.localeTitle">Vista adaptada a tu entorno</strong>
+              <span id="localeDate" data-i18n="center.localeLoading">Calculando fecha local...</span>
+              <span id="localeTimeZone">--</span>
+              <span id="localeRegion">--</span>
+              <span data-i18n="center.localePrivacy">Sin pedir geolocalización: usamos idioma, fecha y zona horaria del navegador.</span>
+            </div>
+          </div>
+
+          <div class="room-tabs" role="tablist" aria-label="Salas de Zamazen Aegis" data-i18n-attr="aria-label:center.tabsLabel">
+            <button class="room-tab is-active" id="roomTabOverview" type="button" role="tab" aria-selected="true" aria-controls="room-overview" data-room-target="overview" data-i18n="center.tabOverview">Resumen</button>
+            <button class="room-tab" id="roomTabPermissions" type="button" role="tab" aria-selected="false" aria-controls="room-permissions" data-room-target="permissions" data-i18n="center.tabPermissions">Permisos</button>
+            <button class="room-tab" id="roomTabMission" type="button" role="tab" aria-selected="false" aria-controls="room-mission" data-room-target="mission" data-i18n="center.tabMission">Misión</button>
+            <button class="room-tab" id="roomTabPeople" type="button" role="tab" aria-selected="false" aria-controls="room-people" data-room-target="people" data-i18n="center.tabPeople">Personas</button>
+            <button class="room-tab" id="roomTabNeo" type="button" role="tab" aria-selected="false" aria-controls="room-neo" data-room-target="neo" data-i18n="center.tabNeo">Neo</button>
+            <button class="room-tab" id="roomTabRunes" type="button" role="tab" aria-selected="false" aria-controls="room-runes" data-room-target="runes" data-i18n="center.tabRunes">Runas</button>
+            <button class="room-tab" id="roomTabAccount" type="button" role="tab" aria-selected="false" aria-controls="room-account" data-room-target="account" data-i18n="center.tabAccount">Cuenta</button>
+          </div>
+
+          <div class="room-stage">
+            <article class="room-panel is-active" id="room-overview" role="tabpanel" aria-labelledby="roomTabOverview" data-room-panel="overview">
+              <div class="room-copy-stack">
+                <h3 data-i18n="center.overviewTitle">Qué hace Zamazen Aegis</h3>
+                <p data-i18n="center.overviewBody">Zamazen Aegis reúne protección ante llamadas, SMS, enlaces, permisos, cuenta, Red Neo, Bunker e IA Neo con un principio simple: ayudar antes de que el error cueste caro.</p>
+              </div>
+              <div class="room-grid">
+                <div class="room-item"><strong data-i18n="center.featureCallsTitle">Llamadas y SMS</strong><span data-i18n="center.featureCallsBody">Detecta señales, explica riesgos y respeta los límites de Android y Google Play.</span></div>
+                <div class="room-item"><strong data-i18n="center.featureNeoTitle">IA Neo</strong><span data-i18n="center.featureNeoBody">Traduce riesgos a lenguaje claro para decidir sin miedo ni tecnicismos.</span></div>
+                <div class="room-item"><strong data-i18n="center.featureNetworkTitle">Red Neo</strong><span data-i18n="center.featureNetworkBody">Comparte avisos saneados con consentimiento para que un reporte pueda ayudar a otros.</span></div>
+                <div class="room-item"><strong data-i18n="center.featureBunkerTitle">Bunker</strong><span data-i18n="center.featureBunkerBody">Protege datos sensibles con cifrado y evita subir secretos en claro.</span></div>
+                <div class="room-item"><strong data-i18n="center.featureGuardianTitle">Guardián familiar</strong><span data-i18n="center.featureGuardianBody">Ayuda a usuarios con menos experiencia sin convertir la app en control remoto oculto.</span></div>
+                <div class="room-item"><strong data-i18n="center.featureAccountTitle">Cuenta y nube</strong><span data-i18n="center.featureAccountBody">Cuenta opcional, sesión online y recuperación cuando el backend está disponible.</span></div>
+              </div>
+              <div class="radial-launch" id="roomRadialLauncher">
+                <button class="radial-core-button" id="roomRadialToggle" type="button" aria-expanded="false" aria-controls="roomRadialMenu" aria-label="Abrir núcleo de acciones Aegis" data-i18n-attr="aria-label:center.radialOpen">ᛉ</button>
+                <nav class="radial-menu" id="roomRadialMenu" aria-label="Núcleo de acciones Aegis" data-i18n-attr="aria-label:center.radialLabel">
+                  <a href="#seguridad" aria-label="Ir a seguridad" data-i18n-attr="aria-label:center.radialSecurity">ᚦ</a>
+                  <a href="#centro-aegis" data-room-target="permissions" aria-label="Ver permisos" data-i18n-attr="aria-label:center.radialPermissions">ᛉ</a>
+                  <a href="#neo" aria-label="Ir a Neo" data-i18n-attr="aria-label:center.radialNeo">ᚨ</a>
+                  <a href="#cuenta" data-open-auth="register" aria-label="Crear cuenta" data-i18n-attr="aria-label:center.radialAccount">ᛟ</a>
+                </nav>
+              </div>
+            </article>
+
+            <article class="room-panel" id="room-permissions" role="tabpanel" aria-labelledby="roomTabPermissions" data-room-panel="permissions">
+              <div class="room-copy-stack">
+                <h3 data-i18n="center.permissionsTitle">Permisos y funciones, sin letra pequeña</h3>
+                <p data-i18n="center.permissionsBody">Cada permiso debe tener una razón real. La versión PlaySafe evita permisos restringidos; las variantes completas solo activan capas sensibles con consentimiento, explicación y aprobación de plataforma cuando corresponda.</p>
+              </div>
+              <div class="permission-list">
+                <div class="permission-row"><strong data-i18n="center.permissionPlayTitle">PlaySafe</strong><span data-i18n="center.permissionPlayBody">No declara lectura de llamadas, SMS, contactos, almacenamiento completo, overlay, VPN, administrador del dispositivo ni servicio de accesibilidad.</span></div>
+                <div class="permission-row"><strong data-i18n="center.permissionCallsTitle">Llamadas y SMS</strong><span data-i18n="center.permissionCallsBody">Las variantes Full/Ragnarok pueden usar READ_PHONE_STATE, READ_CALL_LOG o RECEIVE_SMS solo con consentimiento explícito y utilidad real.</span></div>
+                <div class="permission-row"><strong data-i18n="center.permissionNotificationsTitle">Notificaciones</strong><span data-i18n="center.permissionNotificationsBody">POST_NOTIFICATIONS es opcional; si el usuario lo rechaza, la app debe seguir funcionando con experiencia básica. En 1.6 no se promete leer conversaciones de otras apps.</span></div>
+                <div class="permission-row"><strong data-i18n="center.permissionBunkerTitle">Bunker</strong><span data-i18n="center.permissionBunkerBody">El Bunker trata credenciales y datos sensibles como secretos: cifrado local y paquetes cloud cifrados por el usuario, nunca contraseñas en claro.</span></div>
+                <div class="permission-row"><strong data-i18n="center.permissionNetworkTitle">Red Neo</strong><span data-i18n="center.permissionNetworkBody">Los reportes online se envían saneados, con mínimos datos necesarios y sin conversaciones completas, códigos, credenciales ni datos bancarios completos.</span></div>
+                <div class="permission-row"><strong data-i18n="center.permissionRecoveryTitle">Recuperación</strong><span data-i18n="center.permissionRecoveryBody">Si un servicio falla, la app conserva modo local, cola segura y guía clara; la recuperación forma parte del diseño, no de un parche posterior.</span></div>
+              </div>
+            </article>
+
+            <article class="room-panel" id="room-mission" role="tabpanel" aria-labelledby="roomTabMission" data-room-panel="mission">
+              <div class="room-copy-stack">
+                <h3 data-i18n="center.missionTitle">Por qué nació Zamazen Aegis</h3>
+                <p data-i18n="center.missionP1">Zamazen Aegis nació de una preocupación real: usamos el móvil para casi todo, pero no todas las personas tienen las mismas herramientas para defenderse.</p>
+                <p data-i18n="center.missionP2">Hay quien no entiende un permiso, quien pulsa un enlace porque parece urgente, quien recibe una llamada sospechosa y quien simplemente necesita que alguien le avise antes de cometer un error.</p>
+                <p data-i18n="center.missionP3">La seguridad digital no debería ser solo para expertos. Zamazen Aegis existe para proteger sin invadir, avisar sin asustar y explicar lo importante antes de que sea tarde.</p>
+                <p data-i18n="center.missionP4">Su misión es proteger el móvil, pero sobre todo proteger a quien lo utiliza. Porque detrás de cada móvil hay una persona, y esa persona merece sentirse segura.</p>
+              </div>
+            </article>
+
+            <article class="room-panel" id="room-people" role="tabpanel" aria-labelledby="roomTabPeople" data-room-panel="people">
+              <div class="room-grid two">
+                <div class="profile-room">
+                  <em data-i18n="center.creatorRole">Creador, desarrollador y programador</em>
+                  <strong data-i18n="center.creatorName">Francisco Javier Molina Moreno</strong>
+                  <span data-i18n="center.creatorBody1">Autodidacta, constante y comprometido con construir tecnología útil para la vida real.</span>
+                  <span data-i18n="center.creatorBody2">Zamazen Aegis nace de años de aprendizaje en programación, ciberseguridad, IA, desarrollo web, apps móviles, UX/UI, marketing digital, productividad y protección online.</span>
+                  <span data-i18n="center.creatorBody3">Su filosofía es clara: proteger sin invadir, avisar sin asustar, explicar sin complicar y crear tecnología al servicio de las personas.</span>
+                </div>
+                <div class="profile-room">
+                  <em data-i18n="center.partnerRole">Socia, apoyo e impulsora de ideas</em>
+                  <strong data-i18n="center.partnerName">María Isabel Rodríguez Sánchez</strong>
+                  <span data-i18n="center.partnerBody1">Forma parte esencial de Zamazen Aegis desde una visión humana, práctica y cercana.</span>
+                  <span data-i18n="center.partnerBody2">Su mirada ayuda a pensar en familias, personas mayores, usuarios con poca experiencia digital y cualquier persona que necesite tecnología más clara y protectora.</span>
+                  <span data-i18n="center.partnerBody3">Representa una parte clave del alma del proyecto: que la seguridad digital debe cuidar a personas reales, no solo a dispositivos.</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="room-panel" id="room-neo" role="tabpanel" aria-labelledby="roomTabNeo" data-room-panel="neo">
+              <div class="room-neo-layout">
+                <img class="room-neo-image" src="images/neo/neo_guardian_hologram.png" srcset="images/neo/neo_guardian_hologram.png 1024w, images/neo/neo_guardian_web_4k.png 2160w" sizes="(max-width: 720px) 64vw, 260px" width="2160" height="3240" loading="lazy" decoding="async" alt="Neo, guardián original de Zamazen Aegis" data-i18n-attr="alt:center.neoAlt">
+                <div class="room-copy-stack">
+                  <h3 data-i18n="center.neoTitle">Sobre Neo</h3>
+                  <p data-i18n="center.neoP1">Neo es el protector principal y símbolo de honor de Zamazen Aegis. Representa lealtad, vigilancia, compañía y cuidado.</p>
+                  <p data-i18n="center.neoP2">Su presencia no es estética: recuerda que la seguridad debe estar presente, vigilar sin invadir, acompañar sin controlar y proteger sin asustar.</p>
+                  <p data-i18n="center.neoP3">Neo es el alma protectora del proyecto: el guardián original que recuerda que detectar amenazas solo importa si sirve para cuidar a quienes confían en Zamazen Aegis.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="room-panel" id="room-runes" role="tabpanel" aria-labelledby="roomTabRunes" data-room-panel="runes">
+              <div class="room-copy-stack">
+                <h3 data-i18n="center.runesTitle">Runas oficiales del Guardián</h3>
+                <p data-i18n="center.runesBody">La identidad rúnica se usa con sentido y sin inventar símbolos: solo aparecen las runas oficiales definidas para Zamazen Aegis.</p>
+              </div>
+              <div class="rune-list">
+                <div class="rune-row"><span class="rune-glyph" aria-hidden="true">ᚠ</span><strong>FEHU</strong><span data-i18n="center.runeFehu">Riqueza, prosperidad y suerte.</span></div>
+                <div class="rune-row"><span class="rune-glyph" aria-hidden="true">ᚢ</span><strong>URUZ</strong><span data-i18n="center.runeUruz">Fuerza, salud y poder físico.</span></div>
+                <div class="rune-row"><span class="rune-glyph" aria-hidden="true">ᚦ</span><strong>THURISAZ</strong><span data-i18n="center.runeThurisaz">Protección y resistencia frente a enemigos.</span></div>
+                <div class="rune-row"><span class="rune-glyph" aria-hidden="true">ᚨ</span><strong>ANSUZ</strong><span data-i18n="center.runeAnsuz">Sabiduría y comunicación.</span></div>
+                <div class="rune-row"><span class="rune-glyph" aria-hidden="true">ᚱ</span><strong>RAIDO</strong><span data-i18n="center.runeRaido">Viajes, movimiento y crecimiento personal.</span></div>
+                <div class="rune-row"><span class="rune-glyph" aria-hidden="true">ᚲ</span><strong>KENAZ</strong><span data-i18n="center.runeKenaz">Creatividad, conocimiento y luz interior.</span></div>
+                <div class="rune-row"><span class="rune-glyph" aria-hidden="true">ᛉ</span><strong>ALGIZ</strong><span data-i18n="center.runeAlgiz">Protección espiritual y guía.</span></div>
+                <div class="rune-row"><span class="rune-glyph" aria-hidden="true">ᛟ</span><strong>OTHALA</strong><span data-i18n="center.runeOthala">Herencia, raíces y hogar.</span></div>
+              </div>
+            </article>
+
+            <article class="room-panel" id="room-account" role="tabpanel" aria-labelledby="roomTabAccount" data-room-panel="account">
+              <div class="room-copy-stack">
+                <h3 data-i18n="center.accountTitle">Acceso en una sola experiencia</h3>
+                <p data-i18n="center.accountBody">Login, registro y recuperación viven dentro del mismo santuario visual. No hay recargas, no hay páginas separadas y la web nunca guarda contraseñas.</p>
+              </div>
+              <div class="room-actions">
+                <a class="cta-primary" href="#cuenta" data-open-auth="register" data-i18n="center.accountCreate">Crear cuenta</a>
+                <a class="cta-secondary" href="#cuenta" data-open-auth="login" data-i18n="center.accountLogin">Entrar</a>
+                <a class="cta-secondary" href="#cuenta" data-open-auth="recover" data-i18n="center.accountRecover">Recuperar contraseña</a>
+              </div>
+              <p class="legal-note" data-i18n="center.accountNote">Si la API no responde, la web lo dice claramente y mantiene la protección local; no simula sesiones ni crea promesas falsas.</p>
             </article>
           </div>
         </div>
@@ -4446,7 +4958,7 @@
                 <label for="loginPassword" data-i18n="account.passwordLabel">Contraseña</label>
                 <input class="form-input" id="loginPassword" name="password" type="password" autocomplete="current-password" required>
               </div>
-              <a class="auth-recovery" href="mailto:zamazenaegissupport@gmail.com?subject=Recuperar%20cuenta%20Zamazen%20Aegis" data-i18n="auth.recover">Recuperar contraseña</a>
+              <button class="auth-recovery" type="button" data-open-auth="recover" data-i18n="auth.recover">Recuperar contraseña</button>
               <button class="cta-primary" type="submit" data-i18n="auth.loginSubmit">Entrar</button>
               <p class="account-status" id="loginStatus" role="status" aria-live="polite"></p>
             </form>
@@ -4471,6 +4983,19 @@
               </div>
               <button class="cta-primary" type="submit" data-i18n="account.submit">Crear cuenta Zamazen</button>
               <p class="account-status" id="accountStatus" role="status" aria-live="polite"></p>
+            </form>
+
+            <form class="account-form auth-form auth-form--recover" id="recoveryForm">
+              <span class="section-tag" data-i18n="auth.recoverBadge">Recuperación segura</span>
+              <h3 data-i18n="auth.recoverTitle">Recupera tu acceso sin salir del santuario</h3>
+              <p data-i18n="auth.recoverBody">Introduce tu correo y te guiaremos con pasos seguros. Esta web no pide contraseñas antiguas, códigos 2FA ni códigos de recuperación.</p>
+              <div class="form-row">
+                <label for="recoveryEmail" data-i18n="auth.recoverEmailLabel">Correo de la cuenta</label>
+                <input class="form-input" id="recoveryEmail" name="email" type="email" autocomplete="email" required>
+              </div>
+              <button class="cta-primary" type="submit" data-i18n="auth.recoverSubmit">Solicitar recuperación segura</button>
+              <button class="auth-recovery" type="button" data-open-auth="login" data-i18n="auth.recoverBack">Volver al acceso</button>
+              <p class="account-status" id="recoveryStatus" role="status" aria-live="polite"></p>
             </form>
 
             <aside class="auth-visual" aria-live="polite">
@@ -4676,6 +5201,7 @@
 
           <div class="footer-links">
             <span class="footer-title" data-i18n="footer.productTitle">Producto</span>
+            <a href="#centro-aegis" data-i18n="nav.center">Centro</a>
             <a href="#seguridad" data-i18n="nav.security">Seguridad</a>
             <a href="#privacidad" data-i18n="privacy.badge">Privacidad y control</a>
             <a href="#cuenta" data-i18n="nav.account">Cuenta</a>
@@ -4718,7 +5244,7 @@
     <nav class="quick-menu" id="quickMenu" aria-label="Accesos rápidos" data-i18n-attr="aria-label:quickMenu.label">
       <a href="#nivel"><span class="quick-menu-icon" aria-hidden="true">ᛉ</span><span data-i18n="quickMenu.shield">Escudo</span></a>
       <a href="#neo"><span class="quick-menu-icon" aria-hidden="true">ᚨ</span><span data-i18n="quickMenu.neo">Neo</span></a>
-      <a href="#seguridad"><span class="quick-menu-icon" aria-hidden="true">ᚦ</span><span data-i18n="quickMenu.security">Seguridad</span></a>
+      <a href="#centro-aegis"><span class="quick-menu-icon" aria-hidden="true">ᚦ</span><span data-i18n="quickMenu.center">Centro</span></a>
       <a href="#cuenta"><span class="quick-menu-icon" aria-hidden="true">ᛟ</span><span data-i18n="quickMenu.account">Cuenta</span></a>
       <a href="#premium"><span class="quick-menu-icon" aria-hidden="true">ᚠ</span><span data-i18n="quickMenu.premium">Premium</span></a>
       <a href="#faq"><span class="quick-menu-icon" aria-hidden="true">ᚲ</span><span data-i18n="quickMenu.help">Ayuda</span></a>
@@ -4810,6 +5336,8 @@
     const accountStatus = document.getElementById("accountStatus");
     const loginForm = document.getElementById("loginForm");
     const loginStatus = document.getElementById("loginStatus");
+    const recoveryForm = document.getElementById("recoveryForm");
+    const recoveryStatus = document.getElementById("recoveryStatus");
     const authShell = document.getElementById("authShell");
     const authModeToggle = document.getElementById("authModeToggle");
     const authVisualBadge = document.getElementById("authVisualBadge");
@@ -4832,6 +5360,15 @@
     const liveNetworkStatus = document.getElementById("liveNetworkStatus");
     const liveMotionSwitch = document.getElementById("liveMotionSwitch");
     const liveMotionLabel = document.getElementById("liveMotionLabel");
+    const localeDate = document.getElementById("localeDate");
+    const localeTimeZone = document.getElementById("localeTimeZone");
+    const localeRegion = document.getElementById("localeRegion");
+    const roomTabs = document.querySelectorAll("[data-room-target]");
+    const roomPanels = document.querySelectorAll("[data-room-panel]");
+    const authOpenTriggers = document.querySelectorAll("[data-open-auth]");
+    const roomRadialLauncher = document.getElementById("roomRadialLauncher");
+    const roomRadialToggle = document.getElementById("roomRadialToggle");
+    const roomRadialLinks = document.querySelectorAll("#roomRadialMenu a");
     const storePlaceholderLinks = document.querySelectorAll("[data-store-placeholder]");
     const cookieBanner = document.getElementById("cookieBanner");
     const cookiePanelBackdrop = document.getElementById("cookiePanelBackdrop");
@@ -4873,11 +5410,13 @@
         },
         brand: {
           name: "Zamazen Aegis",
-          tagline: "Seguridad Inteligente"
+          tagline: "Seguridad Inteligente",
+          homeAria: "Ir al inicio de Zamazen Aegis"
         },
         nav: {
           home: "Inicio",
           features: "Funciones",
+          center: "Centro",
           security: "Seguridad",
           account: "Cuenta",
           data: "Datos",
@@ -5010,6 +5549,94 @@
           card9Title: "Confianza",
           card9Body: "La virtud central: cada decisión debe reforzar la confianza del usuario."
         },
+        center: {
+          badge: "Centro Aegis",
+          title: "La web también protege: todo Zamazen explicado por salas.",
+          body: "Aquí se entiende qué hace la app, por qué nació, qué permisos puede necesitar, quién está detrás y qué simboliza Neo. La web no es un adorno: es el mapa público del Guardián.",
+          localeTitle: "Vista adaptada a tu entorno",
+          localeLoading: "Calculando fecha local...",
+          localePrivacy: "Sin pedir geolocalización: usamos idioma, fecha y zona horaria del navegador.",
+          localeTimezone: "Zona horaria: {timeZone}",
+          localeRegion: "Preferencia regional: {region}",
+          tabsLabel: "Salas de Zamazen Aegis",
+          tabOverview: "Resumen",
+          tabPermissions: "Permisos",
+          tabMission: "Misión",
+          tabPeople: "Personas",
+          tabNeo: "Neo",
+          tabRunes: "Runas",
+          tabAccount: "Cuenta",
+          overviewTitle: "Qué hace Zamazen Aegis",
+          overviewBody: "Zamazen Aegis reúne protección ante llamadas, SMS, enlaces, permisos, cuenta, Red Neo, Bunker e IA Neo con un principio simple: ayudar antes de que el error cueste caro.",
+          featureCallsTitle: "Llamadas y SMS",
+          featureCallsBody: "Detecta señales, explica riesgos y respeta los límites de Android y Google Play.",
+          featureNeoTitle: "IA Neo",
+          featureNeoBody: "Traduce riesgos a lenguaje claro para decidir sin miedo ni tecnicismos.",
+          featureNetworkTitle: "Red Neo",
+          featureNetworkBody: "Comparte avisos saneados con consentimiento para que un reporte pueda ayudar a otros.",
+          featureBunkerTitle: "Bunker",
+          featureBunkerBody: "Protege datos sensibles con cifrado y evita subir secretos en claro.",
+          featureGuardianTitle: "Guardián familiar",
+          featureGuardianBody: "Ayuda a usuarios con menos experiencia sin convertir la app en control remoto oculto.",
+          featureAccountTitle: "Cuenta y nube",
+          featureAccountBody: "Cuenta opcional, sesión online y recuperación cuando el backend está disponible.",
+          radialOpen: "Abrir núcleo de acciones Aegis",
+          radialLabel: "Núcleo de acciones Aegis",
+          radialSecurity: "Ir a seguridad",
+          radialPermissions: "Ver permisos",
+          radialNeo: "Ir a Neo",
+          radialAccount: "Crear cuenta",
+          permissionsTitle: "Permisos y funciones, sin letra pequeña",
+          permissionsBody: "Cada permiso debe tener una razón real. La versión PlaySafe evita permisos restringidos; las variantes completas solo activan capas sensibles con consentimiento, explicación y aprobación de plataforma cuando corresponda.",
+          permissionPlayTitle: "PlaySafe",
+          permissionPlayBody: "No declara lectura de llamadas, SMS, contactos, almacenamiento completo, overlay, VPN, administrador del dispositivo ni servicio de accesibilidad.",
+          permissionCallsTitle: "Llamadas y SMS",
+          permissionCallsBody: "Las variantes Full/Ragnarok pueden usar READ_PHONE_STATE, READ_CALL_LOG o RECEIVE_SMS solo con consentimiento explícito y utilidad real.",
+          permissionNotificationsTitle: "Notificaciones",
+          permissionNotificationsBody: "POST_NOTIFICATIONS es opcional; si el usuario lo rechaza, la app debe seguir funcionando con experiencia básica. En 1.6 no se promete leer conversaciones de otras apps.",
+          permissionBunkerTitle: "Bunker",
+          permissionBunkerBody: "El Bunker trata credenciales y datos sensibles como secretos: cifrado local y paquetes cloud cifrados por el usuario, nunca contraseñas en claro.",
+          permissionNetworkTitle: "Red Neo",
+          permissionNetworkBody: "Los reportes online se envían saneados, con mínimos datos necesarios y sin conversaciones completas, códigos, credenciales ni datos bancarios completos.",
+          permissionRecoveryTitle: "Recuperación",
+          permissionRecoveryBody: "Si un servicio falla, la app conserva modo local, cola segura y guía clara; la recuperación forma parte del diseño, no de un parche posterior.",
+          missionTitle: "Por qué nació Zamazen Aegis",
+          missionP1: "Zamazen Aegis nació de una preocupación real: usamos el móvil para casi todo, pero no todas las personas tienen las mismas herramientas para defenderse.",
+          missionP2: "Hay quien no entiende un permiso, quien pulsa un enlace porque parece urgente, quien recibe una llamada sospechosa y quien simplemente necesita que alguien le avise antes de cometer un error.",
+          missionP3: "La seguridad digital no debería ser solo para expertos. Zamazen Aegis existe para proteger sin invadir, avisar sin asustar y explicar lo importante antes de que sea tarde.",
+          missionP4: "Su misión es proteger el móvil, pero sobre todo proteger a quien lo utiliza. Porque detrás de cada móvil hay una persona, y esa persona merece sentirse segura.",
+          creatorRole: "Creador, desarrollador y programador",
+          creatorName: "Francisco Javier Molina Moreno",
+          creatorBody1: "Autodidacta, constante y comprometido con construir tecnología útil para la vida real.",
+          creatorBody2: "Zamazen Aegis nace de años de aprendizaje en programación, ciberseguridad, IA, desarrollo web, apps móviles, UX/UI, marketing digital, productividad y protección online.",
+          creatorBody3: "Su filosofía es clara: proteger sin invadir, avisar sin asustar, explicar sin complicar y crear tecnología al servicio de las personas.",
+          partnerRole: "Socia, apoyo e impulsora de ideas",
+          partnerName: "María Isabel Rodríguez Sánchez",
+          partnerBody1: "Forma parte esencial de Zamazen Aegis desde una visión humana, práctica y cercana.",
+          partnerBody2: "Su mirada ayuda a pensar en familias, personas mayores, usuarios con poca experiencia digital y cualquier persona que necesite tecnología más clara y protectora.",
+          partnerBody3: "Representa una parte clave del alma del proyecto: que la seguridad digital debe cuidar a personas reales, no solo a dispositivos.",
+          neoAlt: "Neo, guardián original de Zamazen Aegis",
+          neoTitle: "Sobre Neo",
+          neoP1: "Neo es el protector principal y símbolo de honor de Zamazen Aegis. Representa lealtad, vigilancia, compañía y cuidado.",
+          neoP2: "Su presencia no es estética: recuerda que la seguridad debe estar presente, vigilar sin invadir, acompañar sin controlar y proteger sin asustar.",
+          neoP3: "Neo es el alma protectora del proyecto: el guardián original que recuerda que detectar amenazas solo importa si sirve para cuidar a quienes confían en Zamazen Aegis.",
+          runesTitle: "Runas oficiales del Guardián",
+          runesBody: "La identidad rúnica se usa con sentido y sin inventar símbolos: solo aparecen las runas oficiales definidas para Zamazen Aegis.",
+          runeFehu: "Riqueza, prosperidad y suerte.",
+          runeUruz: "Fuerza, salud y poder físico.",
+          runeThurisaz: "Protección y resistencia frente a enemigos.",
+          runeAnsuz: "Sabiduría y comunicación.",
+          runeRaido: "Viajes, movimiento y crecimiento personal.",
+          runeKenaz: "Creatividad, conocimiento y luz interior.",
+          runeAlgiz: "Protección espiritual y guía.",
+          runeOthala: "Herencia, raíces y hogar.",
+          accountTitle: "Acceso en una sola experiencia",
+          accountBody: "Login, registro y recuperación viven dentro del mismo santuario visual. No hay recargas, no hay páginas separadas y la web nunca guarda contraseñas.",
+          accountCreate: "Crear cuenta",
+          accountLogin: "Entrar",
+          accountRecover: "Recuperar contraseña",
+          accountNote: "Si la API no responde, la web lo dice claramente y mantiene la protección local; no simula sesiones ni crea promesas falsas."
+        },
         security: {
           badge: "Seguridad",
           title: "Protección continua sobre todo lo que más expone un móvil",
@@ -5093,6 +5720,7 @@
           shield: "Escudo",
           neo: "Neo",
           security: "Seguridad",
+          center: "Centro",
           account: "Cuenta",
           premium: "Premium",
           help: "Ayuda"
@@ -5109,6 +5737,13 @@
           twoFactorRequired: "Esta cuenta requiere dos pasos. Continúa desde la app para completar el acceso.",
           loginError: "No se pudo iniciar sesión. Revisa los datos o inténtalo más tarde.",
           loginOffline: "No se pudo contactar con la API. No se ha creado ninguna sesión local falsa.",
+          recoverBadge: "Recuperación segura",
+          recoverTitle: "Recupera tu acceso sin salir del santuario",
+          recoverBody: "Introduce tu correo y te guiaremos con pasos seguros. Esta web no pide contraseñas antiguas, códigos 2FA ni códigos de recuperación.",
+          recoverEmailLabel: "Correo de la cuenta",
+          recoverSubmit: "Solicitar recuperación segura",
+          recoverBack: "Volver al acceso",
+          recoverGuidance: "Solicitud preparada. Cuando la API de recuperación esté disponible, se enviará desde aquí; mientras tanto usa soporte oficial sin enviar contraseñas ni códigos.",
           visualBadgeLogin: "Despertar Guardián",
           visualTitleLogin: "¿Nuevo en Zamazen?",
           visualBodyLogin: "Crea tu cuenta para activar perfil cloud, sesiones y recuperación sin perder la protección local.",
@@ -5116,6 +5751,9 @@
           visualBadgeRegister: "Santuario Aegis",
           visualTitleRegister: "¿Ya tienes cuenta?",
           visualBodyRegister: "Vuelve al acceso para entrar con tu cuenta Zamazen cuando la API online esté disponible.",
+          visualBadgeRecover: "Clave segura",
+          visualTitleRecover: "Recuperación guiada",
+          visualBodyRecover: "Recupera el acceso con pasos claros, sin pedir secretos y sin abandonar este entorno.",
           toLogin: "Volver al login"
         },
         premium: {
@@ -5235,8 +5873,8 @@
           title: "Zamazen Aegis | Intelligent Security Against Scams, Spam and Phishing",
           description: "Zamazen Aegis helps review reported risk signals in calls, SMS and links with Neo, clear privacy and a futuristic experience designed to anticipate risk."
         },
-        brand: { name: "Zamazen Aegis", tagline: "Intelligent Security" },
-        nav: { home: "Home", features: "Features", security: "Security", account: "Account", data: "Data", deleteAccount: "Delete account", premium: "Premium", music: "Music", faq: "FAQ", cta: "Activate shield" },
+        brand: { name: "Zamazen Aegis", tagline: "Intelligent Security", homeAria: "Go to the Zamazen Aegis start" },
+        nav: { home: "Home", features: "Features", center: "Center", security: "Security", account: "Account", data: "Data", deleteAccount: "Delete account", premium: "Premium", music: "Music", faq: "FAQ", cta: "Activate shield" },
         accessibility: { normal: "Normal", medium: "Medium", large: "Large" },
         hero: {
           eyebrow: "Intelligent digital shield",
@@ -5356,6 +5994,94 @@
           card9Title: "Trust",
           card9Body: "The central virtue: every decision must strengthen user trust."
         },
+        center: {
+          badge: "Aegis Center",
+          title: "The website also protects: Zamazen explained through rooms.",
+          body: "This is where the public can understand what the app does, why it was born, what permissions it may need, who is behind it and what Neo represents. The website is not decoration: it is the Guardian's public map.",
+          localeTitle: "View adapted to your environment",
+          localeLoading: "Calculating local date...",
+          localePrivacy: "No geolocation request: we use the browser language, date and time zone.",
+          localeTimezone: "Time zone: {timeZone}",
+          localeRegion: "Regional preference: {region}",
+          tabsLabel: "Zamazen Aegis rooms",
+          tabOverview: "Overview",
+          tabPermissions: "Permissions",
+          tabMission: "Mission",
+          tabPeople: "People",
+          tabNeo: "Neo",
+          tabRunes: "Runes",
+          tabAccount: "Account",
+          overviewTitle: "What Zamazen Aegis does",
+          overviewBody: "Zamazen Aegis brings together protection for calls, SMS, links, permissions, account, Neo Network, Bunker and Neo AI with one simple principle: help before a mistake becomes expensive.",
+          featureCallsTitle: "Calls and SMS",
+          featureCallsBody: "Detects signals, explains risks and respects Android and Google Play limits.",
+          featureNeoTitle: "Neo AI",
+          featureNeoBody: "Turns risk into clear language so people can decide without fear or jargon.",
+          featureNetworkTitle: "Neo Network",
+          featureNetworkBody: "Shares sanitized warnings with consent so one report can help others.",
+          featureBunkerTitle: "Bunker",
+          featureBunkerBody: "Protects sensitive data with encryption and avoids uploading secrets in plain text.",
+          featureGuardianTitle: "Family guardian",
+          featureGuardianBody: "Helps less experienced users without turning the app into hidden remote control.",
+          featureAccountTitle: "Account and cloud",
+          featureAccountBody: "Optional account, online session and recovery when the backend is available.",
+          radialOpen: "Open Aegis action core",
+          radialLabel: "Aegis action core",
+          radialSecurity: "Go to security",
+          radialPermissions: "View permissions",
+          radialNeo: "Go to Neo",
+          radialAccount: "Create account",
+          permissionsTitle: "Permissions and functions, no fine print",
+          permissionsBody: "Every permission must have a real reason. PlaySafe avoids restricted permissions; complete variants only enable sensitive layers with consent, explanation and platform approval when required.",
+          permissionPlayTitle: "PlaySafe",
+          permissionPlayBody: "Does not declare call log/SMS reading, contacts, full storage, overlay, VPN, Device Admin or Accessibility Service.",
+          permissionCallsTitle: "Calls and SMS",
+          permissionCallsBody: "Full/Ragnarok variants may use READ_PHONE_STATE, READ_CALL_LOG or RECEIVE_SMS only with explicit consent and real utility.",
+          permissionNotificationsTitle: "Notifications",
+          permissionNotificationsBody: "POST_NOTIFICATIONS is optional; if the user denies it, the app must keep its basic experience. Version 1.6 does not promise to read other apps' conversations.",
+          permissionBunkerTitle: "Bunker",
+          permissionBunkerBody: "Bunker treats credentials and sensitive data as secrets: local encryption and user-encrypted cloud packages, never plain passwords.",
+          permissionNetworkTitle: "Neo Network",
+          permissionNetworkBody: "Online reports are sanitized, use the minimum needed data and exclude full conversations, codes, credentials or complete banking data.",
+          permissionRecoveryTitle: "Recovery",
+          permissionRecoveryBody: "If a service fails, the app keeps local mode, safe queue and clear guidance; recovery is part of the design, not a later patch.",
+          missionTitle: "Why Zamazen Aegis was born",
+          missionP1: "Zamazen Aegis was born from a real concern: we use our phones for almost everything, but not everyone has the same tools to defend themselves.",
+          missionP2: "Some people do not understand a permission, tap a link because it looks urgent, receive a suspicious call, or simply need someone to warn them before a mistake.",
+          missionP3: "Digital safety should not be only for experts. Zamazen Aegis exists to protect without invading, warn without frightening and explain what matters before it is too late.",
+          missionP4: "Its mission is to protect the phone, but above all the person using it. Behind every phone there is a person, and that person deserves to feel safe.",
+          creatorRole: "Creator, developer and programmer",
+          creatorName: "Francisco Javier Molina Moreno",
+          creatorBody1: "Self-taught, persistent and committed to building useful technology for real life.",
+          creatorBody2: "Zamazen Aegis comes from years of learning programming, cybersecurity, AI, web development, mobile apps, UX/UI, digital marketing, productivity and online protection.",
+          creatorBody3: "His philosophy is clear: protect without invading, warn without frightening, explain without complicating and create technology in service of people.",
+          partnerRole: "Partner, support and idea driver",
+          partnerName: "María Isabel Rodríguez Sánchez",
+          partnerBody1: "An essential part of Zamazen Aegis through a human, practical and close perspective.",
+          partnerBody2: "Her view helps the project think about families, older people, less experienced digital users and anyone who needs clearer, more protective technology.",
+          partnerBody3: "She represents a key part of the project's soul: digital security must care for real people, not only devices.",
+          neoAlt: "Neo, original guardian of Zamazen Aegis",
+          neoTitle: "About Neo",
+          neoP1: "Neo is the main protector and symbol of honor of Zamazen Aegis. He represents loyalty, vigilance, companionship and care.",
+          neoP2: "His presence is not decorative: it reminds us that security must be present, watch without invading, accompany without controlling and protect without frightening.",
+          neoP3: "Neo is the protective soul of the project: the original guardian who reminds us that detecting threats only matters if it cares for those who trust Zamazen Aegis.",
+          runesTitle: "Official Guardian runes",
+          runesBody: "Runic identity is used with meaning and without invented symbols: only the official runes defined for Zamazen Aegis appear.",
+          runeFehu: "Wealth, prosperity and luck.",
+          runeUruz: "Strength, health and physical power.",
+          runeThurisaz: "Protection and resistance against enemies.",
+          runeAnsuz: "Wisdom and communication.",
+          runeRaido: "Journeys, movement and personal growth.",
+          runeKenaz: "Creativity, knowledge and inner light.",
+          runeAlgiz: "Spiritual protection and guidance.",
+          runeOthala: "Heritage, roots and home.",
+          accountTitle: "Access in one experience",
+          accountBody: "Login, registration and recovery live inside the same visual sanctuary. No reloads, no separate pages and the website never stores passwords.",
+          accountCreate: "Create account",
+          accountLogin: "Sign in",
+          accountRecover: "Recover password",
+          accountNote: "If the API does not respond, the website says so clearly and keeps local protection; it does not simulate sessions or create false promises."
+        },
         security: {
           badge: "Security",
           title: "Continuous protection over what exposes a phone the most",
@@ -5434,6 +6160,7 @@
           shield: "Shield",
           neo: "Neo",
           security: "Security",
+          center: "Center",
           account: "Account",
           premium: "Premium",
           help: "Help"
@@ -5450,6 +6177,13 @@
           twoFactorRequired: "This account requires two-factor verification. Continue in the app to complete access.",
           loginError: "Sign-in failed. Check the details or try again later.",
           loginOffline: "The API could not be reached. No fake local session was created.",
+          recoverBadge: "Secure recovery",
+          recoverTitle: "Recover access without leaving the sanctuary",
+          recoverBody: "Enter your email and we will guide you with safe steps. This website never asks for old passwords, 2FA codes or recovery codes.",
+          recoverEmailLabel: "Account email",
+          recoverSubmit: "Request secure recovery",
+          recoverBack: "Back to sign-in",
+          recoverGuidance: "Request prepared. When the recovery API is available, it will be sent from here; until then use official support without sending passwords or codes.",
           visualBadgeLogin: "Guardian awakening",
           visualTitleLogin: "New to Zamazen?",
           visualBodyLogin: "Create your account to enable cloud profile, sessions and recovery without losing local protection.",
@@ -5457,6 +6191,9 @@
           visualBadgeRegister: "Aegis Sanctuary",
           visualTitleRegister: "Already have an account?",
           visualBodyRegister: "Return to sign-in to access your Zamazen account when the online API is available.",
+          visualBadgeRecover: "Safe key",
+          visualTitleRecover: "Guided recovery",
+          visualBodyRecover: "Recover access through clear steps, without asking for secrets and without leaving this environment.",
           toLogin: "Back to login"
         },
         premium: {
@@ -5576,8 +6313,8 @@
           title: "Zamazen Aegis | Sécurité Intelligente contre les Arnaques, le Spam et le Phishing",
           description: "Zamazen Aegis aide à examiner les signaux de risque signalés dans les appels, SMS et liens avec Neo, une confidentialité claire et une expérience futuriste conçue pour anticiper le risque."
         },
-        brand: { name: "Zamazen Aegis", tagline: "Sécurité Intelligente" },
-        nav: { home: "Accueil", features: "Fonctions", security: "Sécurité", account: "Compte", data: "Données", deleteAccount: "Supprimer le compte", premium: "Premium", music: "Musique", faq: "FAQ", cta: "Activer le bouclier" },
+        brand: { name: "Zamazen Aegis", tagline: "Sécurité Intelligente", homeAria: "Aller au début de Zamazen Aegis" },
+        nav: { home: "Accueil", features: "Fonctions", center: "Centre", security: "Sécurité", account: "Compte", data: "Données", deleteAccount: "Supprimer le compte", premium: "Premium", music: "Musique", faq: "FAQ", cta: "Activer le bouclier" },
         accessibility: { normal: "Normal", medium: "Moyen", large: "Grand" },
         hero: {
           eyebrow: "Bouclier numérique intelligent",
@@ -5697,6 +6434,94 @@
           card9Title: "Confiance",
           card9Body: "La vertu centrale: chaque décision doit renforcer la confiance de l'utilisateur."
         },
+        center: {
+          badge: "Centre Aegis",
+          title: "Le site protège aussi: tout Zamazen expliqué par salles.",
+          body: "Ici le public comprend ce que fait l'app, pourquoi elle est née, quelles permissions elle peut nécessiter, qui est derrière elle et ce que Neo représente. Le site n'est pas un décor: c'est la carte publique du Gardien.",
+          localeTitle: "Vue adaptée à votre environnement",
+          localeLoading: "Calcul de la date locale...",
+          localePrivacy: "Sans demander la géolocalisation: nous utilisons la langue, la date et le fuseau horaire du navigateur.",
+          localeTimezone: "Fuseau horaire: {timeZone}",
+          localeRegion: "Préférence régionale: {region}",
+          tabsLabel: "Salles de Zamazen Aegis",
+          tabOverview: "Résumé",
+          tabPermissions: "Permissions",
+          tabMission: "Mission",
+          tabPeople: "Personnes",
+          tabNeo: "Neo",
+          tabRunes: "Runes",
+          tabAccount: "Compte",
+          overviewTitle: "Ce que fait Zamazen Aegis",
+          overviewBody: "Zamazen Aegis réunit protection des appels, SMS, liens, permissions, compte, Réseau Neo, Bunker et IA Neo avec un principe simple: aider avant qu'une erreur ne coûte cher.",
+          featureCallsTitle: "Appels et SMS",
+          featureCallsBody: "Détecte les signaux, explique les risques et respecte les limites d'Android et de Google Play.",
+          featureNeoTitle: "IA Neo",
+          featureNeoBody: "Traduit les risques en langage clair pour décider sans peur ni jargon.",
+          featureNetworkTitle: "Réseau Neo",
+          featureNetworkBody: "Partage des alertes assainies avec consentement pour qu'un signalement puisse aider d'autres personnes.",
+          featureBunkerTitle: "Bunker",
+          featureBunkerBody: "Protège les données sensibles par chiffrement et évite d'envoyer des secrets en clair.",
+          featureGuardianTitle: "Gardien familial",
+          featureGuardianBody: "Aide les utilisateurs moins expérimentés sans transformer l'app en contrôle à distance caché.",
+          featureAccountTitle: "Compte et cloud",
+          featureAccountBody: "Compte optionnel, session en ligne et récupération lorsque le backend est disponible.",
+          radialOpen: "Ouvrir le noyau d'actions Aegis",
+          radialLabel: "Noyau d'actions Aegis",
+          radialSecurity: "Aller à sécurité",
+          radialPermissions: "Voir les permissions",
+          radialNeo: "Aller à Neo",
+          radialAccount: "Créer un compte",
+          permissionsTitle: "Permissions et fonctions, sans petites lignes",
+          permissionsBody: "Chaque permission doit avoir une vraie raison. PlaySafe évite les permissions restreintes; les variantes complètes n'activent des couches sensibles qu'avec consentement, explication et approbation de plateforme si nécessaire.",
+          permissionPlayTitle: "PlaySafe",
+          permissionPlayBody: "Ne déclare pas la lecture des appels, SMS, contacts, stockage complet, overlay, VPN, administrateur d'appareil ni service d'accessibilité.",
+          permissionCallsTitle: "Appels et SMS",
+          permissionCallsBody: "Les variantes Full/Ragnarok peuvent utiliser READ_PHONE_STATE, READ_CALL_LOG ou RECEIVE_SMS uniquement avec consentement explicite et utilité réelle.",
+          permissionNotificationsTitle: "Notifications",
+          permissionNotificationsBody: "POST_NOTIFICATIONS est optionnel; si l'utilisateur refuse, l'app doit conserver son expérience de base. En 1.6, elle ne promet pas de lire les conversations d'autres apps.",
+          permissionBunkerTitle: "Bunker",
+          permissionBunkerBody: "Le Bunker traite identifiants et données sensibles comme des secrets: chiffrement local et paquets cloud chiffrés par l'utilisateur, jamais de mots de passe en clair.",
+          permissionNetworkTitle: "Réseau Neo",
+          permissionNetworkBody: "Les signalements en ligne sont assainis, utilisent le minimum nécessaire et excluent conversations complètes, codes, identifiants ou données bancaires complètes.",
+          permissionRecoveryTitle: "Récupération",
+          permissionRecoveryBody: "Si un service échoue, l'app conserve le mode local, une file sûre et un guidage clair; la récupération fait partie du design, pas d'un correctif tardif.",
+          missionTitle: "Pourquoi Zamazen Aegis est né",
+          missionP1: "Zamazen Aegis est né d'une inquiétude réelle: nous utilisons le mobile pour presque tout, mais tout le monde n'a pas les mêmes outils pour se défendre.",
+          missionP2: "Certains ne comprennent pas une permission, cliquent sur un lien parce qu'il semble urgent, reçoivent un appel suspect ou ont simplement besoin d'un avertissement avant une erreur.",
+          missionP3: "La sécurité numérique ne devrait pas être réservée aux experts. Zamazen Aegis existe pour protéger sans envahir, avertir sans effrayer et expliquer l'important avant qu'il ne soit trop tard.",
+          missionP4: "Sa mission est de protéger le mobile, mais surtout la personne qui l'utilise. Derrière chaque mobile il y a une personne, et cette personne mérite de se sentir en sécurité.",
+          creatorRole: "Créateur, développeur et programmeur",
+          creatorName: "Francisco Javier Molina Moreno",
+          creatorBody1: "Autodidacte, constant et engagé à construire une technologie utile pour la vie réelle.",
+          creatorBody2: "Zamazen Aegis vient d'années d'apprentissage en programmation, cybersécurité, IA, développement web, apps mobiles, UX/UI, marketing numérique, productivité et protection en ligne.",
+          creatorBody3: "Sa philosophie est claire: protéger sans envahir, avertir sans effrayer, expliquer sans compliquer et créer une technologie au service des personnes.",
+          partnerRole: "Associée, soutien et moteur d'idées",
+          partnerName: "María Isabel Rodríguez Sánchez",
+          partnerBody1: "Elle est une partie essentielle de Zamazen Aegis avec une vision humaine, pratique et proche.",
+          partnerBody2: "Son regard aide à penser aux familles, aux personnes âgées, aux utilisateurs peu expérimentés et à toute personne qui a besoin d'une technologie plus claire et protectrice.",
+          partnerBody3: "Elle représente une partie clé de l'âme du projet: la sécurité numérique doit prendre soin des personnes réelles, pas seulement des appareils.",
+          neoAlt: "Neo, gardien original de Zamazen Aegis",
+          neoTitle: "À propos de Neo",
+          neoP1: "Neo est le protecteur principal et symbole d'honneur de Zamazen Aegis. Il représente loyauté, vigilance, compagnie et soin.",
+          neoP2: "Sa présence n'est pas décorative: elle rappelle que la sécurité doit être présente, surveiller sans envahir, accompagner sans contrôler et protéger sans effrayer.",
+          neoP3: "Neo est l'âme protectrice du projet: le gardien original qui rappelle que détecter les menaces n'a de sens que si cela protège celles et ceux qui font confiance à Zamazen Aegis.",
+          runesTitle: "Runes officielles du Gardien",
+          runesBody: "L'identité runique est utilisée avec sens et sans inventer de symboles: seules apparaissent les runes officielles définies pour Zamazen Aegis.",
+          runeFehu: "Richesse, prospérité et chance.",
+          runeUruz: "Force, santé et puissance physique.",
+          runeThurisaz: "Protection et résistance face aux ennemis.",
+          runeAnsuz: "Sagesse et communication.",
+          runeRaido: "Voyages, mouvement et croissance personnelle.",
+          runeKenaz: "Créativité, connaissance et lumière intérieure.",
+          runeAlgiz: "Protection spirituelle et guide.",
+          runeOthala: "Héritage, racines et foyer.",
+          accountTitle: "Accès dans une seule expérience",
+          accountBody: "Login, inscription et récupération vivent dans le même sanctuaire visuel. Pas de rechargement, pas de pages séparées et le site ne stocke jamais les mots de passe.",
+          accountCreate: "Créer un compte",
+          accountLogin: "Se connecter",
+          accountRecover: "Récupérer le mot de passe",
+          accountNote: "Si l'API ne répond pas, le site le dit clairement et garde la protection locale; il ne simule pas de sessions et ne crée pas de fausses promesses."
+        },
         security: {
           badge: "Sécurité",
           title: "Une protection continue sur ce qui expose le plus un mobile",
@@ -5775,6 +6600,7 @@
           shield: "Bouclier",
           neo: "Neo",
           security: "Sécurité",
+          center: "Centre",
           account: "Compte",
           premium: "Premium",
           help: "Aide"
@@ -5791,6 +6617,13 @@
           twoFactorRequired: "Ce compte exige une vérification en deux étapes. Continuez dans l'app pour terminer l'accès.",
           loginError: "Connexion impossible. Vérifiez les données ou réessayez plus tard.",
           loginOffline: "Impossible de joindre l'API. Aucune fausse session locale n'a été créée.",
+          recoverBadge: "Récupération sûre",
+          recoverTitle: "Récupérez votre accès sans quitter le sanctuaire",
+          recoverBody: "Indiquez votre e-mail et nous vous guiderons avec des étapes sûres. Ce site ne demande jamais d'anciens mots de passe, codes 2FA ni codes de récupération.",
+          recoverEmailLabel: "E-mail du compte",
+          recoverSubmit: "Demander une récupération sûre",
+          recoverBack: "Retour à la connexion",
+          recoverGuidance: "Demande préparée. Lorsque l'API de récupération sera disponible, elle partira d'ici; en attendant utilisez le support officiel sans envoyer de mots de passe ni de codes.",
           visualBadgeLogin: "Éveil du Gardien",
           visualTitleLogin: "Nouveau sur Zamazen ?",
           visualBodyLogin: "Créez votre compte pour activer profil cloud, sessions et récupération sans perdre la protection locale.",
@@ -5798,6 +6631,9 @@
           visualBadgeRegister: "Sanctuaire Aegis",
           visualTitleRegister: "Vous avez déjà un compte ?",
           visualBodyRegister: "Revenez à la connexion pour accéder à votre compte Zamazen lorsque l'API en ligne est disponible.",
+          visualBadgeRecover: "Clé sûre",
+          visualTitleRecover: "Récupération guidée",
+          visualBodyRecover: "Récupérez l'accès avec des étapes claires, sans demander de secrets et sans quitter cet environnement.",
           toLogin: "Retour au login"
         },
         premium: {
@@ -5917,8 +6753,8 @@
           title: "Zamazen Aegis | Segurança Inteligente contra Golpes, Spam e Phishing",
           description: "Zamazen Aegis ajuda a revisar sinais de risco reportados em chamadas, SMS e links com Neo, privacidade clara e uma experiência futurista criada para antecipar riscos."
         },
-        brand: { name: "Zamazen Aegis", tagline: "Segurança Inteligente" },
-        nav: { home: "Início", features: "Funções", security: "Segurança", account: "Conta", data: "Dados", deleteAccount: "Eliminar conta", premium: "Premium", music: "Música", faq: "FAQ", cta: "Ativar escudo" },
+        brand: { name: "Zamazen Aegis", tagline: "Segurança Inteligente", homeAria: "Ir para o início de Zamazen Aegis" },
+        nav: { home: "Início", features: "Funções", center: "Centro", security: "Segurança", account: "Conta", data: "Dados", deleteAccount: "Eliminar conta", premium: "Premium", music: "Música", faq: "FAQ", cta: "Ativar escudo" },
         accessibility: { normal: "Normal", medium: "Médio", large: "Grande" },
         hero: {
           eyebrow: "Escudo digital inteligente",
@@ -6038,6 +6874,94 @@
           card9Title: "Confiança",
           card9Body: "A virtude central: cada decisão deve reforçar a confiança do usuário."
         },
+        center: {
+          badge: "Centro Aegis",
+          title: "O site também protege: todo o Zamazen explicado por salas.",
+          body: "Aqui o público entende o que o app faz, por que nasceu, quais permissões pode precisar, quem está por trás e o que Neo simboliza. O site não é decoração: é o mapa público do Guardião.",
+          localeTitle: "Vista adaptada ao seu ambiente",
+          localeLoading: "Calculando data local...",
+          localePrivacy: "Sem pedir geolocalização: usamos idioma, data e fuso horário do navegador.",
+          localeTimezone: "Fuso horário: {timeZone}",
+          localeRegion: "Preferência regional: {region}",
+          tabsLabel: "Salas de Zamazen Aegis",
+          tabOverview: "Resumo",
+          tabPermissions: "Permissões",
+          tabMission: "Missão",
+          tabPeople: "Pessoas",
+          tabNeo: "Neo",
+          tabRunes: "Runas",
+          tabAccount: "Conta",
+          overviewTitle: "O que Zamazen Aegis faz",
+          overviewBody: "Zamazen Aegis reúne proteção para chamadas, SMS, links, permissões, conta, Red Neo, Bunker e IA Neo com um princípio simples: ajudar antes que o erro custe caro.",
+          featureCallsTitle: "Chamadas e SMS",
+          featureCallsBody: "Detecta sinais, explica riscos e respeita os limites do Android e do Google Play.",
+          featureNeoTitle: "IA Neo",
+          featureNeoBody: "Traduz riscos em linguagem clara para decidir sem medo nem tecnicismos.",
+          featureNetworkTitle: "Red Neo",
+          featureNetworkBody: "Compartilha avisos saneados com consentimento para que um reporte possa ajudar outras pessoas.",
+          featureBunkerTitle: "Bunker",
+          featureBunkerBody: "Protege dados sensíveis com cifragem e evita enviar segredos em claro.",
+          featureGuardianTitle: "Guardião familiar",
+          featureGuardianBody: "Ajuda usuários com menos experiência sem transformar o app em controle remoto oculto.",
+          featureAccountTitle: "Conta e nuvem",
+          featureAccountBody: "Conta opcional, sessão online e recuperação quando o backend está disponível.",
+          radialOpen: "Abrir núcleo de ações Aegis",
+          radialLabel: "Núcleo de ações Aegis",
+          radialSecurity: "Ir para segurança",
+          radialPermissions: "Ver permissões",
+          radialNeo: "Ir para Neo",
+          radialAccount: "Criar conta",
+          permissionsTitle: "Permissões e funções, sem letra miúda",
+          permissionsBody: "Cada permissão deve ter uma razão real. A versão PlaySafe evita permissões restritas; as variantes completas só ativam camadas sensíveis com consentimento, explicação e aprovação da plataforma quando necessário.",
+          permissionPlayTitle: "PlaySafe",
+          permissionPlayBody: "Não declara leitura de chamadas, SMS, contatos, armazenamento completo, overlay, VPN, administrador do dispositivo nem serviço de acessibilidade.",
+          permissionCallsTitle: "Chamadas e SMS",
+          permissionCallsBody: "As variantes Full/Ragnarok podem usar READ_PHONE_STATE, READ_CALL_LOG ou RECEIVE_SMS apenas com consentimento explícito e utilidade real.",
+          permissionNotificationsTitle: "Notificações",
+          permissionNotificationsBody: "POST_NOTIFICATIONS é opcional; se o usuário recusar, o app deve manter a experiência básica. Na 1.6 não promete ler conversas de outros apps.",
+          permissionBunkerTitle: "Bunker",
+          permissionBunkerBody: "O Bunker trata credenciais e dados sensíveis como segredos: cifragem local e pacotes cloud cifrados pelo usuário, nunca senhas em claro.",
+          permissionNetworkTitle: "Red Neo",
+          permissionNetworkBody: "Os reportes online são saneados, usam o mínimo necessário e excluem conversas completas, códigos, credenciais ou dados bancários completos.",
+          permissionRecoveryTitle: "Recuperação",
+          permissionRecoveryBody: "Se um serviço falhar, o app mantém modo local, fila segura e guia clara; a recuperação faz parte do design, não de um remendo posterior.",
+          missionTitle: "Por que Zamazen Aegis nasceu",
+          missionP1: "Zamazen Aegis nasceu de uma preocupação real: usamos o celular para quase tudo, mas nem todas as pessoas têm as mesmas ferramentas para se defender.",
+          missionP2: "Há quem não entenda uma permissão, toque em um link porque parece urgente, receba uma chamada suspeita ou simplesmente precise de alguém que avise antes de cometer um erro.",
+          missionP3: "A segurança digital não deveria ser só para especialistas. Zamazen Aegis existe para proteger sem invadir, avisar sem assustar e explicar o importante antes que seja tarde.",
+          missionP4: "Sua missão é proteger o celular, mas acima de tudo proteger quem o usa. Porque por trás de cada celular há uma pessoa, e essa pessoa merece se sentir segura.",
+          creatorRole: "Criador, desenvolvedor e programador",
+          creatorName: "Francisco Javier Molina Moreno",
+          creatorBody1: "Autodidata, constante e comprometido em construir tecnologia útil para a vida real.",
+          creatorBody2: "Zamazen Aegis nasce de anos de aprendizagem em programação, cibersegurança, IA, desenvolvimento web, apps móveis, UX/UI, marketing digital, produtividade e proteção online.",
+          creatorBody3: "Sua filosofia é clara: proteger sem invadir, avisar sem assustar, explicar sem complicar e criar tecnologia a serviço das pessoas.",
+          partnerRole: "Socia, apoio e impulsionadora de ideias",
+          partnerName: "María Isabel Rodríguez Sánchez",
+          partnerBody1: "Faz parte essencial de Zamazen Aegis com uma visão humana, prática e próxima.",
+          partnerBody2: "Seu olhar ajuda a pensar em famílias, pessoas idosas, usuários com pouca experiência digital e qualquer pessoa que precise de tecnologia mais clara e protetora.",
+          partnerBody3: "Representa uma parte chave da alma do projeto: a segurança digital deve cuidar de pessoas reais, não só de dispositivos.",
+          neoAlt: "Neo, guardião original de Zamazen Aegis",
+          neoTitle: "Sobre Neo",
+          neoP1: "Neo é o protetor principal e símbolo de honra de Zamazen Aegis. Representa lealdade, vigilância, companhia e cuidado.",
+          neoP2: "Sua presença não é decorativa: lembra que a segurança deve estar presente, vigiar sem invadir, acompanhar sem controlar e proteger sem assustar.",
+          neoP3: "Neo é a alma protetora do projeto: o guardião original que lembra que detectar ameaças só importa se servir para cuidar de quem confia em Zamazen Aegis.",
+          runesTitle: "Runas oficiais do Guardião",
+          runesBody: "A identidade rúnica é usada com sentido e sem inventar símbolos: só aparecem as runas oficiais definidas para Zamazen Aegis.",
+          runeFehu: "Riqueza, prosperidade e sorte.",
+          runeUruz: "Força, saúde e poder físico.",
+          runeThurisaz: "Proteção e resistência contra inimigos.",
+          runeAnsuz: "Sabedoria e comunicação.",
+          runeRaido: "Viagens, movimento e crescimento pessoal.",
+          runeKenaz: "Criatividade, conhecimento e luz interior.",
+          runeAlgiz: "Proteção espiritual e guia.",
+          runeOthala: "Herança, raízes e lar.",
+          accountTitle: "Acesso em uma só experiência",
+          accountBody: "Login, cadastro e recuperação vivem dentro do mesmo santuário visual. Sem recargas, sem páginas separadas e o site nunca guarda senhas.",
+          accountCreate: "Criar conta",
+          accountLogin: "Entrar",
+          accountRecover: "Recuperar senha",
+          accountNote: "Se a API não responder, o site diz claramente e mantém a proteção local; não simula sessões nem cria promessas falsas."
+        },
         security: {
           badge: "Segurança",
           title: "Proteção contínua sobre o que mais expõe um celular",
@@ -6116,6 +7040,7 @@
           shield: "Escudo",
           neo: "Neo",
           security: "Segurança",
+          center: "Centro",
           account: "Conta",
           premium: "Premium",
           help: "Ajuda"
@@ -6132,6 +7057,13 @@
           twoFactorRequired: "Esta conta exige verificação em dois passos. Continue pelo app para completar o acesso.",
           loginError: "Não foi possível entrar. Verifique os dados ou tente mais tarde.",
           loginOffline: "Não foi possível contactar a API. Nenhuma sessão local falsa foi criada.",
+          recoverBadge: "Recuperação segura",
+          recoverTitle: "Recupere o acesso sem sair do santuário",
+          recoverBody: "Digite seu email e guiaremos você com passos seguros. Este site não pede senhas antigas, códigos 2FA nem códigos de recuperação.",
+          recoverEmailLabel: "Email da conta",
+          recoverSubmit: "Solicitar recuperação segura",
+          recoverBack: "Voltar ao acesso",
+          recoverGuidance: "Solicitação preparada. Quando a API de recuperação estiver disponível, será enviada daqui; enquanto isso use o suporte oficial sem enviar senhas nem códigos.",
           visualBadgeLogin: "Despertar Guardião",
           visualTitleLogin: "Novo no Zamazen?",
           visualBodyLogin: "Crie sua conta para ativar perfil cloud, sessões e recuperação sem perder a proteção local.",
@@ -6139,6 +7071,9 @@
           visualBadgeRegister: "Santuário Aegis",
           visualTitleRegister: "Já tem conta?",
           visualBodyRegister: "Volte ao login para acessar sua conta Zamazen quando a API online estiver disponível.",
+          visualBadgeRecover: "Chave segura",
+          visualTitleRecover: "Recuperação guiada",
+          visualBodyRecover: "Recupere o acesso com passos claros, sem pedir segredos e sem sair deste ambiente.",
           toLogin: "Voltar ao login"
         },
         premium: {
@@ -6730,6 +7665,7 @@
 
       updateLanguageButtons(selectedLanguage);
       updateClock();
+      updateLocaleInsight();
       updateUserPanelPreview();
       setAuthMode(authShell?.dataset.mode || "login");
       setLiveMotion(localStorage.getItem(STORAGE_MOTION_KEY) !== "off");
@@ -6940,15 +7876,62 @@
       accountActionsToggle.setAttribute("aria-expanded", "false");
     }
 
+    function closeRoomRadial() {
+      if (!roomRadialLauncher || !roomRadialToggle) return;
+      roomRadialLauncher.classList.remove("is-open");
+      roomRadialToggle.setAttribute("aria-expanded", "false");
+    }
+
+    function setActiveRoom(room) {
+      const selectedRoom = Array.from(roomPanels).some(panel => panel.dataset.roomPanel === room)
+        ? room
+        : "overview";
+
+      roomTabs.forEach((tab) => {
+        const isActive = tab.dataset.roomTarget === selectedRoom;
+        tab.classList.toggle("is-active", isActive);
+        if (tab.getAttribute("role") === "tab") {
+          tab.setAttribute("aria-selected", String(isActive));
+          tab.tabIndex = isActive ? 0 : -1;
+        }
+      });
+
+      roomPanels.forEach((panel) => {
+        const isActive = panel.dataset.roomPanel === selectedRoom;
+        panel.classList.toggle("is-active", isActive);
+        panel.hidden = !isActive;
+      });
+    }
+
+    function openAuthMode(mode) {
+      setAuthMode(mode);
+      const accountSection = document.getElementById("cuenta");
+      if (accountSection) {
+        accountSection.scrollIntoView({
+          behavior: document.body.classList.contains("motion-softened") ? "auto" : "smooth",
+          block: "start"
+        });
+      }
+      if (window.location.hash !== "#cuenta") {
+        window.history.replaceState({}, "", "#cuenta");
+      }
+    }
+
     function setAuthMode(mode) {
       if (!authShell || !authModeToggle) return;
-      const selectedMode = mode === "register" ? "register" : "login";
+      const selectedMode = ["register", "recover"].includes(mode) ? mode : "login";
       authShell.dataset.mode = selectedMode;
 
       if (selectedMode === "register") {
         setTranslatedText(authVisualBadge, "auth.visualBadgeRegister");
         setTranslatedText(authVisualTitle, "auth.visualTitleRegister");
         setTranslatedText(authVisualBody, "auth.visualBodyRegister");
+        setTranslatedText(authModeToggle, "auth.toLogin");
+        authModeToggle.dataset.authTarget = "login";
+      } else if (selectedMode === "recover") {
+        setTranslatedText(authVisualBadge, "auth.visualBadgeRecover");
+        setTranslatedText(authVisualTitle, "auth.visualTitleRecover");
+        setTranslatedText(authVisualBody, "auth.visualBodyRecover");
         setTranslatedText(authModeToggle, "auth.toLogin");
         authModeToggle.dataset.authTarget = "login";
       } else {
@@ -6975,6 +7958,43 @@
         month: "long",
         year: "numeric"
       }).format(now);
+    }
+
+    function formatTemplate(template, values) {
+      return Object.entries(values).reduce((result, [key, value]) => (
+        result.replaceAll(`{${key}}`, value)
+      ), template);
+    }
+
+    function updateLocaleInsight() {
+      if (!localeDate && !localeTimeZone && !localeRegion) return;
+
+      const now = new Date();
+      const language = getCurrentLanguage();
+      const browserLocale = navigator.language || language;
+      const resolvedOptions = Intl.DateTimeFormat().resolvedOptions();
+      const timeZone = resolvedOptions.timeZone || "Local";
+      const regionPart = String(browserLocale).split("-")[1] || language.toUpperCase();
+      const region = regionPart.toUpperCase();
+
+      if (localeDate) {
+        localeDate.textContent = new Intl.DateTimeFormat(language, {
+          weekday: "long",
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit"
+        }).format(now);
+      }
+
+      if (localeTimeZone) {
+        localeTimeZone.textContent = formatTemplate(translate("center.localeTimezone"), { timeZone });
+      }
+
+      if (localeRegion) {
+        localeRegion.textContent = formatTemplate(translate("center.localeRegion"), { region });
+      }
     }
 
     function setNetworkState(state, key) {
@@ -7108,6 +8128,7 @@
         userPanelToggle.setAttribute("aria-expanded", String(isOpen));
         closeQuickMenu();
         closeAccountActions();
+        closeRoomRadial();
       });
     }
 
@@ -7125,11 +8146,65 @@
         quickMenuToggle.setAttribute("aria-expanded", String(isOpen));
         closeUserPanel();
         closeAccountActions();
+        closeRoomRadial();
       });
     }
 
     quickMenuLinks.forEach((link) => {
       link.addEventListener("click", closeQuickMenu);
+    });
+
+    roomTabs.forEach((trigger) => {
+      trigger.addEventListener("click", (event) => {
+        const targetRoom = trigger.dataset.roomTarget;
+        if (!targetRoom) return;
+        event.preventDefault();
+        setActiveRoom(targetRoom);
+        closeRoomRadial();
+
+        if (trigger.tagName.toLowerCase() === "a") {
+          document.getElementById("centro-aegis")?.scrollIntoView({
+            behavior: document.body.classList.contains("motion-softened") ? "auto" : "smooth",
+            block: "start"
+          });
+          if (window.location.hash !== "#centro-aegis") {
+            window.history.replaceState({}, "", "#centro-aegis");
+          }
+        }
+      });
+
+      trigger.addEventListener("keydown", (event) => {
+        if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+        const tabButtons = Array.from(document.querySelectorAll(".room-tab"));
+        const currentIndex = tabButtons.indexOf(trigger);
+        if (currentIndex < 0) return;
+        event.preventDefault();
+        const direction = event.key === "ArrowRight" ? 1 : -1;
+        const nextIndex = (currentIndex + direction + tabButtons.length) % tabButtons.length;
+        tabButtons[nextIndex].focus();
+        tabButtons[nextIndex].click();
+      });
+    });
+
+    if (roomRadialToggle && roomRadialLauncher) {
+      roomRadialToggle.addEventListener("click", () => {
+        const isOpen = roomRadialLauncher.classList.toggle("is-open");
+        roomRadialToggle.setAttribute("aria-expanded", String(isOpen));
+        closeUserPanel();
+        closeQuickMenu();
+        closeAccountActions();
+      });
+    }
+
+    roomRadialLinks.forEach((link) => {
+      link.addEventListener("click", closeRoomRadial);
+    });
+
+    authOpenTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", (event) => {
+        event.preventDefault();
+        openAuthMode(trigger.dataset.openAuth || "login");
+      });
     });
 
     if (accountActionsToggle && accountContextActions) {
@@ -7138,6 +8213,7 @@
         accountActionsToggle.setAttribute("aria-expanded", String(isOpen));
         closeUserPanel();
         closeQuickMenu();
+        closeRoomRadial();
       });
 
       accountContextActions.querySelectorAll("a").forEach((link) => {
@@ -7161,6 +8237,7 @@
       if (userPanel && !userPanel.contains(event.target)) closeUserPanel();
       if (quickLauncher && !quickLauncher.contains(event.target)) closeQuickMenu();
       if (accountContextActions && !accountContextActions.contains(event.target)) closeAccountActions();
+      if (roomRadialLauncher && !roomRadialLauncher.contains(event.target)) closeRoomRadial();
     });
 
     document.addEventListener("keydown", (event) => {
@@ -7168,6 +8245,7 @@
         closeUserPanel();
         closeQuickMenu();
         closeAccountActions();
+        closeRoomRadial();
       }
     });
 
@@ -7244,6 +8322,17 @@
           }
           loginForm.removeAttribute("aria-busy");
         }
+      });
+    }
+
+    if (recoveryForm && recoveryStatus) {
+      recoveryForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const selectedLanguage = document.documentElement.lang || localStorage.getItem(STORAGE_LANGUAGE_KEY) || "es";
+        recoveryStatus.textContent =
+          getTranslationValue(selectedLanguage, "auth.recoverGuidance") ||
+          getTranslationValue("es", "auth.recoverGuidance") ||
+          "";
       });
     }
 
@@ -7388,10 +8477,13 @@
     initializeTextSize();
     initializeCookieConsent();
     setAuthMode(authShell?.dataset.mode || "login");
+    setActiveRoom("overview");
     updateUserPanelPreview();
     setLiveMotion(localStorage.getItem(STORAGE_MOTION_KEY) !== "off");
     updateClock();
+    updateLocaleInsight();
     window.setInterval(updateClock, 1000);
+    window.setInterval(updateLocaleInsight, 60000);
     refreshOnlineStatus();
     window.setInterval(refreshOnlineStatus, 60000);
     window.addEventListener("online", refreshOnlineStatus);
