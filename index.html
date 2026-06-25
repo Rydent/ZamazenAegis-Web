@@ -17,18 +17,20 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
+  <meta name="keywords" content="Zamazen Aegis, seguridad Android, anti phishing, spam, Red Neo, Bunker, privacidad, Valhalla, Ragnarok">
   <meta name="theme-color" content="#050816">
   <meta name="robots" content="index,follow">
   <meta property="og:site_name" content="Zamazen Aegis">
+  <meta property="og:locale" content="es_ES">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://zamazenaegis.app/">
+  <meta property="og:url" content="https://rydent.github.io/ZamazenAegis-Web/">
   <meta property="og:title" data-i18n-attr="content:meta.title" content="Zamazen Aegis | Seguridad Inteligente contra Estafas, Spam y Phishing">
   <meta property="og:description" data-i18n-attr="content:meta.description" content="Zamazen Aegis ayuda a revisar señales de riesgo en llamadas, SMS y enlaces reportados con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo.">
-  <meta property="og:image" content="https://zamazenaegis.app/assets/og-zamazen-aegis.png">
+  <meta property="og:image" content="https://rydent.github.io/ZamazenAegis-Web/assets/og-zamazen-aegis.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" data-i18n-attr="content:meta.title" content="Zamazen Aegis | Seguridad Inteligente contra Estafas, Spam y Phishing">
   <meta name="twitter:description" data-i18n-attr="content:meta.description" content="Zamazen Aegis ayuda a revisar señales de riesgo en llamadas, SMS y enlaces reportados con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo.">
-  <meta name="twitter:image" content="https://zamazenaegis.app/assets/og-zamazen-aegis.png">
+  <meta name="twitter:image" content="https://rydent.github.io/ZamazenAegis-Web/assets/og-zamazen-aegis.png">
   <link rel="alternate" hreflang="es" href="?lang=es">
   <link rel="alternate" hreflang="en" href="?lang=en">
   <link rel="alternate" hreflang="fr" href="?lang=fr">
@@ -157,6 +159,8 @@
     a:focus-visible,
     button:focus-visible,
     input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
     .rune:focus-visible,
     .language-button:focus-visible,
     .text-size-button:focus-visible,
@@ -167,7 +171,8 @@
     .quick-menu-toggle:focus-visible,
     .quick-menu a:focus-visible,
     .auth-mode-button:focus-visible,
-    .aegis-switch:focus-visible {
+    .aegis-switch:focus-visible,
+    .secure-tab-button:focus-visible {
       outline: 2px solid var(--green);
       outline-offset: 4px;
       box-shadow: 0 0 0 4px rgba(94, 240, 189, 0.12);
@@ -1080,6 +1085,14 @@
       padding: 34px 0;
     }
 
+    main > section:not([hidden]) {
+      animation: routeViewEnter 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    body.motion-softened main > section:not([hidden]) {
+      animation: none;
+    }
+
     [data-route-section][hidden] {
       display: none !important;
     }
@@ -1185,6 +1198,484 @@
       flex-wrap: wrap;
       gap: 10px;
       align-items: center;
+    }
+
+    .route-detail-shell.is-profile-screen,
+    .route-detail-shell.is-account-screen,
+    .route-detail-shell.is-plan-screen {
+      overflow: hidden;
+      border-color: rgba(94, 240, 189, 0.26);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(94, 240, 189, 0.14), transparent 30%),
+        radial-gradient(circle at 92% 2%, rgba(91, 168, 255, 0.16), transparent 28%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.075), transparent 38%),
+        rgba(5, 12, 26, 0.82);
+    }
+
+    .profile-dashboard {
+      display: grid;
+      gap: 18px;
+    }
+
+    .profile-hero-card,
+    .profile-panel-card,
+    .account-method-card,
+    .sync-status-card {
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(111, 150, 232, 0.18);
+      background:
+        linear-gradient(135deg, rgba(94, 240, 189, 0.075), transparent 46%),
+        rgba(5, 12, 26, 0.78);
+      box-shadow: 0 18px 52px rgba(0, 0, 0, 0.24);
+    }
+
+    .profile-hero-card {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    .profile-avatar {
+      width: clamp(96px, 18vw, 132px);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 32px;
+      border: 1px solid rgba(94, 240, 189, 0.28);
+      background:
+        radial-gradient(circle at 50% 22%, rgba(255, 255, 255, 0.22), transparent 24%),
+        linear-gradient(145deg, rgba(94, 240, 189, 0.92), rgba(91, 168, 255, 0.84));
+      color: #03120f;
+      font-size: clamp(2.4rem, 8vw, 4rem);
+      font-weight: 900;
+      background-size: cover;
+      background-position: center;
+      box-shadow:
+        0 0 0 8px rgba(94, 240, 189, 0.07),
+        0 24px 58px rgba(0, 0, 0, 0.32);
+    }
+
+    .profile-avatar.has-image,
+    .user-avatar.has-image,
+    .user-menu-avatar.has-image {
+      color: transparent;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .profile-identity {
+      display: grid;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .profile-identity h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 4vw, 3rem);
+      line-height: 1.02;
+    }
+
+    .profile-identity p,
+    .profile-panel-card p,
+    .account-method-card p,
+    .sync-status-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .profile-pill-row,
+    .profile-actions-row,
+    .avatar-choice-grid,
+    .sync-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .profile-pill,
+    .sync-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 11px;
+      border-radius: 999px;
+      color: #dffdf7;
+      background: rgba(94, 240, 189, 0.1);
+      border: 1px solid rgba(94, 240, 189, 0.22);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .profile-form-grid,
+    .profile-panel-grid,
+    .account-method-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .profile-panel-grid,
+    .account-method-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .profile-field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .profile-field label {
+      color: #d7e5ff;
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
+
+    .avatar-choice {
+      min-width: 84px;
+      min-height: 76px;
+      display: grid;
+      place-items: center;
+      gap: 4px;
+      padding: 10px;
+      border-radius: 18px;
+      color: #e7f3ff;
+      background: rgba(10, 19, 39, 0.72);
+      border: 1px solid rgba(111, 150, 232, 0.18);
+    }
+
+    .avatar-choice.is-active,
+    .avatar-choice:hover,
+    .avatar-choice:focus-visible {
+      color: #06110f;
+      background: linear-gradient(135deg, var(--green), #a7ffd8);
+      border-color: rgba(94, 240, 189, 0.44);
+      transform: translateY(-2px);
+    }
+
+    .avatar-choice strong {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .avatar-choice span {
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .sync-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .sync-status-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #f8fbff;
+    }
+
+    .auth-provider-options {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(111, 150, 232, 0.14);
+    }
+
+    .auth-google-button {
+      width: 100%;
+    }
+
+    .auth-provider-note {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .experience-dashboard,
+    .secure-form-layout,
+    .guardian-demo-layout {
+      display: grid;
+      gap: 18px;
+    }
+
+    .experience-dashboard {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .experience-card,
+    .secure-form-card,
+    .guardian-demo-card,
+    .timeline-card,
+    .locked-admin-card,
+    .plan-showcase-card {
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(111, 150, 232, 0.18);
+      background:
+        linear-gradient(145deg, rgba(91, 168, 255, 0.08), transparent 42%),
+        rgba(5, 12, 26, 0.8);
+      box-shadow: 0 18px 52px rgba(0, 0, 0, 0.24);
+    }
+
+    .experience-card::before,
+    .secure-form-card::before,
+    .guardian-demo-card::before,
+    .plan-showcase-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 16% 0%, rgba(94, 240, 189, 0.16), transparent 30%),
+        radial-gradient(circle at 92% 4%, rgba(91, 168, 255, 0.13), transparent 28%);
+      pointer-events: none;
+      opacity: 0.78;
+    }
+
+    .experience-card > *,
+    .secure-form-card > *,
+    .guardian-demo-card > *,
+    .timeline-card > *,
+    .locked-admin-card > *,
+    .plan-showcase-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .experience-card h3,
+    .secure-form-card h3,
+    .guardian-demo-card h3,
+    .timeline-card h3,
+    .locked-admin-card h3,
+    .plan-showcase-card h3 {
+      margin: 0 0 10px;
+      font-size: clamp(1.05rem, 2vw, 1.4rem);
+    }
+
+    .experience-card p,
+    .secure-form-card p,
+    .guardian-demo-card p,
+    .timeline-card p,
+    .locked-admin-card p,
+    .plan-showcase-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .experience-status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      margin-bottom: 14px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(94, 240, 189, 0.24);
+      color: #dffdf7;
+      background: rgba(94, 240, 189, 0.1);
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .secure-form-layout {
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      align-items: start;
+    }
+
+    .secure-form-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .secure-form-grid label,
+    .secure-check-row {
+      display: grid;
+      gap: 7px;
+      color: #d7e5ff;
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
+
+    .secure-check-row {
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: start;
+      color: var(--muted);
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .secure-form-grid textarea {
+      min-height: 168px;
+      resize: vertical;
+    }
+
+    .secure-hidden-field {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      opacity: 0;
+    }
+
+    .secure-note-list,
+    .plan-benefit-list,
+    .timeline-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .secure-note-list li,
+    .plan-benefit-list li,
+    .timeline-list li {
+      display: grid;
+      gap: 4px;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(111, 150, 232, 0.14);
+      background: rgba(255, 255, 255, 0.035);
+      color: #d7e5ff;
+      line-height: 1.45;
+    }
+
+    .secure-note-list small,
+    .timeline-list small {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .guardian-demo-layout {
+      grid-template-columns: minmax(220px, 0.36fr) minmax(0, 0.64fr);
+    }
+
+    .secure-tab-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .secure-tab-button {
+      width: 100%;
+      min-height: 54px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(111, 150, 232, 0.16);
+      color: #d7e5ff;
+      background: rgba(10, 19, 39, 0.72);
+      text-align: left;
+      font-weight: 900;
+    }
+
+    .secure-tab-button.is-active {
+      color: #05120f;
+      background: linear-gradient(135deg, var(--green), #b6ffe0);
+      border-color: rgba(94, 240, 189, 0.44);
+      box-shadow: 0 16px 42px rgba(94, 240, 189, 0.12);
+    }
+
+    .demo-screen {
+      display: grid;
+      gap: 14px;
+      min-height: 320px;
+    }
+
+    .demo-risk-meter {
+      height: 12px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(111, 150, 232, 0.16);
+    }
+
+    .demo-risk-meter span {
+      display: block;
+      height: 100%;
+      width: var(--risk-width, 62%);
+      border-radius: inherit;
+      background: linear-gradient(90deg, #5ef0bd, #ffd166, #ff6b6b);
+    }
+
+    .plan-showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .plan-showcase-card {
+      display: grid;
+      gap: 14px;
+      min-height: 100%;
+    }
+
+    .plan-showcase-card.is-valhalla {
+      border-color: rgba(178, 144, 255, 0.34);
+      background:
+        radial-gradient(circle at 80% 0%, rgba(178, 144, 255, 0.16), transparent 30%),
+        rgba(5, 12, 26, 0.82);
+    }
+
+    .plan-showcase-card.is-ragnarok {
+      border-color: rgba(255, 112, 112, 0.34);
+      background:
+        radial-gradient(circle at 80% 0%, rgba(255, 112, 112, 0.18), transparent 30%),
+        rgba(5, 12, 26, 0.84);
+    }
+
+    .plan-glyph {
+      width: 58px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      color: #06110f;
+      background: linear-gradient(135deg, var(--green), #b8ffe6);
+      font-weight: 900;
+      box-shadow: 0 16px 38px rgba(94, 240, 189, 0.18);
+    }
+
+    .plan-showcase-card.is-valhalla .plan-glyph {
+      background: linear-gradient(135deg, #b79bff, #e5dcff);
+    }
+
+    .plan-showcase-card.is-ragnarok .plan-glyph {
+      background: linear-gradient(135deg, #ff7777, #ffd1a8);
+    }
+
+    .form-secondary-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      margin-top: 10px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(111, 150, 232, 0.22);
+      color: #dffdf7;
+      background: rgba(255, 255, 255, 0.045);
+      font-weight: 900;
+    }
+
+    .screen-transition-label {
+      position: fixed;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
     }
 
     .problem-strip,
@@ -3475,6 +3966,20 @@
       opacity: 0.92;
     }
 
+    @keyframes routeViewEnter {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.992);
+        filter: saturate(0.92);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+        filter: none;
+      }
+    }
+
     @keyframes pulse {
       0%, 100% { transform: scale(1); opacity: 0.82; }
       50% { transform: scale(1.06); opacity: 1; }
@@ -3591,7 +4096,17 @@
 
     @media (min-width: 768px) and (max-width: 1100px) {
       .route-tree-grid,
-      .route-detail-grid {
+      .route-detail-grid,
+      .experience-dashboard,
+      .plan-showcase-grid,
+      .guardian-demo-layout,
+      .secure-form-layout {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .profile-panel-grid,
+      .account-method-grid,
+      .sync-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -3778,6 +4293,26 @@
         grid-template-columns: 1fr;
       }
 
+      .profile-hero-card,
+      .profile-panel-grid,
+      .account-method-grid,
+      .sync-grid,
+      .experience-dashboard,
+      .secure-form-layout,
+      .guardian-demo-layout,
+      .plan-showcase-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-avatar {
+        width: 96px;
+        border-radius: 26px;
+      }
+
+      .avatar-choice {
+        flex: 1 1 126px;
+      }
+
       .route-detail-shell {
         padding: 20px;
         border-radius: 22px;
@@ -3952,10 +4487,12 @@
 
           <nav class="nav" id="siteNav" aria-label="Principal">
             <a href="#/inicio" data-i18n="nav.home">Inicio</a>
+            <a href="#/estado-proyecto" data-i18n="nav.projectStatus">Estado</a>
             <a href="#/funciones" data-i18n="nav.features">Funciones</a>
             <a href="#/cuenta" data-i18n="nav.account">Cuenta</a>
             <a href="#/seguridad" data-i18n="nav.security">Seguridad</a>
             <a href="#/precios" data-i18n="nav.premium">Precios</a>
+            <a href="#/ideas" data-i18n="nav.ideas">Ideas</a>
             <a href="#/sobre-zamazenaegis" data-i18n="nav.about">Sobre</a>
             <a href="#/equipo" data-i18n="nav.team">Equipo</a>
             <a href="#/faq" data-i18n="nav.faq">FAQ</a>
@@ -3990,11 +4527,11 @@
             <a class="header-icon-button" href="#/red-neo" aria-label="Abrir Neo" data-i18n-attr="aria-label:topbar.neoAction">ᚨ</a>
             <div class="user-panel" id="userPanel">
               <button class="user-avatar-button" id="userPanelToggle" type="button" aria-expanded="false" aria-controls="userMenu" aria-label="Abrir panel de usuario" data-i18n-attr="aria-label:userPanel.open">
-                <span class="user-avatar" aria-hidden="true">ᛟ</span>
+                <span class="user-avatar" id="userPanelAvatar" aria-hidden="true">ᛟ</span>
               </button>
               <div class="user-menu" id="userMenu" role="dialog" aria-label="Panel de usuario" data-i18n-attr="aria-label:userPanel.label">
                 <div class="user-menu-header">
-                  <span class="user-menu-avatar" aria-hidden="true">ᛟ</span>
+                  <span class="user-menu-avatar" id="userMenuAvatar" aria-hidden="true">ᛟ</span>
                   <div>
                     <strong id="userPanelName" data-i18n="userPanel.guestName">Invitado local</strong>
                     <span id="userPanelEmail" data-i18n="userPanel.guestEmail">Sin sesión online en esta web</span>
@@ -4038,7 +4575,9 @@
                 <p class="cta-microcopy" data-i18n="hero.microcopy">Sin registro obligatorio. Cuenta Zamazen opcional para reforzar sesiones y privacidad.</p>
               </div>
               <a class="cta-secondary" href="#/funciones" data-i18n="hero.secondaryCta">Ver cómo funciona</a>
+              <a class="cta-secondary" href="#/demo" data-i18n="hero.demoCta">Ver demo guiada</a>
               <a class="cta-secondary" href="#/crear-cuenta" data-open-auth="register" data-i18n="hero.accountCta">Acceder / crear cuenta</a>
+              <a class="cta-secondary" href="#/lista-espera" data-i18n="hero.waitlistCta">Solicitar acceso</a>
             </div>
 
             <div class="hero-points" aria-label="Puntos clave">
@@ -5108,6 +5647,10 @@
               </div>
               <button class="auth-recovery" type="button" data-open-auth="recover" data-i18n="auth.recover">Recuperar contraseña</button>
               <button class="cta-primary" type="submit" data-i18n="auth.loginSubmit">Entrar</button>
+              <div class="auth-provider-options">
+                <button class="cta-secondary auth-google-button" type="button" data-google-auth="login" data-i18n="auth.googleButton">Continuar con Google</button>
+                <p class="auth-provider-note" data-i18n="auth.googleNote">Google es la opción rápida; la cuenta Zamazen seguirá siendo la experiencia completa del Guardián.</p>
+              </div>
               <p class="account-status" id="loginStatus" role="status" aria-live="polite"></p>
             </form>
 
@@ -5130,6 +5673,10 @@
                 <input class="form-input" id="accountPassword" name="password" type="password" minlength="10" autocomplete="new-password" required>
               </div>
               <button class="cta-primary" type="submit" data-i18n="account.submit">Crear cuenta Zamazen</button>
+              <div class="auth-provider-options">
+                <button class="cta-secondary auth-google-button" type="button" data-google-auth="register" data-i18n="auth.googleButton">Continuar con Google</button>
+                <p class="auth-provider-note" data-i18n="auth.googleNote">Google es la opción rápida; la cuenta Zamazen seguirá siendo la experiencia completa del Guardián.</p>
+              </div>
               <p class="account-status" id="accountStatus" role="status" aria-live="polite"></p>
             </form>
 
@@ -5345,11 +5892,16 @@
             <a href="#/inicio" data-i18n="nav.home">Inicio</a>
             <a href="#/funciones" data-i18n="nav.features">Funciones</a>
             <a href="#/precios" data-i18n="nav.premium">Precios</a>
+            <a href="#/estado-proyecto" data-i18n="nav.projectStatus">Estado</a>
+            <a href="#/lista-espera" data-i18n="nav.waitlist">Acceso de prueba</a>
           </div>
 
           <div class="footer-links">
             <span class="footer-title" data-i18n="footer.productTitle">Producto</span>
             <a href="#/sobre-zamazenaegis" data-i18n="nav.center">Centro</a>
+            <a href="#/confianza" data-i18n="nav.trust">Confianza</a>
+            <a href="#/novedades" data-i18n="nav.news">Novedades</a>
+            <a href="#/ideas" data-i18n="nav.ideas">Ideas</a>
             <a href="#/funciones" data-i18n="nav.security">Seguridad</a>
             <a href="#/privacidad" data-i18n="privacy.badge">Privacidad y control</a>
             <a href="#/cuenta" data-i18n="nav.account">Cuenta</a>
@@ -5371,6 +5923,9 @@
             <button class="cookie-button ghost" type="button" id="footerCookiePreferences" data-i18n="cookie.preferencesLink">Preferencias de cookies</button>
             <a href="#/cuenta" data-i18n="footer.accountLink">Cuenta</a>
             <a href="#/red-neo" data-i18n="footer.redNeoLink">Red Neo</a>
+            <a href="#/neo">Neo</a>
+            <a href="#/runas">Runas</a>
+            <a href="#/nube" data-i18n="nav.cloud">Nube</a>
             <a href="#/contacto" data-i18n="legalDocs.contactShort">Contacto</a>
           </div>
 
@@ -5396,7 +5951,7 @@
       <a href="#/seguridad"><span class="quick-menu-icon" aria-hidden="true">ᚦ</span><span data-i18n="nav.security">Seguridad</span></a>
       <a href="#/cuenta"><span class="quick-menu-icon" aria-hidden="true">ᛟ</span><span data-i18n="quickMenu.account">Cuenta</span></a>
       <a href="#/precios"><span class="quick-menu-icon" aria-hidden="true">ᚠ</span><span data-i18n="quickMenu.premium">Precios</span></a>
-      <a href="#/faq"><span class="quick-menu-icon" aria-hidden="true">ᚲ</span><span data-i18n="nav.faq">FAQ</span></a>
+      <a href="#/ideas"><span class="quick-menu-icon" aria-hidden="true">ᚲ</span><span data-i18n="nav.ideas">Ideas</span></a>
     </nav>
     <button class="quick-menu-toggle" id="quickMenuToggle" type="button" aria-expanded="false" aria-controls="quickMenu" aria-label="Abrir accesos rápidos" data-i18n-attr="aria-label:quickMenu.open">ᛉ</button>
   </div>
@@ -5496,6 +6051,8 @@
     const accountActionsToggle = document.getElementById("accountActionsToggle");
     const userPanel = document.getElementById("userPanel");
     const userPanelToggle = document.getElementById("userPanelToggle");
+    const userPanelAvatar = document.getElementById("userPanelAvatar");
+    const userMenuAvatar = document.getElementById("userMenuAvatar");
     const userPanelName = document.getElementById("userPanelName");
     const userPanelEmail = document.getElementById("userPanelEmail");
     const userPanelLevel = document.getElementById("userPanelLevel");
@@ -5515,6 +6072,7 @@
     const roomTabs = document.querySelectorAll("[data-room-target]");
     const roomPanels = document.querySelectorAll("[data-room-panel]");
     const authOpenTriggers = document.querySelectorAll("[data-open-auth]");
+    const googleAuthButtons = document.querySelectorAll("[data-google-auth]");
     const roomRadialLauncher = document.getElementById("roomRadialLauncher");
     const roomRadialToggle = document.getElementById("roomRadialToggle");
     const roomRadialLinks = document.querySelectorAll("#roomRadialMenu a");
@@ -5526,6 +6084,7 @@
     const routeTreeBody = document.getElementById("routeTreeBody");
     const routeTreeGrid = document.getElementById("routeTreeGrid");
     const routeDetailSection = document.getElementById("pagina-interna");
+    const routeDetailShell = routeDetailSection?.querySelector(".route-detail-shell");
     const routeDetailBadge = document.getElementById("routeDetailBadge");
     const routeDetailTitle = document.getElementById("routeDetailTitle");
     const routeDetailBody = document.getElementById("routeDetailBody");
@@ -5551,9 +6110,17 @@
     const STORAGE_ACCOUNT_KEY = "zamazen_aegis_account_preview";
     const STORAGE_COOKIE_KEY = "zamazen_aegis_cookie_preferences";
     const STORAGE_MOTION_KEY = "zamazen_aegis_live_motion";
+    const STORAGE_CONTRIBUTIONS_KEY = "zamazen_aegis_contribution_drafts";
+    const STORAGE_WAITLIST_KEY = "zamazen_aegis_waitlist_drafts";
+    const STORAGE_FORM_RATE_KEY = "zamazen_aegis_secure_form_last_submit";
     const ZAMAZEN_API_BASE_URL = "https://api.zamazenaegis.com";
     const ACCOUNT_API_TIMEOUT_MS = 10000;
     const HEALTH_API_TIMEOUT_MS = 3500;
+    const SECURE_FORM_COOLDOWN_MS = 45000;
+    const MAX_ALIAS_LENGTH = 60;
+    const MAX_EMAIL_LENGTH = 120;
+    const MAX_IDEA_MESSAGE_LENGTH = 900;
+    const MAX_WAITLIST_MESSAGE_LENGTH = 600;
     const SUPPORTED_LANGUAGES = ["es", "en", "fr", "pt"];
     const SUPPORTED_TEXT_SIZES = ["normal", "medium", "large"];
     const COOKIE_DEFAULTS = {
@@ -5577,11 +6144,22 @@
       musica: "musica",
       faq: "faq",
       nivel: "estado",
-      neo: "red-neo",
+      neo: "neo",
+      runas: "runas",
       privacidad: "privacidad",
-      legal: "privacidad",
+      legal: "legal",
       datos: "datos",
       descargar: "descargar",
+      ideas: "ideas",
+      mejoras: "ideas",
+      agradecimientos: "ideas",
+      "estado-proyecto": "estado-proyecto",
+      "lista-espera": "lista-espera",
+      confianza: "confianza",
+      novedades: "novedades",
+      nube: "nube",
+      admin: "admin",
+      demo: "demo",
       "gestionar-datos": "gestionar-datos",
       "eliminar-cuenta": "eliminar-cuenta",
       "politica-privacidad": "privacidad",
@@ -5597,6 +6175,17 @@
       funciones: { sections: ["pagina-interna"], detail: "funciones" },
       precios: { sections: ["pagina-interna"], detail: "precios" },
       estado: { sections: ["nivel"] },
+      "estado-proyecto": { sections: ["pagina-interna"], detail: "estado-proyecto" },
+      "lista-espera": { sections: ["pagina-interna"], detail: "lista-espera" },
+      confianza: { sections: ["pagina-interna"], detail: "confianza" },
+      novedades: { sections: ["pagina-interna"], detail: "novedades" },
+      ideas: { sections: ["pagina-interna"], detail: "ideas" },
+      admin: { sections: ["pagina-interna"], detail: "admin" },
+      legal: { sections: ["pagina-interna"], detail: "legal" },
+      nube: { sections: ["pagina-interna"], detail: "nube" },
+      demo: { sections: ["pagina-interna"], detail: "demo" },
+      neo: { sections: ["pagina-interna"], detail: "neo" },
+      runas: { sections: ["pagina-interna"], detail: "runas" },
       musica: { sections: ["musica"] },
       descargar: { sections: ["descargar"] },
       cuenta: { sections: ["pagina-interna"], detail: "cuenta" },
@@ -5628,8 +6217,96 @@
       "red-neo": { sections: ["pagina-interna"], detail: "red-neo" },
       limpieza: { sections: ["pagina-interna"], detail: "limpieza" },
       historial: { sections: ["pagina-interna"], detail: "historial" },
-      "guardian-familiar": { sections: ["pagina-interna"], detail: "guardian-familiar" }
+      "guardian-familiar": { sections: ["pagina-interna"], detail: "guardian-familiar" },
+      "no-encontrado": { sections: ["pagina-interna"], detail: "no-encontrado" }
     };
+    const WEB_PROFILE_AVATARS = [
+      { id: "neo", label: "Neo", glyph: "ᚨ" },
+      { id: "guardian", label: "Guardián", glyph: "ᛉ" },
+      { id: "runes", label: "Runas", glyph: "ᚱ" },
+      { id: "aegis-core", label: "Núcleo", glyph: "AE" },
+      { id: "core", label: "Core", glyph: "CO" },
+      { id: "valhalla", label: "Valhalla", glyph: "VA" },
+      { id: "ragnarok", label: "Ragnarok", glyph: "RG" }
+    ];
+    const PROFILE_IMAGE_MAX_BYTES = 700 * 1024;
+    const PLAN_SHOWCASE = [
+      {
+        id: "core",
+        name: "Core",
+        glyph: "CO",
+        aura: "is-core",
+        forWho: "Ideal para empezar sin presion.",
+        promise: "Proteccion esencial util, honesta y ligera.",
+        benefits: ["Escaner manual y explicaciones claras", "Historial basico local", "Limpieza segura", "Red Neo saneada con consentimiento"],
+        cta: "Elegir Core",
+        href: "#/core"
+      },
+      {
+        id: "valhalla",
+        name: "Valhalla",
+        glyph: "VA",
+        aura: "is-valhalla",
+        forWho: "Para usuarios que quieren mas contexto.",
+        promise: "Mejora clara en privacidad, permisos y Bunker.",
+        benefits: ["Mas senales para enlaces y apps", "Bunker mejorado", "Tendencias Red Neo", "Personalizacion y estado premium"],
+        cta: "Mejorar a Valhalla",
+        href: "#/valhalla"
+      },
+      {
+        id: "ragnarok",
+        name: "Ragnarok",
+        glyph: "RG",
+        aura: "is-ragnarok",
+        forWho: "Para quien quiere apoyar al maximo.",
+        promise: "La experiencia completa cuando Android y el consentimiento lo permiten.",
+        benefits: ["Banca, identidad y credenciales", "Bunker total", "Red Neo prioritaria", "Resolucion guiada de riesgos complejos"],
+        cta: "Desbloquear Ragnarok",
+        href: "#/ragnarok"
+      }
+    ];
+    const DEMO_SCENARIOS = [
+      {
+        id: "call",
+        label: "Llamada sospechosa",
+        title: "Neo detecta una llamada con senales de fraude",
+        body: "Numero desconocido, urgencia comercial y patron de repeticion. Zamazen recomienda no devolver la llamada sin verificar.",
+        action: "Bloquear o revisar manualmente",
+        risk: 72
+      },
+      {
+        id: "sms",
+        label: "SMS phishing",
+        title: "Un SMS imita a una entidad bancaria",
+        body: "El mensaje presiona con urgencia y un enlace dudoso. Neo explica que no se deben introducir credenciales desde el enlace.",
+        action: "Marcar para revisar y reportar",
+        risk: 86
+      },
+      {
+        id: "link",
+        label: "Enlace dudoso",
+        title: "El enlace necesita verificacion antes de abrir",
+        body: "Dominio raro, redireccion y palabras de premio. Zamazen ayuda a decidir sin ejecutar contenido peligroso.",
+        action: "Analizar antes de abrir",
+        risk: 64
+      },
+      {
+        id: "permission",
+        label: "Permiso delicado",
+        title: "Android pide un permiso sensible",
+        body: "La app explica para que se usa, que alternativa existe y que ocurre si el usuario no lo concede.",
+        action: "Conceder solo si aporta valor",
+        risk: 48
+      },
+      {
+        id: "network",
+        label: "Red Neo",
+        title: "Un reporte puede ayudar sin publicar secretos",
+        body: "Antes de enviarse, se sanea el contenido para evitar tokens, correos sensibles, codigos y datos privados.",
+        action: "Compartir indicador saneado",
+        risk: 38
+      }
+    ];
 
     const translations = {
       es: {
@@ -5644,8 +6321,14 @@
         },
         nav: {
           home: "Inicio",
+          projectStatus: "Estado",
           features: "Funciones",
           center: "Centro",
+          trust: "Confianza",
+          news: "Novedades",
+          ideas: "Ideas",
+          waitlist: "Acceso de prueba",
+          cloud: "Nube",
           security: "Seguridad",
           account: "Cuenta",
           data: "Datos",
@@ -5672,7 +6355,9 @@
           subline: "Protección que se anticipa al impacto, para que no tengas que reaccionar tarde.",
           primaryCta: "Proteger mi móvil",
           secondaryCta: "Ver cómo funciona",
+          demoCta: "Ver demo guiada",
           accountCta: "Acceder / crear cuenta",
+          waitlistCta: "Solicitar acceso",
           microcopy: "Sin registro obligatorio. Cuenta Zamazen opcional para reforzar sesiones y privacidad.",
           point1: "Bloquea amenazas antes de que se conviertan en un problema real.",
           point2: "Neo explica cada riesgo como un asistente, no como una alarma vacía.",
@@ -5978,6 +6663,9 @@
           recoverSubmit: "Solicitar recuperación segura",
           recoverBack: "Volver al acceso",
           recoverGuidance: "Solicitud preparada. Cuando la API de recuperación esté disponible, se enviará desde aquí; mientras tanto usa soporte oficial sin enviar contraseñas ni códigos.",
+          googleButton: "Continuar con Google",
+          googleNote: "Google es la opción rápida; la cuenta Zamazen seguirá siendo la experiencia completa del Guardián.",
+          googleStatus: "Google se validará con OAuth/Credential Manager real. Esta web no crea una sesión falsa ni guarda tokens si el proveedor no está configurado.",
           visualBadgeLogin: "Despertar Guardián",
           visualTitleLogin: "¿Nuevo en Zamazen?",
           visualBodyLogin: "Crea tu cuenta para activar perfil cloud, sesiones y recuperación sin perder la protección local.",
@@ -6108,7 +6796,7 @@
           description: "Zamazen Aegis helps review reported risk signals in calls, SMS and links with Neo, clear privacy and a futuristic experience designed to anticipate risk."
         },
         brand: { name: "Zamazen Aegis", tagline: "Intelligent Security", homeAria: "Go to the Zamazen Aegis start" },
-        nav: { home: "Home", features: "Features", center: "Center", security: "Security", account: "Account", data: "Data", deleteAccount: "Delete account", premium: "Plans", bunker: "Bunker", neoNetwork: "Neo Network", about: "About", team: "Team", help: "Help", music: "Music", faq: "FAQ", cta: "Activate shield" },
+        nav: { home: "Home", projectStatus: "Status", features: "Features", center: "Center", trust: "Trust", news: "News", ideas: "Ideas", waitlist: "Trial access", cloud: "Cloud", security: "Security", account: "Account", data: "Data", deleteAccount: "Delete account", premium: "Plans", bunker: "Bunker", neoNetwork: "Neo Network", about: "About", team: "Team", help: "Help", music: "Music", faq: "FAQ", cta: "Activate shield" },
         accessibility: { normal: "Normal", medium: "Medium", large: "Large" },
         hero: {
           eyebrow: "Intelligent digital shield",
@@ -6117,7 +6805,9 @@
           subline: "Protection that anticipates the impact, so you do not have to react too late.",
           primaryCta: "Protect my phone",
           secondaryCta: "See how it works",
+          demoCta: "See guided demo",
           accountCta: "Sign in / create account",
+          waitlistCta: "Request access",
           microcopy: "No mandatory sign-up. Zamazen account is optional for stronger sessions and privacy.",
           point1: "Blocks threats before they become a real problem.",
           point2: "Neo explains every risk like an assistant, not like an empty alarm.",
@@ -6418,6 +7108,9 @@
           recoverSubmit: "Request secure recovery",
           recoverBack: "Back to sign-in",
           recoverGuidance: "Request prepared. When the recovery API is available, it will be sent from here; until then use official support without sending passwords or codes.",
+          googleButton: "Continue with Google",
+          googleNote: "Google is the fast option; the Zamazen account remains the complete Guardian experience.",
+          googleStatus: "Google will be validated with real OAuth/Credential Manager. This website does not fake a session or store tokens when the provider is not configured.",
           visualBadgeLogin: "Guardian awakening",
           visualTitleLogin: "New to Zamazen?",
           visualBodyLogin: "Create your account to enable cloud profile, sessions and recovery without losing local protection.",
@@ -6548,7 +7241,7 @@
           description: "Zamazen Aegis aide à examiner les signaux de risque signalés dans les appels, SMS et liens avec Neo, une confidentialité claire et une expérience futuriste conçue pour anticiper le risque."
         },
         brand: { name: "Zamazen Aegis", tagline: "Sécurité Intelligente", homeAria: "Aller au début de Zamazen Aegis" },
-        nav: { home: "Accueil", features: "Fonctions", center: "Centre", security: "Sécurité", account: "Compte", data: "Données", deleteAccount: "Supprimer le compte", premium: "Tarifs", bunker: "Bunker", neoNetwork: "Réseau Neo", about: "Projet", team: "Équipe", help: "Aide", music: "Musique", faq: "FAQ", cta: "Activer le bouclier" },
+        nav: { home: "Accueil", projectStatus: "État", features: "Fonctions", center: "Centre", trust: "Confiance", news: "Nouveautés", ideas: "Idées", waitlist: "Accès test", cloud: "Cloud", security: "Sécurité", account: "Compte", data: "Données", deleteAccount: "Supprimer le compte", premium: "Tarifs", bunker: "Bunker", neoNetwork: "Réseau Neo", about: "Projet", team: "Équipe", help: "Aide", music: "Musique", faq: "FAQ", cta: "Activer le bouclier" },
         accessibility: { normal: "Normal", medium: "Moyen", large: "Grand" },
         hero: {
           eyebrow: "Bouclier numérique intelligent",
@@ -6557,7 +7250,9 @@
           subline: "Une protection qui anticipe l'impact, pour que vous n'ayez pas à réagir trop tard.",
           primaryCta: "Protéger mon mobile",
           secondaryCta: "Voir comment ça marche",
+          demoCta: "Voir la démo guidée",
           accountCta: "Accéder / créer un compte",
+          waitlistCta: "Demander accès",
           microcopy: "Sans inscription obligatoire. Le compte Zamazen reste optionnel pour renforcer sessions et confidentialité.",
           point1: "Bloque les menaces avant qu'elles ne deviennent un vrai problème.",
           point2: "Neo explique chaque risque comme un assistant, pas comme une alerte vide.",
@@ -6858,6 +7553,9 @@
           recoverSubmit: "Demander une récupération sûre",
           recoverBack: "Retour à la connexion",
           recoverGuidance: "Demande préparée. Lorsque l'API de récupération sera disponible, elle partira d'ici; en attendant utilisez le support officiel sans envoyer de mots de passe ni de codes.",
+          googleButton: "Continuer avec Google",
+          googleNote: "Google est l'option rapide; le compte Zamazen reste l'expérience complète du Gardien.",
+          googleStatus: "Google sera validé avec OAuth/Credential Manager réel. Ce site ne simule pas de session et ne garde pas de jetons si le fournisseur n'est pas configuré.",
           visualBadgeLogin: "Éveil du Gardien",
           visualTitleLogin: "Nouveau sur Zamazen ?",
           visualBodyLogin: "Créez votre compte pour activer profil cloud, sessions et récupération sans perdre la protection locale.",
@@ -6988,7 +7686,7 @@
           description: "Zamazen Aegis ajuda a revisar sinais de risco reportados em chamadas, SMS e links com Neo, privacidade clara e uma experiência futurista criada para antecipar riscos."
         },
         brand: { name: "Zamazen Aegis", tagline: "Segurança Inteligente", homeAria: "Ir para o início de Zamazen Aegis" },
-        nav: { home: "Início", features: "Funções", center: "Centro", security: "Segurança", account: "Conta", data: "Dados", deleteAccount: "Eliminar conta", premium: "Preços", bunker: "Bunker", neoNetwork: "Red Neo", about: "Projeto", team: "Equipe", help: "Ajuda", music: "Música", faq: "FAQ", cta: "Ativar escudo" },
+        nav: { home: "Início", projectStatus: "Estado", features: "Funções", center: "Centro", trust: "Confiança", news: "Novidades", ideas: "Ideias", waitlist: "Acesso teste", cloud: "Nuvem", security: "Segurança", account: "Conta", data: "Dados", deleteAccount: "Eliminar conta", premium: "Preços", bunker: "Bunker", neoNetwork: "Red Neo", about: "Projeto", team: "Equipe", help: "Ajuda", music: "Música", faq: "FAQ", cta: "Ativar escudo" },
         accessibility: { normal: "Normal", medium: "Médio", large: "Grande" },
         hero: {
           eyebrow: "Escudo digital inteligente",
@@ -6997,7 +7695,9 @@
           subline: "Proteção que se antecipa ao impacto, para que você não precise reagir tarde demais.",
           primaryCta: "Proteger meu celular",
           secondaryCta: "Ver como funciona",
+          demoCta: "Ver demo guiada",
           accountCta: "Entrar / criar conta",
+          waitlistCta: "Solicitar acesso",
           microcopy: "Sem cadastro obrigatório. A conta Zamazen é opcional para reforçar sessões e privacidade.",
           point1: "Bloqueia ameaças antes que se tornem um problema real.",
           point2: "Neo explica cada risco como um assistente, não como um alerta vazio.",
@@ -7298,6 +7998,9 @@
           recoverSubmit: "Solicitar recuperação segura",
           recoverBack: "Voltar ao acesso",
           recoverGuidance: "Solicitação preparada. Quando a API de recuperação estiver disponível, será enviada daqui; enquanto isso use o suporte oficial sem enviar senhas nem códigos.",
+          googleButton: "Continuar com Google",
+          googleNote: "Google é a opção rápida; a conta Zamazen continua sendo a experiência completa do Guardião.",
+          googleStatus: "Google será validado com OAuth/Credential Manager real. Este site não cria sessão falsa nem guarda tokens se o provedor não estiver configurado.",
           visualBadgeLogin: "Despertar Guardião",
           visualTitleLogin: "Novo no Zamazen?",
           visualBodyLogin: "Crie sua conta para ativar perfil cloud, sessões e recuperação sem perder a proteção local.",
@@ -8001,6 +8704,18 @@
         equipo: ["Equipo", "Equipo", "Pantalla dedicada a las personas y guardianes detras del proyecto, sin mezclarla con permisos, precios o formularios.", [["Francisco Javier Molina Moreno", "Creador y responsable de la vision de Zamazen Aegis."], ["Maria Isabel Rodriguez Sanchez", "Socia clave del proyecto y apoyo humano en la construccion de confianza."], ["Neo", "Guardian original de Zamazen Aegis: acompana, explica y protege sin convertir el riesgo en miedo."]], [["Sobre el proyecto", "#/sobre-zamazenaegis", "primary"], ["Contacto", "#/contacto", "secondary"]]],
         faq: ["FAQ", "Preguntas frecuentes", "Respuestas rapidas en una pantalla propia para no obligar al usuario a recorrer toda la web.", [["Consume mucha bateria?", "Debe priorizar bajo consumo, foco de pantalla y trabajo minimo en segundo plano."], ["Funciona sin internet?", "Las capas locales siguen siendo utiles; lo online se degrada sin simular exito."], ["Pide permisos sensibles?", "Solo cuando aportan valor real, con explicacion y alternativa manual si corresponde."], ["Promete seguridad total?", "No. Zamazen Aegis ayuda a reducir riesgo, explicar senales y guiar decisiones."]], [["Contacto", "#/contacto", "primary"], ["Ver seguridad", "#/seguridad", "secondary"]]],
         contacto: ["Contacto", "Ayuda y contacto", "Soporte, privacidad, cuentas y errores criticos tienen una pantalla directa. No envies secretos por correo.", [["Correo oficial", "zamazenaegissupport@gmail.com para soporte, privacidad, cuenta y documentacion."], ["Incidentes", "Priorizar seguridad, cuentas, pagos, borrado y errores criticos."], ["Privacidad", "No enviar contrasenas, codigos 2FA ni datos bancarios completos."]], [["Enviar correo", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
+        "estado-proyecto": ["Estado", "Estado del proyecto", "Zamazen Aegis esta en fase final de preparacion 1.6: web activa, app en prueba y conexion de cuenta/nube preparada sin prometer datos que aun no existen.", [["Web activa", "La web publica funciona como centro informativo y panel futuro del ecosistema."], ["App 1.6", "Se esta terminando, revisando y probando antes de declararla lista."], ["Conexion futura", "Cuenta, Red Neo, Bunker y nube se activaran con backend/app real."]], [["Solicitar acceso", "#/lista-espera", "primary"], ["Ver novedades", "#/novedades", "secondary"]]],
+        "lista-espera": ["Acceso", "Lista de espera y acceso de prueba", "Pantalla segura para preparar una solicitud de acceso, tester o aviso de lanzamiento sin exponer datos innecesarios ni simular backend.", [["Privado", "El correo es opcional y no se muestra publicamente."], ["Manual", "Cada solicitud se revisa antes de cualquier acceso."], ["Sin archivos", "No se aceptan adjuntos desde esta web."]], [["Enviar idea", "#/ideas", "primary"], ["Contacto", "#/contacto", "secondary"]]],
+        confianza: ["Confianza", "Centro de confianza y privacidad", "Una pantalla clara para entender que protege Zamazen, que permisos puede pedir, que datos evita y que limites reales tiene Android.", [["Permisos explicados", "Nada sensible se pide sin utilidad, consentimiento y alternativa manual cuando haga falta."], ["Datos minimos", "No se publican secretos, correos ni reportes sin saneamiento."], ["Cero humo", "No se promete proteccion absoluta ni deteccion perfecta."]], [["Gestionar datos", "#/datos", "primary"], ["Ver permisos", "#/permisos", "secondary"]]],
+        novedades: ["Novedades", "Historial del Guardian", "Resumen de cambios recientes de la web, avances de la app y proximos pasos generales para demostrar que el proyecto esta vivo.", [["Web tipo arbol", "Las rutas internas sustituyen la landing interminable."], ["Perfil vivo", "Cuenta, avatar, nivel y sincronizacion preparada."], ["Comunidad segura", "Ideas y agradecimientos se revisan manualmente antes de aparecer."]], [["Estado del proyecto", "#/estado-proyecto", "primary"], ["Ideas", "#/ideas", "secondary"]]],
+        ideas: ["Ideas", "Ideas, mejoras y agradecimientos", "Recibe propuestas utiles de forma segura: sin archivos, sin scripts, sin publicacion automatica y siempre con revision manual.", [["Formulario controlado", "Solo texto limitado, validado y saneado."], ["Moderacion", "Nada aparece en agradecimientos sin permiso y revision."], ["Recompensas", "Los codigos o reconocimientos nunca son automaticos."]], [["Enviar propuesta", "#/ideas", "primary"], ["Estado del proyecto", "#/estado-proyecto", "secondary"]]],
+        admin: ["Privado", "Panel administrador protegido", "Pantalla bloqueada para dejar claro que la revision de ideas, testers y recompensas no vive en el frontend publico.", [["Sin datos publicos", "No hay lista administrativa ni claves en el HTML."], ["Backend requerido", "El panel real necesitara login, roles, reglas y auditoria."], ["Revision manual", "Las aportaciones solo se publican tras aprobacion."]], [["Ideas", "#/ideas", "primary"], ["Inicio", "#/inicio", "secondary"]]],
+        legal: ["Legal", "Centro legal", "Entrada clara a privacidad, cookies, producto, datos, eliminacion de cuenta y licencia sin mezclarlo con la home.", [["Privacidad", "Que datos se usan y que datos no se publican.", "#/privacidad"], ["Cookies", "Preferencias necesarias y opcionales.", "#/politica-cookies"], ["Licencia", "Uso correcto de Core, Valhalla y Ragnarok.", "#/contrato-licencia"]], [["Privacidad", "#/privacidad", "primary"], ["Contacto", "#/contacto", "secondary"]]],
+        nube: ["Cuenta", "Nube y sincronizacion", "Vista preparada para datos sincronizados cuando la app movil y el backend esten conectados. Hoy muestra estados honestos, no datos inventados.", [["App movil", "Todavia no vinculada en esta web publica."], ["Bunker Cloud", "Solo aceptara paquetes cifrados por el usuario cuando este activo."], ["Control", "Exportar, borrar o desvincular requerira autenticacion real."]], [["Perfil", "#/perfil", "primary"], ["Datos", "#/datos", "secondary"]]],
+        demo: ["Demo", "Mira como actua Zamazen", "Demo visual de situaciones comunes: llamada sospechosa, SMS de phishing, enlace dudoso, permiso delicado y reporte Red Neo.", [["Neo explica", "Convierte senales de riesgo en pasos comprensibles."], ["Sin promesas falsas", "La demo muestra ayuda y decision, no magia."], ["Modo seguro", "Si falta permiso o conexion, la experiencia degrada con claridad."]], [["Crear cuenta", "#/crear-cuenta", "primary"], ["Ver funciones", "#/funciones", "secondary"]]],
+        neo: ["Neo", "Neo, el Guardian original", "Pantalla dedicada a Neo como guia protectora: explica riesgos, reduce miedo y ayuda a decidir sin ocultar limites.", [["Claridad", "Traduce senales tecnicas a lenguaje humano."], ["Privacidad", "No necesita exponer secretos para orientar al usuario."], ["Acompanamiento", "Su papel es ayudar, no sustituir el criterio del usuario."]], [["Red Neo", "#/red-neo", "primary"], ["Sobre el proyecto", "#/sobre-zamazenaegis", "secondary"]]],
+        runas: ["Identidad", "Runas del Guardian", "Pantalla para la identidad runica oficial de Zamazen Aegis: FEHU, URUZ, THURISAZ, ANSUZ, RAIDO, KENAZ, ALGIZ y OTHALA.", [["ALGIZ", "Proteccion y escudo."], ["ANSUZ", "Neo, verdad y explicacion."], ["OTHALA", "Bunker, hogar digital y datos sensibles."]], [["Sobre el proyecto", "#/sobre-zamazenaegis", "primary"], ["Equipo", "#/equipo", "secondary"]]],
+        "no-encontrado": ["404", "Neo no ha encontrado esta camara", "La ruta no existe o se movio. Puedes volver al inicio, abrir el mapa de funciones o contactar si crees que hay un enlace roto.", [["Volver", "Inicio y rutas principales siguen disponibles."], ["Mapa", "Funciones, cuenta, seguridad y planes tienen pantallas propias."], ["Aviso", "Si venias desde un enlace externo, puedes reportarlo."]], [["Volver al inicio", "#/inicio", "primary"], ["Mapa de funciones", "#/funciones", "secondary"]]],
         core: ["Core", "Core: proteccion esencial", "La base de Zamazen Aegis protege sin castigar a quien empieza gratis.", [["Escaner manual", "Reportes de llamadas spam, SMS sospechosos y phishing basico."], ["Historial basico", "Memoria local suficiente para entender actividad reciente."], ["Red Neo saneada", "Envio online solo con consentimiento y datos minimos."]], [["Ver precios", "#/precios", "primary"], ["Crear cuenta", "#/crear-cuenta", "secondary"]]],
         valhalla: ["Valhalla", "Valhalla: proteccion social y digital", "Valhalla refuerza contexto, permisos, privacidad y Bunker sin vender magia.", [["Contexto ampliado", "Mas senales para enlaces, apps y permisos excesivos."], ["Bunker mejorado", "Mas control para datos sensibles y modo banco seguro cuando aplica."], ["Red Neo avanzada", "Tendencias online y explicaciones mas utiles."]], [["Comparar ediciones", "#/precios", "primary"], ["Ver Bunker", "#/bunker", "secondary"]]],
         ragnarok: ["Ragnarok", "Ragnarok: experiencia completa", "Ragnarok agrupa las capas mas avanzadas cuando Android, permisos y consentimiento lo permiten.", [["Identidad y banca", "Guia para credenciales, banca y riesgos digitales complejos."], ["Bunker total", "Proteccion reforzada para secretos y datos especialmente sensibles."], ["Red Neo prioritaria", "Mas contexto, historial profundo y resolucion guiada sin falsas reparaciones."]], [["Comparar ediciones", "#/precios", "primary"], ["Ver Red Neo", "#/red-neo", "secondary"]]],
@@ -8031,6 +8746,18 @@
         equipo: ["Team", "Team", "A dedicated screen for the people and guardians behind the project, without mixing it with permissions, plans or forms.", [["Francisco Javier Molina Moreno", "Creator and owner of the Zamazen Aegis vision."], ["Maria Isabel Rodriguez Sanchez", "Key partner in the project and human support in building trust."], ["Neo", "Original guardian of Zamazen Aegis: guides, explains and protects without turning risk into fear."]], [["About the project", "#/sobre-zamazenaegis", "primary"], ["Contact", "#/contacto", "secondary"]]],
         faq: ["FAQ", "Frequently asked questions", "Fast answers on their own screen so the user does not have to browse the whole site.", [["Does it use a lot of battery?", "It should prioritize low consumption, visible-screen focus and minimal background work."], ["Does it work offline?", "Local layers remain useful; online features degrade without faking success."], ["Does it request sensitive permissions?", "Only when they bring real value, with explanation and manual fallback when applicable."], ["Does it promise total security?", "No. Zamazen Aegis helps reduce risk, explain signals and guide decisions."]], [["Contact", "#/contacto", "primary"], ["View security", "#/seguridad", "secondary"]]],
         contacto: ["Contact", "Help and contact", "Support, privacy, accounts and critical errors have a direct screen. Do not send secrets by email.", [["Official email", "zamazenaegissupport@gmail.com for support, privacy, accounts and documentation."], ["Incidents", "Prioritize security, accounts, payments, deletion and critical errors."], ["Privacy", "Do not send passwords, 2FA codes or complete banking details."]], [["Send email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
+        "estado-proyecto": ["Status", "Project status", "Zamazen Aegis is in final 1.6 preparation: the web is active, the app is being tested and account/cloud connection is prepared without fake data.", [["Web active", "The public website works as information center and future ecosystem panel."], ["App 1.6", "It is being finished, reviewed and tested before being called ready."], ["Future connection", "Account, Neo Network, Bunker and cloud will activate with real backend/app evidence."]], [["Request access", "#/lista-espera", "primary"], ["View news", "#/novedades", "secondary"]]],
+        "lista-espera": ["Access", "Waitlist and trial access", "A safe screen to prepare a trial, tester or launch-notice request without exposing unnecessary data or faking a backend.", [["Private", "Email is optional and is never shown publicly."], ["Manual", "Every request is reviewed before access."], ["No files", "Attachments are not accepted from this website."]], [["Send idea", "#/ideas", "primary"], ["Contact", "#/contacto", "secondary"]]],
+        confianza: ["Trust", "Trust and privacy center", "A clear screen to understand what Zamazen protects, which permissions it may need, what data it avoids and Android's real limits.", [["Permissions explained", "Nothing sensitive is requested without value, consent and manual fallback."], ["Minimal data", "No secrets, emails or reports are published without sanitization."], ["No smoke", "No absolute protection or perfect detection promises."]], [["Manage data", "#/datos", "primary"], ["View permissions", "#/permisos", "secondary"]]],
+        novedades: ["News", "Guardian changelog", "Recent web changes, app progress and general next steps to show that the project is alive.", [["Tree web", "Internal routes replaced the endless landing."], ["Living profile", "Account, avatar, level and sync readiness."], ["Safe community", "Ideas and acknowledgements are manually reviewed before publication."]], [["Project status", "#/estado-proyecto", "primary"], ["Ideas", "#/ideas", "secondary"]]],
+        ideas: ["Ideas", "Ideas, improvements and acknowledgements", "Useful proposals are received safely: no files, no scripts, no automatic publishing and always manual review.", [["Controlled form", "Only limited, validated and sanitized text."], ["Moderation", "Nothing appears in acknowledgements without permission and review."], ["Rewards", "Codes or recognition are never automatic."]], [["Send proposal", "#/ideas", "primary"], ["Project status", "#/estado-proyecto", "secondary"]]],
+        admin: ["Private", "Protected admin panel", "A locked screen that makes clear idea review, testers and rewards do not live in the public frontend.", [["No public data", "No admin list or secrets in the HTML."], ["Backend required", "The real panel needs login, roles, rules and audit."], ["Manual review", "Contributions publish only after approval."]], [["Ideas", "#/ideas", "primary"], ["Home", "#/inicio", "secondary"]]],
+        legal: ["Legal", "Legal center", "Clear entry to privacy, cookies, product policy, data, account deletion and license without mixing it into the home.", [["Privacy", "Which data is used and which data is not published.", "#/privacidad"], ["Cookies", "Necessary and optional preferences.", "#/politica-cookies"], ["License", "Correct use of Core, Valhalla and Ragnarok.", "#/contrato-licencia"]], [["Privacy", "#/privacidad", "primary"], ["Contact", "#/contacto", "secondary"]]],
+        nube: ["Account", "Cloud and sync", "A view prepared for synchronized data when the mobile app and backend are connected. Today it shows honest states, not invented data.", [["Mobile app", "Not linked in this public website yet."], ["Bunker Cloud", "Will only accept user-encrypted packages when active."], ["Control", "Export, delete or unlink will require real authentication."]], [["Profile", "#/perfil", "primary"], ["Data", "#/datos", "secondary"]]],
+        demo: ["Demo", "See Zamazen in action", "A visual demo of common situations: suspicious call, phishing SMS, doubtful link, delicate permission and Neo Network report.", [["Neo explains", "Turns risk signals into understandable steps."], ["No false promises", "The demo shows help and decisions, not magic."], ["Safe mode", "If permission or connection is missing, the experience degrades clearly."]], [["Create account", "#/crear-cuenta", "primary"], ["View features", "#/funciones", "secondary"]]],
+        neo: ["Neo", "Neo, the original Guardian", "A dedicated screen for Neo as protective guide: explains risks, reduces fear and helps decide without hiding limits.", [["Clarity", "Turns technical signals into human language."], ["Privacy", "Does not need to expose secrets to guide the user."], ["Support", "Its role is to help, not replace user judgment."]], [["Neo Network", "#/red-neo", "primary"], ["About the project", "#/sobre-zamazenaegis", "secondary"]]],
+        runas: ["Identity", "Guardian runes", "A screen for the official Zamazen Aegis rune identity: FEHU, URUZ, THURISAZ, ANSUZ, RAIDO, KENAZ, ALGIZ and OTHALA.", [["ALGIZ", "Protection and shield."], ["ANSUZ", "Neo, truth and explanation."], ["OTHALA", "Bunker, digital home and sensitive data."]], [["About the project", "#/sobre-zamazenaegis", "primary"], ["Team", "#/equipo", "secondary"]]],
+        "no-encontrado": ["404", "Neo did not find this chamber", "The route does not exist or moved. You can return home, open the feature map or contact support if you found a broken link.", [["Return", "Home and main routes are still available."], ["Map", "Features, account, security and plans have their own screens."], ["Report", "If you came from an external link, you can report it."]], [["Back home", "#/inicio", "primary"], ["Feature map", "#/funciones", "secondary"]]],
         core: ["Core", "Core: essential protection", "The base of Zamazen Aegis protects without punishing people who start free.", [["Manual scanner", "Reports for spam calls, suspicious SMS and basic phishing."], ["Basic history", "Enough local memory to understand recent activity."], ["Sanitized Neo Network", "Online sending only with consent and minimal data."]], [["View plans", "#/precios", "primary"], ["Create account", "#/crear-cuenta", "secondary"]]],
         valhalla: ["Valhalla", "Valhalla: social and digital protection", "Valhalla reinforces context, permissions, privacy and Bunker without selling magic.", [["Expanded context", "More signals for links, apps and excessive permissions."], ["Improved Bunker", "More control for sensitive data and safe banking mode when applicable."], ["Advanced Neo Network", "Online trends and more useful explanations."]], [["Compare editions", "#/precios", "primary"], ["View Bunker", "#/bunker", "secondary"]]],
         ragnarok: ["Ragnarok", "Ragnarok: complete experience", "Ragnarok groups the most advanced layers when Android, permissions and consent allow it.", [["Identity and banking", "Guidance for credentials, banking and complex digital risks."], ["Total Bunker", "Reinforced protection for secrets and especially sensitive data."], ["Priority Neo Network", "More context, deeper history and guided resolution without fake fixes."]], [["Compare editions", "#/precios", "primary"], ["View Neo Network", "#/red-neo", "secondary"]]],
@@ -8282,7 +9009,7 @@
         .split(/[?#]/)[0]
         .trim();
       const legacyRoute = LEGACY_ROUTE_MAP[normalized] || normalized;
-      return ROUTE_DEFINITIONS[legacyRoute] ? legacyRoute : "inicio";
+      return ROUTE_DEFINITIONS[legacyRoute] ? legacyRoute : "no-encontrado";
     }
 
     function getRouteFromHash() {
@@ -8336,6 +9063,734 @@
       routeTreeGrid.replaceChildren(...content.cards.map(createRouteCard));
     }
 
+    function setRouteDetailVariant(variant = "") {
+      if (!routeDetailShell || !routeDetailGrid) return;
+      routeDetailShell.classList.remove("is-profile-screen", "is-account-screen", "is-plan-screen");
+      if (variant) routeDetailShell.classList.add(variant);
+      routeDetailGrid.className = variant === "is-profile-screen" ? "profile-dashboard" : "route-detail-grid";
+    }
+
+    function renderAccountExperience() {
+      setRouteDetailVariant("is-account-screen");
+      routeDetailBadge.textContent = "Cuenta";
+      routeDetailTitle.textContent = "Cuenta Zamazen y acceso Google";
+      routeDetailBody.textContent = "Cuenta Zamazen es la identidad completa del Guardián. Google existe como acceso rápido, pero sin fingir funciones avanzadas si OAuth o la app móvil todavía no están conectados.";
+
+      const account = normalizeAccountPreview(readAccountPreview());
+      const methodGrid = createElement("div", "account-method-grid");
+
+      const zamazenCard = createElement("article", "account-method-card");
+      zamazenCard.append(
+        createElement("span", "profile-pill", "Cuenta oficial"),
+        createElement("h3", "", "Cuenta Zamazen"),
+        createElement("p", "", "Más integrada con perfil, Red Neo, Bunker cifrado, dispositivos y recuperación cuando el backend esté disponible."),
+        createProfileAction("Crear cuenta Zamazen", "#/crear-cuenta", "primary")
+      );
+
+      const googleCard = createElement("article", "account-method-card");
+      googleCard.append(
+        createElement("span", "profile-pill", "Acceso rápido"),
+        createElement("h3", "", "Cuenta con Google"),
+        createElement("p", "", "Opción cómoda para entrar rápido cuando OAuth real esté activo. Las funciones avanzadas pueden requerir Cuenta Zamazen propia."),
+        createProfileAction("Entrar con Google", "#/login", "secondary")
+      );
+
+      methodGrid.append(zamazenCard, googleCard);
+
+      const statusGrid = createElement("div", "sync-grid");
+      statusGrid.append(
+        createStatusCard("Perfil", account.name, account.level),
+        createStatusCard("Sincronización", account.syncStatus, account.lastSyncAt ? formatProfileDate(account.lastSyncAt) : "Pendiente"),
+        createStatusCard("Dispositivo", account.deviceConnected ? account.deviceName : "App móvil no vinculada", account.devicePlatform),
+        createStatusCard("Ecosistema", "Red Neo, Bunker y permisos se mostrarán aquí al enlazar app real.", "Preparado")
+      );
+
+      routeDetailGrid.replaceChildren(methodGrid, statusGrid);
+      routeDetailActions.replaceChildren(
+        createProfileAction("Abrir perfil", "#/perfil", "primary"),
+        createProfileAction("Seguridad", "#/seguridad", "secondary"),
+        createProfileAction("Suscripción", "#/precios", "secondary")
+      );
+    }
+
+    function renderProfileExperience() {
+      setRouteDetailVariant("is-profile-screen");
+      const account = normalizeAccountPreview(readAccountPreview());
+      routeDetailBadge.textContent = "Perfil";
+      routeDetailTitle.textContent = "Perfil Zamazen";
+      routeDetailBody.textContent = "Identidad, avatar, nivel, estado de protección y sincronización preparados para convivir con la app móvil sin inventar datos online.";
+
+      const hero = createElement("section", "profile-hero-card");
+      const avatarSurface = createElement("div", "profile-avatar");
+      applyAvatarSurface(avatarSurface, account);
+      const identity = createElement("div", "profile-identity");
+      identity.append(
+        createElement("h2", "", account.name),
+        createElement("p", "", account.email),
+        createElement("p", "", account.nick ? `Nick: ${account.nick}` : "Nick no configurado"),
+      );
+      const pillRow = createElement("div", "profile-pill-row");
+      pillRow.append(
+        createElement("span", "profile-pill", account.level),
+        createElement("span", "profile-pill", account.protectionStatus),
+        createElement("span", "profile-pill", account.provider === "zamazen-online-account" ? "Online verificada" : "Vista local segura")
+      );
+      identity.append(pillRow);
+      hero.append(avatarSurface, identity);
+
+      const formCard = createElement("section", "profile-panel-card");
+      formCard.append(
+        createElement("h3", "", "Editar información básica"),
+        createElement("p", "", "Estos datos se guardan solo en este navegador hasta que la cuenta online y la app móvil estén conectadas.")
+      );
+      const form = createElement("form", "profile-form-grid");
+      const nameField = createElement("label", "profile-field");
+      nameField.append(createElement("span", "", "Nombre visible"));
+      const nameInput = createElement("input", "form-input");
+      nameInput.type = "text";
+      nameInput.autocomplete = "name";
+      nameInput.value = account.name === "Invitado local" ? "" : account.name;
+      nameField.append(nameInput);
+      const emailField = createElement("label", "profile-field");
+      emailField.append(createElement("span", "", "Email"));
+      const emailInput = createElement("input", "form-input");
+      emailInput.type = "email";
+      emailInput.autocomplete = "email";
+      emailInput.value = account.email === "Sin sesión online en esta web" ? "" : account.email;
+      emailField.append(emailInput);
+      const nickField = createElement("label", "profile-field");
+      nickField.append(createElement("span", "", "Nick"));
+      const nickInput = createElement("input", "form-input");
+      nickInput.type = "text";
+      nickInput.value = account.nick;
+      nickField.append(nickInput);
+      const saveButton = createElement("button", "cta-primary", "Guardar perfil local");
+      saveButton.type = "submit";
+      const formStatus = createElement("p", "account-status");
+      formStatus.setAttribute("role", "status");
+      formStatus.setAttribute("aria-live", "polite");
+      form.append(nameField, emailField, nickField, saveButton, formStatus);
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const updated = writeAccountPreview({
+          ...account,
+          name: nameInput.value.trim() || account.name,
+          email: emailInput.value.trim() || account.email,
+          nick: nickInput.value.trim()
+        });
+        formStatus.textContent = "Perfil local actualizado. La sincronización real se activará cuando la app/backend estén conectados.";
+        routeDetailTitle.textContent = "Perfil Zamazen";
+        identity.querySelector("h2").textContent = updated.name;
+        identity.querySelectorAll("p")[0].textContent = updated.email;
+        identity.querySelectorAll("p")[1].textContent = updated.nick ? `Nick: ${updated.nick}` : "Nick no configurado";
+      });
+      formCard.append(form);
+
+      const avatarCard = createElement("section", "profile-panel-card");
+      avatarCard.append(
+        createElement("h3", "", "Avatar Zamazen"),
+        createElement("p", "", "Elige un avatar del universo Zamazen o usa una foto propia local. La imagen no se sube desde esta web.")
+      );
+      const avatarGrid = createElement("div", "avatar-choice-grid");
+      WEB_PROFILE_AVATARS.forEach((avatar) => {
+        const button = createElement("button", `avatar-choice${account.avatarId === avatar.id ? " is-active" : ""}`);
+        button.type = "button";
+        button.setAttribute("aria-pressed", String(account.avatarId === avatar.id));
+        button.append(createElement("strong", "", avatar.glyph), createElement("span", "", avatar.label));
+        button.addEventListener("click", () => {
+          const updated = writeAccountPreview({
+            ...normalizeAccountPreview(readAccountPreview()),
+            avatarId: avatar.id,
+            avatarGlyph: avatar.glyph,
+            avatarLabel: avatar.label,
+            avatarImageData: ""
+          });
+          avatarGrid.querySelectorAll(".avatar-choice").forEach((item) => {
+            item.classList.remove("is-active");
+            item.setAttribute("aria-pressed", "false");
+          });
+          button.classList.add("is-active");
+          button.setAttribute("aria-pressed", "true");
+          applyAvatarSurface(avatarSurface, updated);
+        });
+        avatarGrid.append(button);
+      });
+      const uploadInput = document.createElement("input");
+      uploadInput.type = "file";
+      uploadInput.accept = "image/*";
+      uploadInput.hidden = true;
+      const uploadButton = createElement("button", "cta-secondary", "Subir foto local");
+      uploadButton.type = "button";
+      const removeButton = createElement("button", "cta-secondary", "Quitar foto");
+      removeButton.type = "button";
+      const avatarStatus = createElement("p", "account-status");
+      uploadButton.addEventListener("click", () => uploadInput.click());
+      removeButton.addEventListener("click", () => {
+        const updated = writeAccountPreview({
+          ...normalizeAccountPreview(readAccountPreview()),
+          avatarImageData: ""
+        });
+        applyAvatarSurface(avatarSurface, updated);
+        avatarStatus.textContent = "Foto local retirada. Se mantiene el avatar Zamazen seleccionado.";
+      });
+      uploadInput.addEventListener("change", () => {
+        const file = uploadInput.files && uploadInput.files[0];
+        if (!file) return;
+        if (!file.type.startsWith("image/")) {
+          avatarStatus.textContent = "Elige una imagen válida para el perfil.";
+          return;
+        }
+        if (file.size > PROFILE_IMAGE_MAX_BYTES) {
+          avatarStatus.textContent = "La imagen es demasiado grande para guardarse de forma local en esta web.";
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+          const updated = writeAccountPreview({
+            ...normalizeAccountPreview(readAccountPreview()),
+            avatarImageData: String(reader.result || "")
+          });
+          applyAvatarSurface(avatarSurface, updated);
+          avatarStatus.textContent = "Foto local aplicada en este navegador. No se ha subido a ningún servidor.";
+        };
+        reader.readAsDataURL(file);
+      });
+      const avatarActions = createElement("div", "profile-actions-row");
+      avatarActions.append(uploadButton, removeButton, uploadInput);
+      avatarCard.append(avatarGrid, avatarActions, avatarStatus);
+
+      const statusGrid = createElement("section", "sync-grid");
+      statusGrid.append(
+        createStatusCard("Protección", account.protectionStatus, account.level),
+        createStatusCard("Sincronización", account.syncStatus, account.lastSyncAt ? formatProfileDate(account.lastSyncAt) : "Pendiente"),
+        createStatusCard("Red Neo", account.redNeoStatus, navigator.onLine ? "Web online" : "Web offline"),
+        createStatusCard("Bunker", account.bunkerStatus, "Cifrado por usuario"),
+        createStatusCard("Permisos", account.permissionStatus, "App móvil"),
+        createStatusCard("Dispositivo", account.deviceConnected ? account.deviceName : "App móvil no vinculada", account.devicePlatform),
+        createStatusCard("Datos", "Nombre, email, avatar y preferencias visibles; sin contraseñas ni tokens.", "Mínimo"),
+        createStatusCard("Avisos", "Sin avisos críticos de cuenta en esta web.", "Claro")
+      );
+
+      const actionCard = createElement("section", "profile-panel-card");
+      actionCard.append(
+        createElement("h3", "", "Accesos del perfil"),
+        createElement("p", "", "Rutas directas a seguridad, permisos, datos, suscripción y configuración sin mezclar pantallas.")
+      );
+      const actionRow = createElement("div", "profile-actions-row");
+      actionRow.append(
+        createProfileAction("Seguridad", "#/seguridad", "primary"),
+        createProfileAction("Permisos", "#/permisos", "secondary"),
+        createProfileAction("Datos", "#/datos", "secondary"),
+        createProfileAction("Suscripción", "#/precios", "secondary"),
+        createProfileAction("Cuenta", "#/cuenta", "secondary")
+      );
+      actionCard.append(actionRow);
+
+      routeDetailGrid.replaceChildren(hero, formCard, avatarCard, statusGrid, actionCard);
+      routeDetailActions.replaceChildren(
+        createProfileAction("Crear cuenta Zamazen", "#/crear-cuenta", "primary"),
+        createProfileAction("Iniciar sesión", "#/login", "secondary")
+      );
+    }
+
+    function renderPlanExperience(detailKey) {
+      setRouteDetailVariant("is-plan-screen");
+      const selectedPlan = PLAN_SHOWCASE.find((plan) => plan.id === detailKey);
+      routeDetailBadge.textContent = selectedPlan ? selectedPlan.name : "Premium";
+      routeDetailTitle.textContent = selectedPlan
+        ? `${selectedPlan.name}: ${selectedPlan.promise}`
+        : "Core, Valhalla y Ragnarok";
+      routeDetailBody.textContent = selectedPlan
+        ? `${selectedPlan.forWho} Esta vista explica valor, limites y siguiente paso sin prometer proteccion absoluta.`
+        : "Compara las ediciones desde una pantalla dedicada. Core es util, Valhalla mejora la experiencia y Ragnarok concentra la capa mas completa cuando Android, permisos y consentimiento lo permiten.";
+
+      const grid = createElement("div", "plan-showcase-grid");
+      PLAN_SHOWCASE.forEach((plan) => {
+        const card = createElement("article", `plan-showcase-card ${plan.aura}`);
+        const benefits = createElement("ul", "plan-benefit-list");
+        plan.benefits.forEach((benefit) => benefits.append(createElement("li", "", benefit)));
+        card.append(
+          createElement("div", "plan-glyph", plan.glyph),
+          createElement("span", "experience-status", plan.forWho),
+          createElement("h3", "", plan.name),
+          createElement("p", "", plan.promise),
+          benefits,
+          createProfileAction(plan.cta, plan.href, plan.id === "ragnarok" ? "primary" : "secondary")
+        );
+        if (selectedPlan?.id === plan.id) card.classList.add("is-active");
+        grid.append(card);
+      });
+
+      const clarity = createElement("article", "experience-card");
+      clarity.append(
+        createElement("span", "experience-status", "Transparencia"),
+        createElement("h3", "", "Que ganas al subir"),
+        createElement("p", "", "Cada nivel aumenta contexto, personalizacion e integracion, pero Zamazen Aegis mantiene los limites reales de Android, permisos y consentimiento.")
+      );
+
+      routeDetailGrid.className = "profile-dashboard";
+      routeDetailGrid.replaceChildren(grid, clarity);
+      routeDetailActions.replaceChildren(
+        createProfileAction("Crear cuenta Zamazen", "#/crear-cuenta", "primary"),
+        createProfileAction("Solicitar acceso de prueba", "#/lista-espera", "secondary"),
+        createProfileAction("Ver demo guiada", "#/demo", "secondary")
+      );
+    }
+
+    function renderDemoExperience() {
+      setRouteDetailVariant("");
+      routeDetailBadge.textContent = "Demo";
+      routeDetailTitle.textContent = "Mira como actua Zamazen";
+      routeDetailBody.textContent = "Una demostracion visual de ayuda al usuario: señales, explicacion de Neo, decision clara y degradacion segura si falta permiso o conexion.";
+      routeDetailGrid.className = "guardian-demo-layout";
+
+      const tabList = createElement("div", "secure-tab-list");
+      const screen = createElement("article", "guardian-demo-card demo-screen");
+      const buttons = [];
+
+      const renderScenario = (scenario) => {
+        buttons.forEach((button) => {
+          const active = button.dataset.demoScenario === scenario.id;
+          button.classList.toggle("is-active", active);
+          button.setAttribute("aria-pressed", String(active));
+        });
+        const meter = createElement("div", "demo-risk-meter");
+        meter.style.setProperty("--risk-width", `${scenario.risk}%`);
+        meter.append(createElement("span"));
+        screen.replaceChildren(
+          createElement("span", "experience-status", `Riesgo estimado ${scenario.risk}%`),
+          createElement("h3", "", scenario.title),
+          createElement("p", "", scenario.body),
+          meter,
+          createStatusCard("Accion recomendada", scenario.action, "Neo explica"),
+          createStatusCard("Privacidad", "La demo no ejecuta enlaces, no lee datos reales y no sube informacion.", "Seguro")
+        );
+      };
+
+      DEMO_SCENARIOS.forEach((scenario, index) => {
+        const button = createElement("button", `secure-tab-button${index === 0 ? " is-active" : ""}`, scenario.label);
+        button.type = "button";
+        button.dataset.demoScenario = scenario.id;
+        button.setAttribute("aria-pressed", String(index === 0));
+        button.addEventListener("click", () => renderScenario(scenario));
+        buttons.push(button);
+        tabList.append(button);
+      });
+
+      renderScenario(DEMO_SCENARIOS[0]);
+      routeDetailGrid.replaceChildren(tabList, screen);
+      routeDetailActions.replaceChildren(
+        createProfileAction("Crear cuenta Zamazen", "#/crear-cuenta", "primary"),
+        createProfileAction("Ver funciones", "#/funciones", "secondary")
+      );
+    }
+
+    function renderStatusExperience() {
+      setRouteDetailVariant("");
+      routeDetailBadge.textContent = "Estado";
+      routeDetailTitle.textContent = "Zamazen Aegis esta vivo y en fase final";
+      routeDetailBody.textContent = "La web esta activa como centro publico. La app 1.6 sigue en cierre, pruebas y publicacion responsable antes de prometer disponibilidad completa.";
+      routeDetailGrid.className = "experience-dashboard";
+      routeDetailGrid.replaceChildren(
+        createStatusCard("Web publica", "Activa y publicada como centro del proyecto.", "Disponible"),
+        createStatusCard("App 1.6", "En fase final de revision, pruebas y preparacion.", "En cierre"),
+        createStatusCard("Cuenta Zamazen", "Estructura web lista; autenticacion real requiere backend conectado.", "Preparada"),
+        createStatusCard("Red Neo", "Modelo de consentimiento y saneamiento preparado.", "Pruebas"),
+        createStatusCard("Bunker Cloud", "Solo se activara con paquetes cifrados y reglas por usuario.", "Futuro seguro"),
+        createStatusCard("Siguiente paso", "Publicar, revisar como usuario real y recoger acceso/testers.", "Manual")
+      );
+      routeDetailActions.replaceChildren(
+        createProfileAction("Solicitar acceso", "#/lista-espera", "primary"),
+        createProfileAction("Ver novedades", "#/novedades", "secondary"),
+        createProfileAction("Enviar idea", "#/ideas", "secondary")
+      );
+    }
+
+    function renderTrustCenterExperience() {
+      setRouteDetailVariant("");
+      routeDetailBadge.textContent = "Confianza";
+      routeDetailTitle.textContent = "Centro de confianza y privacidad";
+      routeDetailBody.textContent = "La web explica lo importante sin revelar reglas internas sensibles: que protege, que permisos puede necesitar, que datos evita y que nunca promete.";
+      routeDetailGrid.className = "experience-dashboard";
+      routeDetailGrid.replaceChildren(
+        createStatusCard("Que protege", "Llamadas, SMS, enlaces, decisiones sensibles, identidad digital, Bunker y reportes saneados.", "Realista"),
+        createStatusCard("Permisos", "Se explican antes de pedirlos y se degradan a modo manual cuando Android o Play Store lo limitan.", "Consentimiento"),
+        createStatusCard("Datos", "Minimo necesario, sin publicar correos, tokens, codigos, contrasenas ni datos bancarios completos.", "Privacidad"),
+        createStatusCard("Limites Android", "Ninguna app puede eliminar todo riesgo ni controlar todo el sistema sin permisos.", "Cero humo"),
+        createStatusCard("Borrado", "Datos, privacidad y eliminacion de cuenta viven en rutas propias.", "Control"),
+        createStatusCard("Seguridad web", "HTTPS, rutas claras, formularios limitados y nada de claves privadas en el cliente.", "Base publica")
+      );
+      routeDetailActions.replaceChildren(
+        createProfileAction("Ver permisos", "#/permisos", "primary"),
+        createProfileAction("Gestionar datos", "#/datos", "secondary"),
+        createProfileAction("Legal", "#/legal", "secondary")
+      );
+    }
+
+    function renderChangelogExperience() {
+      setRouteDetailVariant("");
+      routeDetailBadge.textContent = "Novedades";
+      routeDetailTitle.textContent = "Historial del Guardian";
+      routeDetailBody.textContent = "Cambios importantes recientes para que el visitante vea que Zamazen Aegis evoluciona con orden, pruebas y transparencia.";
+      const timeline = createElement("section", "timeline-card");
+      timeline.append(createElement("h3", "", "Avances recientes"));
+      timeline.append(createSecureNoteList([
+        ["Web por pantallas internas", "Inicio, cuenta, seguridad, precios, equipo, FAQ y contacto se renderizan como rutas independientes."],
+        ["Perfil premium", "Avatar, foto local, nivel, estado de proteccion, sincronizacion y accesos de cuenta."],
+        ["Cuenta Zamazen + Google", "Zamazen se explica como experiencia completa; Google como acceso comodo sin llamarlo inseguro."],
+        ["Comunidad segura", "Ideas y agradecimientos preparados con validacion, no publicacion automatica y revision manual."],
+        ["Publicacion responsable", "No se declara online listo cuando DNS/backend o pruebas externas no lo demuestran."]
+      ]));
+      routeDetailGrid.className = "profile-dashboard";
+      routeDetailGrid.replaceChildren(timeline);
+      routeDetailActions.replaceChildren(
+        createProfileAction("Estado del proyecto", "#/estado-proyecto", "primary"),
+        createProfileAction("Enviar idea", "#/ideas", "secondary")
+      );
+    }
+
+    function renderCloudExperience() {
+      setRouteDetailVariant("");
+      routeDetailBadge.textContent = "Nube";
+      routeDetailTitle.textContent = "Nube y sincronizacion";
+      routeDetailBody.textContent = "Vista preparada para el futuro Centro del Guardian: hoy muestra estados honestos porque la web publica no debe inventar datos sincronizados.";
+      const account = normalizeAccountPreview(readAccountPreview());
+      routeDetailGrid.className = "experience-dashboard";
+      routeDetailGrid.replaceChildren(
+        createStatusCard("Cuenta", account.provider === "zamazen-online-account" ? "Cuenta online detectada en esta vista." : "Vista local sin sesion online real.", account.level),
+        createStatusCard("App movil", account.deviceConnected ? account.deviceName : "App movil todavia no conectada.", account.devicePlatform),
+        createStatusCard("Ultima sincronizacion", account.lastSyncAt ? formatProfileDate(account.lastSyncAt) : "Sin sincronizacion real todavia.", "Pendiente"),
+        createStatusCard("Bunker Cloud", "Se activara solo con cifrado por usuario y reglas por cuenta.", "Protegido"),
+        createStatusCard("Exportar/borrar", "Requiere autenticacion real, confirmacion y backend con reglas de usuario.", "No simulado"),
+        createStatusCard("Red Neo", "Reportes online saneados y consentidos cuando la app este enlazada.", "Preparado")
+      );
+      routeDetailActions.replaceChildren(
+        createProfileAction("Abrir perfil", "#/perfil", "primary"),
+        createProfileAction("Gestionar datos", "#/datos", "secondary")
+      );
+    }
+
+    function renderAdminExperience() {
+      setRouteDetailVariant("");
+      routeDetailBadge.textContent = "Privado";
+      routeDetailTitle.textContent = "Panel administrador protegido";
+      routeDetailBody.textContent = "Esta ruta no expone datos administrativos. El panel real de ideas, testers y recompensas requerira backend, login, rol de administrador, auditoria y reglas por usuario.";
+      const locked = createElement("section", "locked-admin-card");
+      locked.append(
+        createElement("span", "experience-status", "Acceso bloqueado"),
+        createElement("h3", "", "Nada sensible vive en el frontend publico"),
+        createElement("p", "", "No hay lista de ideas recibidas, correos, IPs, notas internas, recompensas ni claves en esta pagina estatica.")
+      );
+      routeDetailGrid.className = "profile-dashboard";
+      routeDetailGrid.replaceChildren(locked, createSecureNoteList([
+        ["Login obligatorio", "El panel real debe verificar identidad y rol."],
+        ["Revision manual", "Aprobacion antes de publicar agradecimientos."],
+        ["Recompensas controladas", "Codigos con caducidad, un solo uso y trazabilidad cuando existan."]
+      ]));
+      routeDetailActions.replaceChildren(
+        createProfileAction("Volver a ideas", "#/ideas", "primary"),
+        createProfileAction("Inicio", "#/inicio", "secondary")
+      );
+    }
+
+    function renderNotFoundExperience() {
+      setRouteDetailVariant("");
+      routeDetailBadge.textContent = "404";
+      routeDetailTitle.textContent = "Neo no ha encontrado esta camara";
+      routeDetailBody.textContent = "La ruta no existe o se ha movido. El arbol principal sigue disponible.";
+      routeDetailGrid.className = "experience-dashboard";
+      routeDetailGrid.replaceChildren(
+        createStatusCard("Inicio", "Vuelve a la pantalla principal limpia.", "Ruta segura"),
+        createStatusCard("Funciones", "Abre el mapa de funciones reales.", "Arbol"),
+        createStatusCard("Contacto", "Reporta un enlace roto si venias desde fuera.", "Ayuda")
+      );
+      routeDetailActions.replaceChildren(
+        createProfileAction("Volver al inicio", "#/inicio", "primary"),
+        createProfileAction("Mapa de funciones", "#/funciones", "secondary"),
+        createProfileAction("Contacto", "#/contacto", "secondary")
+      );
+    }
+
+    function renderNeoExperience() {
+      setRouteDetailVariant("");
+      routeDetailBadge.textContent = "Neo";
+      routeDetailTitle.textContent = "Neo, el Guardian original";
+      routeDetailBody.textContent = "Neo representa la parte humana del escudo: explicar, acompanar y reducir confusion sin convertir la seguridad en miedo.";
+      routeDetailGrid.className = "experience-dashboard";
+      routeDetailGrid.replaceChildren(
+        createStatusCard("Explica", "Traduce senales tecnicas a decisiones sencillas.", "ANSUZ"),
+        createStatusCard("Protege", "Avisa con contexto y limites claros.", "ALGIZ"),
+        createStatusCard("Acompana", "Ayuda a usuarios reales, mayores o vulnerables sin tratarlos como expertos.", "Confianza")
+      );
+      routeDetailActions.replaceChildren(
+        createProfileAction("Ver Red Neo", "#/red-neo", "primary"),
+        createProfileAction("Conocer equipo", "#/equipo", "secondary")
+      );
+    }
+
+    function renderRunesExperience() {
+      setRouteDetailVariant("");
+      routeDetailBadge.textContent = "Runas";
+      routeDetailTitle.textContent = "Runas oficiales del Guardian";
+      routeDetailBody.textContent = "La identidad visual usa runas canonicas con sentido, no decoracion aleatoria.";
+      routeDetailGrid.className = "experience-dashboard";
+      routeDetailGrid.replaceChildren(
+        createStatusCard("FEHU / URUZ", "Valor, energia y arranque del ecosistema.", "Base"),
+        createStatusCard("THURISAZ / ANSUZ", "Defensa frente a amenazas y verdad explicada por Neo.", "Proteccion"),
+        createStatusCard("RAIDO / KENAZ", "Camino guiado y claridad ante decisiones sensibles.", "Guia"),
+        createStatusCard("ALGIZ / OTHALA", "Escudo, hogar digital, Bunker y confianza.", "Guardian")
+      );
+      routeDetailActions.replaceChildren(
+        createProfileAction("Sobre el proyecto", "#/sobre-zamazenaegis", "primary"),
+        createProfileAction("Ver pilares", "#/sobre-zamazenaegis", "secondary")
+      );
+    }
+
+    function renderWaitlistExperience() {
+      setRouteDetailVariant("");
+      routeDetailBadge.textContent = "Acceso";
+      routeDetailTitle.textContent = "Lista de espera y acceso de prueba";
+      routeDetailBody.textContent = "Solicitud segura: sin archivos, sin HTML, sin publicacion automatica y sin backend falso. La web prepara un borrador saneado para envio manual.";
+      routeDetailGrid.className = "secure-form-layout";
+
+      const form = createElement("form", "secure-form-card secure-form-grid");
+      const aliasInput = createElement("input", "form-input");
+      aliasInput.type = "text";
+      aliasInput.maxLength = MAX_ALIAS_LENGTH;
+      aliasInput.autocomplete = "name";
+      const emailInput = createElement("input", "form-input");
+      emailInput.type = "email";
+      emailInput.maxLength = MAX_EMAIL_LENGTH;
+      emailInput.autocomplete = "email";
+      const levelSelect = createElement("select", "form-input");
+      ["Core", "Valhalla", "Ragnarok", "Tester", "No lo se aun"].forEach((value) => {
+        const option = createElement("option", "", value);
+        option.value = value;
+        levelSelect.append(option);
+      });
+      const messageInput = createElement("textarea", "form-input");
+      messageInput.maxLength = MAX_WAITLIST_MESSAGE_LENGTH;
+      const honeypot = createElement("input", "form-input secure-hidden-field");
+      honeypot.type = "text";
+      honeypot.tabIndex = -1;
+      honeypot.autocomplete = "off";
+      const privacy = document.createElement("input");
+      privacy.type = "checkbox";
+      const status = createElement("p", "account-status");
+      status.setAttribute("role", "status");
+      status.setAttribute("aria-live", "polite");
+      const mailLink = createElement("a", "form-secondary-link", "Abrir correo preparado");
+      mailLink.hidden = true;
+      form.append(
+        createElement("h3", "", "Solicitar acceso"),
+        createSecureField("Nombre o alias", aliasInput),
+        createSecureField("Correo opcional", emailInput),
+        createSecureField("Interes principal", levelSelect),
+        createSecureField("Mensaje breve", messageInput),
+        honeypot,
+        createElement("label", "secure-check-row"),
+        createElement("button", "cta-primary", "Preparar solicitud segura"),
+        status,
+        mailLink
+      );
+      const privacyLabel = form.querySelector(".secure-check-row");
+      privacyLabel.append(privacy, createElement("span", "", "Acepto que esta solicitud se revise manualmente y que no se publique mi correo."));
+      form.querySelector("button").type = "submit";
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const alias = normalizeFormText(aliasInput.value, MAX_ALIAS_LENGTH);
+        const email = normalizeFormText(emailInput.value, MAX_EMAIL_LENGTH);
+        const message = normalizeFormText(messageInput.value, MAX_WAITLIST_MESSAGE_LENGTH);
+        if (honeypot.value) return;
+        if (!alias || alias.length < 2) {
+          status.textContent = "Indica un alias reconocible.";
+          return;
+        }
+        if (!isValidOptionalEmail(email)) {
+          status.textContent = "Revisa el correo opcional.";
+          return;
+        }
+        if (hasUnsafeContributionText(`${alias} ${email} ${message}`)) {
+          status.textContent = "Por seguridad no se aceptan enlaces, HTML, scripts ni codigo.";
+          return;
+        }
+        if (!privacy.checked) {
+          status.textContent = "Acepta la revision manual y privacidad antes de preparar el envio.";
+          return;
+        }
+        if (!canSubmitSecureForm("waitlist")) {
+          status.textContent = "Espera un momento antes de preparar otra solicitud.";
+          return;
+        }
+        const draft = { type: "waitlist", alias, email, interest: levelSelect.value, message, createdAt: new Date().toISOString() };
+        appendLocalDraft(STORAGE_WAITLIST_KEY, draft);
+        markSecureFormSubmitted("waitlist");
+        mailLink.href = buildMailtoLink("Solicitud de acceso Zamazen Aegis", [
+          `Alias: ${alias}`,
+          `Correo opcional: ${email || "No indicado"}`,
+          `Interes: ${levelSelect.value}`,
+          `Mensaje: ${message || "Sin mensaje adicional"}`
+        ]);
+        mailLink.hidden = false;
+        status.textContent = "Borrador seguro preparado. Confirma el envio desde tu correo; no se publica nada automaticamente.";
+      });
+
+      const notes = createElement("aside", "secure-form-card");
+      notes.append(
+        createElement("span", "experience-status", "Privacidad"),
+        createElement("h3", "", "Que ocurre con tu solicitud"),
+        createSecureNoteList([
+          ["Sin backend falso", "La web estatica no inventa una inscripcion online."],
+          ["Sin archivos", "No se aceptan adjuntos ni documentos desde esta pantalla."],
+          ["Revision manual", "El acceso se decide cuando exista canal real y seguro."]
+        ])
+      );
+      routeDetailGrid.replaceChildren(form, notes);
+      routeDetailActions.replaceChildren(createProfileAction("Enviar idea", "#/ideas", "secondary"));
+    }
+
+    function renderSecureIdeasExperience() {
+      setRouteDetailVariant("");
+      routeDetailBadge.textContent = "Comunidad";
+      routeDetailTitle.textContent = "Ideas, mejoras y agradecimientos";
+      routeDetailBody.textContent = "Puedes preparar una propuesta segura. Nada se publica automaticamente, no se aceptan archivos y cualquier agradecimiento necesita permiso y revision manual.";
+      routeDetailGrid.className = "secure-form-layout";
+
+      const form = createElement("form", "secure-form-card secure-form-grid");
+      const aliasInput = createElement("input", "form-input");
+      aliasInput.type = "text";
+      aliasInput.maxLength = MAX_ALIAS_LENGTH;
+      aliasInput.autocomplete = "name";
+      const emailInput = createElement("input", "form-input");
+      emailInput.type = "email";
+      emailInput.maxLength = MAX_EMAIL_LENGTH;
+      emailInput.autocomplete = "email";
+      const typeSelect = createElement("select", "form-input");
+      ["Idea", "Mejora", "Error", "Seguridad", "Accesibilidad", "Web", "App", "Funcion futura"].forEach((value) => {
+        const option = createElement("option", "", value);
+        option.value = value;
+        typeSelect.append(option);
+      });
+      const messageInput = createElement("textarea", "form-input");
+      messageInput.maxLength = MAX_IDEA_MESSAGE_LENGTH;
+      const levelSelect = createElement("select", "form-input");
+      ["Sin cuenta", "Core", "Valhalla", "Ragnarok", "Tester"].forEach((value) => {
+        const option = createElement("option", "", value);
+        option.value = value;
+        levelSelect.append(option);
+      });
+      const honeypot = createElement("input", "form-input secure-hidden-field");
+      honeypot.type = "text";
+      honeypot.tabIndex = -1;
+      honeypot.autocomplete = "off";
+      const publicThanks = document.createElement("input");
+      publicThanks.type = "checkbox";
+      const anonymous = document.createElement("input");
+      anonymous.type = "checkbox";
+      const privacy = document.createElement("input");
+      privacy.type = "checkbox";
+      const status = createElement("p", "account-status");
+      status.setAttribute("role", "status");
+      status.setAttribute("aria-live", "polite");
+      const mailLink = createElement("a", "form-secondary-link", "Abrir correo preparado");
+      mailLink.hidden = true;
+
+      form.append(
+        createElement("h3", "", "Enviar propuesta segura"),
+        createSecureField("Nombre o alias", aliasInput),
+        createSecureField("Correo opcional", emailInput),
+        createSecureField("Tipo de aportacion", typeSelect),
+        createSecureField("Nivel actual", levelSelect),
+        createSecureField("Mensaje", messageInput),
+        honeypot,
+        createElement("label", "secure-check-row"),
+        createElement("label", "secure-check-row"),
+        createElement("label", "secure-check-row"),
+        createElement("button", "cta-primary", "Preparar envio seguro"),
+        status,
+        mailLink
+      );
+      const checks = form.querySelectorAll(".secure-check-row");
+      checks[0].append(publicThanks, createElement("span", "", "Quiero poder aparecer en agradecimientos si se aprueba manualmente."));
+      checks[1].append(anonymous, createElement("span", "", "Prefiero aparecer como colaborador anonimo."));
+      checks[2].append(privacy, createElement("span", "", "Acepto privacidad, revision manual y que no hay recompensa automatica."));
+      form.querySelector("button").type = "submit";
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const alias = normalizeFormText(aliasInput.value, MAX_ALIAS_LENGTH);
+        const email = normalizeFormText(emailInput.value, MAX_EMAIL_LENGTH);
+        const message = normalizeFormText(messageInput.value, MAX_IDEA_MESSAGE_LENGTH);
+        if (honeypot.value) return;
+        if (!alias || alias.length < 2) {
+          status.textContent = "Indica un alias reconocible.";
+          return;
+        }
+        if (!isValidOptionalEmail(email)) {
+          status.textContent = "Revisa el correo opcional.";
+          return;
+        }
+        if (message.length < 20) {
+          status.textContent = "Describe la idea con al menos 20 caracteres.";
+          return;
+        }
+        if (hasUnsafeContributionText(`${alias} ${email} ${message}`)) {
+          status.textContent = "Por seguridad no se aceptan enlaces, HTML, scripts ni codigo.";
+          return;
+        }
+        if (!privacy.checked) {
+          status.textContent = "Acepta privacidad y revision manual antes de preparar el envio.";
+          return;
+        }
+        if (!canSubmitSecureForm("ideas")) {
+          status.textContent = "Espera un momento antes de preparar otra propuesta.";
+          return;
+        }
+        const draft = {
+          type: typeSelect.value,
+          alias,
+          email,
+          level: levelSelect.value,
+          message,
+          publicThanks: Boolean(publicThanks.checked),
+          anonymous: Boolean(anonymous.checked),
+          createdAt: new Date().toISOString()
+        };
+        appendLocalDraft(STORAGE_CONTRIBUTIONS_KEY, draft);
+        markSecureFormSubmitted("ideas");
+        mailLink.href = buildMailtoLink("Idea o mejora para Zamazen Aegis", [
+          `Alias: ${alias}`,
+          `Correo opcional: ${email || "No indicado"}`,
+          `Tipo: ${typeSelect.value}`,
+          `Nivel: ${levelSelect.value}`,
+          `Agradecimiento publico: ${publicThanks.checked ? "Si" : "No"}`,
+          `Anonimo: ${anonymous.checked ? "Si" : "No"}`,
+          "",
+          message
+        ]);
+        mailLink.hidden = false;
+        status.textContent = "Propuesta saneada y preparada. Confirma el envio desde tu correo; nada se publica automaticamente.";
+      });
+
+      const security = createElement("aside", "secure-form-card");
+      security.append(
+        createElement("span", "experience-status", "Seguridad primero"),
+        createElement("h3", "", "Reglas de la seccion"),
+        createSecureNoteList([
+          ["Nada automatico", "Las ideas no aparecen publicamente sin revision y permiso."],
+          ["Sin archivos", "No se aceptan imagenes, PDFs, ZIPs, ejecutables ni scripts."],
+          ["Sin enlaces", "La primera version bloquea enlaces para reducir spam y phishing."],
+          ["Sin recompensas falsas", "Codigos Valhalla/Ragnarok o insignias solo tras valoracion manual."],
+          ["Admin privado", "La revision real debe vivir en backend protegido, no en HTML publico."]
+        ]),
+        createProfileAction("Ver panel privado preparado", "#/admin", "secondary")
+      );
+      routeDetailGrid.replaceChildren(form, security);
+      routeDetailActions.replaceChildren(
+        createProfileAction("Solicitar acceso", "#/lista-espera", "primary"),
+        createProfileAction("Centro de confianza", "#/confianza", "secondary")
+      );
+    }
+
     function renderRouteDetail(detailKey) {
       const language = getCurrentLanguage();
       const content = detailKey && (
@@ -8345,6 +9800,78 @@
       );
 
       if (!content || !routeDetailSection) return;
+
+      if (detailKey === "cuenta") {
+        renderAccountExperience();
+        return;
+      }
+
+      if (detailKey === "perfil") {
+        renderProfileExperience();
+        return;
+      }
+
+      if (["precios", "core", "valhalla", "ragnarok"].includes(detailKey)) {
+        renderPlanExperience(detailKey);
+        return;
+      }
+
+      if (detailKey === "demo") {
+        renderDemoExperience();
+        return;
+      }
+
+      if (detailKey === "estado-proyecto") {
+        renderStatusExperience();
+        return;
+      }
+
+      if (detailKey === "confianza") {
+        renderTrustCenterExperience();
+        return;
+      }
+
+      if (detailKey === "novedades") {
+        renderChangelogExperience();
+        return;
+      }
+
+      if (detailKey === "nube") {
+        renderCloudExperience();
+        return;
+      }
+
+      if (detailKey === "ideas") {
+        renderSecureIdeasExperience();
+        return;
+      }
+
+      if (detailKey === "lista-espera") {
+        renderWaitlistExperience();
+        return;
+      }
+
+      if (detailKey === "admin") {
+        renderAdminExperience();
+        return;
+      }
+
+      if (detailKey === "neo") {
+        renderNeoExperience();
+        return;
+      }
+
+      if (detailKey === "runas") {
+        renderRunesExperience();
+        return;
+      }
+
+      if (detailKey === "no-encontrado") {
+        renderNotFoundExperience();
+        return;
+      }
+
+      setRouteDetailVariant("");
 
       const [badge, title, body, cards, actions] = content;
       routeDetailBadge.textContent = badge;
@@ -8472,11 +9999,189 @@
       }
     }
 
+    function findProfileAvatar(account) {
+      const avatarId = account?.avatarId || account?.avatar || "guardian";
+      return WEB_PROFILE_AVATARS.find((avatar) => avatar.id === avatarId || avatar.glyph === avatarId)
+        || WEB_PROFILE_AVATARS[1];
+    }
+
+    function normalizeAccountPreview(account = null) {
+      const safeAccount = account && typeof account === "object" ? account : {};
+      const provider = safeAccount.provider || "local-preview";
+      const isOnline = provider === "zamazen-online-account";
+      const avatar = findProfileAvatar(safeAccount);
+
+      return {
+        ...safeAccount,
+        name: String(safeAccount.name || "").trim() || "Invitado local",
+        email: String(safeAccount.email || "").trim() || "Sin sesión online en esta web",
+        nick: String(safeAccount.nick || "").trim(),
+        provider,
+        avatarId: avatar.id,
+        avatarGlyph: safeAccount.avatarGlyph || avatar.glyph,
+        avatarLabel: avatar.label,
+        avatarImageData: safeAccount.avatarImageData || "",
+        level: safeAccount.level || "Core",
+        protectionStatus: safeAccount.protectionStatus || "Escudo web listo",
+        syncStatus: safeAccount.syncStatus || (isOnline
+          ? "Sesión web verificada; sincronización móvil pendiente"
+          : "Pendiente de conectar app móvil"),
+        redNeoStatus: safeAccount.redNeoStatus || "Modo local seguro hasta enlazar app",
+        bunkerStatus: safeAccount.bunkerStatus || "Bunker no sincronizado; cloud solo con paquete cifrado",
+        permissionStatus: safeAccount.permissionStatus || "Permisos Android se revisan desde la app",
+        lastSyncAt: safeAccount.lastSyncAt || safeAccount.signedInOnlineAt || safeAccount.createdOnlineAt || "",
+        deviceName: safeAccount.deviceName || "Navegador actual",
+        devicePlatform: safeAccount.devicePlatform || (navigator.platform || "Web"),
+        deviceConnected: Boolean(safeAccount.deviceConnected),
+        updatedAt: safeAccount.updatedAt || ""
+      };
+    }
+
+    function writeAccountPreview(account) {
+      const normalized = normalizeAccountPreview({
+        ...account,
+        updatedAt: new Date().toISOString()
+      });
+      localStorage.setItem(STORAGE_ACCOUNT_KEY, JSON.stringify(normalized));
+      updateUserPanelPreview();
+      return normalized;
+    }
+
+    function formatProfileDate(value) {
+      if (!value) return "Pendiente";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "Pendiente";
+      return new Intl.DateTimeFormat(getCurrentLanguage(), {
+        day: "2-digit",
+        month: "short",
+        hour: "2-digit",
+        minute: "2-digit"
+      }).format(date);
+    }
+
+    function applyAvatarSurface(element, account) {
+      if (!element) return;
+      const normalized = normalizeAccountPreview(account);
+
+      if (normalized.avatarImageData) {
+        element.textContent = "";
+        element.style.backgroundImage = `url("${normalized.avatarImageData}")`;
+        element.classList.add("has-image");
+        return;
+      }
+
+      element.style.backgroundImage = "";
+      element.classList.remove("has-image");
+      element.textContent = normalized.avatarGlyph;
+    }
+
+    function createElement(tagName, className = "", text = "") {
+      const element = document.createElement(tagName);
+      if (className) element.className = className;
+      if (text) element.textContent = text;
+      return element;
+    }
+
+    function createStatusCard(title, body, meta = "") {
+      const card = createElement("article", "sync-status-card");
+      card.append(
+        createElement("strong", "", title),
+        createElement("p", "", body)
+      );
+      if (meta) card.append(createElement("span", "sync-pill", meta));
+      return card;
+    }
+
+    function createProfileAction(label, href, variant = "secondary") {
+      const action = document.createElement("a");
+      action.className = variant === "primary" ? "cta-primary" : "cta-secondary";
+      action.href = href;
+      action.textContent = label;
+      return action;
+    }
+
+    function createSecureField(labelText, inputElement) {
+      const field = createElement("label", "profile-field");
+      field.append(createElement("span", "", labelText), inputElement);
+      return field;
+    }
+
+    function normalizeFormText(value = "", maxLength = 300) {
+      return String(value)
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, maxLength);
+    }
+
+    function hasUnsafeContributionText(value = "") {
+      const text = String(value).toLowerCase();
+      return /<|>|<\/|script|javascript:|data:|vbscript:|onerror|onload|onclick|src=|href=|https?:\/\//i.test(text);
+    }
+
+    function isValidOptionalEmail(value = "") {
+      const email = String(value).trim();
+      if (!email) return true;
+      if (email.length > MAX_EMAIL_LENGTH) return false;
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email);
+    }
+
+    function canSubmitSecureForm(formId) {
+      try {
+        const raw = JSON.parse(localStorage.getItem(STORAGE_FORM_RATE_KEY) || "{}");
+        const lastSubmitAt = Number(raw[formId] || 0);
+        return Date.now() - lastSubmitAt > SECURE_FORM_COOLDOWN_MS;
+      } catch (error) {
+        return true;
+      }
+    }
+
+    function markSecureFormSubmitted(formId) {
+      try {
+        const raw = JSON.parse(localStorage.getItem(STORAGE_FORM_RATE_KEY) || "{}");
+        raw[formId] = Date.now();
+        localStorage.setItem(STORAGE_FORM_RATE_KEY, JSON.stringify(raw));
+      } catch (error) {
+        /* Local cooldown is a convenience layer; backend rules remain mandatory later. */
+      }
+    }
+
+    function appendLocalDraft(storageKey, draft) {
+      try {
+        const drafts = JSON.parse(localStorage.getItem(storageKey) || "[]");
+        drafts.unshift(draft);
+        localStorage.setItem(storageKey, JSON.stringify(drafts.slice(0, 5)));
+      } catch (error) {
+        localStorage.setItem(storageKey, JSON.stringify([draft]));
+      }
+    }
+
+    function buildMailtoLink(subject, lines) {
+      const body = lines
+        .map((line) => normalizeFormText(line, 1000))
+        .join("\n");
+      return `mailto:zamazenaegissupport@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+
+    function createSecureNoteList(items) {
+      const list = createElement("ul", "secure-note-list");
+      items.forEach(([title, body]) => {
+        const item = createElement("li");
+        item.append(createElement("strong", "", title), createElement("small", "", body));
+        list.append(item);
+      });
+      return list;
+    }
+
     function updateUserPanelPreview() {
-      const account = readAccountPreview();
-      const name = account && account.name ? String(account.name).slice(0, 80) : "";
-      const email = account && account.email ? String(account.email).slice(0, 120) : "";
-      const isOnline = account && account.provider === "zamazen-online-account";
+      const rawAccount = readAccountPreview();
+      const account = normalizeAccountPreview(rawAccount);
+      const hasAccount = Boolean(rawAccount);
+      const name = hasAccount ? String(account.name).slice(0, 80) : "";
+      const email = hasAccount ? String(account.email).slice(0, 120) : "";
+      const isOnline = account.provider === "zamazen-online-account";
+
+      applyAvatarSurface(userPanelAvatar, hasAccount ? account : null);
+      applyAvatarSurface(userMenuAvatar, hasAccount ? account : null);
 
       if (userPanelName) {
         if (name) {
@@ -8497,7 +10202,12 @@
       }
 
       if (userPanelLevel) {
-        setTranslatedText(userPanelLevel, isOnline ? "userPanel.levelOnline" : "userPanel.levelCore");
+        if (hasAccount) {
+          userPanelLevel.removeAttribute("data-i18n");
+          userPanelLevel.textContent = isOnline ? `${account.level} online` : account.level;
+        } else {
+          setTranslatedText(userPanelLevel, "userPanel.levelCore");
+        }
       }
     }
 
@@ -8860,6 +10570,19 @@
       });
     }
 
+    googleAuthButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const selectedLanguage = document.documentElement.lang || localStorage.getItem(STORAGE_LANGUAGE_KEY) || "es";
+        const status = button.closest("form")?.querySelector(".account-status");
+        if (status) {
+          status.textContent =
+            getTranslationValue(selectedLanguage, "auth.googleStatus") ||
+            getTranslationValue("es", "auth.googleStatus") ||
+            "";
+        }
+      });
+    });
+
     if (liveMotionSwitch) {
       liveMotionSwitch.addEventListener("click", () => {
         setLiveMotion(liveMotionSwitch.getAttribute("aria-pressed") !== "true");
@@ -8925,15 +10648,16 @@
 
           if (response.ok && payload && payload.ok) {
             const profile = payload.profile || {};
-            localStorage.setItem(STORAGE_ACCOUNT_KEY, JSON.stringify({
+            writeAccountPreview({
               name: profile.name || email,
               email: profile.email || email,
               provider: "zamazen-online-account",
               onlineAccountId: profile.id || "",
-              signedInOnlineAt: new Date().toISOString()
-            }));
+              signedInOnlineAt: new Date().toISOString(),
+              lastSyncAt: new Date().toISOString(),
+              syncStatus: "Sesión web verificada; esperando enlace con app móvil"
+            });
             loginForm.reset();
-            updateUserPanelPreview();
             setStatus("auth.loginSuccess");
             return;
           }
@@ -9020,14 +10744,15 @@
           const payload = await response.json().catch(() => ({}));
 
           if (response.ok && payload && payload.ok) {
-            localStorage.setItem(STORAGE_ACCOUNT_KEY, JSON.stringify({
+            writeAccountPreview({
               ...account,
               provider: "zamazen-online-account",
               onlineAccountId: payload.profile && payload.profile.id ? payload.profile.id : "",
-              createdOnlineAt: new Date().toISOString()
-            }));
+              createdOnlineAt: new Date().toISOString(),
+              lastSyncAt: new Date().toISOString(),
+              syncStatus: "Cuenta online creada; esperando enlace con app móvil"
+            });
             accountForm.reset();
-            updateUserPanelPreview();
             setStatus("account.success");
             return;
           }
@@ -9039,11 +10764,11 @@
 
           setStatus("account.error");
         } catch (error) {
-          localStorage.setItem(STORAGE_ACCOUNT_KEY, JSON.stringify({
+          writeAccountPreview({
             ...account,
-            attemptedOnlineAt: new Date().toISOString()
-          }));
-          updateUserPanelPreview();
+            attemptedOnlineAt: new Date().toISOString(),
+            syncStatus: "Vista local guardada; API no disponible ahora"
+          });
           setStatus("account.fallback");
         } finally {
           window.clearTimeout(timeoutId);
