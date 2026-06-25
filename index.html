@@ -1669,6 +1669,128 @@
       font-weight: 900;
     }
 
+    .guardian-hall-layout {
+      display: grid;
+      gap: 18px;
+    }
+
+    .guardian-hall-grid,
+    .crown-grid,
+    .points-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .guardian-hall-grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+    }
+
+    .crown-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .points-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .guardian-hall-card,
+    .crown-card,
+    .points-rule-card,
+    .ranking-card {
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(111, 150, 232, 0.18);
+      background:
+        linear-gradient(145deg, rgba(94, 240, 189, 0.08), transparent 44%),
+        rgba(5, 12, 26, 0.82);
+      box-shadow: 0 18px 52px rgba(0, 0, 0, 0.24);
+    }
+
+    .crown-card.is-gold {
+      border-color: rgba(255, 209, 102, 0.4);
+      background:
+        radial-gradient(circle at 82% 0%, rgba(255, 209, 102, 0.22), transparent 34%),
+        rgba(5, 12, 26, 0.84);
+    }
+
+    .crown-card.is-silver {
+      border-color: rgba(210, 226, 255, 0.34);
+      background:
+        radial-gradient(circle at 82% 0%, rgba(210, 226, 255, 0.18), transparent 34%),
+        rgba(5, 12, 26, 0.84);
+    }
+
+    .crown-card.is-bronze {
+      border-color: rgba(226, 156, 98, 0.34);
+      background:
+        radial-gradient(circle at 82% 0%, rgba(226, 156, 98, 0.18), transparent 34%),
+        rgba(5, 12, 26, 0.84);
+    }
+
+    .guardian-hall-card h3,
+    .crown-card h3,
+    .points-rule-card h3,
+    .ranking-card h3 {
+      margin: 0 0 10px;
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+    }
+
+    .guardian-hall-card p,
+    .crown-card p,
+    .points-rule-card p,
+    .ranking-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .crown-symbol {
+      width: 60px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      margin-bottom: 14px;
+      border-radius: 18px;
+      color: #06110f;
+      background: linear-gradient(135deg, #ffd166, #fff3bf);
+      font-size: 1.7rem;
+      font-weight: 900;
+      box-shadow: 0 16px 38px rgba(255, 209, 102, 0.16);
+    }
+
+    .crown-card.is-silver .crown-symbol {
+      background: linear-gradient(135deg, #d7e5ff, #ffffff);
+    }
+
+    .crown-card.is-bronze .crown-symbol {
+      background: linear-gradient(135deg, #e29c62, #ffd6aa);
+    }
+
+    .points-value {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      width: fit-content;
+      margin-bottom: 12px;
+      padding: 0 12px;
+      border-radius: 999px;
+      color: #06110f;
+      background: linear-gradient(135deg, var(--green), #b8ffe6);
+      font-size: 0.82rem;
+      font-weight: 900;
+    }
+
+    .hall-empty-state {
+      border-style: dashed;
+      border-color: rgba(94, 240, 189, 0.32);
+      background:
+        linear-gradient(135deg, rgba(94, 240, 189, 0.08), transparent 48%),
+        rgba(5, 12, 26, 0.62);
+    }
+
     .screen-transition-label {
       position: fixed;
       width: 1px;
@@ -4100,7 +4222,10 @@
       .experience-dashboard,
       .plan-showcase-grid,
       .guardian-demo-layout,
-      .secure-form-layout {
+      .secure-form-layout,
+      .guardian-hall-grid,
+      .crown-grid,
+      .points-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -4161,6 +4286,10 @@
       .page-shell {
         max-width: 100vw;
         overflow-x: hidden;
+      }
+
+      main {
+        padding-bottom: calc(92px + env(safe-area-inset-bottom));
       }
 
       .container {
@@ -4300,7 +4429,10 @@
       .experience-dashboard,
       .secure-form-layout,
       .guardian-demo-layout,
-      .plan-showcase-grid {
+      .plan-showcase-grid,
+      .guardian-hall-grid,
+      .crown-grid,
+      .points-grid {
         grid-template-columns: 1fr;
       }
 
@@ -4455,8 +4587,14 @@
       }
 
       .quick-launcher {
-        right: 12px;
-        bottom: 12px;
+        right: 14px;
+        bottom: calc(14px + env(safe-area-inset-bottom));
+      }
+
+      .quick-menu-toggle {
+        width: 50px;
+        height: 50px;
+        border-radius: 17px;
       }
 
       .quick-menu {
@@ -4493,6 +4631,7 @@
             <a href="#/seguridad" data-i18n="nav.security">Seguridad</a>
             <a href="#/precios" data-i18n="nav.premium">Precios</a>
             <a href="#/ideas" data-i18n="nav.ideas">Ideas</a>
+            <a href="#/salon-guardianes" data-i18n="nav.guardianHall">Salón</a>
             <a href="#/sobre-zamazenaegis" data-i18n="nav.about">Sobre</a>
             <a href="#/equipo" data-i18n="nav.team">Equipo</a>
             <a href="#/faq" data-i18n="nav.faq">FAQ</a>
@@ -5902,6 +6041,7 @@
             <a href="#/confianza" data-i18n="nav.trust">Confianza</a>
             <a href="#/novedades" data-i18n="nav.news">Novedades</a>
             <a href="#/ideas" data-i18n="nav.ideas">Ideas</a>
+            <a href="#/salon-guardianes" data-i18n="nav.guardianHall">Salón de Guardianes</a>
             <a href="#/funciones" data-i18n="nav.security">Seguridad</a>
             <a href="#/privacidad" data-i18n="privacy.badge">Privacidad y control</a>
             <a href="#/cuenta" data-i18n="nav.account">Cuenta</a>
@@ -5951,7 +6091,7 @@
       <a href="#/seguridad"><span class="quick-menu-icon" aria-hidden="true">ᚦ</span><span data-i18n="nav.security">Seguridad</span></a>
       <a href="#/cuenta"><span class="quick-menu-icon" aria-hidden="true">ᛟ</span><span data-i18n="quickMenu.account">Cuenta</span></a>
       <a href="#/precios"><span class="quick-menu-icon" aria-hidden="true">ᚠ</span><span data-i18n="quickMenu.premium">Precios</span></a>
-      <a href="#/ideas"><span class="quick-menu-icon" aria-hidden="true">ᚲ</span><span data-i18n="nav.ideas">Ideas</span></a>
+      <a href="#/salon-guardianes"><span class="quick-menu-icon" aria-hidden="true">ᚲ</span><span data-i18n="nav.guardianHall">Salón</span></a>
     </nav>
     <button class="quick-menu-toggle" id="quickMenuToggle" type="button" aria-expanded="false" aria-controls="quickMenu" aria-label="Abrir accesos rápidos" data-i18n-attr="aria-label:quickMenu.open">ᛉ</button>
   </div>
@@ -6153,6 +6293,11 @@
       ideas: "ideas",
       mejoras: "ideas",
       agradecimientos: "ideas",
+      salon: "salon-guardianes",
+      "salon-guardianes": "salon-guardianes",
+      guardianes: "salon-guardianes",
+      puntos: "salon-guardianes",
+      coronas: "salon-guardianes",
       "estado-proyecto": "estado-proyecto",
       "lista-espera": "lista-espera",
       confianza: "confianza",
@@ -6180,6 +6325,7 @@
       confianza: { sections: ["pagina-interna"], detail: "confianza" },
       novedades: { sections: ["pagina-interna"], detail: "novedades" },
       ideas: { sections: ["pagina-interna"], detail: "ideas" },
+      "salon-guardianes": { sections: ["pagina-interna"], detail: "salon-guardianes" },
       admin: { sections: ["pagina-interna"], detail: "admin" },
       legal: { sections: ["pagina-interna"], detail: "legal" },
       nube: { sections: ["pagina-interna"], detail: "nube" },
@@ -6307,6 +6453,29 @@
         risk: 38
       }
     ];
+    const GUARDIAN_POINT_RULES = [
+      ["Idea útil", "+10", "Aporta claridad o mejora una parte concreta del proyecto."],
+      ["Mejora aceptada", "+25", "Puede integrarse sin romper estabilidad ni privacidad."],
+      ["Error visual detectado", "+15", "Ayuda a pulir confianza, responsive o accesibilidad visual."],
+      ["Error funcional importante", "+50", "Evita un fallo real de uso, cuenta, datos o navegación."],
+      ["Mejora de accesibilidad", "+40", "Facilita uso a personas mayores, lector de pantalla o texto grande."],
+      ["Reporte de seguridad serio", "+100", "Reduce riesgo real sin publicar detalles sensibles."],
+      ["Idea implementada", "+75", "Termina llegando a la app, la web o Red Neo tras revisión."],
+      ["Aportación excepcional", "Manual", "El equipo decide puntos según impacto real, no por cantidad."]
+    ];
+    const GUARDIAN_CROWNS = [
+      ["is-gold", "1º", "Guardián Ragnarok", "Corona dorada para la aportación más valiosa del periodo."],
+      ["is-silver", "2º", "Guardián Valhalla", "Corona plateada para una ayuda destacada y constante."],
+      ["is-bronze", "3º", "Guardián Core Honorífico", "Corona rúnica para una contribución útil y cuidada."]
+    ];
+    const GUARDIAN_BADGES = [
+      "Aliado de Neo",
+      "Centinela Aegis",
+      "Vigilante de Red Neo",
+      "Custodio del Bunker",
+      "Guardián de Accesibilidad",
+      "Guardián Legendario"
+    ];
 
     const translations = {
       es: {
@@ -6327,6 +6496,7 @@
           trust: "Confianza",
           news: "Novedades",
           ideas: "Ideas",
+          guardianHall: "Salón",
           waitlist: "Acceso de prueba",
           cloud: "Nube",
           security: "Seguridad",
@@ -6796,7 +6966,7 @@
           description: "Zamazen Aegis helps review reported risk signals in calls, SMS and links with Neo, clear privacy and a futuristic experience designed to anticipate risk."
         },
         brand: { name: "Zamazen Aegis", tagline: "Intelligent Security", homeAria: "Go to the Zamazen Aegis start" },
-        nav: { home: "Home", projectStatus: "Status", features: "Features", center: "Center", trust: "Trust", news: "News", ideas: "Ideas", waitlist: "Trial access", cloud: "Cloud", security: "Security", account: "Account", data: "Data", deleteAccount: "Delete account", premium: "Plans", bunker: "Bunker", neoNetwork: "Neo Network", about: "About", team: "Team", help: "Help", music: "Music", faq: "FAQ", cta: "Activate shield" },
+        nav: { home: "Home", projectStatus: "Status", features: "Features", center: "Center", trust: "Trust", news: "News", ideas: "Ideas", guardianHall: "Hall", waitlist: "Trial access", cloud: "Cloud", security: "Security", account: "Account", data: "Data", deleteAccount: "Delete account", premium: "Plans", bunker: "Bunker", neoNetwork: "Neo Network", about: "About", team: "Team", help: "Help", music: "Music", faq: "FAQ", cta: "Activate shield" },
         accessibility: { normal: "Normal", medium: "Medium", large: "Large" },
         hero: {
           eyebrow: "Intelligent digital shield",
@@ -7241,7 +7411,7 @@
           description: "Zamazen Aegis aide à examiner les signaux de risque signalés dans les appels, SMS et liens avec Neo, une confidentialité claire et une expérience futuriste conçue pour anticiper le risque."
         },
         brand: { name: "Zamazen Aegis", tagline: "Sécurité Intelligente", homeAria: "Aller au début de Zamazen Aegis" },
-        nav: { home: "Accueil", projectStatus: "État", features: "Fonctions", center: "Centre", trust: "Confiance", news: "Nouveautés", ideas: "Idées", waitlist: "Accès test", cloud: "Cloud", security: "Sécurité", account: "Compte", data: "Données", deleteAccount: "Supprimer le compte", premium: "Tarifs", bunker: "Bunker", neoNetwork: "Réseau Neo", about: "Projet", team: "Équipe", help: "Aide", music: "Musique", faq: "FAQ", cta: "Activer le bouclier" },
+        nav: { home: "Accueil", projectStatus: "État", features: "Fonctions", center: "Centre", trust: "Confiance", news: "Nouveautés", ideas: "Idées", guardianHall: "Salon", waitlist: "Accès test", cloud: "Cloud", security: "Sécurité", account: "Compte", data: "Données", deleteAccount: "Supprimer le compte", premium: "Tarifs", bunker: "Bunker", neoNetwork: "Réseau Neo", about: "Projet", team: "Équipe", help: "Aide", music: "Musique", faq: "FAQ", cta: "Activer le bouclier" },
         accessibility: { normal: "Normal", medium: "Moyen", large: "Grand" },
         hero: {
           eyebrow: "Bouclier numérique intelligent",
@@ -7686,7 +7856,7 @@
           description: "Zamazen Aegis ajuda a revisar sinais de risco reportados em chamadas, SMS e links com Neo, privacidade clara e uma experiência futurista criada para antecipar riscos."
         },
         brand: { name: "Zamazen Aegis", tagline: "Segurança Inteligente", homeAria: "Ir para o início de Zamazen Aegis" },
-        nav: { home: "Início", projectStatus: "Estado", features: "Funções", center: "Centro", trust: "Confiança", news: "Novidades", ideas: "Ideias", waitlist: "Acesso teste", cloud: "Nuvem", security: "Segurança", account: "Conta", data: "Dados", deleteAccount: "Eliminar conta", premium: "Preços", bunker: "Bunker", neoNetwork: "Red Neo", about: "Projeto", team: "Equipe", help: "Ajuda", music: "Música", faq: "FAQ", cta: "Ativar escudo" },
+        nav: { home: "Início", projectStatus: "Estado", features: "Funções", center: "Centro", trust: "Confiança", news: "Novidades", ideas: "Ideias", guardianHall: "Salão", waitlist: "Acesso teste", cloud: "Nuvem", security: "Segurança", account: "Conta", data: "Dados", deleteAccount: "Eliminar conta", premium: "Preços", bunker: "Bunker", neoNetwork: "Red Neo", about: "Projeto", team: "Equipe", help: "Ajuda", music: "Música", faq: "FAQ", cta: "Ativar escudo" },
         accessibility: { normal: "Normal", medium: "Médio", large: "Grande" },
         hero: {
           eyebrow: "Escudo digital inteligente",
@@ -8709,6 +8879,7 @@
         confianza: ["Confianza", "Centro de confianza y privacidad", "Una pantalla clara para entender que protege Zamazen, que permisos puede pedir, que datos evita y que limites reales tiene Android.", [["Permisos explicados", "Nada sensible se pide sin utilidad, consentimiento y alternativa manual cuando haga falta."], ["Datos minimos", "No se publican secretos, correos ni reportes sin saneamiento."], ["Cero humo", "No se promete proteccion absoluta ni deteccion perfecta."]], [["Gestionar datos", "#/datos", "primary"], ["Ver permisos", "#/permisos", "secondary"]]],
         novedades: ["Novedades", "Historial del Guardian", "Resumen de cambios recientes de la web, avances de la app y proximos pasos generales para demostrar que el proyecto esta vivo.", [["Web tipo arbol", "Las rutas internas sustituyen la landing interminable."], ["Perfil vivo", "Cuenta, avatar, nivel y sincronizacion preparada."], ["Comunidad segura", "Ideas y agradecimientos se revisan manualmente antes de aparecer."]], [["Estado del proyecto", "#/estado-proyecto", "primary"], ["Ideas", "#/ideas", "secondary"]]],
         ideas: ["Ideas", "Ideas, mejoras y agradecimientos", "Recibe propuestas utiles de forma segura: sin archivos, sin scripts, sin publicacion automatica y siempre con revision manual.", [["Formulario controlado", "Solo texto limitado, validado y saneado."], ["Moderacion", "Nada aparece en agradecimientos sin permiso y revision."], ["Recompensas", "Los codigos o reconocimientos nunca son automaticos."]], [["Enviar propuesta", "#/ideas", "primary"], ["Estado del proyecto", "#/estado-proyecto", "secondary"]]],
+        "salon-guardianes": ["Comunidad", "Salón de Guardianes", "Reconocimiento publico preparado para quienes ayuden de verdad: puntos por impacto real, coronas, insignias y agradecimientos solo con permiso y revision manual.", [["Puntos", "No se ganan por enviar mucho; se asignan por utilidad real."], ["Coronas", "Ragnarok, Valhalla y Core Honorifico destacan aportaciones aprobadas."], ["Privacidad", "Alias, anonimo o no aparecer: siempre decide el usuario."]], [["Enviar idea", "#/ideas", "primary"], ["Panel privado", "#/admin", "secondary"]]],
         admin: ["Privado", "Panel administrador protegido", "Pantalla bloqueada para dejar claro que la revision de ideas, testers y recompensas no vive en el frontend publico.", [["Sin datos publicos", "No hay lista administrativa ni claves en el HTML."], ["Backend requerido", "El panel real necesitara login, roles, reglas y auditoria."], ["Revision manual", "Las aportaciones solo se publican tras aprobacion."]], [["Ideas", "#/ideas", "primary"], ["Inicio", "#/inicio", "secondary"]]],
         legal: ["Legal", "Centro legal", "Entrada clara a privacidad, cookies, producto, datos, eliminacion de cuenta y licencia sin mezclarlo con la home.", [["Privacidad", "Que datos se usan y que datos no se publican.", "#/privacidad"], ["Cookies", "Preferencias necesarias y opcionales.", "#/politica-cookies"], ["Licencia", "Uso correcto de Core, Valhalla y Ragnarok.", "#/contrato-licencia"]], [["Privacidad", "#/privacidad", "primary"], ["Contacto", "#/contacto", "secondary"]]],
         nube: ["Cuenta", "Nube y sincronizacion", "Vista preparada para datos sincronizados cuando la app movil y el backend esten conectados. Hoy muestra estados honestos, no datos inventados.", [["App movil", "Todavia no vinculada en esta web publica."], ["Bunker Cloud", "Solo aceptara paquetes cifrados por el usuario cuando este activo."], ["Control", "Exportar, borrar o desvincular requerira autenticacion real."]], [["Perfil", "#/perfil", "primary"], ["Datos", "#/datos", "secondary"]]],
@@ -8751,6 +8922,7 @@
         confianza: ["Trust", "Trust and privacy center", "A clear screen to understand what Zamazen protects, which permissions it may need, what data it avoids and Android's real limits.", [["Permissions explained", "Nothing sensitive is requested without value, consent and manual fallback."], ["Minimal data", "No secrets, emails or reports are published without sanitization."], ["No smoke", "No absolute protection or perfect detection promises."]], [["Manage data", "#/datos", "primary"], ["View permissions", "#/permisos", "secondary"]]],
         novedades: ["News", "Guardian changelog", "Recent web changes, app progress and general next steps to show that the project is alive.", [["Tree web", "Internal routes replaced the endless landing."], ["Living profile", "Account, avatar, level and sync readiness."], ["Safe community", "Ideas and acknowledgements are manually reviewed before publication."]], [["Project status", "#/estado-proyecto", "primary"], ["Ideas", "#/ideas", "secondary"]]],
         ideas: ["Ideas", "Ideas, improvements and acknowledgements", "Useful proposals are received safely: no files, no scripts, no automatic publishing and always manual review.", [["Controlled form", "Only limited, validated and sanitized text."], ["Moderation", "Nothing appears in acknowledgements without permission and review."], ["Rewards", "Codes or recognition are never automatic."]], [["Send proposal", "#/ideas", "primary"], ["Project status", "#/estado-proyecto", "secondary"]]],
+        "salon-guardianes": ["Community", "Hall of Guardians", "Public recognition prepared for people who truly help: impact-based points, crowns, badges and acknowledgements only with permission and manual review.", [["Points", "Not earned by sending many messages; assigned by real usefulness."], ["Crowns", "Ragnarok, Valhalla and Honorary Core highlight approved contributions."], ["Privacy", "Alias, anonymous or not listed: the user always decides."]], [["Send idea", "#/ideas", "primary"], ["Private panel", "#/admin", "secondary"]]],
         admin: ["Private", "Protected admin panel", "A locked screen that makes clear idea review, testers and rewards do not live in the public frontend.", [["No public data", "No admin list or secrets in the HTML."], ["Backend required", "The real panel needs login, roles, rules and audit."], ["Manual review", "Contributions publish only after approval."]], [["Ideas", "#/ideas", "primary"], ["Home", "#/inicio", "secondary"]]],
         legal: ["Legal", "Legal center", "Clear entry to privacy, cookies, product policy, data, account deletion and license without mixing it into the home.", [["Privacy", "Which data is used and which data is not published.", "#/privacidad"], ["Cookies", "Necessary and optional preferences.", "#/politica-cookies"], ["License", "Correct use of Core, Valhalla and Ragnarok.", "#/contrato-licencia"]], [["Privacy", "#/privacidad", "primary"], ["Contact", "#/contacto", "secondary"]]],
         nube: ["Account", "Cloud and sync", "A view prepared for synchronized data when the mobile app and backend are connected. Today it shows honest states, not invented data.", [["Mobile app", "Not linked in this public website yet."], ["Bunker Cloud", "Will only accept user-encrypted packages when active."], ["Control", "Export, delete or unlink will require real authentication."]], [["Profile", "#/perfil", "primary"], ["Data", "#/datos", "secondary"]]],
@@ -9782,11 +9954,115 @@
           ["Sin recompensas falsas", "Codigos Valhalla/Ragnarok o insignias solo tras valoracion manual."],
           ["Admin privado", "La revision real debe vivir en backend protegido, no en HTML publico."]
         ]),
+        createProfileAction("Abrir Salón de Guardianes", "#/salon-guardianes", "primary"),
         createProfileAction("Ver panel privado preparado", "#/admin", "secondary")
       );
       routeDetailGrid.replaceChildren(form, security);
       routeDetailActions.replaceChildren(
         createProfileAction("Solicitar acceso", "#/lista-espera", "primary"),
+        createProfileAction("Centro de confianza", "#/confianza", "secondary")
+      );
+    }
+
+    function renderGuardianHallExperience() {
+      setRouteDetailVariant("");
+      routeDetailBadge.textContent = "Comunidad";
+      routeDetailTitle.textContent = "Salón de Guardianes";
+      routeDetailBody.textContent = "Zamazen Aegis tambien crece gracias a quienes ayudan al Guardian. Los puntos, coronas e insignias se asignan manualmente por impacto real, nunca por spam ni cantidad de mensajes.";
+      routeDetailGrid.className = "guardian-hall-layout";
+
+      const introGrid = createElement("section", "guardian-hall-grid");
+      const philosophy = createElement("article", "guardian-hall-card");
+      philosophy.append(
+        createElement("span", "experience-status", "No gana quien mas envia"),
+        createElement("h3", "", "Gana quien mas ayuda"),
+        createElement("p", "", "Cada idea, mejora, error o reporte se revisa por utilidad, seguridad, estabilidad, privacidad, accesibilidad e impacto real en usuarios. Si hay abuso, spam o repeticion, no suma puntos.")
+      );
+      const privacy = createElement("article", "guardian-hall-card");
+      privacy.append(
+        createElement("span", "experience-status", "Privacidad"),
+        createElement("h3", "", "Aparecer es opcional"),
+        createElement("p", "", "Nadie aparece sin permiso. El usuario puede usar alias, aparecer como colaborador anonimo o no aparecer. Nunca se muestran correo, IP, datos privados, mensajes completos ni informacion sensible.")
+      );
+      introGrid.append(philosophy, privacy);
+
+      const pointsSection = createElement("section", "guardian-hall-card");
+      pointsSection.append(
+        createElement("span", "experience-status", "Puntos manuales"),
+        createElement("h3", "", "Tabla orientativa de impacto")
+      );
+      const pointsGrid = createElement("div", "points-grid");
+      GUARDIAN_POINT_RULES.forEach(([title, points, body]) => {
+        const card = createElement("article", "points-rule-card");
+        card.append(
+          createElement("span", "points-value", points),
+          createElement("h3", "", title),
+          createElement("p", "", body)
+        );
+        pointsGrid.append(card);
+      });
+      pointsSection.append(pointsGrid);
+
+      const crownsSection = createElement("section", "guardian-hall-card");
+      crownsSection.append(
+        createElement("span", "experience-status", "Coronas"),
+        createElement("h3", "", "Puestos destacados cuando exista ranking aprobado")
+      );
+      const crownGrid = createElement("div", "crown-grid");
+      GUARDIAN_CROWNS.forEach(([className, place, title, body]) => {
+        const card = createElement("article", `crown-card ${className}`);
+        card.append(
+          createElement("div", "crown-symbol", place),
+          createElement("h3", "", title),
+          createElement("p", "", body)
+        );
+        crownGrid.append(card);
+      });
+      crownsSection.append(crownGrid);
+
+      const rankingGrid = createElement("section", "guardian-hall-grid");
+      const monthly = createElement("article", "ranking-card hall-empty-state");
+      monthly.append(
+        createElement("span", "experience-status", "Ranking mensual"),
+        createElement("h3", "", "Pendiente de activacion manual"),
+        createElement("p", "", "Se mostrara solo cuando el administrador apruebe entradas reales del mes. Ahora no hay nombres publicados porque no se deben inventar colaboradores.")
+      );
+      const historical = createElement("article", "ranking-card hall-empty-state");
+      historical.append(
+        createElement("span", "experience-status", "Ranking historico"),
+        createElement("h3", "", "Reconocimiento permanente preparado"),
+        createElement("p", "", "Guardara el historial aprobado desde el inicio del proyecto cuando exista backend/panel privado y consentimiento de cada persona.")
+      );
+      rankingGrid.append(monthly, historical);
+
+      const badgesSection = createElement("section", "guardian-hall-card");
+      badgesSection.append(
+        createElement("span", "experience-status", "Insignias"),
+        createElement("h3", "", "Reconocimientos posibles")
+      );
+      const badgeList = createElement("div", "profile-pill-row");
+      GUARDIAN_BADGES.forEach((badge) => badgeList.append(createElement("span", "profile-pill", badge)));
+      badgesSection.append(
+        badgeList,
+        createElement("p", "", "Las insignias y recompensas pueden acompañar agradecimientos, codigos temporales Valhalla/Ragnarok o acceso anticipado, siempre tras revision manual y sin automatismos.")
+      );
+
+      const adminSection = createElement("section", "guardian-hall-card");
+      adminSection.append(
+        createElement("span", "experience-status", "Admin privado"),
+        createElement("h3", "", "Gestion segura obligatoria"),
+        createSecureNoteList([
+          ["Aprobar o rechazar", "Cada aportacion se revisa antes de publicar."],
+          ["Asignar puntos", "El administrador decide puntos e insignias segun impacto real."],
+          ["Corregir abusos", "Spam, repeticion, HTML, scripts o intentos de abuso no suman."],
+          ["Recompensas pendientes", "Cualquier codigo debe tener caducidad, control y trazabilidad."]
+        ])
+      );
+
+      routeDetailGrid.replaceChildren(introGrid, pointsSection, crownsSection, rankingGrid, badgesSection, adminSection);
+      routeDetailActions.replaceChildren(
+        createProfileAction("Enviar idea segura", "#/ideas", "primary"),
+        createProfileAction("Panel privado", "#/admin", "secondary"),
         createProfileAction("Centro de confianza", "#/confianza", "secondary")
       );
     }
@@ -9843,6 +10119,11 @@
 
       if (detailKey === "ideas") {
         renderSecureIdeasExperience();
+        return;
+      }
+
+      if (detailKey === "salon-guardianes") {
+        renderGuardianHallExperience();
         return;
       }
 
