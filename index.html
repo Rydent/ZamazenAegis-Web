@@ -6481,6 +6481,922 @@
       "Guardián de Accesibilidad",
       "Guardián Legendario"
     ];
+    const RICH_ROUTE_COPY = {
+      es: {
+        account: {
+          badge: "Cuenta",
+          title: "Cuenta Zamazen y acceso Google",
+          body: "Cuenta Zamazen es la identidad completa del Guardián. Google existe como acceso rápido, pero sin fingir funciones avanzadas si OAuth o la app móvil todavía no están conectados.",
+          official: "Cuenta oficial",
+          zamazenTitle: "Cuenta Zamazen",
+          zamazenBody: "Más integrada con perfil, Red Neo, Bunker cifrado, dispositivos y recuperación cuando el backend esté disponible.",
+          createAccount: "Crear cuenta Zamazen",
+          quickAccess: "Acceso rápido",
+          googleTitle: "Cuenta con Google",
+          googleBody: "Opción cómoda para entrar rápido cuando OAuth real esté activo. Las funciones avanzadas pueden requerir Cuenta Zamazen propia.",
+          googleAction: "Entrar con Google",
+          profile: "Perfil",
+          sync: "Sincronización",
+          device: "Dispositivo",
+          pending: "Pendiente",
+          mobileNotLinked: "App móvil no vinculada",
+          ecosystem: "Ecosistema",
+          ecosystemBody: "Red Neo, Bunker y permisos se mostrarán aquí al enlazar app real.",
+          prepared: "Preparado",
+          openProfile: "Abrir perfil",
+          security: "Seguridad",
+          subscription: "Suscripción"
+        },
+        profile: {
+          badge: "Perfil",
+          title: "Perfil Zamazen",
+          body: "Identidad, avatar, nivel, estado de protección y sincronización preparados para convivir con la app móvil sin inventar datos online.",
+          defaultName: "Invitado local",
+          defaultEmail: "Sin sesión online en esta web",
+          nickMissing: "Nick no configurado",
+          onlineVerified: "Online verificada",
+          localSafe: "Vista local segura",
+          editTitle: "Editar información básica",
+          editBody: "Estos datos se guardan solo en este navegador hasta que la cuenta online y la app móvil estén conectadas.",
+          visibleName: "Nombre visible",
+          email: "Email",
+          nick: "Nick",
+          save: "Guardar perfil local",
+          saved: "Perfil local actualizado. La sincronización real se activará cuando la app/backend estén conectados.",
+          avatarTitle: "Avatar Zamazen",
+          avatarBody: "Elige un avatar del universo Zamazen o usa una foto propia local. La imagen no se sube desde esta web.",
+          upload: "Subir foto local",
+          remove: "Quitar foto",
+          photoRemoved: "Foto local retirada. Se mantiene el avatar Zamazen seleccionado.",
+          invalidImage: "Elige una imagen válida para el perfil.",
+          imageTooLarge: "La imagen es demasiado grande para guardarse de forma local en esta web.",
+          photoApplied: "Foto local aplicada en este navegador. No se ha subido a ningún servidor.",
+          protection: "Protección",
+          webReady: "Escudo web listo",
+          syncStatus: "Pendiente de conectar app móvil",
+          redNeo: "Red Neo",
+          redNeoLocal: "Modo local seguro hasta enlazar app",
+          webOnline: "Web online",
+          webOffline: "Web offline",
+          bunker: "Bunker",
+          bunkerLocal: "Bunker no sincronizado; cloud solo con paquete cifrado",
+          encryptedByUser: "Cifrado por usuario",
+          permissions: "Permisos",
+          permissionsMobile: "Permisos Android se revisan desde la app",
+          mobileApp: "App móvil",
+          device: "Dispositivo",
+          platformWeb: "Web",
+          data: "Datos",
+          dataBody: "Nombre, email, avatar y preferencias visibles; sin contraseñas ni tokens.",
+          minimal: "Mínimo",
+          notices: "Avisos",
+          noticesBody: "Sin avisos críticos de cuenta en esta web.",
+          clear: "Claro",
+          actionsTitle: "Accesos del perfil",
+          actionsBody: "Rutas directas a seguridad, permisos, datos, suscripción y configuración sin mezclar pantallas.",
+          account: "Cuenta",
+          plan: "Suscripción",
+          signIn: "Iniciar sesión",
+          avatarLabels: { guardian: "Guardián", runes: "Runas", "aegis-core": "Núcleo" }
+        },
+        plan: {
+          premium: "Premium",
+          title: "Core, Valhalla y Ragnarok",
+          genericBody: "Compara las ediciones desde una pantalla dedicada. Core es útil, Valhalla mejora la experiencia y Ragnarok concentra la capa más completa cuando Android, permisos y consentimiento lo permiten.",
+          selectedBody: "Esta vista explica valor, límites y siguiente paso sin prometer protección absoluta.",
+          transparency: "Transparencia",
+          upgradeTitle: "Qué ganas al subir",
+          upgradeBody: "Cada nivel aumenta contexto, personalización e integración, pero Zamazen Aegis mantiene los límites reales de Android, permisos y consentimiento.",
+          create: "Crear cuenta Zamazen",
+          trial: "Solicitar acceso de prueba",
+          demo: "Ver demo guiada",
+          plans: [
+            ["core", "Core", "CO", "is-core", "Ideal para empezar sin presión.", "Protección esencial útil, honesta y ligera.", ["Escáner manual y explicaciones claras", "Historial básico local", "Limpieza segura", "Red Neo saneada con consentimiento"], "Elegir Core", "#/core"],
+            ["valhalla", "Valhalla", "VA", "is-valhalla", "Para usuarios que quieren más contexto.", "Mejora clara en privacidad, permisos y Bunker.", ["Más señales para enlaces y apps", "Bunker mejorado", "Tendencias Red Neo", "Personalización y estado premium"], "Mejorar a Valhalla", "#/valhalla"],
+            ["ragnarok", "Ragnarok", "RG", "is-ragnarok", "Para quien quiere apoyar al máximo.", "La experiencia completa cuando Android y el consentimiento lo permiten.", ["Banca, identidad y credenciales", "Bunker total", "Red Neo prioritaria", "Resolución guiada de riesgos complejos"], "Desbloquear Ragnarok", "#/ragnarok"]
+          ]
+        },
+        demo: {
+          badge: "Demo",
+          title: "Mira cómo actúa Zamazen",
+          body: "Una demostración visual de ayuda al usuario: señales, explicación de Neo, decisión clara y degradación segura si falta permiso o conexión.",
+          risk: "Riesgo estimado",
+          action: "Acción recomendada",
+          neoExplains: "Neo explica",
+          privacy: "Privacidad",
+          privacyBody: "La demo no ejecuta enlaces, no lee datos reales y no sube información.",
+          safe: "Seguro",
+          create: "Crear cuenta Zamazen",
+          features: "Ver funciones",
+          scenarios: [
+            ["call", "Llamada sospechosa", "Neo detecta una llamada con señales de fraude", "Número desconocido, urgencia comercial y patrón de repetición. Zamazen recomienda no devolver la llamada sin verificar.", "Bloquear o revisar manualmente", 72],
+            ["sms", "SMS phishing", "Un SMS imita a una entidad bancaria", "El mensaje presiona con urgencia y un enlace dudoso. Neo explica que no se deben introducir credenciales desde el enlace.", "Marcar para revisar y reportar", 86],
+            ["link", "Enlace dudoso", "El enlace necesita verificación antes de abrir", "Dominio raro, redirección y palabras de premio. Zamazen ayuda a decidir sin ejecutar contenido peligroso.", "Analizar antes de abrir", 64],
+            ["permission", "Permiso delicado", "Android pide un permiso sensible", "La app explica para qué se usa, qué alternativa existe y qué ocurre si el usuario no lo concede.", "Conceder solo si aporta valor", 48],
+            ["network", "Red Neo", "Un reporte puede ayudar sin publicar secretos", "Antes de enviarse, se sanea el contenido para evitar tokens, correos sensibles, códigos y datos privados.", "Compartir indicador saneado", 38]
+          ]
+        },
+        waitlist: {
+          badge: "Acceso",
+          title: "Lista de espera y acceso de prueba",
+          body: "Solicitud segura: sin archivos, sin HTML, sin publicación automática y sin backend falso. La web prepara un borrador saneado para envío manual.",
+          formTitle: "Solicitar acceso",
+          alias: "Nombre o alias",
+          email: "Correo opcional",
+          interest: "Interés principal",
+          message: "Mensaje breve",
+          submit: "Preparar solicitud segura",
+          privacyText: "Acepto que esta solicitud se revise manualmente y que no se publique mi correo.",
+          mail: "Abrir correo preparado",
+          invalidAlias: "Indica un alias reconocible.",
+          invalidEmail: "Revisa el correo opcional.",
+          unsafe: "Por seguridad no se aceptan enlaces, HTML, scripts ni código.",
+          accept: "Acepta la revisión manual y privacidad antes de preparar el envío.",
+          cooldown: "Espera un momento antes de preparar otra solicitud.",
+          ready: "Borrador seguro preparado. Confirma el envío desde tu correo; no se publica nada automáticamente.",
+          subject: "Solicitud de acceso Zamazen Aegis",
+          optionalMissing: "No indicado",
+          noMessage: "Sin mensaje adicional",
+          notesBadge: "Privacidad",
+          notesTitle: "Qué ocurre con tu solicitud",
+          notes: [["Sin backend falso", "La web estática no inventa una inscripción online."], ["Sin archivos", "No se aceptan adjuntos ni documentos desde esta pantalla."], ["Revisión manual", "El acceso se decide cuando exista canal real y seguro."]],
+          ideaAction: "Enviar idea",
+          levels: ["Core", "Valhalla", "Ragnarok", "Tester", "No lo sé aún"]
+        },
+        ideas: {
+          badge: "Comunidad",
+          title: "Ideas, mejoras y agradecimientos",
+          body: "Puedes preparar una propuesta segura. Nada se publica automáticamente, no se aceptan archivos y cualquier agradecimiento necesita permiso y revisión manual.",
+          formTitle: "Enviar propuesta segura",
+          alias: "Nombre o alias",
+          email: "Correo opcional",
+          type: "Tipo de aportación",
+          level: "Nivel actual",
+          message: "Mensaje",
+          submit: "Preparar envío seguro",
+          publicThanks: "Quiero poder aparecer en agradecimientos si se aprueba manualmente.",
+          anonymous: "Prefiero aparecer como colaborador anónimo.",
+          privacy: "Acepto privacidad, revisión manual y que no hay recompensa automática.",
+          mail: "Abrir correo preparado",
+          invalidAlias: "Indica un alias reconocible.",
+          invalidEmail: "Revisa el correo opcional.",
+          shortMessage: "Describe la idea con al menos 20 caracteres.",
+          unsafe: "Por seguridad no se aceptan enlaces, HTML, scripts ni código.",
+          accept: "Acepta privacidad y revisión manual antes de preparar el envío.",
+          cooldown: "Espera un momento antes de preparar otra propuesta.",
+          ready: "Propuesta saneada y preparada. Confirma el envío desde tu correo; nada se publica automáticamente.",
+          subject: "Idea o mejora para Zamazen Aegis",
+          optionalMissing: "No indicado",
+          yes: "Sí",
+          no: "No",
+          securityBadge: "Seguridad primero",
+          rulesTitle: "Reglas de la sección",
+          rules: [["Nada automático", "Las ideas no aparecen públicamente sin revisión y permiso."], ["Sin archivos", "No se aceptan imágenes, PDFs, ZIPs, ejecutables ni scripts."], ["Sin enlaces", "La primera versión bloquea enlaces para reducir spam y phishing."], ["Sin recompensas falsas", "Códigos Valhalla/Ragnarok o insignias solo tras valoración manual."], ["Admin privado", "La revisión real debe vivir en backend protegido, no en HTML público."]],
+          hallAction: "Abrir Salón de Guardianes",
+          adminAction: "Ver panel privado preparado",
+          waitlistAction: "Solicitar acceso",
+          trustAction: "Centro de confianza",
+          types: ["Idea", "Mejora", "Error", "Seguridad", "Accesibilidad", "Web", "App", "Función futura"],
+          levels: ["Sin cuenta", "Core", "Valhalla", "Ragnarok", "Tester"]
+        },
+        hall: {
+          badge: "Comunidad",
+          title: "Salón de Guardianes",
+          body: "Zamazen Aegis también crece gracias a quienes ayudan al Guardián. Los puntos, coronas e insignias se asignan manualmente por impacto real, nunca por spam ni cantidad de mensajes.",
+          philosophyBadge: "No gana quien más envía",
+          philosophyTitle: "Gana quien más ayuda",
+          philosophyBody: "Cada idea, mejora, error o reporte se revisa por utilidad, seguridad, estabilidad, privacidad, accesibilidad e impacto real en usuarios. Si hay abuso, spam o repetición, no suma puntos.",
+          privacyBadge: "Privacidad",
+          privacyTitle: "Aparecer es opcional",
+          privacyBody: "Nadie aparece sin permiso. El usuario puede usar alias, aparecer como colaborador anónimo o no aparecer. Nunca se muestran correo, IP, datos privados, mensajes completos ni información sensible.",
+          pointsBadge: "Puntos manuales",
+          pointsTitle: "Tabla orientativa de impacto",
+          crownsBadge: "Coronas",
+          crownsTitle: "Puestos destacados cuando exista ranking aprobado",
+          monthlyBadge: "Ranking mensual",
+          monthlyTitle: "Pendiente de activación manual",
+          monthlyBody: "Se mostrará solo cuando el administrador apruebe entradas reales del mes. Ahora no hay nombres publicados porque no se deben inventar colaboradores.",
+          historicalBadge: "Ranking histórico",
+          historicalTitle: "Reconocimiento permanente preparado",
+          historicalBody: "Guardará el historial aprobado desde el inicio del proyecto cuando exista backend/panel privado y consentimiento de cada persona.",
+          thanksBadge: "Agradecimientos",
+          thanksTitle: "Aportaciones aprobadas manualmente",
+          thanksBody: "Aquí aparecerán solo alias, tipo de ayuda aprobada, insignia, puntos, mes aproximado y un agradecimiento breve. No se muestran correos, IP, mensajes completos ni datos privados.",
+          thanksEmpty: "Todavía no hay agradecimientos publicados porque no se deben inventar colaboradores.",
+          badgesBadge: "Insignias",
+          badgesTitle: "Reconocimientos posibles",
+          badgesBody: "Las insignias y recompensas pueden acompañar agradecimientos, códigos temporales Valhalla/Ragnarok o acceso anticipado, siempre tras revisión manual y sin automatismos.",
+          adminBadge: "Admin privado",
+          adminTitle: "Gestión segura obligatoria",
+          adminNotes: [["Aprobar o rechazar", "Cada aportación se revisa antes de publicar."], ["Asignar puntos", "El administrador decide puntos e insignias según impacto real."], ["Corregir abusos", "Spam, repetición, HTML, scripts o intentos de abuso no suman."], ["Recompensas pendientes", "Cualquier código debe tener caducidad, control y trazabilidad."]],
+          idea: "Enviar idea segura",
+          admin: "Panel privado",
+          trust: "Centro de confianza",
+          points: GUARDIAN_POINT_RULES,
+          crowns: GUARDIAN_CROWNS,
+          badges: GUARDIAN_BADGES
+        }
+      },
+      en: {
+        account: {
+          badge: "Account",
+          title: "Zamazen account and Google access",
+          body: "The Zamazen account is the Guardian's complete identity. Google is available as quick access, without pretending advanced features are active before real OAuth or the mobile app are connected.",
+          official: "Official account",
+          zamazenTitle: "Zamazen account",
+          zamazenBody: "More integrated with profile, Neo Network, encrypted Bunker, devices and recovery when the backend is available.",
+          createAccount: "Create Zamazen account",
+          quickAccess: "Quick access",
+          googleTitle: "Google account",
+          googleBody: "A convenient way to sign in quickly when real OAuth is active. Advanced features may require a dedicated Zamazen account.",
+          googleAction: "Sign in with Google",
+          profile: "Profile",
+          sync: "Sync",
+          device: "Device",
+          pending: "Pending",
+          mobileNotLinked: "Mobile app not linked",
+          ecosystem: "Ecosystem",
+          ecosystemBody: "Neo Network, Bunker and permissions will appear here after linking the real app.",
+          prepared: "Prepared",
+          openProfile: "Open profile",
+          security: "Security",
+          subscription: "Subscription"
+        },
+        profile: {
+          badge: "Profile",
+          title: "Zamazen profile",
+          body: "Identity, avatar, level, protection state and sync are prepared to work with the mobile app without inventing online data.",
+          defaultName: "Local guest",
+          defaultEmail: "No online session in this website",
+          nickMissing: "Nickname not configured",
+          onlineVerified: "Online verified",
+          localSafe: "Safe local view",
+          editTitle: "Edit basic information",
+          editBody: "These details stay in this browser until the online account and mobile app are connected.",
+          visibleName: "Visible name",
+          email: "Email",
+          nick: "Nickname",
+          save: "Save local profile",
+          saved: "Local profile updated. Real sync will activate when the app/backend are connected.",
+          avatarTitle: "Zamazen avatar",
+          avatarBody: "Choose a Zamazen universe avatar or use your own local photo. The image is not uploaded from this website.",
+          upload: "Upload local photo",
+          remove: "Remove photo",
+          photoRemoved: "Local photo removed. The selected Zamazen avatar remains active.",
+          invalidImage: "Choose a valid profile image.",
+          imageTooLarge: "The image is too large to store locally in this website.",
+          photoApplied: "Local photo applied in this browser. It has not been uploaded to any server.",
+          protection: "Protection",
+          webReady: "Web shield ready",
+          syncStatus: "Waiting to connect mobile app",
+          redNeo: "Neo Network",
+          redNeoLocal: "Safe local mode until the app is linked",
+          webOnline: "Web online",
+          webOffline: "Web offline",
+          bunker: "Bunker",
+          bunkerLocal: "Bunker not synced; cloud only with encrypted package",
+          encryptedByUser: "User encrypted",
+          permissions: "Permissions",
+          permissionsMobile: "Android permissions are reviewed from the app",
+          mobileApp: "Mobile app",
+          device: "Device",
+          platformWeb: "Web",
+          data: "Data",
+          dataBody: "Visible name, email, avatar and preferences; no passwords or tokens.",
+          minimal: "Minimal",
+          notices: "Notices",
+          noticesBody: "No critical account notices in this website.",
+          clear: "Clear",
+          actionsTitle: "Profile shortcuts",
+          actionsBody: "Direct routes to security, permissions, data, subscription and settings without mixing screens.",
+          account: "Account",
+          plan: "Subscription",
+          signIn: "Sign in",
+          avatarLabels: { guardian: "Guardian", runes: "Runes", "aegis-core": "Core" }
+        },
+        plan: {
+          premium: "Premium",
+          title: "Core, Valhalla and Ragnarok",
+          genericBody: "Compare editions from a dedicated screen. Core is useful, Valhalla improves the experience and Ragnarok gathers the most complete layer when Android, permissions and consent allow it.",
+          selectedBody: "This view explains value, limits and the next step without promising absolute protection.",
+          transparency: "Transparency",
+          upgradeTitle: "What improves when you upgrade",
+          upgradeBody: "Each level increases context, personalization and integration, while Zamazen Aegis keeps the real limits of Android, permissions and consent clear.",
+          create: "Create Zamazen account",
+          trial: "Request trial access",
+          demo: "View guided demo",
+          plans: [
+            ["core", "Core", "CO", "is-core", "Ideal to start without pressure.", "Useful, honest and lightweight essential protection.", ["Manual scanner and clear explanations", "Basic local history", "Safe cleanup", "Sanitized Neo Network with consent"], "Choose Core", "#/core"],
+            ["valhalla", "Valhalla", "VA", "is-valhalla", "For users who want more context.", "A clear improvement in privacy, permissions and Bunker.", ["More signals for links and apps", "Improved Bunker", "Neo Network trends", "Premium personalization and status"], "Upgrade to Valhalla", "#/valhalla"],
+            ["ragnarok", "Ragnarok", "RG", "is-ragnarok", "For those who want to support the most.", "The complete experience when Android and consent allow it.", ["Banking, identity and credentials", "Full Bunker", "Priority Neo Network", "Guided resolution for complex risks"], "Unlock Ragnarok", "#/ragnarok"]
+          ]
+        },
+        demo: {
+          badge: "Demo",
+          title: "See Zamazen in action",
+          body: "A visual demo of user help: signals, Neo explanation, clear decision and safe degradation when a permission or connection is missing.",
+          risk: "Estimated risk",
+          action: "Recommended action",
+          neoExplains: "Neo explains",
+          privacy: "Privacy",
+          privacyBody: "The demo does not execute links, read real data or upload information.",
+          safe: "Safe",
+          create: "Create Zamazen account",
+          features: "View features",
+          scenarios: [
+            ["call", "Suspicious call", "Neo detects a call with fraud signals", "Unknown number, commercial urgency and repeated pattern. Zamazen recommends not calling back without verification.", "Block or review manually", 72],
+            ["sms", "Phishing SMS", "An SMS imitates a bank", "The message uses urgency and a doubtful link. Neo explains that credentials should not be entered from the link.", "Mark for review and report", 86],
+            ["link", "Doubtful link", "The link needs verification before opening", "Strange domain, redirect and prize language. Zamazen helps decide without running dangerous content.", "Analyze before opening", 64],
+            ["permission", "Sensitive permission", "Android asks for a sensitive permission", "The app explains what it is used for, what alternative exists and what happens if the user refuses it.", "Grant only if it brings value", 48],
+            ["network", "Neo Network", "A report can help without publishing secrets", "Before sending, content is sanitized to avoid tokens, sensitive emails, codes and private data.", "Share sanitized indicator", 38]
+          ]
+        },
+        waitlist: {
+          badge: "Access",
+          title: "Waitlist and trial access",
+          body: "Safe request: no files, no HTML, no automatic publishing and no fake backend. The website prepares a sanitized draft for manual sending.",
+          formTitle: "Request access",
+          alias: "Name or alias",
+          email: "Optional email",
+          interest: "Main interest",
+          message: "Short message",
+          submit: "Prepare safe request",
+          privacyText: "I accept manual review and understand my email will not be published.",
+          mail: "Open prepared email",
+          invalidAlias: "Enter a recognizable alias.",
+          invalidEmail: "Review the optional email.",
+          unsafe: "For security, links, HTML, scripts and code are not accepted.",
+          accept: "Accept manual review and privacy before preparing the request.",
+          cooldown: "Wait a moment before preparing another request.",
+          ready: "Safe draft prepared. Confirm sending from your email; nothing is published automatically.",
+          subject: "Zamazen Aegis access request",
+          optionalMissing: "Not provided",
+          noMessage: "No additional message",
+          notesBadge: "Privacy",
+          notesTitle: "What happens to your request",
+          notes: [["No fake backend", "The static website does not invent an online registration."], ["No files", "Attachments and documents are not accepted from this screen."], ["Manual review", "Access is decided when a real and safe channel exists."]],
+          ideaAction: "Send idea",
+          levels: ["Core", "Valhalla", "Ragnarok", "Tester", "Not sure yet"]
+        },
+        ideas: {
+          badge: "Community",
+          title: "Ideas, improvements and thanks",
+          body: "You can prepare a safe proposal. Nothing is published automatically, files are not accepted and any thanks require permission and manual review.",
+          formTitle: "Send safe proposal",
+          alias: "Name or alias",
+          email: "Optional email",
+          type: "Contribution type",
+          level: "Current level",
+          message: "Message",
+          submit: "Prepare safe submission",
+          publicThanks: "I want to be eligible for public thanks if manually approved.",
+          anonymous: "I prefer to appear as an anonymous contributor.",
+          privacy: "I accept privacy, manual review and no automatic reward.",
+          mail: "Open prepared email",
+          invalidAlias: "Enter a recognizable alias.",
+          invalidEmail: "Review the optional email.",
+          shortMessage: "Describe the idea with at least 20 characters.",
+          unsafe: "For security, links, HTML, scripts and code are not accepted.",
+          accept: "Accept privacy and manual review before preparing the submission.",
+          cooldown: "Wait a moment before preparing another proposal.",
+          ready: "Sanitized proposal prepared. Confirm sending from your email; nothing is published automatically.",
+          subject: "Idea or improvement for Zamazen Aegis",
+          optionalMissing: "Not provided",
+          yes: "Yes",
+          no: "No",
+          securityBadge: "Security first",
+          rulesTitle: "Section rules",
+          rules: [["Nothing automatic", "Ideas do not appear publicly without review and permission."], ["No files", "Images, PDFs, ZIPs, executables and scripts are not accepted."], ["No links", "The first version blocks links to reduce spam and phishing."], ["No fake rewards", "Valhalla/Ragnarok codes or badges only after manual assessment."], ["Private admin", "Real review must live in a protected backend, not public HTML."]],
+          hallAction: "Open Hall of Guardians",
+          adminAction: "View prepared private panel",
+          waitlistAction: "Request access",
+          trustAction: "Trust center",
+          types: ["Idea", "Improvement", "Bug", "Security", "Accessibility", "Web", "App", "Future feature"],
+          levels: ["No account", "Core", "Valhalla", "Ragnarok", "Tester"]
+        },
+        hall: {
+          badge: "Community",
+          title: "Hall of Guardians",
+          body: "Zamazen Aegis also grows thanks to people who help the Guardian. Points, crowns and badges are assigned manually for real impact, never for spam or message volume.",
+          philosophyBadge: "Volume does not win",
+          philosophyTitle: "The person who helps most wins",
+          philosophyBody: "Each idea, improvement, bug or report is reviewed for usefulness, security, stability, privacy, accessibility and real user impact. Abuse, spam or repetition does not add points.",
+          privacyBadge: "Privacy",
+          privacyTitle: "Appearing is optional",
+          privacyBody: "Nobody appears without permission. The user may use an alias, appear as an anonymous contributor or not appear. Email, IP, private data, full messages and sensitive information are never shown.",
+          pointsBadge: "Manual points",
+          pointsTitle: "Impact guide table",
+          crownsBadge: "Crowns",
+          crownsTitle: "Featured places when approved ranking exists",
+          monthlyBadge: "Monthly ranking",
+          monthlyTitle: "Pending manual activation",
+          monthlyBody: "It will appear only when the administrator approves real entries for the month. No names are published now because contributors must not be invented.",
+          historicalBadge: "Historical ranking",
+          historicalTitle: "Permanent recognition prepared",
+          historicalBody: "It will keep the approved history from the start of the project when backend/private panel and each person's consent exist.",
+          thanksBadge: "Acknowledgements",
+          thanksTitle: "Manually approved contributions",
+          thanksBody: "Only alias, approved help type, badge, points, approximate month and a short thank-you will appear here. Emails, IPs, full messages and private data are never shown.",
+          thanksEmpty: "No acknowledgements are published yet because contributors must not be invented.",
+          badgesBadge: "Badges",
+          badgesTitle: "Possible recognitions",
+          badgesBody: "Badges and rewards may accompany thanks, temporary Valhalla/Ragnarok codes or early access, always after manual review and without automation.",
+          adminBadge: "Private admin",
+          adminTitle: "Mandatory safe management",
+          adminNotes: [["Approve or reject", "Each contribution is reviewed before publishing."], ["Assign points", "The administrator decides points and badges by real impact."], ["Correct abuse", "Spam, repetition, HTML, scripts or abuse attempts do not count."], ["Pending rewards", "Any code must have expiry, control and traceability."]],
+          idea: "Send safe idea",
+          admin: "Private panel",
+          trust: "Trust center",
+          points: [["Useful idea", "+10", "Adds clarity or improves a concrete part of the project."], ["Accepted improvement", "+25", "Can be integrated without breaking stability or privacy."], ["Visual bug found", "+15", "Helps polish trust, responsiveness or visual accessibility."], ["Important functional bug", "+50", "Prevents a real usage, account, data or navigation failure."], ["Accessibility improvement", "+40", "Helps older people, screen readers or large text."], ["Serious security report", "+100", "Reduces real risk without publishing sensitive details."], ["Implemented idea", "+75", "Reaches the app, website or Neo Network after review."], ["Exceptional contribution", "Manual", "The team decides points by real impact, not quantity."]],
+          crowns: [["is-gold", "1st", "Ragnarok Guardian", "Gold crown for the most valuable contribution of the period."], ["is-silver", "2nd", "Valhalla Guardian", "Silver crown for outstanding and consistent help."], ["is-bronze", "3rd", "Honorary Core Guardian", "Runic crown for a useful and careful contribution."]],
+          badges: ["Neo Ally", "Aegis Sentinel", "Neo Network Watcher", "Bunker Custodian", "Accessibility Guardian", "Legendary Guardian"]
+        }
+      },
+      fr: {
+        account: {
+          badge: "Compte",
+          title: "Compte Zamazen et accès Google",
+          body: "Le compte Zamazen est l'identité complète du Gardien. Google sert d'accès rapide, sans prétendre activer des fonctions avancées avant OAuth réel ou la connexion de l'app mobile.",
+          official: "Compte officiel",
+          zamazenTitle: "Compte Zamazen",
+          zamazenBody: "Plus intégré au profil, à Red Neo, au Bunker chiffré, aux appareils et à la récupération quand le backend sera disponible.",
+          createAccount: "Créer un compte Zamazen",
+          quickAccess: "Accès rapide",
+          googleTitle: "Compte Google",
+          googleBody: "Option pratique pour entrer vite quand OAuth réel sera actif. Les fonctions avancées peuvent nécessiter un compte Zamazen propre.",
+          googleAction: "Se connecter avec Google",
+          profile: "Profil",
+          sync: "Synchronisation",
+          device: "Appareil",
+          pending: "En attente",
+          mobileNotLinked: "App mobile non liée",
+          ecosystem: "Écosystème",
+          ecosystemBody: "Red Neo, Bunker et autorisations apparaîtront ici après liaison avec l'app réelle.",
+          prepared: "Préparé",
+          openProfile: "Ouvrir le profil",
+          security: "Sécurité",
+          subscription: "Abonnement"
+        },
+        profile: {
+          badge: "Profil",
+          title: "Profil Zamazen",
+          body: "Identité, avatar, niveau, état de protection et synchronisation sont préparés pour fonctionner avec l'app mobile sans inventer de données en ligne.",
+          defaultName: "Invité local",
+          defaultEmail: "Aucune session en ligne sur ce site",
+          nickMissing: "Pseudo non configuré",
+          onlineVerified: "En ligne vérifié",
+          localSafe: "Vue locale sûre",
+          editTitle: "Modifier les informations de base",
+          editBody: "Ces données restent dans ce navigateur jusqu'à connexion du compte en ligne et de l'app mobile.",
+          visibleName: "Nom visible",
+          email: "Email",
+          nick: "Pseudo",
+          save: "Enregistrer le profil local",
+          saved: "Profil local mis à jour. La synchronisation réelle s'activera quand l'app/backend seront connectés.",
+          avatarTitle: "Avatar Zamazen",
+          avatarBody: "Choisissez un avatar de l'univers Zamazen ou utilisez une photo locale. L'image n'est pas envoyée depuis ce site.",
+          upload: "Importer une photo locale",
+          remove: "Retirer la photo",
+          photoRemoved: "Photo locale retirée. L'avatar Zamazen sélectionné reste actif.",
+          invalidImage: "Choisissez une image de profil valide.",
+          imageTooLarge: "L'image est trop lourde pour être stockée localement sur ce site.",
+          photoApplied: "Photo locale appliquée dans ce navigateur. Elle n'a été envoyée à aucun serveur.",
+          protection: "Protection",
+          webReady: "Bouclier web prêt",
+          syncStatus: "En attente de connexion avec l'app mobile",
+          redNeo: "Red Neo",
+          redNeoLocal: "Mode local sûr jusqu'à liaison avec l'app",
+          webOnline: "Web en ligne",
+          webOffline: "Web hors ligne",
+          bunker: "Bunker",
+          bunkerLocal: "Bunker non synchronisé; cloud seulement avec paquet chiffré",
+          encryptedByUser: "Chiffré par l'utilisateur",
+          permissions: "Autorisations",
+          permissionsMobile: "Les autorisations Android se vérifient depuis l'app",
+          mobileApp: "App mobile",
+          device: "Appareil",
+          platformWeb: "Web",
+          data: "Données",
+          dataBody: "Nom, email, avatar et préférences visibles; sans mots de passe ni jetons.",
+          minimal: "Minimal",
+          notices: "Avis",
+          noticesBody: "Aucun avis critique de compte sur ce site.",
+          clear: "Clair",
+          actionsTitle: "Raccourcis du profil",
+          actionsBody: "Routes directes vers sécurité, autorisations, données, abonnement et paramètres sans mélanger les écrans.",
+          account: "Compte",
+          plan: "Abonnement",
+          signIn: "Se connecter",
+          avatarLabels: { guardian: "Gardien", runes: "Runes", "aegis-core": "Noyau" }
+        },
+        plan: {
+          premium: "Premium",
+          title: "Core, Valhalla et Ragnarok",
+          genericBody: "Comparez les éditions depuis un écran dédié. Core est utile, Valhalla améliore l'expérience et Ragnarok réunit la couche la plus complète quand Android, les autorisations et le consentement le permettent.",
+          selectedBody: "Cette vue explique la valeur, les limites et l'étape suivante sans promettre une protection absolue.",
+          transparency: "Transparence",
+          upgradeTitle: "Ce qui s'améliore en montant",
+          upgradeBody: "Chaque niveau ajoute contexte, personnalisation et intégration, tout en gardant claires les limites réelles d'Android, des autorisations et du consentement.",
+          create: "Créer un compte Zamazen",
+          trial: "Demander un accès test",
+          demo: "Voir la démo guidée",
+          plans: [
+            ["core", "Core", "CO", "is-core", "Idéal pour commencer sans pression.", "Protection essentielle utile, honnête et légère.", ["Scanner manuel et explications claires", "Historique local basique", "Nettoyage sûr", "Red Neo assainie avec consentement"], "Choisir Core", "#/core"],
+            ["valhalla", "Valhalla", "VA", "is-valhalla", "Pour les utilisateurs qui veulent plus de contexte.", "Amélioration nette de confidentialité, autorisations et Bunker.", ["Plus de signaux pour liens et apps", "Bunker amélioré", "Tendances Red Neo", "Personnalisation et statut premium"], "Passer à Valhalla", "#/valhalla"],
+            ["ragnarok", "Ragnarok", "RG", "is-ragnarok", "Pour celles et ceux qui veulent soutenir au maximum.", "L'expérience complète quand Android et le consentement le permettent.", ["Banque, identité et identifiants", "Bunker complet", "Red Neo prioritaire", "Résolution guidée des risques complexes"], "Débloquer Ragnarok", "#/ragnarok"]
+          ]
+        },
+        demo: {
+          badge: "Démo",
+          title: "Voir Zamazen en action",
+          body: "Une démo visuelle d'aide à l'utilisateur: signaux, explication de Neo, décision claire et dégradation sûre si une autorisation ou connexion manque.",
+          risk: "Risque estimé",
+          action: "Action recommandée",
+          neoExplains: "Neo explique",
+          privacy: "Confidentialité",
+          privacyBody: "La démo n'exécute pas de liens, ne lit pas de données réelles et n'envoie aucune information.",
+          safe: "Sûr",
+          create: "Créer un compte Zamazen",
+          features: "Voir les fonctions",
+          scenarios: [
+            ["call", "Appel suspect", "Neo détecte un appel avec signaux de fraude", "Numéro inconnu, urgence commerciale et motif répété. Zamazen recommande de ne pas rappeler sans vérifier.", "Bloquer ou vérifier manuellement", 72],
+            ["sms", "SMS phishing", "Un SMS imite une banque", "Le message pousse à l'urgence avec un lien douteux. Neo explique qu'il ne faut pas saisir d'identifiants depuis ce lien.", "Marquer pour vérification et signaler", 86],
+            ["link", "Lien douteux", "Le lien doit être vérifié avant ouverture", "Domaine étrange, redirection et vocabulaire de cadeau. Zamazen aide à décider sans exécuter de contenu dangereux.", "Analyser avant d'ouvrir", 64],
+            ["permission", "Autorisation sensible", "Android demande une autorisation sensible", "L'app explique à quoi elle sert, quelle alternative existe et ce qui se passe si l'utilisateur refuse.", "Accorder seulement si cela apporte une valeur", 48],
+            ["network", "Red Neo", "Un signalement peut aider sans publier de secrets", "Avant l'envoi, le contenu est assaini pour éviter jetons, emails sensibles, codes et données privées.", "Partager un indicateur assaini", 38]
+          ]
+        },
+        waitlist: {
+          badge: "Accès",
+          title: "Liste d'attente et accès test",
+          body: "Demande sûre: pas de fichiers, pas de HTML, pas de publication automatique et pas de faux backend. Le site prépare un brouillon assaini pour envoi manuel.",
+          formTitle: "Demander un accès",
+          alias: "Nom ou alias",
+          email: "Email optionnel",
+          interest: "Intérêt principal",
+          message: "Message bref",
+          submit: "Préparer une demande sûre",
+          privacyText: "J'accepte la revue manuelle et comprends que mon email ne sera pas publié.",
+          mail: "Ouvrir l'email préparé",
+          invalidAlias: "Indiquez un alias reconnaissable.",
+          invalidEmail: "Vérifiez l'email optionnel.",
+          unsafe: "Par sécurité, les liens, HTML, scripts et code ne sont pas acceptés.",
+          accept: "Acceptez la revue manuelle et la confidentialité avant de préparer la demande.",
+          cooldown: "Attendez un moment avant de préparer une autre demande.",
+          ready: "Brouillon sûr préparé. Confirmez l'envoi depuis votre email; rien n'est publié automatiquement.",
+          subject: "Demande d'accès Zamazen Aegis",
+          optionalMissing: "Non indiqué",
+          noMessage: "Aucun message supplémentaire",
+          notesBadge: "Confidentialité",
+          notesTitle: "Ce qui arrive à votre demande",
+          notes: [["Pas de faux backend", "Le site statique n'invente pas une inscription en ligne."], ["Pas de fichiers", "Les pièces jointes et documents ne sont pas acceptés depuis cet écran."], ["Revue manuelle", "L'accès sera décidé quand un canal réel et sûr existera."]],
+          ideaAction: "Envoyer une idée",
+          levels: ["Core", "Valhalla", "Ragnarok", "Tester", "Pas encore sûr"]
+        },
+        ideas: {
+          badge: "Communauté",
+          title: "Idées, améliorations et remerciements",
+          body: "Vous pouvez préparer une proposition sûre. Rien n'est publié automatiquement, les fichiers ne sont pas acceptés et tout remerciement nécessite permission et revue manuelle.",
+          formTitle: "Envoyer une proposition sûre",
+          alias: "Nom ou alias",
+          email: "Email optionnel",
+          type: "Type d'apport",
+          level: "Niveau actuel",
+          message: "Message",
+          submit: "Préparer l'envoi sûr",
+          publicThanks: "Je souhaite pouvoir apparaître dans les remerciements si c'est approuvé manuellement.",
+          anonymous: "Je préfère apparaître comme contributeur anonyme.",
+          privacy: "J'accepte la confidentialité, la revue manuelle et l'absence de récompense automatique.",
+          mail: "Ouvrir l'email préparé",
+          invalidAlias: "Indiquez un alias reconnaissable.",
+          invalidEmail: "Vérifiez l'email optionnel.",
+          shortMessage: "Décrivez l'idée avec au moins 20 caractères.",
+          unsafe: "Par sécurité, les liens, HTML, scripts et code ne sont pas acceptés.",
+          accept: "Acceptez la confidentialité et la revue manuelle avant de préparer l'envoi.",
+          cooldown: "Attendez un moment avant de préparer une autre proposition.",
+          ready: "Proposition assainie et préparée. Confirmez l'envoi depuis votre email; rien n'est publié automatiquement.",
+          subject: "Idée ou amélioration pour Zamazen Aegis",
+          optionalMissing: "Non indiqué",
+          yes: "Oui",
+          no: "Non",
+          securityBadge: "Sécurité d'abord",
+          rulesTitle: "Règles de la section",
+          rules: [["Rien d'automatique", "Les idées n'apparaissent pas publiquement sans revue et permission."], ["Pas de fichiers", "Images, PDFs, ZIPs, exécutables et scripts ne sont pas acceptés."], ["Pas de liens", "La première version bloque les liens pour réduire spam et phishing."], ["Pas de fausses récompenses", "Codes Valhalla/Ragnarok ou badges seulement après évaluation manuelle."], ["Admin privé", "La revue réelle doit vivre dans un backend protégé, pas dans le HTML public."]],
+          hallAction: "Ouvrir le Salon des Gardiens",
+          adminAction: "Voir le panneau privé préparé",
+          waitlistAction: "Demander un accès",
+          trustAction: "Centre de confiance",
+          types: ["Idée", "Amélioration", "Erreur", "Sécurité", "Accessibilité", "Web", "App", "Fonction future"],
+          levels: ["Sans compte", "Core", "Valhalla", "Ragnarok", "Tester"]
+        },
+        hall: {
+          badge: "Communauté",
+          title: "Salon des Gardiens",
+          body: "Zamazen Aegis grandit aussi grâce aux personnes qui aident le Gardien. Points, couronnes et badges sont attribués manuellement selon l'impact réel, jamais selon le spam ou le volume.",
+          philosophyBadge: "Le volume ne gagne pas",
+          philosophyTitle: "Gagne qui aide le plus",
+          philosophyBody: "Chaque idée, amélioration, erreur ou signalement est revu selon utilité, sécurité, stabilité, confidentialité, accessibilité et impact réel. Abus, spam ou répétition ne donnent aucun point.",
+          privacyBadge: "Confidentialité",
+          privacyTitle: "Apparaître est optionnel",
+          privacyBody: "Personne n'apparaît sans permission. L'utilisateur peut utiliser un alias, apparaître anonymement ou ne pas apparaître. Email, IP, données privées, messages complets et informations sensibles ne sont jamais affichés.",
+          pointsBadge: "Points manuels",
+          pointsTitle: "Table indicative d'impact",
+          crownsBadge: "Couronnes",
+          crownsTitle: "Places mises en avant quand un classement approuvé existe",
+          monthlyBadge: "Classement mensuel",
+          monthlyTitle: "Activation manuelle en attente",
+          monthlyBody: "Il s'affichera seulement quand l'administrateur approuvera de vraies entrées du mois. Aucun nom n'est publié maintenant car il ne faut pas inventer de contributeurs.",
+          historicalBadge: "Classement historique",
+          historicalTitle: "Reconnaissance permanente préparée",
+          historicalBody: "Il gardera l'historique approuvé depuis le début du projet quand backend/panneau privé et consentement de chaque personne existeront.",
+          thanksBadge: "Remerciements",
+          thanksTitle: "Contributions approuvées manuellement",
+          thanksBody: "Seuls alias, type d'aide approuvée, badge, points, mois approximatif et court remerciement apparaîtront ici. Emails, IP, messages complets et données privées ne sont jamais affichés.",
+          thanksEmpty: "Aucun remerciement n'est encore publié, car il ne faut pas inventer de contributeurs.",
+          badgesBadge: "Badges",
+          badgesTitle: "Reconnaissances possibles",
+          badgesBody: "Badges et récompenses peuvent accompagner remerciements, codes temporaires Valhalla/Ragnarok ou accès anticipé, toujours après revue manuelle et sans automatisme.",
+          adminBadge: "Admin privé",
+          adminTitle: "Gestion sûre obligatoire",
+          adminNotes: [["Approuver ou rejeter", "Chaque contribution est revue avant publication."], ["Attribuer des points", "L'administrateur décide points et badges selon l'impact réel."], ["Corriger les abus", "Spam, répétition, HTML, scripts ou tentatives d'abus ne comptent pas."], ["Récompenses en attente", "Tout code doit avoir expiration, contrôle et traçabilité."]],
+          idea: "Envoyer une idée sûre",
+          admin: "Panneau privé",
+          trust: "Centre de confiance",
+          points: [["Idée utile", "+10", "Ajoute de la clarté ou améliore une partie concrète du projet."], ["Amélioration acceptée", "+25", "Peut être intégrée sans casser stabilité ni confidentialité."], ["Erreur visuelle détectée", "+15", "Aide à améliorer confiance, responsive ou accessibilité visuelle."], ["Erreur fonctionnelle importante", "+50", "Évite un vrai échec d'usage, compte, données ou navigation."], ["Amélioration d'accessibilité", "+40", "Aide personnes âgées, lecteur d'écran ou grand texte."], ["Signalement de sécurité sérieux", "+100", "Réduit un risque réel sans publier de détails sensibles."], ["Idée implémentée", "+75", "Arrive dans l'app, le web ou Red Neo après revue."], ["Apport exceptionnel", "Manuel", "L'équipe décide les points selon l'impact réel, pas la quantité."]],
+          crowns: [["is-gold", "1er", "Gardien Ragnarok", "Couronne dorée pour l'apport le plus précieux de la période."], ["is-silver", "2e", "Gardien Valhalla", "Couronne argentée pour une aide remarquable et constante."], ["is-bronze", "3e", "Gardien Core honorifique", "Couronne runique pour une contribution utile et soignée."]],
+          badges: ["Allié de Neo", "Sentinelle Aegis", "Vigie de Red Neo", "Gardien du Bunker", "Gardien de l'accessibilité", "Gardien légendaire"]
+        }
+      },
+      pt: {
+        account: {
+          badge: "Conta",
+          title: "Conta Zamazen e acesso Google",
+          body: "A conta Zamazen é a identidade completa do Guardião. Google existe como acesso rápido, sem fingir funções avançadas antes de OAuth real ou app móvel conectados.",
+          official: "Conta oficial",
+          zamazenTitle: "Conta Zamazen",
+          zamazenBody: "Mais integrada com perfil, Red Neo, Bunker cifrado, dispositivos e recuperação quando o backend estiver disponível.",
+          createAccount: "Criar conta Zamazen",
+          quickAccess: "Acesso rápido",
+          googleTitle: "Conta Google",
+          googleBody: "Opção cómoda para entrar rapidamente quando OAuth real estiver ativo. Funções avançadas podem exigir conta Zamazen própria.",
+          googleAction: "Entrar com Google",
+          profile: "Perfil",
+          sync: "Sincronização",
+          device: "Dispositivo",
+          pending: "Pendente",
+          mobileNotLinked: "App móvel não vinculada",
+          ecosystem: "Ecossistema",
+          ecosystemBody: "Red Neo, Bunker e permissões aparecerão aqui depois de vincular a app real.",
+          prepared: "Preparado",
+          openProfile: "Abrir perfil",
+          security: "Segurança",
+          subscription: "Subscrição"
+        },
+        profile: {
+          badge: "Perfil",
+          title: "Perfil Zamazen",
+          body: "Identidade, avatar, nível, estado de proteção e sincronização preparados para conviver com a app móvel sem inventar dados online.",
+          defaultName: "Convidado local",
+          defaultEmail: "Sem sessão online neste site",
+          nickMissing: "Nick não configurado",
+          onlineVerified: "Online verificada",
+          localSafe: "Vista local segura",
+          editTitle: "Editar informação básica",
+          editBody: "Estes dados ficam apenas neste navegador até a conta online e a app móvel estarem conectadas.",
+          visibleName: "Nome visível",
+          email: "Email",
+          nick: "Nick",
+          save: "Guardar perfil local",
+          saved: "Perfil local atualizado. A sincronização real será ativada quando app/backend estiverem conectados.",
+          avatarTitle: "Avatar Zamazen",
+          avatarBody: "Escolhe um avatar do universo Zamazen ou usa uma foto própria local. A imagem não é enviada por este site.",
+          upload: "Subir foto local",
+          remove: "Remover foto",
+          photoRemoved: "Foto local removida. O avatar Zamazen selecionado continua ativo.",
+          invalidImage: "Escolhe uma imagem válida para o perfil.",
+          imageTooLarge: "A imagem é demasiado grande para guardar localmente neste site.",
+          photoApplied: "Foto local aplicada neste navegador. Não foi enviada a nenhum servidor.",
+          protection: "Proteção",
+          webReady: "Escudo web pronto",
+          syncStatus: "Pendente de conectar app móvel",
+          redNeo: "Red Neo",
+          redNeoLocal: "Modo local seguro até vincular a app",
+          webOnline: "Web online",
+          webOffline: "Web offline",
+          bunker: "Bunker",
+          bunkerLocal: "Bunker não sincronizado; cloud só com pacote cifrado",
+          encryptedByUser: "Cifrado pelo usuário",
+          permissions: "Permissões",
+          permissionsMobile: "Permissões Android são revistas desde a app",
+          mobileApp: "App móvel",
+          device: "Dispositivo",
+          platformWeb: "Web",
+          data: "Dados",
+          dataBody: "Nome, email, avatar e preferências visíveis; sem senhas nem tokens.",
+          minimal: "Mínimo",
+          notices: "Avisos",
+          noticesBody: "Sem avisos críticos de conta neste site.",
+          clear: "Claro",
+          actionsTitle: "Acessos do perfil",
+          actionsBody: "Rotas diretas para segurança, permissões, dados, subscrição e configuração sem misturar telas.",
+          account: "Conta",
+          plan: "Subscrição",
+          signIn: "Entrar",
+          avatarLabels: { guardian: "Guardião", runes: "Runas", "aegis-core": "Núcleo" }
+        },
+        plan: {
+          premium: "Premium",
+          title: "Core, Valhalla e Ragnarok",
+          genericBody: "Compara as edições numa tela dedicada. Core é útil, Valhalla melhora a experiência e Ragnarok reúne a camada mais completa quando Android, permissões e consentimento permitem.",
+          selectedBody: "Esta tela explica valor, limites e próximo passo sem prometer proteção absoluta.",
+          transparency: "Transparência",
+          upgradeTitle: "O que melhora ao subir",
+          upgradeBody: "Cada nível aumenta contexto, personalização e integração, mantendo claros os limites reais do Android, permissões e consentimento.",
+          create: "Criar conta Zamazen",
+          trial: "Solicitar acesso de teste",
+          demo: "Ver demo guiada",
+          plans: [
+            ["core", "Core", "CO", "is-core", "Ideal para começar sem pressão.", "Proteção essencial útil, honesta e leve.", ["Scanner manual e explicações claras", "Histórico básico local", "Limpeza segura", "Red Neo saneada com consentimento"], "Escolher Core", "#/core"],
+            ["valhalla", "Valhalla", "VA", "is-valhalla", "Para usuários que querem mais contexto.", "Melhoria clara em privacidade, permissões e Bunker.", ["Mais sinais para links e apps", "Bunker melhorado", "Tendências Red Neo", "Personalização e estado premium"], "Melhorar para Valhalla", "#/valhalla"],
+            ["ragnarok", "Ragnarok", "RG", "is-ragnarok", "Para quem quer apoiar ao máximo.", "A experiência completa quando Android e consentimento permitem.", ["Banco, identidade e credenciais", "Bunker total", "Red Neo prioritária", "Resolução guiada de riscos complexos"], "Desbloquear Ragnarok", "#/ragnarok"]
+          ]
+        },
+        demo: {
+          badge: "Demo",
+          title: "Veja Zamazen em ação",
+          body: "Uma demonstração visual de ajuda ao usuário: sinais, explicação de Neo, decisão clara e degradação segura se faltar permissão ou conexão.",
+          risk: "Risco estimado",
+          action: "Ação recomendada",
+          neoExplains: "Neo explica",
+          privacy: "Privacidade",
+          privacyBody: "A demo não executa links, não lê dados reais e não envia informação.",
+          safe: "Seguro",
+          create: "Criar conta Zamazen",
+          features: "Ver funções",
+          scenarios: [
+            ["call", "Chamada suspeita", "Neo detecta uma chamada com sinais de fraude", "Número desconhecido, urgência comercial e padrão repetido. Zamazen recomenda não devolver a chamada sem verificar.", "Bloquear ou rever manualmente", 72],
+            ["sms", "SMS phishing", "Um SMS imita um banco", "A mensagem pressiona com urgência e link duvidoso. Neo explica que não se devem inserir credenciais a partir do link.", "Marcar para rever e reportar", 86],
+            ["link", "Link duvidoso", "O link precisa de verificação antes de abrir", "Domínio estranho, redirecionamento e palavras de prémio. Zamazen ajuda a decidir sem executar conteúdo perigoso.", "Analisar antes de abrir", 64],
+            ["permission", "Permissão sensível", "Android pede uma permissão sensível", "A app explica para que serve, que alternativa existe e o que acontece se o usuário não conceder.", "Conceder só se trouxer valor", 48],
+            ["network", "Red Neo", "Um relato pode ajudar sem publicar segredos", "Antes de enviar, o conteúdo é saneado para evitar tokens, emails sensíveis, códigos e dados privados.", "Partilhar indicador saneado", 38]
+          ]
+        },
+        waitlist: {
+          badge: "Acesso",
+          title: "Lista de espera e acesso de teste",
+          body: "Pedido seguro: sem arquivos, sem HTML, sem publicação automática e sem backend falso. A web prepara um rascunho saneado para envio manual.",
+          formTitle: "Solicitar acesso",
+          alias: "Nome ou alias",
+          email: "Email opcional",
+          interest: "Interesse principal",
+          message: "Mensagem breve",
+          submit: "Preparar pedido seguro",
+          privacyText: "Aceito revisão manual e entendo que meu email não será publicado.",
+          mail: "Abrir email preparado",
+          invalidAlias: "Indica um alias reconhecível.",
+          invalidEmail: "Revê o email opcional.",
+          unsafe: "Por segurança, links, HTML, scripts e código não são aceites.",
+          accept: "Aceita revisão manual e privacidade antes de preparar o pedido.",
+          cooldown: "Espera um momento antes de preparar outro pedido.",
+          ready: "Rascunho seguro preparado. Confirma o envio desde teu email; nada é publicado automaticamente.",
+          subject: "Pedido de acesso Zamazen Aegis",
+          optionalMissing: "Não indicado",
+          noMessage: "Sem mensagem adicional",
+          notesBadge: "Privacidade",
+          notesTitle: "O que acontece ao teu pedido",
+          notes: [["Sem backend falso", "A web estática não inventa inscrição online."], ["Sem arquivos", "Anexos e documentos não são aceites nesta tela."], ["Revisão manual", "O acesso será decidido quando existir canal real e seguro."]],
+          ideaAction: "Enviar ideia",
+          levels: ["Core", "Valhalla", "Ragnarok", "Tester", "Ainda não sei"]
+        },
+        ideas: {
+          badge: "Comunidade",
+          title: "Ideias, melhorias e agradecimentos",
+          body: "Podes preparar uma proposta segura. Nada é publicado automaticamente, arquivos não são aceites e qualquer agradecimento precisa de permissão e revisão manual.",
+          formTitle: "Enviar proposta segura",
+          alias: "Nome ou alias",
+          email: "Email opcional",
+          type: "Tipo de contribuição",
+          level: "Nível atual",
+          message: "Mensagem",
+          submit: "Preparar envio seguro",
+          publicThanks: "Quero poder aparecer em agradecimentos se for aprovado manualmente.",
+          anonymous: "Prefiro aparecer como colaborador anónimo.",
+          privacy: "Aceito privacidade, revisão manual e que não há recompensa automática.",
+          mail: "Abrir email preparado",
+          invalidAlias: "Indica um alias reconhecível.",
+          invalidEmail: "Revê o email opcional.",
+          shortMessage: "Descreve a ideia com pelo menos 20 caracteres.",
+          unsafe: "Por segurança, links, HTML, scripts e código não são aceites.",
+          accept: "Aceita privacidade e revisão manual antes de preparar o envio.",
+          cooldown: "Espera um momento antes de preparar outra proposta.",
+          ready: "Proposta saneada e preparada. Confirma o envio desde teu email; nada é publicado automaticamente.",
+          subject: "Ideia ou melhoria para Zamazen Aegis",
+          optionalMissing: "Não indicado",
+          yes: "Sim",
+          no: "Não",
+          securityBadge: "Segurança primeiro",
+          rulesTitle: "Regras da seção",
+          rules: [["Nada automático", "Ideias não aparecem publicamente sem revisão e permissão."], ["Sem arquivos", "Imagens, PDFs, ZIPs, executáveis e scripts não são aceites."], ["Sem links", "A primeira versão bloqueia links para reduzir spam e phishing."], ["Sem recompensas falsas", "Códigos Valhalla/Ragnarok ou insígnias só após avaliação manual."], ["Admin privado", "A revisão real deve viver em backend protegido, não em HTML público."]],
+          hallAction: "Abrir Salão de Guardiões",
+          adminAction: "Ver painel privado preparado",
+          waitlistAction: "Solicitar acesso",
+          trustAction: "Centro de confiança",
+          types: ["Ideia", "Melhoria", "Erro", "Segurança", "Acessibilidade", "Web", "App", "Função futura"],
+          levels: ["Sem conta", "Core", "Valhalla", "Ragnarok", "Tester"]
+        },
+        hall: {
+          badge: "Comunidade",
+          title: "Salão de Guardiões",
+          body: "Zamazen Aegis também cresce graças a quem ajuda o Guardião. Pontos, coroas e insígnias são atribuídos manualmente por impacto real, nunca por spam nem quantidade de mensagens.",
+          philosophyBadge: "Não ganha quem envia mais",
+          philosophyTitle: "Ganha quem ajuda mais",
+          philosophyBody: "Cada ideia, melhoria, erro ou relato é revisto por utilidade, segurança, estabilidade, privacidade, acessibilidade e impacto real. Abuso, spam ou repetição não somam pontos.",
+          privacyBadge: "Privacidade",
+          privacyTitle: "Aparecer é opcional",
+          privacyBody: "Ninguém aparece sem permissão. O usuário pode usar alias, aparecer como colaborador anónimo ou não aparecer. Email, IP, dados privados, mensagens completas e informação sensível nunca são mostrados.",
+          pointsBadge: "Pontos manuais",
+          pointsTitle: "Tabela orientativa de impacto",
+          crownsBadge: "Coroas",
+          crownsTitle: "Destaques quando existir ranking aprovado",
+          monthlyBadge: "Ranking mensal",
+          monthlyTitle: "Pendente de ativação manual",
+          monthlyBody: "Será mostrado só quando o administrador aprovar entradas reais do mês. Agora não há nomes publicados porque não se devem inventar colaboradores.",
+          historicalBadge: "Ranking histórico",
+          historicalTitle: "Reconhecimento permanente preparado",
+          historicalBody: "Guardará o histórico aprovado desde o início do projeto quando existirem backend/painel privado e consentimento de cada pessoa.",
+          thanksBadge: "Agradecimentos",
+          thanksTitle: "Contribuições aprovadas manualmente",
+          thanksBody: "Aqui aparecerão apenas alias, tipo de ajuda aprovada, insígnia, pontos, mês aproximado e um agradecimento breve. Emails, IP, mensagens completas e dados privados nunca são mostrados.",
+          thanksEmpty: "Ainda não há agradecimentos publicados porque não se devem inventar colaboradores.",
+          badgesBadge: "Insígnias",
+          badgesTitle: "Reconhecimentos possíveis",
+          badgesBody: "Insígnias e recompensas podem acompanhar agradecimentos, códigos temporários Valhalla/Ragnarok ou acesso antecipado, sempre após revisão manual e sem automatismos.",
+          adminBadge: "Admin privado",
+          adminTitle: "Gestão segura obrigatória",
+          adminNotes: [["Aprovar ou rejeitar", "Cada contribuição é revista antes de publicar."], ["Atribuir pontos", "O administrador decide pontos e insígnias segundo impacto real."], ["Corrigir abusos", "Spam, repetição, HTML, scripts ou tentativas de abuso não contam."], ["Recompensas pendentes", "Qualquer código deve ter caducidade, controlo e rastreabilidade."]],
+          idea: "Enviar ideia segura",
+          admin: "Painel privado",
+          trust: "Centro de confiança",
+          points: [["Ideia útil", "+10", "Acrescenta clareza ou melhora uma parte concreta do projeto."], ["Melhoria aceite", "+25", "Pode integrar-se sem quebrar estabilidade nem privacidade."], ["Erro visual detetado", "+15", "Ajuda a melhorar confiança, responsive ou acessibilidade visual."], ["Erro funcional importante", "+50", "Evita uma falha real de uso, conta, dados ou navegação."], ["Melhoria de acessibilidade", "+40", "Ajuda pessoas idosas, leitor de tela ou texto grande."], ["Relato de segurança sério", "+100", "Reduz risco real sem publicar detalhes sensíveis."], ["Ideia implementada", "+75", "Chega à app, web ou Red Neo após revisão."], ["Contribuição excecional", "Manual", "A equipa decide pontos segundo impacto real, não quantidade."]],
+          crowns: [["is-gold", "1º", "Guardião Ragnarok", "Coroa dourada para a contribuição mais valiosa do período."], ["is-silver", "2º", "Guardião Valhalla", "Coroa prateada para ajuda destacada e constante."], ["is-bronze", "3º", "Guardião Core Honorífico", "Coroa rúnica para contribuição útil e cuidada."]],
+          badges: ["Aliado de Neo", "Sentinela Aegis", "Vigilante de Red Neo", "Custódio do Bunker", "Guardião de Acessibilidade", "Guardião Legendário"]
+        }
+      }
+    };
+
+    function getRichRouteCopy(section) {
+      const language = getCurrentLanguage();
+      return RICH_ROUTE_COPY[language]?.[section] || RICH_ROUTE_COPY.es[section];
+    }
+
+    function localizeAccountForProfile(account, profileCopy) {
+      const defaultNames = ["Invitado local", "Local guest", "Invité local", "Convidado local"];
+      const defaultEmails = [
+        "Sin sesión online en esta web",
+        "No online session in this website",
+        "Aucune session en ligne sur ce site",
+        "Sem sessão online neste site"
+      ];
+      const defaultProtection = ["Escudo web listo", "Web shield ready", "Bouclier web prêt", "Escudo web pronto"];
+      const defaultSync = [
+        "Pendiente de conectar app móvil",
+        "Waiting to connect mobile app",
+        "En attente de connexion avec l'app mobile",
+        "Pendente de conectar app móvel"
+      ];
+      const defaultRedNeo = [
+        "Modo local seguro hasta enlazar app",
+        "Safe local mode until the app is linked",
+        "Mode local sûr jusqu'à liaison avec l'app",
+        "Modo local seguro até vincular a app"
+      ];
+      const defaultBunker = [
+        "Bunker no sincronizado; cloud solo con paquete cifrado",
+        "Bunker not synced; cloud only with encrypted package",
+        "Bunker non synchronisé; cloud seulement avec paquet chiffré",
+        "Bunker não sincronizado; cloud só com pacote cifrado"
+      ];
+      const defaultPermissions = [
+        "Permisos Android se revisan desde la app",
+        "Android permissions are reviewed from the app",
+        "Les autorisations Android se vérifient depuis l'app",
+        "Permissões Android são revistas desde a app"
+      ];
+
+      return {
+        ...account,
+        name: defaultNames.includes(account.name) ? profileCopy.defaultName : account.name,
+        email: defaultEmails.includes(account.email) ? profileCopy.defaultEmail : account.email,
+        avatarLabel: profileCopy.avatarLabels?.[account.avatarId] || account.avatarLabel,
+        protectionStatus: defaultProtection.includes(account.protectionStatus) ? profileCopy.webReady : account.protectionStatus,
+        syncStatus: defaultSync.includes(account.syncStatus) ? profileCopy.syncStatus : account.syncStatus,
+        redNeoStatus: defaultRedNeo.includes(account.redNeoStatus) ? profileCopy.redNeoLocal : account.redNeoStatus,
+        bunkerStatus: defaultBunker.includes(account.bunkerStatus) ? profileCopy.bunkerLocal : account.bunkerStatus,
+        permissionStatus: defaultPermissions.includes(account.permissionStatus) ? profileCopy.permissionsMobile : account.permissionStatus,
+        deviceName: account.deviceName === "Navegador actual" ? profileCopy.platformWeb : account.deviceName,
+        devicePlatform: account.devicePlatform === "Web" ? profileCopy.platformWeb : account.devicePlatform
+      };
+    }
 
     const translations = {
       es: {
@@ -9348,54 +10264,57 @@
     }
 
     function renderAccountExperience() {
+      const copy = getRichRouteCopy("account");
+      const profileCopy = getRichRouteCopy("profile");
       setRouteDetailVariant("is-account-screen");
-      routeDetailBadge.textContent = "Cuenta";
-      routeDetailTitle.textContent = "Cuenta Zamazen y acceso Google";
-      routeDetailBody.textContent = "Cuenta Zamazen es la identidad completa del Guardián. Google existe como acceso rápido, pero sin fingir funciones avanzadas si OAuth o la app móvil todavía no están conectados.";
+      routeDetailBadge.textContent = copy.badge;
+      routeDetailTitle.textContent = copy.title;
+      routeDetailBody.textContent = copy.body;
 
-      const account = normalizeAccountPreview(readAccountPreview());
+      const account = localizeAccountForProfile(normalizeAccountPreview(readAccountPreview()), profileCopy);
       const methodGrid = createElement("div", "account-method-grid");
 
       const zamazenCard = createElement("article", "account-method-card");
       zamazenCard.append(
-        createElement("span", "profile-pill", "Cuenta oficial"),
-        createElement("h3", "", "Cuenta Zamazen"),
-        createElement("p", "", "Más integrada con perfil, Red Neo, Bunker cifrado, dispositivos y recuperación cuando el backend esté disponible."),
-        createProfileAction("Crear cuenta Zamazen", "#/crear-cuenta", "primary")
+        createElement("span", "profile-pill", copy.official),
+        createElement("h3", "", copy.zamazenTitle),
+        createElement("p", "", copy.zamazenBody),
+        createProfileAction(copy.createAccount, "#/crear-cuenta", "primary")
       );
 
       const googleCard = createElement("article", "account-method-card");
       googleCard.append(
-        createElement("span", "profile-pill", "Acceso rápido"),
-        createElement("h3", "", "Cuenta con Google"),
-        createElement("p", "", "Opción cómoda para entrar rápido cuando OAuth real esté activo. Las funciones avanzadas pueden requerir Cuenta Zamazen propia."),
-        createProfileAction("Entrar con Google", "#/login", "secondary")
+        createElement("span", "profile-pill", copy.quickAccess),
+        createElement("h3", "", copy.googleTitle),
+        createElement("p", "", copy.googleBody),
+        createProfileAction(copy.googleAction, "#/login", "secondary")
       );
 
       methodGrid.append(zamazenCard, googleCard);
 
       const statusGrid = createElement("div", "sync-grid");
       statusGrid.append(
-        createStatusCard("Perfil", account.name, account.level),
-        createStatusCard("Sincronización", account.syncStatus, account.lastSyncAt ? formatProfileDate(account.lastSyncAt) : "Pendiente"),
-        createStatusCard("Dispositivo", account.deviceConnected ? account.deviceName : "App móvil no vinculada", account.devicePlatform),
-        createStatusCard("Ecosistema", "Red Neo, Bunker y permisos se mostrarán aquí al enlazar app real.", "Preparado")
+        createStatusCard(copy.profile, account.name, account.level),
+        createStatusCard(copy.sync, account.syncStatus, account.lastSyncAt ? formatProfileDate(account.lastSyncAt) : copy.pending),
+        createStatusCard(copy.device, account.deviceConnected ? account.deviceName : copy.mobileNotLinked, account.devicePlatform),
+        createStatusCard(copy.ecosystem, copy.ecosystemBody, copy.prepared)
       );
 
       routeDetailGrid.replaceChildren(methodGrid, statusGrid);
       routeDetailActions.replaceChildren(
-        createProfileAction("Abrir perfil", "#/perfil", "primary"),
-        createProfileAction("Seguridad", "#/seguridad", "secondary"),
-        createProfileAction("Suscripción", "#/precios", "secondary")
+        createProfileAction(copy.openProfile, "#/perfil", "primary"),
+        createProfileAction(copy.security, "#/seguridad", "secondary"),
+        createProfileAction(copy.subscription, "#/precios", "secondary")
       );
     }
 
     function renderProfileExperience() {
       setRouteDetailVariant("is-profile-screen");
-      const account = normalizeAccountPreview(readAccountPreview());
-      routeDetailBadge.textContent = "Perfil";
-      routeDetailTitle.textContent = "Perfil Zamazen";
-      routeDetailBody.textContent = "Identidad, avatar, nivel, estado de protección y sincronización preparados para convivir con la app móvil sin inventar datos online.";
+      const copy = getRichRouteCopy("profile");
+      const account = localizeAccountForProfile(normalizeAccountPreview(readAccountPreview()), copy);
+      routeDetailBadge.textContent = copy.badge;
+      routeDetailTitle.textContent = copy.title;
+      routeDetailBody.textContent = copy.body;
 
       const hero = createElement("section", "profile-hero-card");
       const avatarSurface = createElement("div", "profile-avatar");
@@ -9404,44 +10323,44 @@
       identity.append(
         createElement("h2", "", account.name),
         createElement("p", "", account.email),
-        createElement("p", "", account.nick ? `Nick: ${account.nick}` : "Nick no configurado"),
+        createElement("p", "", account.nick ? `${copy.nick}: ${account.nick}` : copy.nickMissing),
       );
       const pillRow = createElement("div", "profile-pill-row");
       pillRow.append(
         createElement("span", "profile-pill", account.level),
         createElement("span", "profile-pill", account.protectionStatus),
-        createElement("span", "profile-pill", account.provider === "zamazen-online-account" ? "Online verificada" : "Vista local segura")
+        createElement("span", "profile-pill", account.provider === "zamazen-online-account" ? copy.onlineVerified : copy.localSafe)
       );
       identity.append(pillRow);
       hero.append(avatarSurface, identity);
 
       const formCard = createElement("section", "profile-panel-card");
       formCard.append(
-        createElement("h3", "", "Editar información básica"),
-        createElement("p", "", "Estos datos se guardan solo en este navegador hasta que la cuenta online y la app móvil estén conectadas.")
+        createElement("h3", "", copy.editTitle),
+        createElement("p", "", copy.editBody)
       );
       const form = createElement("form", "profile-form-grid");
       const nameField = createElement("label", "profile-field");
-      nameField.append(createElement("span", "", "Nombre visible"));
+      nameField.append(createElement("span", "", copy.visibleName));
       const nameInput = createElement("input", "form-input");
       nameInput.type = "text";
       nameInput.autocomplete = "name";
-      nameInput.value = account.name === "Invitado local" ? "" : account.name;
+      nameInput.value = account.name === copy.defaultName ? "" : account.name;
       nameField.append(nameInput);
       const emailField = createElement("label", "profile-field");
-      emailField.append(createElement("span", "", "Email"));
+      emailField.append(createElement("span", "", copy.email));
       const emailInput = createElement("input", "form-input");
       emailInput.type = "email";
       emailInput.autocomplete = "email";
-      emailInput.value = account.email === "Sin sesión online en esta web" ? "" : account.email;
+      emailInput.value = account.email === copy.defaultEmail ? "" : account.email;
       emailField.append(emailInput);
       const nickField = createElement("label", "profile-field");
-      nickField.append(createElement("span", "", "Nick"));
+      nickField.append(createElement("span", "", copy.nick));
       const nickInput = createElement("input", "form-input");
       nickInput.type = "text";
       nickInput.value = account.nick;
       nickField.append(nickInput);
-      const saveButton = createElement("button", "cta-primary", "Guardar perfil local");
+      const saveButton = createElement("button", "cta-primary", copy.save);
       saveButton.type = "submit";
       const formStatus = createElement("p", "account-status");
       formStatus.setAttribute("role", "status");
@@ -9455,25 +10374,26 @@
           email: emailInput.value.trim() || account.email,
           nick: nickInput.value.trim()
         });
-        formStatus.textContent = "Perfil local actualizado. La sincronización real se activará cuando la app/backend estén conectados.";
-        routeDetailTitle.textContent = "Perfil Zamazen";
+        formStatus.textContent = copy.saved;
+        routeDetailTitle.textContent = copy.title;
         identity.querySelector("h2").textContent = updated.name;
         identity.querySelectorAll("p")[0].textContent = updated.email;
-        identity.querySelectorAll("p")[1].textContent = updated.nick ? `Nick: ${updated.nick}` : "Nick no configurado";
+        identity.querySelectorAll("p")[1].textContent = updated.nick ? `${copy.nick}: ${updated.nick}` : copy.nickMissing;
       });
       formCard.append(form);
 
       const avatarCard = createElement("section", "profile-panel-card");
       avatarCard.append(
-        createElement("h3", "", "Avatar Zamazen"),
-        createElement("p", "", "Elige un avatar del universo Zamazen o usa una foto propia local. La imagen no se sube desde esta web.")
+        createElement("h3", "", copy.avatarTitle),
+        createElement("p", "", copy.avatarBody)
       );
       const avatarGrid = createElement("div", "avatar-choice-grid");
       WEB_PROFILE_AVATARS.forEach((avatar) => {
         const button = createElement("button", `avatar-choice${account.avatarId === avatar.id ? " is-active" : ""}`);
         button.type = "button";
         button.setAttribute("aria-pressed", String(account.avatarId === avatar.id));
-        button.append(createElement("strong", "", avatar.glyph), createElement("span", "", avatar.label));
+        const avatarLabel = copy.avatarLabels?.[avatar.id] || avatar.label;
+        button.append(createElement("strong", "", avatar.glyph), createElement("span", "", avatarLabel));
         button.addEventListener("click", () => {
           const updated = writeAccountPreview({
             ...normalizeAccountPreview(readAccountPreview()),
@@ -9496,9 +10416,9 @@
       uploadInput.type = "file";
       uploadInput.accept = "image/*";
       uploadInput.hidden = true;
-      const uploadButton = createElement("button", "cta-secondary", "Subir foto local");
+      const uploadButton = createElement("button", "cta-secondary", copy.upload);
       uploadButton.type = "button";
-      const removeButton = createElement("button", "cta-secondary", "Quitar foto");
+      const removeButton = createElement("button", "cta-secondary", copy.remove);
       removeButton.type = "button";
       const avatarStatus = createElement("p", "account-status");
       uploadButton.addEventListener("click", () => uploadInput.click());
@@ -9508,17 +10428,17 @@
           avatarImageData: ""
         });
         applyAvatarSurface(avatarSurface, updated);
-        avatarStatus.textContent = "Foto local retirada. Se mantiene el avatar Zamazen seleccionado.";
+        avatarStatus.textContent = copy.photoRemoved;
       });
       uploadInput.addEventListener("change", () => {
         const file = uploadInput.files && uploadInput.files[0];
         if (!file) return;
         if (!file.type.startsWith("image/")) {
-          avatarStatus.textContent = "Elige una imagen válida para el perfil.";
+          avatarStatus.textContent = copy.invalidImage;
           return;
         }
         if (file.size > PROFILE_IMAGE_MAX_BYTES) {
-          avatarStatus.textContent = "La imagen es demasiado grande para guardarse de forma local en esta web.";
+          avatarStatus.textContent = copy.imageTooLarge;
           return;
         }
         const reader = new FileReader();
@@ -9528,7 +10448,7 @@
             avatarImageData: String(reader.result || "")
           });
           applyAvatarSurface(avatarSurface, updated);
-          avatarStatus.textContent = "Foto local aplicada en este navegador. No se ha subido a ningún servidor.";
+          avatarStatus.textContent = copy.photoApplied;
         };
         reader.readAsDataURL(file);
       });
@@ -9538,51 +10458,63 @@
 
       const statusGrid = createElement("section", "sync-grid");
       statusGrid.append(
-        createStatusCard("Protección", account.protectionStatus, account.level),
-        createStatusCard("Sincronización", account.syncStatus, account.lastSyncAt ? formatProfileDate(account.lastSyncAt) : "Pendiente"),
-        createStatusCard("Red Neo", account.redNeoStatus, navigator.onLine ? "Web online" : "Web offline"),
-        createStatusCard("Bunker", account.bunkerStatus, "Cifrado por usuario"),
-        createStatusCard("Permisos", account.permissionStatus, "App móvil"),
-        createStatusCard("Dispositivo", account.deviceConnected ? account.deviceName : "App móvil no vinculada", account.devicePlatform),
-        createStatusCard("Datos", "Nombre, email, avatar y preferencias visibles; sin contraseñas ni tokens.", "Mínimo"),
-        createStatusCard("Avisos", "Sin avisos críticos de cuenta en esta web.", "Claro")
+        createStatusCard(copy.protection, account.protectionStatus, account.level),
+        createStatusCard(getRichRouteCopy("account").sync, account.syncStatus, account.lastSyncAt ? formatProfileDate(account.lastSyncAt) : getRichRouteCopy("account").pending),
+        createStatusCard(copy.redNeo, account.redNeoStatus, navigator.onLine ? copy.webOnline : copy.webOffline),
+        createStatusCard(copy.bunker, account.bunkerStatus, copy.encryptedByUser),
+        createStatusCard(copy.permissions, account.permissionStatus, copy.mobileApp),
+        createStatusCard(copy.device, account.deviceConnected ? account.deviceName : getRichRouteCopy("account").mobileNotLinked, account.devicePlatform),
+        createStatusCard(copy.data, copy.dataBody, copy.minimal),
+        createStatusCard(copy.notices, copy.noticesBody, copy.clear)
       );
 
       const actionCard = createElement("section", "profile-panel-card");
       actionCard.append(
-        createElement("h3", "", "Accesos del perfil"),
-        createElement("p", "", "Rutas directas a seguridad, permisos, datos, suscripción y configuración sin mezclar pantallas.")
+        createElement("h3", "", copy.actionsTitle),
+        createElement("p", "", copy.actionsBody)
       );
       const actionRow = createElement("div", "profile-actions-row");
       actionRow.append(
-        createProfileAction("Seguridad", "#/seguridad", "primary"),
-        createProfileAction("Permisos", "#/permisos", "secondary"),
-        createProfileAction("Datos", "#/datos", "secondary"),
-        createProfileAction("Suscripción", "#/precios", "secondary"),
-        createProfileAction("Cuenta", "#/cuenta", "secondary")
+        createProfileAction(getRichRouteCopy("account").security, "#/seguridad", "primary"),
+        createProfileAction(copy.permissions, "#/permisos", "secondary"),
+        createProfileAction(copy.data, "#/datos", "secondary"),
+        createProfileAction(copy.plan, "#/precios", "secondary"),
+        createProfileAction(copy.account, "#/cuenta", "secondary")
       );
       actionCard.append(actionRow);
 
       routeDetailGrid.replaceChildren(hero, formCard, avatarCard, statusGrid, actionCard);
       routeDetailActions.replaceChildren(
-        createProfileAction("Crear cuenta Zamazen", "#/crear-cuenta", "primary"),
-        createProfileAction("Iniciar sesión", "#/login", "secondary")
+        createProfileAction(getRichRouteCopy("account").createAccount, "#/crear-cuenta", "primary"),
+        createProfileAction(copy.signIn, "#/login", "secondary")
       );
     }
 
     function renderPlanExperience(detailKey) {
       setRouteDetailVariant("is-plan-screen");
-      const selectedPlan = PLAN_SHOWCASE.find((plan) => plan.id === detailKey);
-      routeDetailBadge.textContent = selectedPlan ? selectedPlan.name : "Premium";
+      const copy = getRichRouteCopy("plan");
+      const plans = copy.plans.map(([id, name, glyph, aura, forWho, promise, benefits, cta, href]) => ({
+        id,
+        name,
+        glyph,
+        aura,
+        forWho,
+        promise,
+        benefits,
+        cta,
+        href
+      }));
+      const selectedPlan = plans.find((plan) => plan.id === detailKey);
+      routeDetailBadge.textContent = selectedPlan ? selectedPlan.name : copy.premium;
       routeDetailTitle.textContent = selectedPlan
         ? `${selectedPlan.name}: ${selectedPlan.promise}`
-        : "Core, Valhalla y Ragnarok";
+        : copy.title;
       routeDetailBody.textContent = selectedPlan
-        ? `${selectedPlan.forWho} Esta vista explica valor, limites y siguiente paso sin prometer proteccion absoluta.`
-        : "Compara las ediciones desde una pantalla dedicada. Core es util, Valhalla mejora la experiencia y Ragnarok concentra la capa mas completa cuando Android, permisos y consentimiento lo permiten.";
+        ? `${selectedPlan.forWho} ${copy.selectedBody}`
+        : copy.genericBody;
 
       const grid = createElement("div", "plan-showcase-grid");
-      PLAN_SHOWCASE.forEach((plan) => {
+      plans.forEach((plan) => {
         const card = createElement("article", `plan-showcase-card ${plan.aura}`);
         const benefits = createElement("ul", "plan-benefit-list");
         plan.benefits.forEach((benefit) => benefits.append(createElement("li", "", benefit)));
@@ -9600,25 +10532,34 @@
 
       const clarity = createElement("article", "experience-card");
       clarity.append(
-        createElement("span", "experience-status", "Transparencia"),
-        createElement("h3", "", "Que ganas al subir"),
-        createElement("p", "", "Cada nivel aumenta contexto, personalizacion e integracion, pero Zamazen Aegis mantiene los limites reales de Android, permisos y consentimiento.")
+        createElement("span", "experience-status", copy.transparency),
+        createElement("h3", "", copy.upgradeTitle),
+        createElement("p", "", copy.upgradeBody)
       );
 
       routeDetailGrid.className = "profile-dashboard";
       routeDetailGrid.replaceChildren(grid, clarity);
       routeDetailActions.replaceChildren(
-        createProfileAction("Crear cuenta Zamazen", "#/crear-cuenta", "primary"),
-        createProfileAction("Solicitar acceso de prueba", "#/lista-espera", "secondary"),
-        createProfileAction("Ver demo guiada", "#/demo", "secondary")
+        createProfileAction(copy.create, "#/crear-cuenta", "primary"),
+        createProfileAction(copy.trial, "#/lista-espera", "secondary"),
+        createProfileAction(copy.demo, "#/demo", "secondary")
       );
     }
 
     function renderDemoExperience() {
       setRouteDetailVariant("");
-      routeDetailBadge.textContent = "Demo";
-      routeDetailTitle.textContent = "Mira como actua Zamazen";
-      routeDetailBody.textContent = "Una demostracion visual de ayuda al usuario: señales, explicacion de Neo, decision clara y degradacion segura si falta permiso o conexion.";
+      const copy = getRichRouteCopy("demo");
+      const scenarios = copy.scenarios.map(([id, label, title, body, action, risk]) => ({
+        id,
+        label,
+        title,
+        body,
+        action,
+        risk
+      }));
+      routeDetailBadge.textContent = copy.badge;
+      routeDetailTitle.textContent = copy.title;
+      routeDetailBody.textContent = copy.body;
       routeDetailGrid.className = "guardian-demo-layout";
 
       const tabList = createElement("div", "secure-tab-list");
@@ -9635,16 +10576,16 @@
         meter.style.setProperty("--risk-width", `${scenario.risk}%`);
         meter.append(createElement("span"));
         screen.replaceChildren(
-          createElement("span", "experience-status", `Riesgo estimado ${scenario.risk}%`),
+          createElement("span", "experience-status", `${copy.risk} ${scenario.risk}%`),
           createElement("h3", "", scenario.title),
           createElement("p", "", scenario.body),
           meter,
-          createStatusCard("Accion recomendada", scenario.action, "Neo explica"),
-          createStatusCard("Privacidad", "La demo no ejecuta enlaces, no lee datos reales y no sube informacion.", "Seguro")
+          createStatusCard(copy.action, scenario.action, copy.neoExplains),
+          createStatusCard(copy.privacy, copy.privacyBody, copy.safe)
         );
       };
 
-      DEMO_SCENARIOS.forEach((scenario, index) => {
+      scenarios.forEach((scenario, index) => {
         const button = createElement("button", `secure-tab-button${index === 0 ? " is-active" : ""}`, scenario.label);
         button.type = "button";
         button.dataset.demoScenario = scenario.id;
@@ -9654,11 +10595,11 @@
         tabList.append(button);
       });
 
-      renderScenario(DEMO_SCENARIOS[0]);
+      renderScenario(scenarios[0]);
       routeDetailGrid.replaceChildren(tabList, screen);
       routeDetailActions.replaceChildren(
-        createProfileAction("Crear cuenta Zamazen", "#/crear-cuenta", "primary"),
-        createProfileAction("Ver funciones", "#/funciones", "secondary")
+        createProfileAction(copy.create, "#/crear-cuenta", "primary"),
+        createProfileAction(copy.features, "#/funciones", "secondary")
       );
     }
 
@@ -9825,9 +10766,10 @@
 
     function renderWaitlistExperience() {
       setRouteDetailVariant("");
-      routeDetailBadge.textContent = "Acceso";
-      routeDetailTitle.textContent = "Lista de espera y acceso de prueba";
-      routeDetailBody.textContent = "Solicitud segura: sin archivos, sin HTML, sin publicacion automatica y sin backend falso. La web prepara un borrador saneado para envio manual.";
+      const copy = getRichRouteCopy("waitlist");
+      routeDetailBadge.textContent = copy.badge;
+      routeDetailTitle.textContent = copy.title;
+      routeDetailBody.textContent = copy.body;
       routeDetailGrid.className = "secure-form-layout";
 
       const form = createElement("form", "secure-form-card secure-form-grid");
@@ -9840,7 +10782,7 @@
       emailInput.maxLength = MAX_EMAIL_LENGTH;
       emailInput.autocomplete = "email";
       const levelSelect = createElement("select", "form-input");
-      ["Core", "Valhalla", "Ragnarok", "Tester", "No lo se aun"].forEach((value) => {
+      copy.levels.forEach((value) => {
         const option = createElement("option", "", value);
         option.value = value;
         levelSelect.append(option);
@@ -9856,22 +10798,22 @@
       const status = createElement("p", "account-status");
       status.setAttribute("role", "status");
       status.setAttribute("aria-live", "polite");
-      const mailLink = createElement("a", "form-secondary-link", "Abrir correo preparado");
+      const mailLink = createElement("a", "form-secondary-link", copy.mail);
       mailLink.hidden = true;
       form.append(
-        createElement("h3", "", "Solicitar acceso"),
-        createSecureField("Nombre o alias", aliasInput),
-        createSecureField("Correo opcional", emailInput),
-        createSecureField("Interes principal", levelSelect),
-        createSecureField("Mensaje breve", messageInput),
+        createElement("h3", "", copy.formTitle),
+        createSecureField(copy.alias, aliasInput),
+        createSecureField(copy.email, emailInput),
+        createSecureField(copy.interest, levelSelect),
+        createSecureField(copy.message, messageInput),
         honeypot,
         createElement("label", "secure-check-row"),
-        createElement("button", "cta-primary", "Preparar solicitud segura"),
+        createElement("button", "cta-primary", copy.submit),
         status,
         mailLink
       );
       const privacyLabel = form.querySelector(".secure-check-row");
-      privacyLabel.append(privacy, createElement("span", "", "Acepto que esta solicitud se revise manualmente y que no se publique mi correo."));
+      privacyLabel.append(privacy, createElement("span", "", copy.privacyText));
       form.querySelector("button").type = "submit";
       form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -9880,57 +10822,54 @@
         const message = normalizeFormText(messageInput.value, MAX_WAITLIST_MESSAGE_LENGTH);
         if (honeypot.value) return;
         if (!alias || alias.length < 2) {
-          status.textContent = "Indica un alias reconocible.";
+          status.textContent = copy.invalidAlias;
           return;
         }
         if (!isValidOptionalEmail(email)) {
-          status.textContent = "Revisa el correo opcional.";
+          status.textContent = copy.invalidEmail;
           return;
         }
         if (hasUnsafeContributionText(`${alias} ${email} ${message}`)) {
-          status.textContent = "Por seguridad no se aceptan enlaces, HTML, scripts ni codigo.";
+          status.textContent = copy.unsafe;
           return;
         }
         if (!privacy.checked) {
-          status.textContent = "Acepta la revision manual y privacidad antes de preparar el envio.";
+          status.textContent = copy.accept;
           return;
         }
         if (!canSubmitSecureForm("waitlist")) {
-          status.textContent = "Espera un momento antes de preparar otra solicitud.";
+          status.textContent = copy.cooldown;
           return;
         }
         const draft = { type: "waitlist", alias, email, interest: levelSelect.value, message, createdAt: new Date().toISOString() };
         appendLocalDraft(STORAGE_WAITLIST_KEY, draft);
         markSecureFormSubmitted("waitlist");
-        mailLink.href = buildMailtoLink("Solicitud de acceso Zamazen Aegis", [
+        mailLink.href = buildMailtoLink(copy.subject, [
           `Alias: ${alias}`,
-          `Correo opcional: ${email || "No indicado"}`,
-          `Interes: ${levelSelect.value}`,
-          `Mensaje: ${message || "Sin mensaje adicional"}`
+          `${copy.email}: ${email || copy.optionalMissing}`,
+          `${copy.interest}: ${levelSelect.value}`,
+          `${copy.message}: ${message || copy.noMessage}`
         ]);
         mailLink.hidden = false;
-        status.textContent = "Borrador seguro preparado. Confirma el envio desde tu correo; no se publica nada automaticamente.";
+        status.textContent = copy.ready;
       });
 
       const notes = createElement("aside", "secure-form-card");
       notes.append(
-        createElement("span", "experience-status", "Privacidad"),
-        createElement("h3", "", "Que ocurre con tu solicitud"),
-        createSecureNoteList([
-          ["Sin backend falso", "La web estatica no inventa una inscripcion online."],
-          ["Sin archivos", "No se aceptan adjuntos ni documentos desde esta pantalla."],
-          ["Revision manual", "El acceso se decide cuando exista canal real y seguro."]
-        ])
+        createElement("span", "experience-status", copy.notesBadge),
+        createElement("h3", "", copy.notesTitle),
+        createSecureNoteList(copy.notes)
       );
       routeDetailGrid.replaceChildren(form, notes);
-      routeDetailActions.replaceChildren(createProfileAction("Enviar idea", "#/ideas", "secondary"));
+      routeDetailActions.replaceChildren(createProfileAction(copy.ideaAction, "#/ideas", "secondary"));
     }
 
     function renderSecureIdeasExperience() {
       setRouteDetailVariant("");
-      routeDetailBadge.textContent = "Comunidad";
-      routeDetailTitle.textContent = "Ideas, mejoras y agradecimientos";
-      routeDetailBody.textContent = "Puedes preparar una propuesta segura. Nada se publica automaticamente, no se aceptan archivos y cualquier agradecimiento necesita permiso y revision manual.";
+      const copy = getRichRouteCopy("ideas");
+      routeDetailBadge.textContent = copy.badge;
+      routeDetailTitle.textContent = copy.title;
+      routeDetailBody.textContent = copy.body;
       routeDetailGrid.className = "secure-form-layout";
 
       const form = createElement("form", "secure-form-card secure-form-grid");
@@ -9943,7 +10882,7 @@
       emailInput.maxLength = MAX_EMAIL_LENGTH;
       emailInput.autocomplete = "email";
       const typeSelect = createElement("select", "form-input");
-      ["Idea", "Mejora", "Error", "Seguridad", "Accesibilidad", "Web", "App", "Funcion futura"].forEach((value) => {
+      copy.types.forEach((value) => {
         const option = createElement("option", "", value);
         option.value = value;
         typeSelect.append(option);
@@ -9951,7 +10890,7 @@
       const messageInput = createElement("textarea", "form-input");
       messageInput.maxLength = MAX_IDEA_MESSAGE_LENGTH;
       const levelSelect = createElement("select", "form-input");
-      ["Sin cuenta", "Core", "Valhalla", "Ragnarok", "Tester"].forEach((value) => {
+      copy.levels.forEach((value) => {
         const option = createElement("option", "", value);
         option.value = value;
         levelSelect.append(option);
@@ -9969,28 +10908,28 @@
       const status = createElement("p", "account-status");
       status.setAttribute("role", "status");
       status.setAttribute("aria-live", "polite");
-      const mailLink = createElement("a", "form-secondary-link", "Abrir correo preparado");
+      const mailLink = createElement("a", "form-secondary-link", copy.mail);
       mailLink.hidden = true;
 
       form.append(
-        createElement("h3", "", "Enviar propuesta segura"),
-        createSecureField("Nombre o alias", aliasInput),
-        createSecureField("Correo opcional", emailInput),
-        createSecureField("Tipo de aportacion", typeSelect),
-        createSecureField("Nivel actual", levelSelect),
-        createSecureField("Mensaje", messageInput),
+        createElement("h3", "", copy.formTitle),
+        createSecureField(copy.alias, aliasInput),
+        createSecureField(copy.email, emailInput),
+        createSecureField(copy.type, typeSelect),
+        createSecureField(copy.level, levelSelect),
+        createSecureField(copy.message, messageInput),
         honeypot,
         createElement("label", "secure-check-row"),
         createElement("label", "secure-check-row"),
         createElement("label", "secure-check-row"),
-        createElement("button", "cta-primary", "Preparar envio seguro"),
+        createElement("button", "cta-primary", copy.submit),
         status,
         mailLink
       );
       const checks = form.querySelectorAll(".secure-check-row");
-      checks[0].append(publicThanks, createElement("span", "", "Quiero poder aparecer en agradecimientos si se aprueba manualmente."));
-      checks[1].append(anonymous, createElement("span", "", "Prefiero aparecer como colaborador anonimo."));
-      checks[2].append(privacy, createElement("span", "", "Acepto privacidad, revision manual y que no hay recompensa automatica."));
+      checks[0].append(publicThanks, createElement("span", "", copy.publicThanks));
+      checks[1].append(anonymous, createElement("span", "", copy.anonymous));
+      checks[2].append(privacy, createElement("span", "", copy.privacy));
       form.querySelector("button").type = "submit";
       form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -9999,27 +10938,27 @@
         const message = normalizeFormText(messageInput.value, MAX_IDEA_MESSAGE_LENGTH);
         if (honeypot.value) return;
         if (!alias || alias.length < 2) {
-          status.textContent = "Indica un alias reconocible.";
+          status.textContent = copy.invalidAlias;
           return;
         }
         if (!isValidOptionalEmail(email)) {
-          status.textContent = "Revisa el correo opcional.";
+          status.textContent = copy.invalidEmail;
           return;
         }
         if (message.length < 20) {
-          status.textContent = "Describe la idea con al menos 20 caracteres.";
+          status.textContent = copy.shortMessage;
           return;
         }
         if (hasUnsafeContributionText(`${alias} ${email} ${message}`)) {
-          status.textContent = "Por seguridad no se aceptan enlaces, HTML, scripts ni codigo.";
+          status.textContent = copy.unsafe;
           return;
         }
         if (!privacy.checked) {
-          status.textContent = "Acepta privacidad y revision manual antes de preparar el envio.";
+          status.textContent = copy.accept;
           return;
         }
         if (!canSubmitSecureForm("ideas")) {
-          status.textContent = "Espera un momento antes de preparar otra propuesta.";
+          status.textContent = copy.cooldown;
           return;
         }
         const draft = {
@@ -10034,70 +10973,65 @@
         };
         appendLocalDraft(STORAGE_CONTRIBUTIONS_KEY, draft);
         markSecureFormSubmitted("ideas");
-        mailLink.href = buildMailtoLink("Idea o mejora para Zamazen Aegis", [
+        mailLink.href = buildMailtoLink(copy.subject, [
           `Alias: ${alias}`,
-          `Correo opcional: ${email || "No indicado"}`,
-          `Tipo: ${typeSelect.value}`,
-          `Nivel: ${levelSelect.value}`,
-          `Agradecimiento publico: ${publicThanks.checked ? "Si" : "No"}`,
-          `Anonimo: ${anonymous.checked ? "Si" : "No"}`,
+          `${copy.email}: ${email || copy.optionalMissing}`,
+          `${copy.type}: ${typeSelect.value}`,
+          `${copy.level}: ${levelSelect.value}`,
+          `${copy.publicThanks}: ${publicThanks.checked ? copy.yes : copy.no}`,
+          `${copy.anonymous}: ${anonymous.checked ? copy.yes : copy.no}`,
           "",
           message
         ]);
         mailLink.hidden = false;
-        status.textContent = "Propuesta saneada y preparada. Confirma el envio desde tu correo; nada se publica automaticamente.";
+        status.textContent = copy.ready;
       });
 
       const security = createElement("aside", "secure-form-card");
       security.append(
-        createElement("span", "experience-status", "Seguridad primero"),
-        createElement("h3", "", "Reglas de la seccion"),
-        createSecureNoteList([
-          ["Nada automatico", "Las ideas no aparecen publicamente sin revision y permiso."],
-          ["Sin archivos", "No se aceptan imagenes, PDFs, ZIPs, ejecutables ni scripts."],
-          ["Sin enlaces", "La primera version bloquea enlaces para reducir spam y phishing."],
-          ["Sin recompensas falsas", "Codigos Valhalla/Ragnarok o insignias solo tras valoracion manual."],
-          ["Admin privado", "La revision real debe vivir en backend protegido, no en HTML publico."]
-        ]),
-        createProfileAction("Abrir Salón de Guardianes", "#/salon-guardianes", "primary"),
-        createProfileAction("Ver panel privado preparado", "#/admin", "secondary")
+        createElement("span", "experience-status", copy.securityBadge),
+        createElement("h3", "", copy.rulesTitle),
+        createSecureNoteList(copy.rules),
+        createProfileAction(copy.hallAction, "#/salon-guardianes", "primary"),
+        createProfileAction(copy.adminAction, "#/admin", "secondary")
       );
       routeDetailGrid.replaceChildren(form, security);
       routeDetailActions.replaceChildren(
-        createProfileAction("Solicitar acceso", "#/lista-espera", "primary"),
-        createProfileAction("Centro de confianza", "#/confianza", "secondary")
+        createProfileAction(copy.waitlistAction, "#/lista-espera", "primary"),
+        createProfileAction(copy.trustAction, "#/confianza", "secondary")
       );
     }
 
     function renderGuardianHallExperience() {
       setRouteDetailVariant("");
-      routeDetailBadge.textContent = "Comunidad";
-      routeDetailTitle.textContent = "Salón de Guardianes";
-      routeDetailBody.textContent = "Zamazen Aegis tambien crece gracias a quienes ayudan al Guardian. Los puntos, coronas e insignias se asignan manualmente por impacto real, nunca por spam ni cantidad de mensajes.";
+      const copy = getRichRouteCopy("hall");
+      routeDetailBadge.textContent = copy.badge;
+      routeDetailTitle.textContent = copy.title;
+      routeDetailBody.textContent = copy.body;
       routeDetailGrid.className = "guardian-hall-layout";
 
       const introGrid = createElement("section", "guardian-hall-grid");
       const philosophy = createElement("article", "guardian-hall-card");
       philosophy.append(
-        createElement("span", "experience-status", "No gana quien mas envia"),
-        createElement("h3", "", "Gana quien mas ayuda"),
-        createElement("p", "", "Cada idea, mejora, error o reporte se revisa por utilidad, seguridad, estabilidad, privacidad, accesibilidad e impacto real en usuarios. Si hay abuso, spam o repeticion, no suma puntos.")
+        createElement("span", "experience-status", copy.philosophyBadge),
+        createElement("h3", "", copy.philosophyTitle),
+        createElement("p", "", copy.philosophyBody)
       );
       const privacy = createElement("article", "guardian-hall-card");
       privacy.append(
-        createElement("span", "experience-status", "Privacidad"),
-        createElement("h3", "", "Aparecer es opcional"),
-        createElement("p", "", "Nadie aparece sin permiso. El usuario puede usar alias, aparecer como colaborador anonimo o no aparecer. Nunca se muestran correo, IP, datos privados, mensajes completos ni informacion sensible.")
+        createElement("span", "experience-status", copy.privacyBadge),
+        createElement("h3", "", copy.privacyTitle),
+        createElement("p", "", copy.privacyBody)
       );
       introGrid.append(philosophy, privacy);
 
       const pointsSection = createElement("section", "guardian-hall-card");
       pointsSection.append(
-        createElement("span", "experience-status", "Puntos manuales"),
-        createElement("h3", "", "Tabla orientativa de impacto")
+        createElement("span", "experience-status", copy.pointsBadge),
+        createElement("h3", "", copy.pointsTitle)
       );
       const pointsGrid = createElement("div", "points-grid");
-      GUARDIAN_POINT_RULES.forEach(([title, points, body]) => {
+      copy.points.forEach(([title, points, body]) => {
         const card = createElement("article", "points-rule-card");
         card.append(
           createElement("span", "points-value", points),
@@ -10110,11 +11044,11 @@
 
       const crownsSection = createElement("section", "guardian-hall-card");
       crownsSection.append(
-        createElement("span", "experience-status", "Coronas"),
-        createElement("h3", "", "Puestos destacados cuando exista ranking aprobado")
+        createElement("span", "experience-status", copy.crownsBadge),
+        createElement("h3", "", copy.crownsTitle)
       );
       const crownGrid = createElement("div", "crown-grid");
-      GUARDIAN_CROWNS.forEach(([className, place, title, body]) => {
+      copy.crowns.forEach(([className, place, title, body]) => {
         const card = createElement("article", `crown-card ${className}`);
         card.append(
           createElement("div", "crown-symbol", place),
@@ -10128,47 +11062,50 @@
       const rankingGrid = createElement("section", "guardian-hall-grid");
       const monthly = createElement("article", "ranking-card hall-empty-state");
       monthly.append(
-        createElement("span", "experience-status", "Ranking mensual"),
-        createElement("h3", "", "Pendiente de activacion manual"),
-        createElement("p", "", "Se mostrara solo cuando el administrador apruebe entradas reales del mes. Ahora no hay nombres publicados porque no se deben inventar colaboradores.")
+        createElement("span", "experience-status", copy.monthlyBadge),
+        createElement("h3", "", copy.monthlyTitle),
+        createElement("p", "", copy.monthlyBody)
       );
       const historical = createElement("article", "ranking-card hall-empty-state");
       historical.append(
-        createElement("span", "experience-status", "Ranking historico"),
-        createElement("h3", "", "Reconocimiento permanente preparado"),
-        createElement("p", "", "Guardara el historial aprobado desde el inicio del proyecto cuando exista backend/panel privado y consentimiento de cada persona.")
+        createElement("span", "experience-status", copy.historicalBadge),
+        createElement("h3", "", copy.historicalTitle),
+        createElement("p", "", copy.historicalBody)
       );
       rankingGrid.append(monthly, historical);
 
+      const thanksSection = createElement("section", "guardian-hall-card hall-empty-state");
+      thanksSection.append(
+        createElement("span", "experience-status", copy.thanksBadge),
+        createElement("h3", "", copy.thanksTitle),
+        createElement("p", "", copy.thanksBody),
+        createElement("p", "account-status", copy.thanksEmpty)
+      );
+
       const badgesSection = createElement("section", "guardian-hall-card");
       badgesSection.append(
-        createElement("span", "experience-status", "Insignias"),
-        createElement("h3", "", "Reconocimientos posibles")
+        createElement("span", "experience-status", copy.badgesBadge),
+        createElement("h3", "", copy.badgesTitle)
       );
       const badgeList = createElement("div", "profile-pill-row");
-      GUARDIAN_BADGES.forEach((badge) => badgeList.append(createElement("span", "profile-pill", badge)));
+      copy.badges.forEach((badge) => badgeList.append(createElement("span", "profile-pill", badge)));
       badgesSection.append(
         badgeList,
-        createElement("p", "", "Las insignias y recompensas pueden acompañar agradecimientos, codigos temporales Valhalla/Ragnarok o acceso anticipado, siempre tras revision manual y sin automatismos.")
+        createElement("p", "", copy.badgesBody)
       );
 
       const adminSection = createElement("section", "guardian-hall-card");
       adminSection.append(
-        createElement("span", "experience-status", "Admin privado"),
-        createElement("h3", "", "Gestion segura obligatoria"),
-        createSecureNoteList([
-          ["Aprobar o rechazar", "Cada aportacion se revisa antes de publicar."],
-          ["Asignar puntos", "El administrador decide puntos e insignias segun impacto real."],
-          ["Corregir abusos", "Spam, repeticion, HTML, scripts o intentos de abuso no suman."],
-          ["Recompensas pendientes", "Cualquier codigo debe tener caducidad, control y trazabilidad."]
-        ])
+        createElement("span", "experience-status", copy.adminBadge),
+        createElement("h3", "", copy.adminTitle),
+        createSecureNoteList(copy.adminNotes)
       );
 
-      routeDetailGrid.replaceChildren(introGrid, pointsSection, crownsSection, rankingGrid, badgesSection, adminSection);
+      routeDetailGrid.replaceChildren(introGrid, pointsSection, crownsSection, rankingGrid, thanksSection, badgesSection, adminSection);
       routeDetailActions.replaceChildren(
-        createProfileAction("Enviar idea segura", "#/ideas", "primary"),
-        createProfileAction("Panel privado", "#/admin", "secondary"),
-        createProfileAction("Centro de confianza", "#/confianza", "secondary")
+        createProfileAction(copy.idea, "#/ideas", "primary"),
+        createProfileAction(copy.admin, "#/admin", "secondary"),
+        createProfileAction(copy.trust, "#/confianza", "secondary")
       );
     }
 
@@ -10183,22 +11120,22 @@
       if (!content || !routeDetailSection) return;
       const useRichLocalizedRoute = language === "es";
 
-      if (useRichLocalizedRoute && detailKey === "cuenta") {
+      if (detailKey === "cuenta") {
         renderAccountExperience();
         return;
       }
 
-      if (useRichLocalizedRoute && detailKey === "perfil") {
+      if (detailKey === "perfil") {
         renderProfileExperience();
         return;
       }
 
-      if (useRichLocalizedRoute && ["precios", "core", "valhalla", "ragnarok"].includes(detailKey)) {
+      if (["precios", "core", "valhalla", "ragnarok"].includes(detailKey)) {
         renderPlanExperience(detailKey);
         return;
       }
 
-      if (useRichLocalizedRoute && detailKey === "demo") {
+      if (detailKey === "demo") {
         renderDemoExperience();
         return;
       }
@@ -10223,17 +11160,17 @@
         return;
       }
 
-      if (useRichLocalizedRoute && detailKey === "ideas") {
+      if (detailKey === "ideas") {
         renderSecureIdeasExperience();
         return;
       }
 
-      if (useRichLocalizedRoute && detailKey === "salon-guardianes") {
+      if (detailKey === "salon-guardianes") {
         renderGuardianHallExperience();
         return;
       }
 
-      if (useRichLocalizedRoute && detailKey === "lista-espera") {
+      if (detailKey === "lista-espera") {
         renderWaitlistExperience();
         return;
       }
