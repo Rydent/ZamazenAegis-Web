@@ -91,7 +91,7 @@
     }
 
     html {
-      scroll-behavior: smooth;
+      scroll-behavior: auto;
       font-size: 16px;
     }
 
@@ -1078,6 +1078,113 @@
 
     .section {
       padding: 34px 0;
+    }
+
+    [data-route-section][hidden] {
+      display: none !important;
+    }
+
+    .route-tree-section,
+    .route-detail {
+      scroll-margin-top: calc(var(--header-height) + 18px);
+    }
+
+    .route-tree-grid,
+    .route-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .route-link-card,
+    .route-detail-card {
+      position: relative;
+      min-height: 100%;
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(111, 150, 232, 0.16);
+      background:
+        linear-gradient(135deg, rgba(94, 240, 189, 0.075), transparent 42%),
+        rgba(8, 17, 35, 0.82);
+      box-shadow: 0 18px 52px rgba(0, 0, 0, 0.22);
+    }
+
+    .route-link-card {
+      display: grid;
+      gap: 10px;
+      color: inherit;
+    }
+
+    .route-link-card:hover,
+    .route-link-card:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(94, 240, 189, 0.42);
+      box-shadow: 0 24px 62px rgba(0, 0, 0, 0.28);
+    }
+
+    .route-link-card span,
+    .route-detail-card span {
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .route-link-card h3,
+    .route-detail-card h3 {
+      margin: 0;
+      color: #f8fbff;
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      line-height: 1.18;
+    }
+
+    .route-link-card p,
+    .route-detail-card p,
+    .route-detail-lead {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .route-link-card::after {
+      content: ">";
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      color: rgba(94, 240, 189, 0.72);
+      font-weight: 900;
+    }
+
+    .route-detail-shell {
+      display: grid;
+      gap: 22px;
+      padding: clamp(22px, 4vw, 34px);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(94, 240, 189, 0.18);
+      background:
+        radial-gradient(circle at 85% 12%, rgba(91, 168, 255, 0.14), transparent 26%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.07), transparent 42%),
+        rgba(7, 14, 29, 0.72);
+      box-shadow: var(--shadow);
+    }
+
+    .route-detail-head {
+      max-width: 760px;
+    }
+
+    .route-detail-head h1 {
+      margin: 10px 0 12px;
+      color: #f8fbff;
+      font-size: clamp(2.15rem, 5vw, 4rem);
+      line-height: 1.02;
+    }
+
+    .route-detail-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
     }
 
     .problem-strip,
@@ -3483,6 +3590,11 @@
     }
 
     @media (min-width: 768px) and (max-width: 1100px) {
+      .route-tree-grid,
+      .route-detail-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .brand {
         max-width: min(250px, 34vw);
       }
@@ -3661,6 +3773,16 @@
         display: none;
       }
 
+      .route-tree-grid,
+      .route-detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .route-detail-shell {
+        padding: 20px;
+        border-radius: 22px;
+      }
+
       .rune {
         width: 32px;
         height: 32px;
@@ -3813,7 +3935,7 @@
   <div class="page-shell">
     <header class="header" id="top">
       <div class="container header-inner">
-        <a class="brand" href="#inicio" aria-label="Ir al inicio de Zamazen Aegis" data-i18n-attr="aria-label:brand.homeAria">
+        <a class="brand" href="#/inicio" aria-label="Ir al inicio de Zamazen Aegis" data-i18n-attr="aria-label:brand.homeAria">
           <span class="brand-mark" aria-hidden="true">
             <img class="brand-logo" src="assets/brand/zamazen-aegis-icon.png" alt="">
           </span>
@@ -3829,17 +3951,15 @@
           </button>
 
           <nav class="nav" id="siteNav" aria-label="Principal">
-            <a href="#inicio" data-i18n="nav.home">Inicio</a>
-            <a href="#funciones" data-i18n="nav.features">Funciones</a>
-            <a href="#centro-aegis" data-i18n="nav.center">Centro</a>
-            <a href="#seguridad" data-i18n="nav.security">Seguridad</a>
-            <a href="#cuenta" data-i18n="nav.account">Cuenta</a>
-            <a href="#gestionar-datos" data-i18n="nav.data">Datos</a>
-            <a href="#eliminar-cuenta" data-i18n="nav.deleteAccount">Eliminar cuenta</a>
-            <a href="#premium" data-i18n="nav.premium">Premium</a>
-            <a href="#musica" data-i18n="nav.music">Música</a>
-            <a href="#faq" data-i18n="nav.faq">FAQ</a>
-            <a href="#descargar" data-i18n="nav.cta">Activar escudo</a>
+            <a href="#/inicio" data-i18n="nav.home">Inicio</a>
+            <a href="#/funciones" data-i18n="nav.features">Funciones</a>
+            <a href="#/cuenta" data-i18n="nav.account">Cuenta</a>
+            <a href="#/seguridad" data-i18n="nav.security">Seguridad</a>
+            <a href="#/precios" data-i18n="nav.premium">Precios</a>
+            <a href="#/sobre-zamazenaegis" data-i18n="nav.about">Sobre</a>
+            <a href="#/equipo" data-i18n="nav.team">Equipo</a>
+            <a href="#/faq" data-i18n="nav.faq">FAQ</a>
+            <a href="#/contacto" data-i18n="legalDocs.contactShort">Contacto</a>
           </nav>
 
           <div class="control-switchers" aria-label="Idioma y tamaño de texto">
@@ -3863,11 +3983,11 @@
           </div>
 
           <div class="header-actions" aria-label="Estado y usuario" data-i18n-attr="aria-label:topbar.actionsLabel">
-            <a class="header-status" href="#nivel">
+            <a class="header-status" href="#/estado">
               <span class="status-dot" aria-hidden="true"></span>
               <span data-i18n="topbar.status">Escudo activo</span>
             </a>
-            <a class="header-icon-button" href="#neo" aria-label="Abrir Neo" data-i18n-attr="aria-label:topbar.neoAction">ᚨ</a>
+            <a class="header-icon-button" href="#/red-neo" aria-label="Abrir Neo" data-i18n-attr="aria-label:topbar.neoAction">ᚨ</a>
             <div class="user-panel" id="userPanel">
               <button class="user-avatar-button" id="userPanelToggle" type="button" aria-expanded="false" aria-controls="userMenu" aria-label="Abrir panel de usuario" data-i18n-attr="aria-label:userPanel.open">
                 <span class="user-avatar" aria-hidden="true">ᛟ</span>
@@ -3882,18 +4002,18 @@
                   </div>
                 </div>
                 <div class="user-menu-links">
-                  <a href="#cuenta"><span aria-hidden="true">ᛟ</span><span data-i18n="userPanel.profile">Perfil</span></a>
-                  <a href="#gestionar-datos"><span aria-hidden="true">ᚱ</span><span data-i18n="userPanel.settings">Ajustes</span></a>
-                  <a href="#seguridad"><span aria-hidden="true">ᛉ</span><span data-i18n="userPanel.security">Seguridad</span></a>
-                  <a href="#premium"><span aria-hidden="true">ᚠ</span><span data-i18n="userPanel.subscription">Suscripción</span></a>
-                  <a href="#faq"><span aria-hidden="true">ᚲ</span><span data-i18n="userPanel.help">Ayuda</span></a>
+                  <a href="#/perfil"><span aria-hidden="true">ᛟ</span><span data-i18n="userPanel.profile">Perfil</span></a>
+                  <a href="#/ajustes-cuenta"><span aria-hidden="true">ᚱ</span><span data-i18n="userPanel.settings">Ajustes</span></a>
+                  <a href="#/seguridad"><span aria-hidden="true">ᛉ</span><span data-i18n="userPanel.security">Seguridad</span></a>
+                  <a href="#/precios"><span aria-hidden="true">ᚠ</span><span data-i18n="userPanel.subscription">Suscripción</span></a>
+                  <a href="#/faq"><span aria-hidden="true">ᚲ</span><span data-i18n="userPanel.help">Ayuda</span></a>
                   <button type="button" id="userPanelLogout"><span aria-hidden="true">×</span><span data-i18n="userPanel.logout">Limpiar vista local</span></button>
                 </div>
               </div>
             </div>
           </div>
 
-          <a class="cta-primary" href="#descargar" data-i18n="nav.cta">Activar escudo</a>
+          <a class="cta-primary" href="#/descargar" data-i18n="nav.cta">Activar escudo</a>
         </div>
       </div>
     </header>
@@ -3914,11 +4034,11 @@
 
             <div class="hero-actions">
               <div class="cta-stack">
-                <a class="cta-primary" href="#descargar" data-i18n="hero.primaryCta">Proteger mi móvil</a>
+                <a class="cta-primary" href="#/descargar" data-i18n="hero.primaryCta">Proteger mi móvil</a>
                 <p class="cta-microcopy" data-i18n="hero.microcopy">Sin registro obligatorio. Cuenta Zamazen opcional para reforzar sesiones y privacidad.</p>
               </div>
-              <a class="cta-secondary" href="#funciones" data-i18n="hero.secondaryCta">Ver cómo funciona</a>
-              <a class="cta-secondary" href="#cuenta" data-open-auth="register" data-i18n="hero.accountCta">Acceder / crear cuenta</a>
+              <a class="cta-secondary" href="#/funciones" data-i18n="hero.secondaryCta">Ver cómo funciona</a>
+              <a class="cta-secondary" href="#/crear-cuenta" data-open-auth="register" data-i18n="hero.accountCta">Acceder / crear cuenta</a>
             </div>
 
             <div class="hero-points" aria-label="Puntos clave">
@@ -4041,6 +4161,34 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section route-tree-section" id="mapa-web" data-route-section>
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="section-tag" id="routeTreeBadge">Mapa web</span>
+            <h2 id="routeTreeTitle">Explora Zamazen Aegis por ramas</h2>
+            <p id="routeTreeBody">
+              Entra en cada area importante desde su propia vista, sin perder el camino de vuelta al inicio.
+            </p>
+            <div class="section-runes" aria-hidden="true">ᚱ ᛉ ᛟ</div>
+          </div>
+          <div class="route-tree-grid" id="routeTreeGrid"></div>
+        </div>
+      </section>
+
+      <section class="section route-detail" id="pagina-interna" data-route-section hidden>
+        <div class="container">
+          <div class="route-detail-shell reveal">
+            <div class="route-detail-head">
+              <span class="section-tag" id="routeDetailBadge">Zamazen Aegis</span>
+              <h1 id="routeDetailTitle">Vista interna</h1>
+              <p class="route-detail-lead" id="routeDetailBody"></p>
+            </div>
+            <div class="route-detail-grid" id="routeDetailGrid"></div>
+            <div class="route-detail-actions" id="routeDetailActions"></div>
           </div>
         </div>
       </section>
@@ -4373,10 +4521,10 @@
               <div class="radial-launch" id="roomRadialLauncher">
                 <button class="radial-core-button" id="roomRadialToggle" type="button" aria-expanded="false" aria-controls="roomRadialMenu" aria-label="Abrir núcleo de acciones Aegis" data-i18n-attr="aria-label:center.radialOpen">ᛉ</button>
                 <nav class="radial-menu" id="roomRadialMenu" aria-label="Núcleo de acciones Aegis" data-i18n-attr="aria-label:center.radialLabel">
-                  <a href="#seguridad" aria-label="Ir a seguridad" data-i18n-attr="aria-label:center.radialSecurity">ᚦ</a>
-                  <a href="#centro-aegis" data-room-target="permissions" aria-label="Ver permisos" data-i18n-attr="aria-label:center.radialPermissions">ᛉ</a>
-                  <a href="#neo" aria-label="Ir a Neo" data-i18n-attr="aria-label:center.radialNeo">ᚨ</a>
-                  <a href="#cuenta" data-open-auth="register" aria-label="Crear cuenta" data-i18n-attr="aria-label:center.radialAccount">ᛟ</a>
+                  <a href="#/funciones" aria-label="Ir a seguridad" data-i18n-attr="aria-label:center.radialSecurity">ᚦ</a>
+                  <a href="#/permisos" data-room-target="permissions" aria-label="Ver permisos" data-i18n-attr="aria-label:center.radialPermissions">ᛉ</a>
+                  <a href="#/red-neo" aria-label="Ir a Neo" data-i18n-attr="aria-label:center.radialNeo">ᚨ</a>
+                  <a href="#/crear-cuenta" data-open-auth="register" aria-label="Crear cuenta" data-i18n-attr="aria-label:center.radialAccount">ᛟ</a>
                 </nav>
               </div>
             </article>
@@ -4460,9 +4608,9 @@
                 <p data-i18n="center.accountBody">Login, registro y recuperación viven dentro del mismo santuario visual. No hay recargas, no hay páginas separadas y la web nunca guarda contraseñas.</p>
               </div>
               <div class="room-actions">
-                <a class="cta-primary" href="#cuenta" data-open-auth="register" data-i18n="center.accountCreate">Crear cuenta</a>
-                <a class="cta-secondary" href="#cuenta" data-open-auth="login" data-i18n="center.accountLogin">Entrar</a>
-                <a class="cta-secondary" href="#cuenta" data-open-auth="recover" data-i18n="center.accountRecover">Recuperar contraseña</a>
+                <a class="cta-primary" href="#/crear-cuenta" data-open-auth="register" data-i18n="center.accountCreate">Crear cuenta</a>
+                <a class="cta-secondary" href="#/login" data-open-auth="login" data-i18n="center.accountLogin">Entrar</a>
+                <a class="cta-secondary" href="#/recuperar-cuenta" data-open-auth="recover" data-i18n="center.accountRecover">Recuperar contraseña</a>
               </div>
               <p class="legal-note" data-i18n="center.accountNote">Si la API no responde, la web lo dice claramente y mantiene la protección local; no simula sesiones ni crea promesas falsas.</p>
             </article>
@@ -4576,16 +4724,16 @@
         <div class="container legal-grid">
           <aside class="legal-index reveal" aria-label="Documentos legales de Zamazen Aegis">
             <span class="section-tag" data-i18n="legalDocs.badge">Legal claro</span>
-            <a href="#politica-privacidad" data-i18n="legalDocs.privacyShort">Política de privacidad</a>
-            <a href="#gestionar-datos" data-i18n="legalDocs.dataShort">Gestionar datos</a>
-            <a href="#eliminar-cuenta" data-i18n="legalDocs.deleteShort">Eliminar cuenta y datos</a>
-            <a href="#cobertura-wifi" data-i18n="legalDocs.coverageShort">Cobertura y WiFi</a>
-            <a href="#politica-cookies" data-i18n="legalDocs.cookiesShort">Política de cookies</a>
-            <a href="#politica-producto" data-i18n="legalDocs.productShort">Política de producto</a>
-            <a href="#cobertura-wifi" data-i18n="legalDocs.coverageShort">Cobertura y WiFi</a>
-            <a href="#contrato-licencia" data-i18n="legalDocs.licenseShort">Contrato de licencia / EULA</a>
-            <a href="#acerca-de-zamazen-aegis" data-i18n="legalDocs.aboutShort">Acerca de Zamazen Aegis</a>
-            <a href="#contacto-soporte" data-i18n="legalDocs.contactShort">Contacto / soporte</a>
+            <a href="#/privacidad" data-i18n="legalDocs.privacyShort">Política de privacidad</a>
+            <a href="#/gestionar-datos" data-i18n="legalDocs.dataShort">Gestionar datos</a>
+            <a href="#/eliminar-cuenta" data-i18n="legalDocs.deleteShort">Eliminar cuenta y datos</a>
+            <a href="#/cobertura-wifi" data-i18n="legalDocs.coverageShort">Cobertura y WiFi</a>
+            <a href="#/politica-cookies" data-i18n="legalDocs.cookiesShort">Política de cookies</a>
+            <a href="#/politica-producto" data-i18n="legalDocs.productShort">Política de producto</a>
+            <a href="#/cobertura-wifi" data-i18n="legalDocs.coverageShort">Cobertura y WiFi</a>
+            <a href="#/contrato-licencia" data-i18n="legalDocs.licenseShort">Contrato de licencia / EULA</a>
+            <a href="#/sobre-zamazenaegis" data-i18n="legalDocs.aboutShort">Acerca de Zamazen Aegis</a>
+            <a href="#/contacto" data-i18n="legalDocs.contactShort">Contacto / soporte</a>
           </aside>
 
           <div class="legal-docs-list">
@@ -4611,7 +4759,7 @@
               </ul>
               <p class="legal-callout">
                 <span data-i18n="legalDocs.deleteCallout">Si tienes una cuenta Zamazen, puedes solicitar la eliminación de la cuenta y datos asociados desde la página pública de eliminación.</span>
-                <a href="#eliminar-cuenta" data-i18n="legalDocs.deleteAction">Solicitar eliminación de cuenta</a>
+                <a href="#/eliminar-cuenta" data-i18n="legalDocs.deleteAction">Solicitar eliminación de cuenta</a>
               </p>
             </article>
 
@@ -4866,7 +5014,7 @@
             </div>
 
             <div style="margin-top: 22px;">
-              <a class="cta-primary" href="#descargar" data-i18n="premium.cta">Ver disponibilidad</a>
+              <a class="cta-primary" href="#/descargar" data-i18n="premium.cta">Ver disponibilidad</a>
             </div>
           </div>
         </div>
@@ -4938,9 +5086,9 @@
             <div class="context-actions" id="accountContextActions">
               <button class="context-actions-toggle" id="accountActionsToggle" type="button" aria-expanded="false" aria-controls="accountActionsMenu" data-i18n="account.actionsToggle">Acciones de cuenta</button>
               <div class="context-actions-menu" id="accountActionsMenu">
-                <a href="#gestionar-datos"><span aria-hidden="true">ᚱ</span><span data-i18n="account.dataAction">Gestionar datos</span></a>
-                <a href="#eliminar-cuenta"><span aria-hidden="true">ᛟ</span><span data-i18n="account.deleteAction">Eliminar cuenta</span></a>
-                <a href="#politica-privacidad"><span aria-hidden="true">ᛉ</span><span data-i18n="account.privacyAction">Privacidad</span></a>
+                <a href="#/gestionar-datos"><span aria-hidden="true">ᚱ</span><span data-i18n="account.dataAction">Gestionar datos</span></a>
+                <a href="#/eliminar-cuenta"><span aria-hidden="true">ᛟ</span><span data-i18n="account.deleteAction">Eliminar cuenta</span></a>
+                <a href="#/privacidad"><span aria-hidden="true">ᛉ</span><span data-i18n="account.privacyAction">Privacidad</span></a>
               </div>
             </div>
           </div>
@@ -5194,35 +5342,36 @@
 
           <div class="footer-links">
             <span class="footer-title" data-i18n="footer.linksTitle">Enlaces</span>
-            <a href="#inicio" data-i18n="nav.home">Inicio</a>
-            <a href="#funciones" data-i18n="nav.features">Funciones</a>
-            <a href="#premium" data-i18n="nav.premium">Premium</a>
+            <a href="#/inicio" data-i18n="nav.home">Inicio</a>
+            <a href="#/funciones" data-i18n="nav.features">Funciones</a>
+            <a href="#/precios" data-i18n="nav.premium">Precios</a>
           </div>
 
           <div class="footer-links">
             <span class="footer-title" data-i18n="footer.productTitle">Producto</span>
-            <a href="#centro-aegis" data-i18n="nav.center">Centro</a>
-            <a href="#seguridad" data-i18n="nav.security">Seguridad</a>
-            <a href="#privacidad" data-i18n="privacy.badge">Privacidad y control</a>
-            <a href="#cuenta" data-i18n="nav.account">Cuenta</a>
-            <a href="#gestionar-datos" data-i18n="nav.data">Datos</a>
-            <a href="#eliminar-cuenta" data-i18n="nav.deleteAccount">Eliminar cuenta</a>
-            <a href="#faq" data-i18n="nav.faq">FAQ</a>
-            <a href="#descargar" data-i18n="nav.cta">Activar escudo</a>
+            <a href="#/sobre-zamazenaegis" data-i18n="nav.center">Centro</a>
+            <a href="#/funciones" data-i18n="nav.security">Seguridad</a>
+            <a href="#/privacidad" data-i18n="privacy.badge">Privacidad y control</a>
+            <a href="#/cuenta" data-i18n="nav.account">Cuenta</a>
+            <a href="#/datos" data-i18n="nav.data">Datos</a>
+            <a href="#/eliminar-cuenta" data-i18n="nav.deleteAccount">Eliminar cuenta</a>
+            <a href="#/faq" data-i18n="nav.faq">FAQ</a>
+            <a href="#/descargar" data-i18n="nav.cta">Activar escudo</a>
           </div>
 
           <div class="footer-links">
             <span class="footer-title" data-i18n="footer.ecosystemTitle">Ecosistema</span>
-            <a href="#politica-privacidad" data-i18n="legalDocs.privacyShort">Política de privacidad</a>
-            <a href="#gestionar-datos" data-i18n="legalDocs.dataShort">Gestionar datos</a>
-            <a href="#eliminar-cuenta" data-i18n="legalDocs.deleteShort">Eliminar cuenta y datos</a>
-            <a href="#politica-cookies" data-i18n="legalDocs.cookiesShort">Política de cookies</a>
-            <a href="#politica-producto" data-i18n="legalDocs.productShort">Política de producto</a>
-            <a href="#contrato-licencia" data-i18n="legalDocs.licenseShort">Contrato de licencia / EULA</a>
-            <a href="#acerca-de-zamazen-aegis" data-i18n="legalDocs.aboutShort">Acerca de Zamazen Aegis</a>
+            <a href="#/privacidad" data-i18n="legalDocs.privacyShort">Política de privacidad</a>
+            <a href="#/gestionar-datos" data-i18n="legalDocs.dataShort">Gestionar datos</a>
+            <a href="#/eliminar-cuenta" data-i18n="legalDocs.deleteShort">Eliminar cuenta y datos</a>
+            <a href="#/politica-cookies" data-i18n="legalDocs.cookiesShort">Política de cookies</a>
+            <a href="#/politica-producto" data-i18n="legalDocs.productShort">Política de producto</a>
+            <a href="#/contrato-licencia" data-i18n="legalDocs.licenseShort">Contrato de licencia / EULA</a>
+            <a href="#/sobre-zamazenaegis" data-i18n="legalDocs.aboutShort">Acerca de Zamazen Aegis</a>
             <button class="cookie-button ghost" type="button" id="footerCookiePreferences" data-i18n="cookie.preferencesLink">Preferencias de cookies</button>
-            <a href="#cuenta" data-i18n="footer.accountLink">Cuenta</a>
-            <a href="#neo" data-i18n="footer.redNeoLink">Red Neo</a>
+            <a href="#/cuenta" data-i18n="footer.accountLink">Cuenta</a>
+            <a href="#/red-neo" data-i18n="footer.redNeoLink">Red Neo</a>
+            <a href="#/contacto" data-i18n="legalDocs.contactShort">Contacto</a>
           </div>
 
           <div class="footer-contact">
@@ -5242,12 +5391,12 @@
 
   <div class="quick-launcher" id="quickLauncher">
     <nav class="quick-menu" id="quickMenu" aria-label="Accesos rápidos" data-i18n-attr="aria-label:quickMenu.label">
-      <a href="#nivel"><span class="quick-menu-icon" aria-hidden="true">ᛉ</span><span data-i18n="quickMenu.shield">Escudo</span></a>
-      <a href="#neo"><span class="quick-menu-icon" aria-hidden="true">ᚨ</span><span data-i18n="quickMenu.neo">Neo</span></a>
-      <a href="#centro-aegis"><span class="quick-menu-icon" aria-hidden="true">ᚦ</span><span data-i18n="quickMenu.center">Centro</span></a>
-      <a href="#cuenta"><span class="quick-menu-icon" aria-hidden="true">ᛟ</span><span data-i18n="quickMenu.account">Cuenta</span></a>
-      <a href="#premium"><span class="quick-menu-icon" aria-hidden="true">ᚠ</span><span data-i18n="quickMenu.premium">Premium</span></a>
-      <a href="#faq"><span class="quick-menu-icon" aria-hidden="true">ᚲ</span><span data-i18n="quickMenu.help">Ayuda</span></a>
+      <a href="#/estado"><span class="quick-menu-icon" aria-hidden="true">ᛉ</span><span data-i18n="quickMenu.shield">Escudo</span></a>
+      <a href="#/red-neo"><span class="quick-menu-icon" aria-hidden="true">ᚨ</span><span data-i18n="quickMenu.neo">Red Neo</span></a>
+      <a href="#/seguridad"><span class="quick-menu-icon" aria-hidden="true">ᚦ</span><span data-i18n="nav.security">Seguridad</span></a>
+      <a href="#/cuenta"><span class="quick-menu-icon" aria-hidden="true">ᛟ</span><span data-i18n="quickMenu.account">Cuenta</span></a>
+      <a href="#/precios"><span class="quick-menu-icon" aria-hidden="true">ᚠ</span><span data-i18n="quickMenu.premium">Precios</span></a>
+      <a href="#/faq"><span class="quick-menu-icon" aria-hidden="true">ᚲ</span><span data-i18n="nav.faq">FAQ</span></a>
     </nav>
     <button class="quick-menu-toggle" id="quickMenuToggle" type="button" aria-expanded="false" aria-controls="quickMenu" aria-label="Abrir accesos rápidos" data-i18n-attr="aria-label:quickMenu.open">ᛉ</button>
   </div>
@@ -5370,6 +5519,18 @@
     const roomRadialToggle = document.getElementById("roomRadialToggle");
     const roomRadialLinks = document.querySelectorAll("#roomRadialMenu a");
     const storePlaceholderLinks = document.querySelectorAll("[data-store-placeholder]");
+    const routeSections = Array.from(document.querySelectorAll("main > section[id]"));
+    const routeTreeSection = document.getElementById("mapa-web");
+    const routeTreeBadge = document.getElementById("routeTreeBadge");
+    const routeTreeTitle = document.getElementById("routeTreeTitle");
+    const routeTreeBody = document.getElementById("routeTreeBody");
+    const routeTreeGrid = document.getElementById("routeTreeGrid");
+    const routeDetailSection = document.getElementById("pagina-interna");
+    const routeDetailBadge = document.getElementById("routeDetailBadge");
+    const routeDetailTitle = document.getElementById("routeDetailTitle");
+    const routeDetailBody = document.getElementById("routeDetailBody");
+    const routeDetailGrid = document.getElementById("routeDetailGrid");
+    const routeDetailActions = document.getElementById("routeDetailActions");
     const cookieBanner = document.getElementById("cookieBanner");
     const cookiePanelBackdrop = document.getElementById("cookiePanelBackdrop");
     const cookieAcceptAll = document.getElementById("cookieAcceptAll");
@@ -5401,6 +5562,74 @@
       personalization: false,
       marketing: false
     };
+    const ACCOUNT_ROUTE_BY_MODE = {
+      login: "login",
+      register: "crear-cuenta",
+      recover: "recuperar-cuenta"
+    };
+    const LEGACY_ROUTE_MAP = {
+      inicio: "inicio",
+      funciones: "funciones",
+      "centro-aegis": "sobre-zamazenaegis",
+      seguridad: "seguridad",
+      cuenta: "cuenta",
+      premium: "precios",
+      musica: "musica",
+      faq: "faq",
+      nivel: "estado",
+      neo: "red-neo",
+      privacidad: "privacidad",
+      legal: "privacidad",
+      datos: "datos",
+      descargar: "descargar",
+      "gestionar-datos": "gestionar-datos",
+      "eliminar-cuenta": "eliminar-cuenta",
+      "politica-privacidad": "privacidad",
+      "politica-cookies": "politica-cookies",
+      "politica-producto": "politica-producto",
+      "cobertura-wifi": "cobertura-wifi",
+      "contrato-licencia": "contrato-licencia",
+      "acerca-de-zamazen-aegis": "sobre-zamazenaegis",
+      "contacto-soporte": "contacto"
+    };
+    const ROUTE_DEFINITIONS = {
+      inicio: { sections: ["inicio"] },
+      funciones: { sections: ["pagina-interna"], detail: "funciones" },
+      precios: { sections: ["pagina-interna"], detail: "precios" },
+      estado: { sections: ["nivel"] },
+      musica: { sections: ["musica"] },
+      descargar: { sections: ["descargar"] },
+      cuenta: { sections: ["pagina-interna"], detail: "cuenta" },
+      login: { sections: ["cuenta"], authMode: "login" },
+      "crear-cuenta": { sections: ["cuenta"], authMode: "register" },
+      "recuperar-cuenta": { sections: ["cuenta"], authMode: "recover" },
+      perfil: { sections: ["pagina-interna"], detail: "perfil" },
+      "ajustes-cuenta": { sections: ["pagina-interna"], detail: "ajustes-cuenta" },
+      seguridad: { sections: ["pagina-interna"], detail: "seguridad" },
+      permisos: { sections: ["pagina-interna"], detail: "permisos" },
+      privacidad: { sections: ["pagina-interna"], detail: "privacidad" },
+      datos: { sections: ["pagina-interna"], detail: "gestionar-datos" },
+      "gestionar-datos": { sections: ["pagina-interna"], detail: "gestionar-datos" },
+      "eliminar-cuenta": { sections: ["pagina-interna"], detail: "eliminar-cuenta" },
+      "politica-cookies": { sections: ["pagina-interna"], detail: "politica-cookies" },
+      "politica-producto": { sections: ["pagina-interna"], detail: "politica-producto" },
+      "cobertura-wifi": { sections: ["pagina-interna"], detail: "cobertura-wifi" },
+      "contrato-licencia": { sections: ["pagina-interna"], detail: "contrato-licencia" },
+      "sobre-zamazenaegis": { sections: ["pagina-interna"], detail: "sobre-zamazenaegis" },
+      equipo: { sections: ["pagina-interna"], detail: "equipo" },
+      faq: { sections: ["pagina-interna"], detail: "faq" },
+      contacto: { sections: ["pagina-interna"], detail: "contacto" },
+      "ayuda-contacto": { sections: ["pagina-interna"], detail: "contacto" },
+      core: { sections: ["pagina-interna"], detail: "core" },
+      valhalla: { sections: ["pagina-interna"], detail: "valhalla" },
+      ragnarok: { sections: ["pagina-interna"], detail: "ragnarok" },
+      escaner: { sections: ["pagina-interna"], detail: "escaner" },
+      bunker: { sections: ["pagina-interna"], detail: "bunker" },
+      "red-neo": { sections: ["pagina-interna"], detail: "red-neo" },
+      limpieza: { sections: ["pagina-interna"], detail: "limpieza" },
+      historial: { sections: ["pagina-interna"], detail: "historial" },
+      "guardian-familiar": { sections: ["pagina-interna"], detail: "guardian-familiar" }
+    };
 
     const translations = {
       es: {
@@ -5421,7 +5650,12 @@
           account: "Cuenta",
           data: "Datos",
           deleteAccount: "Eliminar cuenta",
-          premium: "Premium",
+          premium: "Precios",
+          bunker: "Bunker",
+          neoNetwork: "Red Neo",
+          about: "Sobre",
+          team: "Equipo",
+          help: "Ayuda",
           music: "Música",
           faq: "FAQ",
           cta: "Activar escudo"
@@ -5631,7 +5865,7 @@
           runeAlgiz: "Protección espiritual y guía.",
           runeOthala: "Herencia, raíces y hogar.",
           accountTitle: "Acceso en una sola experiencia",
-          accountBody: "Login, registro y recuperación viven dentro del mismo santuario visual. No hay recargas, no hay páginas separadas y la web nunca guarda contraseñas.",
+          accountBody: "Login, registro y recuperación tienen vistas dedicadas dentro del mismo santuario visual. La web no recarga, no guarda contraseñas y deja claro el estado real de la API.",
           accountCreate: "Crear cuenta",
           accountLogin: "Entrar",
           accountRecover: "Recuperar contraseña",
@@ -5718,11 +5952,11 @@
           label: "Accesos rápidos",
           open: "Abrir accesos rápidos",
           shield: "Escudo",
-          neo: "Neo",
+          neo: "Red Neo",
           security: "Seguridad",
           center: "Centro",
           account: "Cuenta",
-          premium: "Premium",
+          premium: "Precios",
           help: "Ayuda"
         },
         auth: {
@@ -5874,7 +6108,7 @@
           description: "Zamazen Aegis helps review reported risk signals in calls, SMS and links with Neo, clear privacy and a futuristic experience designed to anticipate risk."
         },
         brand: { name: "Zamazen Aegis", tagline: "Intelligent Security", homeAria: "Go to the Zamazen Aegis start" },
-        nav: { home: "Home", features: "Features", center: "Center", security: "Security", account: "Account", data: "Data", deleteAccount: "Delete account", premium: "Premium", music: "Music", faq: "FAQ", cta: "Activate shield" },
+        nav: { home: "Home", features: "Features", center: "Center", security: "Security", account: "Account", data: "Data", deleteAccount: "Delete account", premium: "Plans", bunker: "Bunker", neoNetwork: "Neo Network", about: "About", team: "Team", help: "Help", music: "Music", faq: "FAQ", cta: "Activate shield" },
         accessibility: { normal: "Normal", medium: "Medium", large: "Large" },
         hero: {
           eyebrow: "Intelligent digital shield",
@@ -6076,7 +6310,7 @@
           runeAlgiz: "Spiritual protection and guidance.",
           runeOthala: "Heritage, roots and home.",
           accountTitle: "Access in one experience",
-          accountBody: "Login, registration and recovery live inside the same visual sanctuary. No reloads, no separate pages and the website never stores passwords.",
+          accountBody: "Login, registration and recovery have dedicated views inside the same visual sanctuary. The website does not reload, never stores passwords and explains the real API state.",
           accountCreate: "Create account",
           accountLogin: "Sign in",
           accountRecover: "Recover password",
@@ -6158,11 +6392,11 @@
           label: "Quick access",
           open: "Open quick access",
           shield: "Shield",
-          neo: "Neo",
+          neo: "Neo Network",
           security: "Security",
           center: "Center",
           account: "Account",
-          premium: "Premium",
+          premium: "Plans",
           help: "Help"
         },
         auth: {
@@ -6314,7 +6548,7 @@
           description: "Zamazen Aegis aide à examiner les signaux de risque signalés dans les appels, SMS et liens avec Neo, une confidentialité claire et une expérience futuriste conçue pour anticiper le risque."
         },
         brand: { name: "Zamazen Aegis", tagline: "Sécurité Intelligente", homeAria: "Aller au début de Zamazen Aegis" },
-        nav: { home: "Accueil", features: "Fonctions", center: "Centre", security: "Sécurité", account: "Compte", data: "Données", deleteAccount: "Supprimer le compte", premium: "Premium", music: "Musique", faq: "FAQ", cta: "Activer le bouclier" },
+        nav: { home: "Accueil", features: "Fonctions", center: "Centre", security: "Sécurité", account: "Compte", data: "Données", deleteAccount: "Supprimer le compte", premium: "Tarifs", bunker: "Bunker", neoNetwork: "Réseau Neo", about: "Projet", team: "Équipe", help: "Aide", music: "Musique", faq: "FAQ", cta: "Activer le bouclier" },
         accessibility: { normal: "Normal", medium: "Moyen", large: "Grand" },
         hero: {
           eyebrow: "Bouclier numérique intelligent",
@@ -6516,7 +6750,7 @@
           runeAlgiz: "Protection spirituelle et guide.",
           runeOthala: "Héritage, racines et foyer.",
           accountTitle: "Accès dans une seule expérience",
-          accountBody: "Login, inscription et récupération vivent dans le même sanctuaire visuel. Pas de rechargement, pas de pages séparées et le site ne stocke jamais les mots de passe.",
+          accountBody: "Connexion, inscription et récupération ont des vues dédiées dans le même sanctuaire visuel. Le site ne recharge pas, ne stocke jamais les mots de passe et indique l'état réel de l'API.",
           accountCreate: "Créer un compte",
           accountLogin: "Se connecter",
           accountRecover: "Récupérer le mot de passe",
@@ -6598,11 +6832,11 @@
           label: "Accès rapides",
           open: "Ouvrir les accès rapides",
           shield: "Bouclier",
-          neo: "Neo",
+          neo: "Réseau Neo",
           security: "Sécurité",
           center: "Centre",
           account: "Compte",
-          premium: "Premium",
+          premium: "Tarifs",
           help: "Aide"
         },
         auth: {
@@ -6754,7 +6988,7 @@
           description: "Zamazen Aegis ajuda a revisar sinais de risco reportados em chamadas, SMS e links com Neo, privacidade clara e uma experiência futurista criada para antecipar riscos."
         },
         brand: { name: "Zamazen Aegis", tagline: "Segurança Inteligente", homeAria: "Ir para o início de Zamazen Aegis" },
-        nav: { home: "Início", features: "Funções", center: "Centro", security: "Segurança", account: "Conta", data: "Dados", deleteAccount: "Eliminar conta", premium: "Premium", music: "Música", faq: "FAQ", cta: "Ativar escudo" },
+        nav: { home: "Início", features: "Funções", center: "Centro", security: "Segurança", account: "Conta", data: "Dados", deleteAccount: "Eliminar conta", premium: "Preços", bunker: "Bunker", neoNetwork: "Red Neo", about: "Projeto", team: "Equipe", help: "Ajuda", music: "Música", faq: "FAQ", cta: "Ativar escudo" },
         accessibility: { normal: "Normal", medium: "Médio", large: "Grande" },
         hero: {
           eyebrow: "Escudo digital inteligente",
@@ -6956,7 +7190,7 @@
           runeAlgiz: "Proteção espiritual e guia.",
           runeOthala: "Herança, raízes e lar.",
           accountTitle: "Acesso em uma só experiência",
-          accountBody: "Login, cadastro e recuperação vivem dentro do mesmo santuário visual. Sem recargas, sem páginas separadas e o site nunca guarda senhas.",
+          accountBody: "Login, cadastro e recuperação têm vistas dedicadas dentro do mesmo santuário visual. O site não recarrega, nunca guarda senhas e explica o estado real da API.",
           accountCreate: "Criar conta",
           accountLogin: "Entrar",
           accountRecover: "Recuperar senha",
@@ -7038,11 +7272,11 @@
           label: "Acessos rápidos",
           open: "Abrir acessos rápidos",
           shield: "Escudo",
-          neo: "Neo",
+          neo: "Red Neo",
           security: "Segurança",
           center: "Centro",
           account: "Conta",
-          premium: "Premium",
+          premium: "Preços",
           help: "Ajuda"
         },
         auth: {
@@ -7592,6 +7826,226 @@
       };
     });
 
+    const ROUTE_TREE_CONTENT = {
+      es: {
+        home: {
+          badge: "Mapa web",
+          title: "Explora Zamazen Aegis por ramas",
+          body: "La home resume el proyecto. Las decisiones importantes viven en vistas propias para que puedas avanzar sin perderte.",
+          cards: [
+            ["Cuenta", "Crear cuenta", "Registro dedicado para activar perfil, sesiones y recuperacion cuando la API esta disponible.", "#/crear-cuenta"],
+            ["Cuenta", "Iniciar sesion", "Acceso claro: la web no guarda contrasenas ni simula sesiones falsas.", "#/login"],
+            ["Precios", "Core, Valhalla y Ragnarok", "Compara las ediciones sin mezclarlo con toda la pagina principal.", "#/precios"],
+            ["Funcion", "Bunker", "Consulta como se protegen credenciales, registros bancarios y datos sensibles.", "#/bunker"],
+            ["Funcion", "Red Neo", "Entiende los reportes saneados, el consentimiento y la cola online.", "#/red-neo"],
+            ["Proyecto", "Equipo", "Conoce a Francisco Javier Molina Moreno, Maria Isabel Rodriguez Sanchez y Neo.", "#/equipo"]
+          ]
+        },
+        features: {
+          badge: "Arbol de funciones",
+          title: "Cada funcion importante tiene su propia rama",
+          body: "Entra solo en lo que necesitas: escaner, Bunker, Red Neo, limpieza, historial o Guardian familiar.",
+          cards: [
+            ["Funcion", "Escaner", "Revision de llamadas, SMS, enlaces y senales de estafa con explicacion clara.", "#/escaner"],
+            ["Funcion", "Bunker", "Capa para secretos y datos sensibles con cifrado y limites honestos.", "#/bunker"],
+            ["Funcion", "Red Neo", "Reportes comunitarios saneados y controlados por consentimiento.", "#/red-neo"],
+            ["Funcion", "Limpieza", "Acciones seguras para cache, preferencias y elementos controlados por la app.", "#/limpieza"],
+            ["Funcion", "Historial", "Memoria local de eventos para entender que paso y decidir mejor.", "#/historial"],
+            ["Funcion", "Guardian familiar", "Modo seguro para personas con menos experiencia sin control oculto.", "#/guardian-familiar"]
+          ]
+        },
+        pricing: {
+          badge: "Ramas de precios",
+          title: "Core, Valhalla y Ragnarok como vistas separadas",
+          body: "La comparativa general esta aqui; cada edicion tiene tambien una vista propia para revisar su valor sin presion.",
+          cards: [
+            ["Edicion", "Core", "Proteccion esencial, escaner manual, historial basico, limpieza segura y Red Neo saneada.", "#/core"],
+            ["Edicion", "Valhalla", "Mas contexto, privacidad, permisos, enlaces, tendencias online y Bunker mejorado.", "#/valhalla"],
+            ["Edicion", "Ragnarok", "Experiencia completa para banca, credenciales, identidad digital y riesgos complejos.", "#/ragnarok"]
+          ]
+        }
+      },
+      en: {
+        home: {
+          badge: "Site map",
+          title: "Explore Zamazen Aegis by branches",
+          body: "The home page summarizes the project. Important decisions live in their own views so you can move without getting lost.",
+          cards: [
+            ["Account", "Create account", "Dedicated registration for profile, sessions and recovery when the API is available.", "#/crear-cuenta"],
+            ["Account", "Sign in", "Clear access: the website does not store passwords or fake sessions.", "#/login"],
+            ["Plans", "Core, Valhalla and Ragnarok", "Compare editions without mixing them into the whole home page.", "#/precios"],
+            ["Feature", "Bunker", "See how credentials, banking records and sensitive data are protected.", "#/bunker"],
+            ["Feature", "Neo Network", "Understand sanitized reports, consent and the online queue.", "#/red-neo"],
+            ["Project", "Team", "Meet Francisco Javier Molina Moreno, Maria Isabel Rodriguez Sanchez and Neo.", "#/equipo"]
+          ]
+        },
+        features: {
+          badge: "Feature tree",
+          title: "Every important feature has its own branch",
+          body: "Open only what you need: scanner, Bunker, Neo Network, cleaner, history or Family Guardian.",
+          cards: [
+            ["Feature", "Scanner", "Review calls, SMS, links and scam signals with clear explanations.", "#/escaner"],
+            ["Feature", "Bunker", "A layer for secrets and sensitive data with encryption and honest limits.", "#/bunker"],
+            ["Feature", "Neo Network", "Sanitized community reports controlled by consent.", "#/red-neo"],
+            ["Feature", "Cleaner", "Safe actions for cache, preferences and data controlled by the app.", "#/limpieza"],
+            ["Feature", "History", "Local event memory to understand what happened and decide better.", "#/historial"],
+            ["Feature", "Family Guardian", "Safe mode for less experienced users without hidden control.", "#/guardian-familiar"]
+          ]
+        },
+        pricing: {
+          badge: "Plan branches",
+          title: "Core, Valhalla and Ragnarok as separate views",
+          body: "The general comparison is here; each edition also has its own view to review value without pressure.",
+          cards: [
+            ["Edition", "Core", "Essential protection, manual scanner, basic history, safe cleaning and sanitized Neo Network.", "#/core"],
+            ["Edition", "Valhalla", "More context, privacy, permissions, links, online trends and improved Bunker.", "#/valhalla"],
+            ["Edition", "Ragnarok", "Complete experience for banking, credentials, digital identity and complex risks.", "#/ragnarok"]
+          ]
+        }
+      },
+      fr: {
+        home: {
+          badge: "Plan du site",
+          title: "Explorez Zamazen Aegis par branches",
+          body: "L'accueil resume le projet. Les decisions importantes ont leurs propres vues pour avancer sans se perdre.",
+          cards: [
+            ["Compte", "Creer un compte", "Inscription dediee pour profil, sessions et recuperation quand l'API est disponible.", "#/crear-cuenta"],
+            ["Compte", "Se connecter", "Acces clair: le site ne stocke pas de mots de passe et ne simule pas de sessions.", "#/login"],
+            ["Tarifs", "Core, Valhalla et Ragnarok", "Comparez les editions sans tout melanger dans l'accueil.", "#/precios"],
+            ["Fonction", "Bunker", "Voyez comment identifiants, donnees bancaires et donnees sensibles sont proteges.", "#/bunker"],
+            ["Fonction", "Reseau Neo", "Comprenez les signalements assainis, le consentement et la file en ligne.", "#/red-neo"],
+            ["Projet", "Equipe", "Decouvrez Francisco Javier Molina Moreno, Maria Isabel Rodriguez Sanchez et Neo.", "#/equipo"]
+          ]
+        },
+        features: {
+          badge: "Arbre des fonctions",
+          title: "Chaque fonction importante a sa propre branche",
+          body: "Ouvrez seulement ce dont vous avez besoin: scanner, Bunker, Reseau Neo, nettoyage, historique ou Gardien familial.",
+          cards: [
+            ["Fonction", "Scanner", "Revision appels, SMS, liens et signaux d'arnaque avec explications claires.", "#/escaner"],
+            ["Fonction", "Bunker", "Couche pour secrets et donnees sensibles avec chiffrement et limites honnetes.", "#/bunker"],
+            ["Fonction", "Reseau Neo", "Signalements communautaires assainis et controles par consentement.", "#/red-neo"],
+            ["Fonction", "Nettoyage", "Actions sures pour cache, preferences et donnees controlees par l'app.", "#/limpieza"],
+            ["Fonction", "Historique", "Memoire locale des evenements pour comprendre et mieux decider.", "#/historial"],
+            ["Fonction", "Gardien familial", "Mode sur pour utilisateurs moins experimentes sans controle cache.", "#/guardian-familiar"]
+          ]
+        },
+        pricing: {
+          badge: "Branches tarifaires",
+          title: "Core, Valhalla et Ragnarok en vues separees",
+          body: "La comparaison generale est ici; chaque edition a aussi sa vue pour revoir sa valeur sans pression.",
+          cards: [
+            ["Edition", "Core", "Protection essentielle, scanner manuel, historique basique, nettoyage sur et Reseau Neo assaini.", "#/core"],
+            ["Edition", "Valhalla", "Plus de contexte, confidentialite, permissions, liens, tendances en ligne et Bunker ameliore.", "#/valhalla"],
+            ["Edition", "Ragnarok", "Experience complete pour banque, identifiants, identite numerique et risques complexes.", "#/ragnarok"]
+          ]
+        }
+      },
+      pt: {
+        home: {
+          badge: "Mapa do site",
+          title: "Explore Zamazen Aegis por ramos",
+          body: "A pagina inicial resume o projeto. Decisoes importantes vivem em vistas proprias para voce avancar sem se perder.",
+          cards: [
+            ["Conta", "Criar conta", "Cadastro dedicado para perfil, sessoes e recuperacao quando a API esta disponivel.", "#/crear-cuenta"],
+            ["Conta", "Entrar", "Acesso claro: o site nao guarda senhas nem simula sessoes falsas.", "#/login"],
+            ["Precos", "Core, Valhalla e Ragnarok", "Compare as edicoes sem misturar tudo na pagina inicial.", "#/precios"],
+            ["Funcao", "Bunker", "Veja como credenciais, registros bancarios e dados sensiveis sao protegidos.", "#/bunker"],
+            ["Funcao", "Red Neo", "Entenda reportes saneados, consentimento e fila online.", "#/red-neo"],
+            ["Projeto", "Equipe", "Conheca Francisco Javier Molina Moreno, Maria Isabel Rodriguez Sanchez e Neo.", "#/equipo"]
+          ]
+        },
+        features: {
+          badge: "Arvore de funcoes",
+          title: "Cada funcao importante tem seu proprio ramo",
+          body: "Entre apenas no que precisa: scanner, Bunker, Red Neo, limpeza, historico ou Guardiao familiar.",
+          cards: [
+            ["Funcao", "Scanner", "Revisao de chamadas, SMS, links e sinais de golpe com explicacao clara.", "#/escaner"],
+            ["Funcao", "Bunker", "Camada para segredos e dados sensiveis com cifragem e limites honestos.", "#/bunker"],
+            ["Funcao", "Red Neo", "Reportes comunitarios saneados e controlados por consentimento.", "#/red-neo"],
+            ["Funcao", "Limpeza", "Acoes seguras para cache, preferencias e dados controlados pelo app.", "#/limpieza"],
+            ["Funcao", "Historico", "Memoria local de eventos para entender o que aconteceu e decidir melhor.", "#/historial"],
+            ["Funcao", "Guardiao familiar", "Modo seguro para usuarios com menos experiencia sem controle oculto.", "#/guardian-familiar"]
+          ]
+        },
+        pricing: {
+          badge: "Ramos de precos",
+          title: "Core, Valhalla e Ragnarok como vistas separadas",
+          body: "A comparacao geral esta aqui; cada edicao tambem tem sua propria vista para rever valor sem pressao.",
+          cards: [
+            ["Edicao", "Core", "Protecao essencial, scanner manual, historico basico, limpeza segura e Red Neo saneada.", "#/core"],
+            ["Edicao", "Valhalla", "Mais contexto, privacidade, permissoes, links, tendencias online e Bunker melhorado.", "#/valhalla"],
+            ["Edicao", "Ragnarok", "Experiencia completa para banca, credenciais, identidade digital e riscos complexos.", "#/ragnarok"]
+          ]
+        }
+      }
+    };
+
+    const ROUTE_DETAIL_CONTENT = {
+      es: {
+        funciones: ["Funciones", "Funciones de Zamazen Aegis", "Cada funcion importante vive en su propia pantalla para que el usuario explore sin recorrer una landing interminable.", [["Escaner", "Revision de llamadas, SMS, enlaces y senales de estafa con explicaciones claras.", "#/escaner"], ["Bunker", "Proteccion de secretos, registros bancarios y datos sensibles con limites honestos.", "#/bunker"], ["Red Neo", "Reportes comunitarios saneados, consentimiento y modo local si la red falla.", "#/red-neo"], ["Limpieza", "Acciones seguras para cache, preferencias y datos controlados por Zamazen Aegis.", "#/limpieza"], ["Historial", "Memoria local para comprender eventos recientes sin subir informacion innecesaria.", "#/historial"], ["Guardian familiar", "Modo claro para usuarios mayores o con menos experiencia digital.", "#/guardian-familiar"]], [["Volver al inicio", "#/inicio", "secondary"], ["Crear cuenta", "#/crear-cuenta", "primary"]]],
+        precios: ["Premium", "Precios: Core, Valhalla y Ragnarok", "Compara las ediciones desde una vista dedicada. Cada nivel tiene tambien su propia pantalla para revisar valor, limites y llamadas a la accion sin presion.", [["Core", "Proteccion esencial para empezar con escaner, historial basico, limpieza segura y Red Neo saneada.", "#/core"], ["Valhalla", "Mas contexto, privacidad, permisos, enlaces, tendencias online y Bunker mejorado.", "#/valhalla"], ["Ragnarok", "Experiencia completa para banca, credenciales, identidad digital y riesgos complejos.", "#/ragnarok"]], [["Crear cuenta", "#/crear-cuenta", "primary"], ["Ver funciones", "#/funciones", "secondary"]]],
+        cuenta: ["Cuenta", "Cuenta Zamazen", "La cuenta se divide en rutas claras: alta, acceso, recuperacion, perfil y ajustes. La web no simula sesiones ni guarda contrasenas localmente.", [["Crear cuenta", "Registro dedicado para activar perfil y sesiones cuando la API este disponible.", "#/crear-cuenta"], ["Iniciar sesion", "Acceso con copy honesto y sin prometer login local falso.", "#/login"], ["Recuperar contrasena", "Flujo de recuperacion separado para evitar confundirlo con el registro.", "#/recuperar-cuenta"], ["Perfil", "Resumen del usuario, nivel y estado de cuenta sin exponer datos sensibles.", "#/perfil"], ["Ajustes de cuenta", "Preferencias, datos, privacidad y eliminacion desde una pantalla propia.", "#/ajustes-cuenta"]], [["Crear cuenta", "#/crear-cuenta", "primary"], ["Seguridad de cuenta", "#/seguridad", "secondary"]]],
+        perfil: ["Cuenta", "Perfil", "Pantalla dedicada al perfil del usuario: identidad visible, nivel, estado de cuenta y enlaces a ajustes sin mezclarlo con toda la web.", [["Identidad", "Nombre y correo se tratan como datos sensibles y se muestran solo cuando existen en la sesion local."], ["Nivel", "Core, Valhalla o Ragnarok se explican como estado de producto, no como promesa absoluta."], ["Control", "El usuario conserva rutas claras para editar ajustes, revisar privacidad o eliminar cuenta."]], [["Ajustes de cuenta", "#/ajustes-cuenta", "primary"], ["Volver a cuenta", "#/cuenta", "secondary"]]],
+        "ajustes-cuenta": ["Cuenta", "Ajustes de cuenta", "Centro de control para privacidad, datos y seguridad de cuenta con rutas separadas para cada decision sensible.", [["Privacidad", "Explica que se recoge, que se evita y que queda bajo control del usuario.", "#/privacidad"], ["Datos", "Gestionar datos exportables, locales y asociados a soporte.", "#/datos"], ["Eliminar cuenta", "Ruta especifica para solicitar borrado de cuenta y datos.", "#/eliminar-cuenta"]], [["Gestionar datos", "#/datos", "primary"], ["Volver a cuenta", "#/cuenta", "secondary"]]],
+        seguridad: ["Seguridad", "Seguridad y control", "Vista dedicada a permisos, privacidad, datos y eliminacion. El usuario puede revisar cada area sin saltos ni bloques mezclados.", [["Permisos", "Que permisos puede necesitar Zamazen Aegis y por que Android puede limitarlos.", "#/permisos"], ["Privacidad", "Minimo dato, consentimiento claro y transparencia.", "#/privacidad"], ["Datos", "Gestion y eliminacion de informacion asociada a cuenta, soporte y dispositivo.", "#/datos"], ["Eliminar cuenta", "Solicitud de borrado con explicacion de plazos y limites legales.", "#/eliminar-cuenta"]], [["Ver permisos", "#/permisos", "primary"], ["Sobre el proyecto", "#/sobre-zamazenaegis", "secondary"]]],
+        permisos: ["Seguridad", "Permisos", "Zamazen Aegis debe explicar cada permiso antes de pedirlo y mantener modo PlaySafe cuando Android o Google Play no permitan automatizacion sensible.", [["PlaySafe", "Sin READ_CALL_LOG, RECEIVE_SMS, READ_PHONE_STATE ni lectura silenciosa de terceros cuando no corresponde."], ["Consentimiento", "Los permisos sensibles se solicitan solo si aportan valor real y el usuario entiende el motivo."], ["Modo manual", "Si una integracion no puede usarse de forma segura, la app guia al usuario en lugar de simular proteccion."]], [["Volver a seguridad", "#/seguridad", "primary"], ["Privacidad", "#/privacidad", "secondary"]]],
+        privacidad: ["Privacidad", "Privacidad por defecto", "Todo dato se considera sensible. Zamazen Aegis debe pedir lo minimo, almacenar lo minimo y explicar con claridad cada uso.", [["Minimo acceso", "No se leen conversaciones completas ni datos de terceros sin base tecnica, legal y consentimiento."], ["Red Neo", "Los reportes se saneanan antes de cualquier envio online."], ["Control", "El usuario puede revisar datos, cookies y eliminacion desde rutas propias."]], [["Gestionar datos", "#/gestionar-datos", "primary"], ["Eliminar cuenta", "#/eliminar-cuenta", "secondary"]]],
+        "gestionar-datos": ["Datos", "Gestionar datos", "Pantalla dedicada a datos de cuenta, soporte, preferencias locales, historial y elementos del Bunker cuando correspondan.", [["Datos locales", "Preferencias e historial local pueden limpiarse desde la app o al desinstalar."], ["Datos online", "Solo deben enviarse datos necesarios y saneados cuando exista consentimiento."], ["Soporte", "No se deben enviar contrasenas, codigos 2FA ni datos bancarios completos por correo."]], [["Privacidad", "#/privacidad", "primary"], ["Eliminar cuenta", "#/eliminar-cuenta", "secondary"]]],
+        "eliminar-cuenta": ["Cuenta", "Eliminar cuenta y datos", "Ruta separada para solicitar eliminacion de cuenta Zamazen y datos asociados sin esconderla dentro de una landing.", [["Solicitud", "El usuario puede escribir al soporte oficial para iniciar borrado y verificacion."], ["Plazos", "El proceso normalmente se completa en un plazo razonable tras verificar la solicitud."], ["Limites", "Puede conservarse informacion minima por obligaciones legales, seguridad o prevencion de fraude."]], [["Enviar correo", "mailto:zamazenaegissupport@gmail.com", "primary"], ["Volver a privacidad", "#/privacidad", "secondary"]]],
+        "politica-cookies": ["Privacidad", "Politica de cookies", "El sitio usa almacenamiento necesario para idioma, preferencias y consentimiento; las categorias opcionales quedan desactivadas hasta que el usuario las acepte.", [["Necesarias", "Siempre activas para funcionamiento basico."], ["Opcionales", "Analitica, personalizacion y marketing/producto solo con consentimiento."], ["Cambio", "Las preferencias pueden modificarse desde el pie de pagina."]], [["Contacto", "#/contacto", "primary"], ["Privacidad", "#/privacidad", "secondary"]]],
+        "politica-producto": ["Producto", "Politica de producto", "Zamazen Aegis ayuda a revisar senales de riesgo reportadas sin prometer seguridad total ni deteccion perfecta.", [["Limites honestos", "Ninguna app elimina todo riesgo ni sustituye el criterio del usuario."], ["Permisos", "Si una funcion necesita permisos o conexion, se explica antes."], ["Accion real", "Solo se bloquea o automatiza cuando existe funcion, permiso y consentimiento."]], [["Ver seguridad", "#/seguridad", "primary"], ["Ver funciones", "#/funciones", "secondary"]]],
+        "cobertura-wifi": ["Conexion", "Cobertura, internet movil y WiFi", "La app puede orientar ante problemas de red, pero no promete crear cobertura ni saltarse limites del operador.", [["Diagnostico", "Puede indicar perdida de conexion, WiFi debil o red abierta cuando Android lo permite."], ["Acciones reales", "Guia a modo avion, 4G/5G, llamadas WiFi o cambio de red segura."], ["Sin humo", "No promete cambiar antenas ni mejorar fisicamente la senal."]], [["Contacto", "#/contacto", "primary"], ["Politica de producto", "#/politica-producto", "secondary"]]],
+        "contrato-licencia": ["Legal", "Contrato de licencia / EULA", "Uso personal, limitado y sujeto a la ley, Play Store y terminos publicados de Zamazen Aegis.", [["Uso correcto", "No manipular, revender ni intentar romper sistemas de proteccion."], ["Planes", "Core, Valhalla y Ragnarok deben usarse respetando permisos y privacidad."], ["Evolucion", "Las funciones conectadas pueden cambiar para mejorar seguridad, estabilidad o cumplimiento."]], [["Contacto", "#/contacto", "primary"], ["Sobre el proyecto", "#/sobre-zamazenaegis", "secondary"]]],
+        "sobre-zamazenaegis": ["Proyecto", "Sobre Zamazen Aegis", "Zamazen Aegis existe para ayudar a personas reales frente a spam, phishing, estafas moviles y confusion digital, con claridad y sin vender proteccion absoluta.", [["Que protege", "Llamadas, SMS, enlaces, reportes, identidad digital, credenciales y decisiones sensibles dentro de los limites tecnicos reales."], ["Por que existe", "Para que la seguridad sea comprensible, accesible y util en el dia a dia."], ["Pilares", "Coraje, Verdad, Honor, Lealtad, Disciplina, Hospitalidad, Productividad, Perseverancia y Confianza guian cada decision."]], [["Ver equipo", "#/equipo", "primary"], ["Ver funciones", "#/funciones", "secondary"]]],
+        equipo: ["Equipo", "Equipo", "Pantalla dedicada a las personas y guardianes detras del proyecto, sin mezclarla con permisos, precios o formularios.", [["Francisco Javier Molina Moreno", "Creador y responsable de la vision de Zamazen Aegis."], ["Maria Isabel Rodriguez Sanchez", "Socia clave del proyecto y apoyo humano en la construccion de confianza."], ["Neo", "Guardian original de Zamazen Aegis: acompana, explica y protege sin convertir el riesgo en miedo."]], [["Sobre el proyecto", "#/sobre-zamazenaegis", "primary"], ["Contacto", "#/contacto", "secondary"]]],
+        faq: ["FAQ", "Preguntas frecuentes", "Respuestas rapidas en una pantalla propia para no obligar al usuario a recorrer toda la web.", [["Consume mucha bateria?", "Debe priorizar bajo consumo, foco de pantalla y trabajo minimo en segundo plano."], ["Funciona sin internet?", "Las capas locales siguen siendo utiles; lo online se degrada sin simular exito."], ["Pide permisos sensibles?", "Solo cuando aportan valor real, con explicacion y alternativa manual si corresponde."], ["Promete seguridad total?", "No. Zamazen Aegis ayuda a reducir riesgo, explicar senales y guiar decisiones."]], [["Contacto", "#/contacto", "primary"], ["Ver seguridad", "#/seguridad", "secondary"]]],
+        contacto: ["Contacto", "Ayuda y contacto", "Soporte, privacidad, cuentas y errores criticos tienen una pantalla directa. No envies secretos por correo.", [["Correo oficial", "zamazenaegissupport@gmail.com para soporte, privacidad, cuenta y documentacion."], ["Incidentes", "Priorizar seguridad, cuentas, pagos, borrado y errores criticos."], ["Privacidad", "No enviar contrasenas, codigos 2FA ni datos bancarios completos."]], [["Enviar correo", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
+        core: ["Core", "Core: proteccion esencial", "La base de Zamazen Aegis protege sin castigar a quien empieza gratis.", [["Escaner manual", "Reportes de llamadas spam, SMS sospechosos y phishing basico."], ["Historial basico", "Memoria local suficiente para entender actividad reciente."], ["Red Neo saneada", "Envio online solo con consentimiento y datos minimos."]], [["Ver precios", "#/precios", "primary"], ["Crear cuenta", "#/crear-cuenta", "secondary"]]],
+        valhalla: ["Valhalla", "Valhalla: proteccion social y digital", "Valhalla refuerza contexto, permisos, privacidad y Bunker sin vender magia.", [["Contexto ampliado", "Mas senales para enlaces, apps y permisos excesivos."], ["Bunker mejorado", "Mas control para datos sensibles y modo banco seguro cuando aplica."], ["Red Neo avanzada", "Tendencias online y explicaciones mas utiles."]], [["Comparar ediciones", "#/precios", "primary"], ["Ver Bunker", "#/bunker", "secondary"]]],
+        ragnarok: ["Ragnarok", "Ragnarok: experiencia completa", "Ragnarok agrupa las capas mas avanzadas cuando Android, permisos y consentimiento lo permiten.", [["Identidad y banca", "Guia para credenciales, banca y riesgos digitales complejos."], ["Bunker total", "Proteccion reforzada para secretos y datos especialmente sensibles."], ["Red Neo prioritaria", "Mas contexto, historial profundo y resolucion guiada sin falsas reparaciones."]], [["Comparar ediciones", "#/precios", "primary"], ["Ver Red Neo", "#/red-neo", "secondary"]]],
+        escaner: ["Funcion", "Escaner de amenazas", "Revision clara de llamadas, SMS, enlaces y senales sospechosas sin prometer deteccion perfecta.", [["Llamadas", "Ayuda a identificar spam o fraude con avisos comprensibles."], ["SMS y enlaces", "Reconoce urgencia artificial, suplantacion y dominios dudosos."], ["Explicacion Neo", "Traduce el riesgo a pasos simples para decidir mejor."]], [["Ver funciones", "#/funciones", "primary"], ["Activar escudo", "#/descargar", "secondary"]]],
+        bunker: ["Funcion", "Bunker", "Una rama dedicada a secretos: credenciales, registros bancarios y datos sensibles tratados con privacidad por defecto.", [["Cifrado local", "Los datos sensibles se protegen antes de cualquier sincronizacion."], ["Cloud con sobre cifrado", "La nube solo acepta paquetes cifrados por el usuario."], ["Limites claros", "No se piden contrasenas por correo ni se prometen imposibles."]], [["Crear cuenta", "#/crear-cuenta", "primary"], ["Ver Valhalla", "#/valhalla", "secondary"]]],
+        "red-neo": ["Funcion", "Red Neo", "Red Neo permite que un reporte ayude a otros sin publicar secretos ni conversaciones completas.", [["Consentimiento", "El usuario decide cuando compartir indicadores."], ["Saneamiento", "Se eliminan tokens, codigos, emails sensibles, queries y datos privados."], ["Modo local", "Si la red falla, la cola segura conserva utilidad sin inventar estado online."]], [["Ver funciones", "#/funciones", "primary"], ["Ver cuenta", "#/login", "secondary"]]],
+        limpieza: ["Funcion", "Limpieza segura", "Limpieza se centra en elementos bajo control de Zamazen Aegis y evita borrar datos ajenos sin permiso real.", [["Cache y preferencias", "Acciones claras para datos locales de la app."], ["Guia Android", "Cuando Android limita una accion, la app guia a Ajustes."], ["Sin destruccion opaca", "Cada borrado debe ser comprensible y reversible cuando tenga sentido."]], [["Ver funciones", "#/funciones", "primary"], ["Gestionar datos", "#/gestionar-datos", "secondary"]]],
+        historial: ["Funcion", "Historial", "Historial ayuda a entender que paso, que decidio el usuario y que senales detecto el sistema.", [["Memoria local", "Eventos recientes sin subir informacion innecesaria."], ["Contexto util", "Explica llamadas, mensajes, enlaces y acciones de proteccion."], ["Control", "El usuario puede borrar datos desde la app cuando corresponda."]], [["Ver funciones", "#/funciones", "primary"], ["Privacidad", "#/privacidad", "secondary"]]],
+        "guardian-familiar": ["Funcion", "Guardian familiar", "Modo seguro para personas mayores, familias o usuarios con poca experiencia digital sin control parental oculto.", [["Estado seguro", "Activa modo simple, avisos importantes y bajo consumo."], ["Sin permisos silenciosos", "No cambia permisos Android por detras ni lee apps de terceros."], ["Reversible", "El usuario conserva control y explicaciones claras."]], [["Ver funciones", "#/funciones", "primary"], ["Sobre el proyecto", "#/sobre-zamazenaegis", "secondary"]]],
+        "ayuda-contacto": ["Ayuda", "Ayuda y contacto", "Soporte, privacidad, cuentas y errores criticos tienen una entrada clara sin obligarte a recorrer toda la web.", [["Correo oficial", "zamazenaegissupport@gmail.com para soporte, privacidad y cuentas."], ["FAQ", "Respuestas sobre bateria, conexion, permisos y seguridad."], ["Sin secretos", "Nunca envies contrasenas, codigos 2FA ni datos bancarios completos por correo."]], [["Enviar correo", "mailto:zamazenaegissupport@gmail.com", "primary"], ["Eliminar cuenta", "#/eliminar-cuenta", "secondary"]]]
+      },
+      en: {
+        funciones: ["Features", "Zamazen Aegis features", "Every important feature lives on its own screen so people can explore without scrolling through an endless landing page.", [["Scanner", "Review calls, SMS, links and scam signals with clear explanations.", "#/escaner"], ["Bunker", "Protection for secrets, banking records and sensitive data with honest limits.", "#/bunker"], ["Neo Network", "Sanitized community reports, consent and local mode when the network fails.", "#/red-neo"], ["Cleaner", "Safe actions for cache, preferences and data controlled by Zamazen Aegis.", "#/limpieza"], ["History", "Local memory for recent events without uploading unnecessary information.", "#/historial"], ["Family Guardian", "Clear mode for older people or less experienced digital users.", "#/guardian-familiar"]], [["Back home", "#/inicio", "secondary"], ["Create account", "#/crear-cuenta", "primary"]]],
+        precios: ["Plans", "Plans: Core, Valhalla and Ragnarok", "Compare editions from a dedicated view. Each level also has its own screen to review value, limits and calls to action without pressure.", [["Core", "Essential protection to start with scanner, basic history, safe cleaning and sanitized Neo Network.", "#/core"], ["Valhalla", "More context, privacy, permissions, links, online trends and improved Bunker.", "#/valhalla"], ["Ragnarok", "Complete experience for banking, credentials, digital identity and complex risks.", "#/ragnarok"]], [["Create account", "#/crear-cuenta", "primary"], ["View features", "#/funciones", "secondary"]]],
+        cuenta: ["Account", "Zamazen account", "Account work is split into clear routes: sign up, sign in, recovery, profile and settings. The site does not fake sessions or store passwords locally.", [["Create account", "Dedicated sign-up for profile and sessions when the API is available.", "#/crear-cuenta"], ["Sign in", "Clear access copy without promising fake local login.", "#/login"], ["Recover password", "Separate recovery flow so it is not confused with registration.", "#/recuperar-cuenta"], ["Profile", "User summary, level and account state without exposing sensitive data.", "#/perfil"], ["Account settings", "Preferences, data, privacy and deletion from a dedicated screen.", "#/ajustes-cuenta"]], [["Create account", "#/crear-cuenta", "primary"], ["Account security", "#/seguridad", "secondary"]]],
+        perfil: ["Account", "Profile", "A dedicated profile screen for visible identity, level, account state and settings links without mixing it with the whole website.", [["Identity", "Name and email are treated as sensitive data and shown only when they exist in the local session."], ["Level", "Core, Valhalla or Ragnarok are explained as product state, not absolute promises."], ["Control", "The user keeps clear routes to edit settings, review privacy or delete the account."]], [["Account settings", "#/ajustes-cuenta", "primary"], ["Back to account", "#/cuenta", "secondary"]]],
+        "ajustes-cuenta": ["Account", "Account settings", "Control center for privacy, data and account security with separate routes for every sensitive decision.", [["Privacy", "Explains what is collected, what is avoided and what remains under user control.", "#/privacidad"], ["Data", "Manage exportable, local and support-related data.", "#/datos"], ["Delete account", "Specific route to request account and data deletion.", "#/eliminar-cuenta"]], [["Manage data", "#/datos", "primary"], ["Back to account", "#/cuenta", "secondary"]]],
+        seguridad: ["Security", "Security and control", "A dedicated view for permissions, privacy, data and deletion. The user can review each area without jumps or mixed blocks.", [["Permissions", "Which permissions Zamazen Aegis may need and why Android can limit them.", "#/permisos"], ["Privacy", "Minimal data, clear consent and transparency.", "#/privacidad"], ["Data", "Manage and delete information related to account, support and device.", "#/datos"], ["Delete account", "Deletion request with explanation of timing and legal limits.", "#/eliminar-cuenta"]], [["View permissions", "#/permisos", "primary"], ["About the project", "#/sobre-zamazenaegis", "secondary"]]],
+        permisos: ["Security", "Permissions", "Zamazen Aegis must explain each permission before asking for it and keep PlaySafe mode when Android or Google Play do not allow sensitive automation.", [["PlaySafe", "No READ_CALL_LOG, RECEIVE_SMS, READ_PHONE_STATE or silent third-party reading when it does not apply."], ["Consent", "Sensitive permissions are requested only when they bring real value and the user understands why."], ["Manual mode", "If an integration cannot be used safely, the app guides the user instead of faking protection."]], [["Back to security", "#/seguridad", "primary"], ["Privacy", "#/privacidad", "secondary"]]],
+        privacidad: ["Privacy", "Privacy by default", "Every piece of data is treated as sensitive. Zamazen Aegis should request the minimum, store the minimum and clearly explain every use.", [["Minimum access", "It does not read full conversations or third-party data without technical, legal and consent basis."], ["Neo Network", "Reports are sanitized before any online sending."], ["Control", "The user can review data, cookies and deletion through their own routes."]], [["Manage data", "#/gestionar-datos", "primary"], ["Delete account", "#/eliminar-cuenta", "secondary"]]],
+        "gestionar-datos": ["Data", "Manage data", "A dedicated screen for account data, support, local preferences, history and Bunker items when applicable.", [["Local data", "Preferences and local history can be cleaned from the app or by uninstalling."], ["Online data", "Only necessary and sanitized data should be sent when consent exists."], ["Support", "Do not send passwords, 2FA codes or complete banking details by email."]], [["Privacy", "#/privacidad", "primary"], ["Delete account", "#/eliminar-cuenta", "secondary"]]],
+        "eliminar-cuenta": ["Account", "Delete account and data", "A separate route to request deletion of the Zamazen account and associated data without hiding it inside a landing page.", [["Request", "The user can write to official support to start deletion and verification."], ["Timing", "The process is normally completed in a reasonable period after verifying the request."], ["Limits", "Minimal information may be kept for legal obligations, security or fraud prevention."]], [["Send email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["Back to privacy", "#/privacidad", "secondary"]]],
+        "politica-cookies": ["Privacy", "Cookie policy", "The site uses necessary storage for language, preferences and consent; optional categories stay off until the user accepts them.", [["Necessary", "Always active for basic operation."], ["Optional", "Analytics, personalization and marketing/product only with consent."], ["Change", "Preferences can be changed from the footer."]], [["Contact", "#/contacto", "primary"], ["Privacy", "#/privacidad", "secondary"]]],
+        "politica-producto": ["Product", "Product policy", "Zamazen Aegis helps review reported risk signals without promising total security or perfect detection.", [["Honest limits", "No app removes all risk or replaces user judgment."], ["Permissions", "If a feature needs permissions or connection, it is explained first."], ["Real action", "Blocking or automation happens only when there is a feature, permission and consent."]], [["View security", "#/seguridad", "primary"], ["View features", "#/funciones", "secondary"]]],
+        "cobertura-wifi": ["Connection", "Coverage, mobile internet and WiFi", "The app can guide around network issues, but it does not promise to create coverage or bypass carrier limits.", [["Diagnostics", "It can indicate lost connection, weak WiFi or open networks when Android allows it."], ["Real actions", "It guides to airplane mode, 4G/5G, WiFi calling or a safe network change."], ["No smoke", "It does not promise to change antennas or physically improve signal."]], [["Contact", "#/contacto", "primary"], ["Product policy", "#/politica-producto", "secondary"]]],
+        "contrato-licencia": ["Legal", "License agreement / EULA", "Personal, limited use subject to law, Play Store and published Zamazen Aegis terms.", [["Correct use", "Do not manipulate, resell or try to break protection systems."], ["Plans", "Core, Valhalla and Ragnarok must be used respecting permissions and privacy."], ["Evolution", "Connected features may change to improve security, stability or compliance."]], [["Contact", "#/contacto", "primary"], ["About the project", "#/sobre-zamazenaegis", "secondary"]]],
+        "sobre-zamazenaegis": ["Project", "About Zamazen Aegis", "Zamazen Aegis exists to help real people against spam, phishing, mobile scams and digital confusion, with clarity and without selling absolute protection.", [["What it protects", "Calls, SMS, links, reports, digital identity, credentials and sensitive decisions within real technical limits."], ["Why it exists", "To make security understandable, accessible and useful in everyday life."], ["Pillars", "Courage, Truth, Honor, Loyalty, Discipline, Hospitality, Productivity, Perseverance and Trust guide every decision."]], [["View team", "#/equipo", "primary"], ["View features", "#/funciones", "secondary"]]],
+        equipo: ["Team", "Team", "A dedicated screen for the people and guardians behind the project, without mixing it with permissions, plans or forms.", [["Francisco Javier Molina Moreno", "Creator and owner of the Zamazen Aegis vision."], ["Maria Isabel Rodriguez Sanchez", "Key partner in the project and human support in building trust."], ["Neo", "Original guardian of Zamazen Aegis: guides, explains and protects without turning risk into fear."]], [["About the project", "#/sobre-zamazenaegis", "primary"], ["Contact", "#/contacto", "secondary"]]],
+        faq: ["FAQ", "Frequently asked questions", "Fast answers on their own screen so the user does not have to browse the whole site.", [["Does it use a lot of battery?", "It should prioritize low consumption, visible-screen focus and minimal background work."], ["Does it work offline?", "Local layers remain useful; online features degrade without faking success."], ["Does it request sensitive permissions?", "Only when they bring real value, with explanation and manual fallback when applicable."], ["Does it promise total security?", "No. Zamazen Aegis helps reduce risk, explain signals and guide decisions."]], [["Contact", "#/contacto", "primary"], ["View security", "#/seguridad", "secondary"]]],
+        contacto: ["Contact", "Help and contact", "Support, privacy, accounts and critical errors have a direct screen. Do not send secrets by email.", [["Official email", "zamazenaegissupport@gmail.com for support, privacy, accounts and documentation."], ["Incidents", "Prioritize security, accounts, payments, deletion and critical errors."], ["Privacy", "Do not send passwords, 2FA codes or complete banking details."]], [["Send email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
+        core: ["Core", "Core: essential protection", "The base of Zamazen Aegis protects without punishing people who start free.", [["Manual scanner", "Reports for spam calls, suspicious SMS and basic phishing."], ["Basic history", "Enough local memory to understand recent activity."], ["Sanitized Neo Network", "Online sending only with consent and minimal data."]], [["View plans", "#/precios", "primary"], ["Create account", "#/crear-cuenta", "secondary"]]],
+        valhalla: ["Valhalla", "Valhalla: social and digital protection", "Valhalla reinforces context, permissions, privacy and Bunker without selling magic.", [["Expanded context", "More signals for links, apps and excessive permissions."], ["Improved Bunker", "More control for sensitive data and safe banking mode when applicable."], ["Advanced Neo Network", "Online trends and more useful explanations."]], [["Compare editions", "#/precios", "primary"], ["View Bunker", "#/bunker", "secondary"]]],
+        ragnarok: ["Ragnarok", "Ragnarok: complete experience", "Ragnarok groups the most advanced layers when Android, permissions and consent allow it.", [["Identity and banking", "Guidance for credentials, banking and complex digital risks."], ["Total Bunker", "Reinforced protection for secrets and especially sensitive data."], ["Priority Neo Network", "More context, deeper history and guided resolution without fake fixes."]], [["Compare editions", "#/precios", "primary"], ["View Neo Network", "#/red-neo", "secondary"]]],
+        escaner: ["Feature", "Threat scanner", "Clear review for calls, SMS, links and suspicious signals without promising perfect detection.", [["Calls", "Helps identify spam or fraud with understandable warnings."], ["SMS and links", "Recognizes artificial urgency, impersonation and suspicious domains."], ["Neo explanation", "Translates risk into simple steps to decide better."]], [["View features", "#/funciones", "primary"], ["Activate shield", "#/descargar", "secondary"]]],
+        bunker: ["Feature", "Bunker", "A dedicated branch for secrets: credentials, banking records and sensitive data treated with privacy by default.", [["Local encryption", "Sensitive data is protected before any synchronization."], ["Encrypted cloud envelope", "The cloud only accepts user-encrypted packages."], ["Clear limits", "No passwords by email and no impossible promises."]], [["Create account", "#/crear-cuenta", "primary"], ["View Valhalla", "#/valhalla", "secondary"]]],
+        "red-neo": ["Feature", "Neo Network", "Neo Network lets a report help others without publishing secrets or full conversations.", [["Consent", "The user decides when to share indicators."], ["Sanitization", "Tokens, codes, sensitive emails, queries and private data are removed."], ["Local mode", "If the network fails, the safe queue keeps utility without inventing online state."]], [["View features", "#/funciones", "primary"], ["View account", "#/login", "secondary"]]],
+        limpieza: ["Feature", "Safe cleaning", "Cleaning focuses on items controlled by Zamazen Aegis and avoids deleting other data without real permission.", [["Cache and preferences", "Clear actions for local app data."], ["Android guidance", "When Android limits an action, the app guides to Settings."], ["No opaque destruction", "Every deletion should be understandable and reversible when appropriate."]], [["View features", "#/funciones", "primary"], ["Manage data", "#/gestionar-datos", "secondary"]]],
+        historial: ["Feature", "History", "History helps understand what happened, what the user decided and what signals the system detected.", [["Local memory", "Recent events without uploading unnecessary information."], ["Useful context", "Explains calls, messages, links and protection actions."], ["Control", "The user can delete data from the app when applicable."]], [["View features", "#/funciones", "primary"], ["Privacy", "#/privacidad", "secondary"]]],
+        "guardian-familiar": ["Feature", "Family Guardian", "Safe mode for older people, families or less experienced digital users without hidden parental control.", [["Safe state", "Enables simple mode, important warnings and low consumption."], ["No silent permissions", "Does not change Android permissions behind the scenes or read third-party apps."], ["Reversible", "The user keeps control and clear explanations."]], [["View features", "#/funciones", "primary"], ["About the project", "#/sobre-zamazenaegis", "secondary"]]],
+        "ayuda-contacto": ["Help", "Help and contact", "Support, privacy, accounts and critical errors have a clear entry without making you browse the whole site.", [["Official email", "zamazenaegissupport@gmail.com for support, privacy and accounts."], ["FAQ", "Answers about battery, connectivity, permissions and security."], ["No secrets", "Never send passwords, 2FA codes or complete banking details by email."]], [["Send email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["Delete account", "#/eliminar-cuenta", "secondary"]]]
+      }
+    };
+    ROUTE_DETAIL_CONTENT.fr = ROUTE_DETAIL_CONTENT.en;
+    ROUTE_DETAIL_CONTENT.pt = ROUTE_DETAIL_CONTENT.en;
+
     function getTranslationValue(language, key) {
       return key.split(".").reduce((value, part) => value && value[part], translations[language]);
     }
@@ -7669,6 +8123,7 @@
       updateUserPanelPreview();
       setAuthMode(authShell?.dataset.mode || "login");
       setLiveMotion(localStorage.getItem(STORAGE_MOTION_KEY) !== "off");
+      renderCurrentRoute({ preserveScroll: true });
 
       if (options.persist) {
         localStorage.setItem(STORAGE_LANGUAGE_KEY, selectedLanguage);
@@ -7792,8 +8247,7 @@
     }
 
     function openCookiePolicy() {
-      window.location.hash = "politica-cookies";
-      document.getElementById("politica-cookies")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      navigateToRoute("politica-cookies");
     }
 
     function initializeCookieConsent() {
@@ -7819,6 +8273,195 @@
       if (!element) return;
       element.dataset.i18n = key;
       element.textContent = translate(key);
+    }
+
+    function normalizeRouteName(routeName) {
+      const normalized = String(routeName || "")
+        .replace(/^#\/?/, "")
+        .replace(/^\/+/, "")
+        .split(/[?#]/)[0]
+        .trim();
+      const legacyRoute = LEGACY_ROUTE_MAP[normalized] || normalized;
+      return ROUTE_DEFINITIONS[legacyRoute] ? legacyRoute : "inicio";
+    }
+
+    function getRouteFromHash() {
+      const rawHash = decodeURIComponent(window.location.hash || "");
+
+      if (rawHash.startsWith("#/")) {
+        return normalizeRouteName(rawHash.slice(2));
+      }
+
+      if (rawHash.startsWith("#")) {
+        return normalizeRouteName(rawHash.slice(1));
+      }
+
+      return "inicio";
+    }
+
+    function syncRouteHash(routeName) {
+      const expectedHash = `#/${routeName}`;
+      if (window.location.hash !== expectedHash) {
+        window.history.replaceState({}, "", expectedHash);
+      }
+    }
+
+    function createRouteCard(card) {
+      const [badge, title, body, href] = card;
+      const link = document.createElement("a");
+      link.className = "route-link-card reveal is-visible";
+      link.href = href;
+
+      const badgeElement = document.createElement("span");
+      badgeElement.textContent = badge;
+      const titleElement = document.createElement("h3");
+      titleElement.textContent = title;
+      const bodyElement = document.createElement("p");
+      bodyElement.textContent = body;
+
+      link.append(badgeElement, titleElement, bodyElement);
+      return link;
+    }
+
+    function renderRouteTree(routeName) {
+      const treeKey = ROUTE_DEFINITIONS[routeName]?.tree;
+      const language = getCurrentLanguage();
+      const content = treeKey && (ROUTE_TREE_CONTENT[language]?.[treeKey] || ROUTE_TREE_CONTENT.es[treeKey]);
+
+      if (!content || !routeTreeSection) return;
+
+      routeTreeBadge.textContent = content.badge;
+      routeTreeTitle.textContent = content.title;
+      routeTreeBody.textContent = content.body;
+      routeTreeGrid.replaceChildren(...content.cards.map(createRouteCard));
+    }
+
+    function renderRouteDetail(detailKey) {
+      const language = getCurrentLanguage();
+      const content = detailKey && (
+        ROUTE_DETAIL_CONTENT[language]?.[detailKey]
+        || ROUTE_DETAIL_CONTENT.en?.[detailKey]
+        || ROUTE_DETAIL_CONTENT.es?.[detailKey]
+      );
+
+      if (!content || !routeDetailSection) return;
+
+      const [badge, title, body, cards, actions] = content;
+      routeDetailBadge.textContent = badge;
+      routeDetailTitle.textContent = title;
+      routeDetailBody.textContent = body;
+      routeDetailGrid.replaceChildren(...cards.map(([cardTitle, cardBody, cardHref]) => {
+        const article = document.createElement(cardHref ? "a" : "article");
+        article.className = cardHref ? "route-link-card route-detail-card" : "route-detail-card";
+        if (cardHref) article.href = cardHref;
+
+        const badgeElement = document.createElement("span");
+        badgeElement.textContent = badge;
+        const titleElement = document.createElement("h3");
+        titleElement.textContent = cardTitle;
+        const bodyElement = document.createElement("p");
+        bodyElement.textContent = cardBody;
+
+        article.append(badgeElement, titleElement, bodyElement);
+        return article;
+      }));
+      routeDetailActions.replaceChildren(...actions.map(([label, href, variant]) => {
+        const action = document.createElement("a");
+        action.className = variant === "primary" ? "cta-primary" : "cta-secondary";
+        action.href = href;
+        action.textContent = label;
+        return action;
+      }));
+    }
+
+    function routeTitleFor(routeName, definition) {
+      const language = getCurrentLanguage();
+      const detail = definition.detail && (
+        ROUTE_DETAIL_CONTENT[language]?.[definition.detail]
+        || ROUTE_DETAIL_CONTENT.en?.[definition.detail]
+        || ROUTE_DETAIL_CONTENT.es?.[definition.detail]
+      );
+      if (detail) return detail[1];
+
+      if (definition.tree) {
+        return ROUTE_TREE_CONTENT[language]?.[definition.tree]?.title || ROUTE_TREE_CONTENT.es[definition.tree].title;
+      }
+
+      if (definition.authMode === "register") return translate("account.formTitle");
+      if (definition.authMode === "recover") return translate("auth.recoverTitle");
+      if (definition.authMode === "login") return translate("auth.loginTitle");
+      if (routeName === "estado") return translate("level.title");
+      if (routeName === "musica") return translate("music.title");
+      if (routeName === "descargar") return translate("download.title");
+      if (routeName === "privacidad") return translate("legalDocs.privacyTitle");
+      if (routeName === "gestionar-datos") return translate("legalDocs.dataTitle");
+      if (routeName === "eliminar-cuenta") return translate("legalDocs.deleteTitle");
+      if (routeName === "politica-cookies") return translate("legalDocs.cookiesTitle");
+      if (routeName === "politica-producto") return translate("legalDocs.productTitle");
+      if (routeName === "cobertura-wifi") return translate("legalDocs.coverageTitle");
+      if (routeName === "contrato-licencia") return translate("legalDocs.licenseTitle");
+      if (routeName === "sobre-zamazenaegis") return translate("center.title");
+      if (routeName === "permisos") return translate("center.permissionsTitle");
+      if (routeName === "equipo") return translate("center.tabPeople");
+
+      return translate("meta.title");
+    }
+
+    function updateRouteLinks(routeName) {
+      document.querySelectorAll('a[href^="#/"]').forEach((link) => {
+        const linkRoute = normalizeRouteName(link.getAttribute("href"));
+        const isCurrent = linkRoute === routeName;
+        if (isCurrent) {
+          link.setAttribute("aria-current", "page");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    }
+
+    function renderCurrentRoute(options = {}) {
+      const routeName = getRouteFromHash();
+      const definition = ROUTE_DEFINITIONS[routeName] || ROUTE_DEFINITIONS.inicio;
+      const visibleSections = new Set(definition.sections);
+
+      syncRouteHash(routeName);
+      document.body.dataset.route = routeName;
+
+      routeSections.forEach((section) => {
+        section.hidden = !visibleSections.has(section.id);
+      });
+
+      if (definition.tree) renderRouteTree(routeName);
+      if (definition.detail) renderRouteDetail(definition.detail);
+      if (definition.authMode) setAuthMode(definition.authMode);
+      if (definition.room) setActiveRoom(definition.room, { updateRoute: false });
+
+      updateRouteLinks(routeName);
+      document.title = routeTitleFor(routeName, definition).replace(/\s+/g, " ").trim() + " | Zamazen Aegis";
+      revealVisibleItems();
+
+      if (!options.preserveScroll) {
+        window.setTimeout(() => {
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "auto"
+          });
+        }, 40);
+      }
+
+      return routeName;
+    }
+
+    function navigateToRoute(routeName, options = {}) {
+      const normalizedRoute = normalizeRouteName(routeName);
+      const nextHash = `#/${normalizedRoute}`;
+      if (window.location.hash === nextHash) {
+        renderCurrentRoute(options);
+        return;
+      }
+
+      window.location.hash = nextHash;
     }
 
     function readAccountPreview() {
@@ -7882,7 +8525,7 @@
       roomRadialToggle.setAttribute("aria-expanded", "false");
     }
 
-    function setActiveRoom(room) {
+    function setActiveRoom(room, options = {}) {
       const selectedRoom = Array.from(roomPanels).some(panel => panel.dataset.roomPanel === room)
         ? room
         : "overview";
@@ -7901,20 +8544,15 @@
         panel.classList.toggle("is-active", isActive);
         panel.hidden = !isActive;
       });
+
+      if (options.updateRoute !== false && selectedRoom !== "overview") {
+        navigateToRoute("sobre-zamazenaegis", { preserveScroll: true });
+      }
     }
 
     function openAuthMode(mode) {
       setAuthMode(mode);
-      const accountSection = document.getElementById("cuenta");
-      if (accountSection) {
-        accountSection.scrollIntoView({
-          behavior: document.body.classList.contains("motion-softened") ? "auto" : "smooth",
-          block: "start"
-        });
-      }
-      if (window.location.hash !== "#cuenta") {
-        window.history.replaceState({}, "", "#cuenta");
-      }
+      navigateToRoute(ACCOUNT_ROUTE_BY_MODE[mode] || "login");
     }
 
     function setAuthMode(mode) {
@@ -8159,17 +8797,12 @@
         const targetRoom = trigger.dataset.roomTarget;
         if (!targetRoom) return;
         event.preventDefault();
-        setActiveRoom(targetRoom);
+        const isLink = trigger.tagName.toLowerCase() === "a";
+        setActiveRoom(targetRoom, { updateRoute: false });
         closeRoomRadial();
 
-        if (trigger.tagName.toLowerCase() === "a") {
-          document.getElementById("centro-aegis")?.scrollIntoView({
-            behavior: document.body.classList.contains("motion-softened") ? "auto" : "smooth",
-            block: "start"
-          });
-          if (window.location.hash !== "#centro-aegis") {
-            window.history.replaceState({}, "", "#centro-aegis");
-          }
+        if (isLink) {
+          navigateToRoute(normalizeRouteName(trigger.getAttribute("href")));
         }
       });
 
@@ -8223,7 +8856,7 @@
 
     if (authModeToggle) {
       authModeToggle.addEventListener("click", () => {
-        setAuthMode(authModeToggle.dataset.authTarget);
+        openAuthMode(authModeToggle.dataset.authTarget);
       });
     }
 
@@ -8472,12 +9105,11 @@
 
     revealItems.forEach((item) => revealObserver.observe(item));
     window.requestAnimationFrame(revealVisibleItems);
-    window.addEventListener("hashchange", () => window.setTimeout(revealVisibleItems, 80));
+    window.addEventListener("hashchange", () => window.setTimeout(() => renderCurrentRoute(), 80));
     initializeLanguage();
     initializeTextSize();
     initializeCookieConsent();
-    setAuthMode(authShell?.dataset.mode || "login");
-    setActiveRoom("overview");
+    renderCurrentRoute({ preserveScroll: true });
     updateUserPanelPreview();
     setLiveMotion(localStorage.getItem(STORAGE_MOTION_KEY) !== "off");
     updateClock();
