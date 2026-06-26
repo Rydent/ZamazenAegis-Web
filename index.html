@@ -6322,9 +6322,11 @@
     const STORAGE_CONTRIBUTIONS_KEY = "zamazen_aegis_contribution_drafts";
     const STORAGE_WAITLIST_KEY = "zamazen_aegis_waitlist_drafts";
     const STORAGE_SUPPORT_TICKETS_KEY = "zamazen_aegis_support_ticket_drafts";
+    const STORAGE_ACCOUNT_SESSION_TOKEN_KEY = "zamazen_aegis_online_session_token";
     const STORAGE_FORM_RATE_KEY = "zamazen_aegis_secure_form_last_submit";
     const ZAMAZEN_API_BASE_URL = "https://api.zamazenaegis.com";
     const ACCOUNT_API_TIMEOUT_MS = 10000;
+    const SUPPORT_API_TIMEOUT_MS = 10000;
     const HEALTH_API_TIMEOUT_MS = 3500;
     const SECURE_FORM_COOLDOWN_MS = 45000;
     const MAX_ALIAS_LENGTH = 60;
@@ -6333,6 +6335,8 @@
     const MAX_WAITLIST_MESSAGE_LENGTH = 600;
     const MAX_TICKET_MESSAGE_LENGTH = 900;
     const SUPPORTED_LANGUAGES = ["es", "en", "fr", "pt"];
+    const SUPPORT_TICKET_CATEGORY_VALUES = ["general", "account", "access", "privacy", "plans", "technical", "bug", "security", "idea", "other"];
+    const SUPPORT_TICKET_PRIORITY_VALUES = ["low", "normal", "high", "security"];
     const SUPPORTED_TEXT_SIZES = ["normal", "medium", "large"];
     const COOKIE_DEFAULTS = {
       necessary: true,
@@ -6757,6 +6761,9 @@
           accept: "Acepta la revisión manual antes de preparar el ticket.",
           cooldown: "Espera un momento antes de preparar otro ticket.",
           ready: "Ticket saneado y preparado. Confirma el envío desde tu correo; no se publica nada.",
+          onlineReady: "Ticket recibido por la API Zamazen. Puedes consultarlo al iniciar sesión; no se publica nada.",
+          onlineSessionMissing: "No hay sesión online válida en esta pestaña. He preparado correo seguro como alternativa.",
+          onlineUnavailable: "La API de tickets no responde ahora. He preparado correo seguro sin simular guardado online.",
           subject: "Ticket soporte Zamazen Aegis",
           optionalMissing: "No indicado",
           yes: "Sí",
@@ -7023,6 +7030,9 @@
           accept: "Accept manual review before preparing the ticket.",
           cooldown: "Wait a moment before preparing another ticket.",
           ready: "Sanitized ticket prepared. Confirm sending from your email; nothing is published.",
+          onlineReady: "Ticket received by the Zamazen API. You can review it after signing in; nothing is published.",
+          onlineSessionMissing: "There is no valid online session in this tab. I prepared a safe email as fallback.",
+          onlineUnavailable: "The ticket API is not responding now. I prepared a safe email without pretending it was stored online.",
           subject: "Zamazen Aegis support ticket",
           optionalMissing: "Not provided",
           yes: "Yes",
@@ -7289,6 +7299,9 @@
           accept: "Acceptez la revue manuelle avant de préparer le ticket.",
           cooldown: "Attendez un moment avant de préparer un autre ticket.",
           ready: "Ticket assaini et préparé. Confirmez l'envoi depuis votre email; rien n'est publié.",
+          onlineReady: "Ticket reçu par l'API Zamazen. Vous pourrez le consulter après connexion; rien n'est publié.",
+          onlineSessionMissing: "Aucune session en ligne valide dans cet onglet. J'ai préparé un email sûr en solution de secours.",
+          onlineUnavailable: "L'API de tickets ne répond pas maintenant. J'ai préparé un email sûr sans simuler d'enregistrement en ligne.",
           subject: "Ticket support Zamazen Aegis",
           optionalMissing: "Non indiqué",
           yes: "Oui",
@@ -7555,6 +7568,9 @@
           accept: "Aceita a revisão manual antes de preparar o ticket.",
           cooldown: "Espera um momento antes de preparar outro ticket.",
           ready: "Ticket saneado e preparado. Confirma o envio desde teu email; nada é publicado.",
+          onlineReady: "Ticket recebido pela API Zamazen. Poderás consultá-lo depois de iniciar sessão; nada é publicado.",
+          onlineSessionMissing: "Não há sessão online válida nesta aba. Preparei email seguro como alternativa.",
+          onlineUnavailable: "A API de tickets não responde agora. Preparei email seguro sem fingir gravação online.",
           subject: "Ticket suporte Zamazen Aegis",
           optionalMissing: "Não indicado",
           yes: "Sim",
@@ -11322,15 +11338,15 @@
       emailInput.maxLength = MAX_EMAIL_LENGTH;
       emailInput.autocomplete = "email";
       const categorySelect = createElement("select", "form-input");
-      copy.categories.forEach((value) => {
+      copy.categories.forEach((value, index) => {
         const option = createElement("option", "", value);
-        option.value = value;
+        option.value = SUPPORT_TICKET_CATEGORY_VALUES[index] || "other";
         categorySelect.append(option);
       });
       const prioritySelect = createElement("select", "form-input");
-      copy.priorities.forEach((value) => {
+      copy.priorities.forEach((value, index) => {
         const option = createElement("option", "", value);
-        option.value = value;
+        option.value = SUPPORT_TICKET_PRIORITY_VALUES[index] || "normal";
         prioritySelect.append(option);
       });
       const messageInput = createElement("textarea", "form-input");
@@ -11368,11 +11384,12 @@
       checks[0].append(consent, createElement("span", "", copy.consent));
       checks[1].append(wantsReply, createElement("span", "", copy.wantsReply));
       form.querySelector("button").type = "submit";
-      form.addEventListener("submit", (event) => {
+      form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const alias = normalizeFormText(aliasInput.value, MAX_ALIAS_LENGTH);
         const email = normalizeFormText(emailInput.value, MAX_EMAIL_LENGTH);
         const message = normalizeFormText(messageInput.value, MAX_TICKET_MESSAGE_LENGTH);
+        const submitButton = form.querySelector("button[type='submit']");
         if (honeypot.value) return;
         if (!alias || alias.length < 2) {
           status.textContent = copy.invalidAlias;
@@ -11401,6 +11418,8 @@
         const draft = {
           type: categorySelect.value,
           priority: prioritySelect.value,
+          categoryLabel: categorySelect.options[categorySelect.selectedIndex]?.textContent || categorySelect.value,
+          priorityLabel: prioritySelect.options[prioritySelect.selectedIndex]?.textContent || prioritySelect.value,
           alias,
           email,
           message,
@@ -11408,19 +11427,46 @@
           wantsReply: Boolean(wantsReply.checked),
           createdAt: new Date().toISOString()
         };
-        appendLocalDraft(STORAGE_SUPPORT_TICKETS_KEY, draft);
-        markSecureFormSubmitted("support");
-        mailLink.href = buildMailtoLink(copy.subject, [
-          `Alias: ${alias}`,
-          `${copy.email}: ${email || copy.optionalMissing}`,
-          `${copy.category}: ${categorySelect.value}`,
-          `${copy.priority}: ${prioritySelect.value}`,
-          `${copy.wantsReply}: ${wantsReply.checked ? copy.yes : copy.no}`,
-          "",
-          message
-        ]);
-        mailLink.hidden = false;
-        status.textContent = copy.ready;
+        mailLink.hidden = true;
+        form.setAttribute("aria-busy", "true");
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.setAttribute("aria-disabled", "true");
+        }
+
+        try {
+          const onlineResult = await submitSupportTicketOnline(draft);
+          markSecureFormSubmitted("support");
+
+          if (onlineResult.ok) {
+            appendLocalDraft(STORAGE_SUPPORT_TICKETS_KEY, {
+              type: draft.type,
+              priority: draft.priority,
+              alias: draft.alias,
+              onlineTicketId: onlineResult.ticketId,
+              onlineStatus: "received",
+              createdAt: draft.createdAt
+            });
+            status.textContent = copy.onlineReady;
+            messageInput.value = "";
+          } else {
+            appendLocalDraft(STORAGE_SUPPORT_TICKETS_KEY, {
+              ...draft,
+              onlineTicketId: "",
+              onlineStatus: "manual_fallback"
+            });
+            prepareSupportMailLink(mailLink, copy, draft);
+            status.textContent = onlineResult.reason === "missing_session"
+              ? copy.onlineSessionMissing
+              : copy.onlineUnavailable;
+          }
+        } finally {
+          form.removeAttribute("aria-busy");
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.removeAttribute("aria-disabled");
+          }
+        }
       });
 
       const privacy = createElement("aside", "secure-form-card");
@@ -11811,6 +11857,27 @@
       return normalized;
     }
 
+    function writeOnlineSessionToken(token = "") {
+      const cleanToken = String(token || "").trim();
+      try {
+        if (cleanToken) {
+          sessionStorage.setItem(STORAGE_ACCOUNT_SESSION_TOKEN_KEY, cleanToken);
+        } else {
+          sessionStorage.removeItem(STORAGE_ACCOUNT_SESSION_TOKEN_KEY);
+        }
+      } catch (error) {
+        /* Session storage can be disabled by the browser; support falls back to manual email. */
+      }
+    }
+
+    function readOnlineSessionToken() {
+      try {
+        return String(sessionStorage.getItem(STORAGE_ACCOUNT_SESSION_TOKEN_KEY) || "").trim();
+      } catch (error) {
+        return "";
+      }
+    }
+
     function formatProfileDate(value) {
       if (!value) return "Pendiente";
       const date = new Date(value);
@@ -11924,6 +11991,67 @@
         .map((line) => normalizeFormText(line, 1000))
         .join("\n");
       return `mailto:zamazenaegissupport@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+
+    function prepareSupportMailLink(mailLink, copy, draft) {
+      mailLink.href = buildMailtoLink(copy.subject, [
+        `Alias: ${draft.alias}`,
+        `${copy.email}: ${draft.email || copy.optionalMissing}`,
+        `${copy.category}: ${draft.categoryLabel || draft.type}`,
+        `${copy.priority}: ${draft.priorityLabel || draft.priority}`,
+        `${copy.wantsReply}: ${draft.wantsReply ? copy.yes : copy.no}`,
+        "",
+        draft.message
+      ]);
+      mailLink.hidden = false;
+    }
+
+    async function submitSupportTicketOnline(draft) {
+      const token = readOnlineSessionToken();
+      if (!token) {
+        return { ok: false, reason: "missing_session" };
+      }
+
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), SUPPORT_API_TIMEOUT_MS);
+
+      try {
+        const response = await fetch(`${ZAMAZEN_API_BASE_URL}/api/support/tickets`, {
+          method: "POST",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          cache: "no-store",
+          signal: controller.signal,
+          body: JSON.stringify({
+            alias: draft.alias,
+            contactEmail: draft.email || undefined,
+            category: draft.type,
+            priority: draft.priority,
+            message: draft.message,
+            consentToReview: true,
+            wantsReply: draft.wantsReply
+          })
+        });
+        const payload = await response.json().catch(() => ({}));
+
+        if (response.ok && payload && payload.ok) {
+          return { ok: true, ticketId: payload.ticket?.id || "" };
+        }
+
+        if (response.status === 401 || response.status === 403) {
+          writeOnlineSessionToken("");
+          return { ok: false, reason: "missing_session" };
+        }
+
+        return { ok: false, reason: payload?.message || "api_unavailable" };
+      } catch (error) {
+        return { ok: false, reason: "api_unavailable" };
+      } finally {
+        window.clearTimeout(timeoutId);
+      }
     }
 
     function createSecureNoteList(items) {
@@ -12247,6 +12375,7 @@
     if (userPanelLogout) {
       userPanelLogout.addEventListener("click", () => {
         localStorage.removeItem(STORAGE_ACCOUNT_KEY);
+        writeOnlineSessionToken("");
         updateUserPanelPreview();
         closeUserPanel();
       });
@@ -12412,6 +12541,7 @@
 
           if (response.ok && payload && payload.ok) {
             const profile = payload.profile || {};
+            writeOnlineSessionToken(payload.session?.token || "");
             writeAccountPreview({
               name: profile.name || email,
               email: profile.email || email,
@@ -12427,12 +12557,15 @@
           }
 
           if (response.status === 401 && payload && payload.message === "two_factor_required") {
+            writeOnlineSessionToken("");
             setStatus("auth.twoFactorRequired");
             return;
           }
 
+          writeOnlineSessionToken("");
           setStatus("auth.loginError");
         } catch (error) {
+          writeOnlineSessionToken("");
           setStatus("auth.loginOffline");
         } finally {
           window.clearTimeout(timeoutId);
@@ -12508,6 +12641,7 @@
           const payload = await response.json().catch(() => ({}));
 
           if (response.ok && payload && payload.ok) {
+            writeOnlineSessionToken(payload.session?.token || "");
             writeAccountPreview({
               ...account,
               provider: "zamazen-online-account",
@@ -12526,8 +12660,10 @@
             return;
           }
 
+          writeOnlineSessionToken("");
           setStatus("account.error");
         } catch (error) {
+          writeOnlineSessionToken("");
           writeAccountPreview({
             ...account,
             attemptedOnlineAt: new Date().toISOString(),
