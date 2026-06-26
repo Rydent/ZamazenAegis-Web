@@ -497,6 +497,10 @@
       color: var(--text);
     }
 
+    .user-menu-links [hidden] {
+      display: none;
+    }
+
     .nav-toggle-line,
     .nav-toggle-line::before,
     .nav-toggle-line::after {
@@ -1292,7 +1296,42 @@
     .profile-pill-row,
     .profile-actions-row,
     .avatar-choice-grid,
-    .sync-grid {
+    .sync-grid,
+    .creator-ticket-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .creator-ticket-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .creator-ticket-card {
+      display: grid;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .creator-ticket-card blockquote {
+      margin: 0;
+      padding: 14px;
+      border-left: 3px solid rgba(94, 240, 189, 0.55);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.035);
+      color: #dbeaff;
+      line-height: 1.65;
+      overflow-wrap: anywhere;
+    }
+
+    .creator-ticket-form {
+      display: grid;
+      gap: 10px;
+    }
+
+    .creator-ticket-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -4751,6 +4790,7 @@
                   <a href="#/seguridad"><span aria-hidden="true">ᛉ</span><span data-i18n="userPanel.security">Seguridad</span></a>
                   <a href="#/precios"><span aria-hidden="true">ᚠ</span><span data-i18n="userPanel.subscription">Suscripción</span></a>
                   <a href="#/faq"><span aria-hidden="true">ᚲ</span><span data-i18n="userPanel.help">Ayuda</span></a>
+                  <a href="#/admin" id="userPanelCreatorLink" hidden><span aria-hidden="true">ᛟ</span><span data-i18n="userPanel.creatorPanel">Panel del Creador</span></a>
                   <button type="button" id="userPanelLogout"><span aria-hidden="true">×</span><span data-i18n="userPanel.logout">Limpiar vista local</span></button>
                 </div>
               </div>
@@ -6265,6 +6305,7 @@
     const userPanelName = document.getElementById("userPanelName");
     const userPanelEmail = document.getElementById("userPanelEmail");
     const userPanelLevel = document.getElementById("userPanelLevel");
+    const userPanelCreatorLink = document.getElementById("userPanelCreatorLink");
     const userPanelLogout = document.getElementById("userPanelLogout");
     const quickLauncher = document.getElementById("quickLauncher");
     const quickMenuToggle = document.getElementById("quickMenuToggle");
@@ -6334,9 +6375,11 @@
     const MAX_IDEA_MESSAGE_LENGTH = 900;
     const MAX_WAITLIST_MESSAGE_LENGTH = 600;
     const MAX_TICKET_MESSAGE_LENGTH = 900;
+    const MAX_CREATOR_RESPONSE_LENGTH = 900;
     const SUPPORTED_LANGUAGES = ["es", "en", "fr", "pt"];
     const SUPPORT_TICKET_CATEGORY_VALUES = ["general", "account", "access", "privacy", "plans", "technical", "bug", "security", "idea", "other"];
     const SUPPORT_TICKET_PRIORITY_VALUES = ["low", "normal", "high", "security"];
+    const CREATOR_TICKET_STATUS_VALUES = ["pending", "in_review", "answered", "resolved", "closed", "spam"];
     const SUPPORTED_TEXT_SIZES = ["normal", "medium", "large"];
     const COOKIE_DEFAULTS = {
       necessary: true,
@@ -7974,6 +8017,7 @@
           security: "Seguridad",
           subscription: "Suscripción",
           help: "Ayuda",
+          creatorPanel: "Panel del Creador",
           logout: "Limpiar vista local"
         },
         live: {
@@ -8420,6 +8464,7 @@
           security: "Security",
           subscription: "Subscription",
           help: "Help",
+          creatorPanel: "Creator Panel",
           logout: "Clear local view"
         },
         live: {
@@ -8866,6 +8911,7 @@
           security: "Sécurité",
           subscription: "Abonnement",
           help: "Aide",
+          creatorPanel: "Panneau créateur",
           logout: "Effacer la vue locale"
         },
         live: {
@@ -9312,6 +9358,7 @@
           security: "Segurança",
           subscription: "Subscrição",
           help: "Ajuda",
+          creatorPanel: "Painel do Criador",
           logout: "Limpar vista local"
         },
         live: {
@@ -10956,16 +11003,31 @@
       );
     }
 
-    function renderAdminExperience() {
+    function formatCreatorTicketStatus(value) {
+      const labels = {
+        pending: "Pendiente",
+        in_review: "En revisión",
+        answered: "Respondido",
+        resolved: "Resuelto",
+        closed: "Cerrado",
+        spam: "Spam"
+      };
+      return labels[value] || "Pendiente";
+    }
+
+    function renderAdminLockedExperience(account) {
       setRouteDetailVariant("");
       routeDetailBadge.textContent = "Privado";
       routeDetailTitle.textContent = "Panel del Creador protegido";
-      routeDetailBody.textContent = "Esta ruta no expone datos administrativos. El panel real solo debe aparecer si la sesion tiene rol creator o admin, con backend, auditoria y reglas por usuario.";
+      routeDetailBody.textContent = "Esta ruta no expone datos administrativos si no existe una sesion real con rol creator o admin.";
       const locked = createElement("section", "locked-admin-card");
+      const reason = account.provider === "zamazen-online-account"
+        ? "La sesion online actual no trae permiso creator/admin desde el backend o el token de esta pestana no esta disponible."
+        : "Inicia sesion con una cuenta Zamazen real autorizada para ver la bandeja privada.";
       locked.append(
         createElement("span", "experience-status", "Acceso bloqueado"),
         createElement("h3", "", "Nada sensible vive en el frontend publico"),
-        createElement("p", "", "No hay lista de ideas recibidas, correos, IPs, notas internas, recompensas, tickets ni claves en esta pagina estatica.")
+        createElement("p", "", reason)
       );
       routeDetailGrid.className = "profile-dashboard";
       routeDetailGrid.replaceChildren(locked, createSecureNoteList([
@@ -10981,6 +11043,148 @@
         createProfileAction("Abrir soporte", "#/soporte", "secondary"),
         createProfileAction("Inicio", "#/inicio", "secondary")
       );
+    }
+
+    function createCreatorTicketCard(ticket, onSaved) {
+      const card = createElement("article", "sync-status-card creator-ticket-card");
+      const title = createElement("h3", "", `${ticket.alias || "Usuario"} · ${ticket.id || "ticket"}`);
+      const meta = createElement("div", "creator-ticket-meta");
+      [
+        `Estado: ${formatCreatorTicketStatus(ticket.status)}`,
+        `Prioridad: ${ticket.priority || "normal"}`,
+        `Tipo: ${ticket.category || "general"}`,
+        `Contacto: ${ticket.contactEmailMasked || ticket.requester?.emailMasked || "no indicado"}`,
+        `Actualizado: ${formatProfileDate(ticket.updatedAt || ticket.createdAt)}`
+      ].forEach((value) => meta.append(createElement("span", "sync-pill", value)));
+
+      const message = createElement("blockquote", "", ticket.message || "Mensaje no disponible.");
+      card.append(title, meta, message);
+
+      if (ticket.creatorResponse) {
+        const response = createElement("p", "", `Respuesta actual: ${ticket.creatorResponse}`);
+        card.append(response);
+      }
+
+      const form = createElement("form", "creator-ticket-form");
+      const statusSelect = createElement("select", "form-input");
+      CREATOR_TICKET_STATUS_VALUES.forEach((statusValue) => {
+        const option = createElement("option", "", formatCreatorTicketStatus(statusValue));
+        option.value = statusValue;
+        if (statusValue === ticket.status) option.selected = true;
+        statusSelect.append(option);
+      });
+
+      const responseInput = createElement("textarea", "form-input");
+      responseInput.maxLength = MAX_CREATOR_RESPONSE_LENGTH;
+      responseInput.rows = 4;
+      responseInput.placeholder = "Respuesta privada para el ticket, sin pedir contraseñas, 2FA, Bunker ni datos bancarios.";
+
+      const statusText = createElement("p", "");
+      const saveButton = createElement("button", "cta-primary", "Guardar revisión");
+      saveButton.type = "submit";
+      const actions = createElement("div", "creator-ticket-actions");
+      actions.append(saveButton, statusText);
+
+      form.append(statusSelect, responseInput, actions);
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const creatorResponse = normalizeFormText(responseInput.value, MAX_CREATOR_RESPONSE_LENGTH);
+        if (creatorResponse && hasUnsafeContributionText(creatorResponse)) {
+          statusText.textContent = "Respuesta bloqueada: no incluyas HTML, scripts ni enlaces sospechosos.";
+          return;
+        }
+
+        saveButton.disabled = true;
+        saveButton.setAttribute("aria-disabled", "true");
+        form.setAttribute("aria-busy", "true");
+        statusText.textContent = "Guardando...";
+
+        const result = await patchCreatorSupportTicket(ticket.id, {
+          status: statusSelect.value,
+          ...(creatorResponse ? { creatorResponse } : {})
+        });
+
+        if (result.ok) {
+          statusText.textContent = "Revisión guardada.";
+          responseInput.value = "";
+          onSaved();
+        } else {
+          statusText.textContent = result.reason === "forbidden"
+            ? "El backend no reconoce permiso creator/admin para esta sesión."
+            : "No se pudo guardar ahora. No se simula ningún cambio.";
+        }
+
+        form.removeAttribute("aria-busy");
+        saveButton.disabled = false;
+        saveButton.removeAttribute("aria-disabled");
+      });
+      card.append(form);
+      return card;
+    }
+
+    function renderAdminExperience() {
+      const account = normalizeAccountPreview(readAccountPreview());
+      if (!hasCreatorPanelSession(account)) {
+        renderAdminLockedExperience(account);
+        return;
+      }
+
+      setRouteDetailVariant("");
+      routeDetailBadge.textContent = "Creator";
+      routeDetailTitle.textContent = "Panel del Creador";
+      routeDetailBody.textContent = "Bandeja privada conectada al backend. Solo muestra tickets enviados voluntariamente al soporte y conserva el fallo cerrado si la API o el rol no responden.";
+
+      const accessCard = createStatusCard("Acceso privado", `${account.email} · rol ${account.role}`, "Backend obligatorio");
+      const refreshButton = createElement("button", "cta-secondary", "Actualizar tickets");
+      refreshButton.type = "button";
+      const statusText = createElement("p", "", "Cargando tickets...");
+      const ticketList = createElement("div", "creator-ticket-list");
+      const inbox = createElement("section", "locked-admin-card");
+      inbox.append(
+        createElement("span", "experience-status", "Tickets privados"),
+        createElement("h3", "", "Soporte recibido"),
+        createElement("p", "", "No aparece en el menu publico y no permite navegar por cuentas privadas. Solo revisa lo que el usuario envio al soporte."),
+        refreshButton,
+        statusText,
+        ticketList
+      );
+      const privacyRules = createSecureNoteList([
+        ["Minimo necesario", "El panel no muestra contrasenas, Bunker, archivos privados, conversaciones no enviadas al soporte ni cuentas completas."],
+        ["Respuesta responsable", "No pedir secretos, codigos 2FA, datos bancarios ni documentos sensibles."],
+        ["Nada automatico", "Marcar spam, cerrar o responder requiere accion manual y queda en el backend."],
+        ["Fallo cerrado", "Si el token caduca, la API falla o el rol no coincide, no se muestra bandeja ni se simulan cambios."]
+      ]);
+
+      routeDetailGrid.className = "profile-dashboard";
+      routeDetailGrid.replaceChildren(accessCard, inbox, privacyRules);
+      routeDetailActions.replaceChildren(
+        createProfileAction("Abrir soporte", "#/soporte", "primary"),
+        createProfileAction("Salon de Guardianes", "#/salon-guardianes", "secondary"),
+        createProfileAction("Inicio", "#/inicio", "secondary")
+      );
+
+      const loadTickets = async () => {
+        refreshButton.disabled = true;
+        refreshButton.setAttribute("aria-disabled", "true");
+        statusText.textContent = "Consultando backend...";
+        ticketList.replaceChildren();
+        const result = await fetchCreatorSupportTickets();
+        if (result.ok) {
+          statusText.textContent = result.tickets.length
+            ? `${result.tickets.length} ticket(s) visibles para rol ${result.role || account.role}.`
+            : "No hay tickets pendientes o visibles ahora.";
+          ticketList.replaceChildren(...result.tickets.map((ticket) => createCreatorTicketCard(ticket, loadTickets)));
+        } else {
+          statusText.textContent = result.reason === "forbidden"
+            ? "El backend no reconoce rol creator/admin para esta sesion."
+            : "La bandeja privada no esta disponible ahora. No se muestran datos ni se simula conexion.";
+        }
+        refreshButton.disabled = false;
+        refreshButton.removeAttribute("aria-disabled");
+      };
+
+      refreshButton.addEventListener("click", loadTickets);
+      loadTickets();
     }
 
     function renderNotFoundExperience() {
@@ -11820,6 +12024,10 @@
       const provider = safeAccount.provider || "local-preview";
       const isOnline = provider === "zamazen-online-account";
       const avatar = findProfileAvatar(safeAccount);
+      const role = String(safeAccount.role || "user").trim().toLowerCase();
+      const permissions = safeAccount.permissions && typeof safeAccount.permissions === "object"
+        ? safeAccount.permissions
+        : {};
 
       return {
         ...safeAccount,
@@ -11827,6 +12035,10 @@
         email: String(safeAccount.email || "").trim() || "Sin sesión online en esta web",
         nick: String(safeAccount.nick || "").trim(),
         provider,
+        role,
+        permissions: {
+          creatorPanel: Boolean(permissions.creatorPanel)
+        },
         avatarId: avatar.id,
         avatarGlyph: safeAccount.avatarGlyph || avatar.glyph,
         avatarLabel: avatar.label,
@@ -11845,6 +12057,12 @@
         deviceConnected: Boolean(safeAccount.deviceConnected),
         updatedAt: safeAccount.updatedAt || ""
       };
+    }
+
+    function hasCreatorPanelSession(account = normalizeAccountPreview(readAccountPreview())) {
+      return account.provider === "zamazen-online-account"
+        && Boolean(account.permissions?.creatorPanel)
+        && Boolean(readOnlineSessionToken());
     }
 
     function writeAccountPreview(account) {
@@ -12054,6 +12272,90 @@
       }
     }
 
+    async function fetchCreatorSupportTickets() {
+      const token = readOnlineSessionToken();
+      if (!token) {
+        return { ok: false, reason: "missing_session", tickets: [] };
+      }
+
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), SUPPORT_API_TIMEOUT_MS);
+
+      try {
+        const response = await fetch(`${ZAMAZEN_API_BASE_URL}/api/support/tickets?limit=40`, {
+          method: "GET",
+          headers: {
+            "Accept": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          cache: "no-store",
+          signal: controller.signal
+        });
+        const payload = await response.json().catch(() => ({}));
+
+        if (response.ok && payload && payload.ok) {
+          return { ok: true, role: payload.role || "", tickets: Array.isArray(payload.tickets) ? payload.tickets : [] };
+        }
+
+        if (response.status === 401) {
+          writeOnlineSessionToken("");
+          updateUserPanelPreview();
+          return { ok: false, reason: "missing_session", tickets: [] };
+        }
+
+        return {
+          ok: false,
+          reason: response.status === 403 ? "forbidden" : (payload?.message || "api_unavailable"),
+          tickets: []
+        };
+      } catch (error) {
+        return { ok: false, reason: "api_unavailable", tickets: [] };
+      } finally {
+        window.clearTimeout(timeoutId);
+      }
+    }
+
+    async function patchCreatorSupportTicket(ticketId, updates) {
+      const token = readOnlineSessionToken();
+      if (!token || !ticketId) {
+        return { ok: false, reason: "missing_session" };
+      }
+
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), SUPPORT_API_TIMEOUT_MS);
+
+      try {
+        const response = await fetch(`${ZAMAZEN_API_BASE_URL}/api/support/tickets/${encodeURIComponent(ticketId)}`, {
+          method: "PATCH",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          cache: "no-store",
+          signal: controller.signal,
+          body: JSON.stringify(updates)
+        });
+        const payload = await response.json().catch(() => ({}));
+
+        if (response.ok && payload && payload.ok) {
+          return { ok: true, ticket: payload.ticket || null };
+        }
+
+        if (response.status === 401) {
+          writeOnlineSessionToken("");
+          updateUserPanelPreview();
+          return { ok: false, reason: "missing_session" };
+        }
+
+        return { ok: false, reason: response.status === 403 ? "forbidden" : (payload?.message || "api_unavailable") };
+      } catch (error) {
+        return { ok: false, reason: "api_unavailable" };
+      } finally {
+        window.clearTimeout(timeoutId);
+      }
+    }
+
     function createSecureNoteList(items) {
       const list = createElement("ul", "secure-note-list");
       items.forEach(([title, body]) => {
@@ -12100,6 +12402,10 @@
         } else {
           setTranslatedText(userPanelLevel, "userPanel.levelCore");
         }
+      }
+
+      if (userPanelCreatorLink) {
+        userPanelCreatorLink.hidden = !hasCreatorPanelSession(account);
       }
     }
 
@@ -12547,6 +12853,8 @@
               email: profile.email || email,
               provider: "zamazen-online-account",
               onlineAccountId: profile.id || "",
+              role: profile.role || "user",
+              permissions: profile.permissions || {},
               signedInOnlineAt: new Date().toISOString(),
               lastSyncAt: new Date().toISOString(),
               syncStatus: "Sesión web verificada; esperando enlace con app móvil"
@@ -12646,6 +12954,8 @@
               ...account,
               provider: "zamazen-online-account",
               onlineAccountId: payload.profile && payload.profile.id ? payload.profile.id : "",
+              role: payload.profile?.role || "user",
+              permissions: payload.profile?.permissions || {},
               createdOnlineAt: new Date().toISOString(),
               lastSyncAt: new Date().toISOString(),
               syncStatus: "Cuenta online creada; esperando enlace con app móvil"
