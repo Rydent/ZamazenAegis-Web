@@ -95,6 +95,7 @@
     html {
       scroll-behavior: auto;
       font-size: 16px;
+      background: #02050c;
     }
 
     html[data-text-size="medium"] {
@@ -1323,7 +1324,7 @@
 
     .profile-panel-grid,
     .account-method-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     }
 
     .profile-field {
@@ -1374,7 +1375,7 @@
 
     .sync-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
     }
 
     .sync-status-card strong {
@@ -1564,6 +1565,43 @@
       grid-template-columns: minmax(220px, 0.36fr) minmax(0, 0.64fr);
     }
 
+    .support-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .help-search-card {
+      display: grid;
+      gap: 14px;
+    }
+
+    .help-result-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .help-result-card {
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(111, 150, 232, 0.16);
+      background: rgba(255, 255, 255, 0.035);
+      overflow-wrap: anywhere;
+    }
+
+    .help-result-card strong {
+      color: #f8fbff;
+    }
+
+    .help-result-card span,
+    .help-result-card p {
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
     .secure-tab-list {
       display: grid;
       gap: 10px;
@@ -1611,7 +1649,7 @@
 
     .plan-showcase-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
       gap: 18px;
     }
 
@@ -1619,6 +1657,28 @@
       display: grid;
       gap: 14px;
       min-height: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .plan-price {
+      display: grid;
+      gap: 4px;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(94, 240, 189, 0.18);
+      background: rgba(94, 240, 189, 0.075);
+    }
+
+    .plan-price strong {
+      color: #f8fbff;
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      line-height: 1.05;
+    }
+
+    .plan-price span,
+    .plan-availability {
+      color: var(--muted);
+      line-height: 1.45;
     }
 
     .plan-showcase-card.is-valhalla {
@@ -4223,6 +4283,7 @@
       .plan-showcase-grid,
       .guardian-demo-layout,
       .secure-form-layout,
+      .support-layout,
       .guardian-hall-grid,
       .crown-grid,
       .points-grid {
@@ -4429,6 +4490,7 @@
       .experience-dashboard,
       .secure-form-layout,
       .guardian-demo-layout,
+      .support-layout,
       .plan-showcase-grid,
       .guardian-hall-grid,
       .crown-grid,
@@ -4639,6 +4701,7 @@
             <a href="#/salon-guardianes" data-i18n="nav.guardianHall">Salón</a>
             <a href="#/sobre-zamazenaegis" data-i18n="nav.about">Sobre</a>
             <a href="#/equipo" data-i18n="nav.team">Equipo</a>
+            <a href="#/soporte" data-i18n="nav.help">Ayuda</a>
             <a href="#/faq" data-i18n="nav.faq">FAQ</a>
             <a href="#/contacto" data-i18n="legalDocs.contactShort">Contacto</a>
           </nav>
@@ -6052,6 +6115,7 @@
             <a href="#/cuenta" data-i18n="nav.account">Cuenta</a>
             <a href="#/datos" data-i18n="nav.data">Datos</a>
             <a href="#/eliminar-cuenta" data-i18n="nav.deleteAccount">Eliminar cuenta</a>
+            <a href="#/soporte" data-i18n="nav.help">Ayuda</a>
             <a href="#/faq" data-i18n="nav.faq">FAQ</a>
             <a href="#/descargar" data-i18n="nav.cta">Activar escudo</a>
           </div>
@@ -6096,7 +6160,7 @@
       <a href="#/seguridad"><span class="quick-menu-icon" aria-hidden="true">ᚦ</span><span data-i18n="nav.security">Seguridad</span></a>
       <a href="#/cuenta"><span class="quick-menu-icon" aria-hidden="true">ᛟ</span><span data-i18n="quickMenu.account">Cuenta</span></a>
       <a href="#/precios"><span class="quick-menu-icon" aria-hidden="true">ᚠ</span><span data-i18n="quickMenu.premium">Precios</span></a>
-      <a href="#/salon-guardianes"><span class="quick-menu-icon" aria-hidden="true">ᚲ</span><span data-i18n="nav.guardianHall">Salón</span></a>
+      <a href="#/soporte"><span class="quick-menu-icon" aria-hidden="true">ᚲ</span><span data-i18n="nav.help">Ayuda</span></a>
     </nav>
     <button class="quick-menu-toggle" id="quickMenuToggle" type="button" aria-expanded="false" aria-controls="quickMenu" aria-label="Abrir accesos rápidos" data-i18n-attr="aria-label:quickMenu.open">ᛉ</button>
   </div>
@@ -6257,6 +6321,7 @@
     const STORAGE_MOTION_KEY = "zamazen_aegis_live_motion";
     const STORAGE_CONTRIBUTIONS_KEY = "zamazen_aegis_contribution_drafts";
     const STORAGE_WAITLIST_KEY = "zamazen_aegis_waitlist_drafts";
+    const STORAGE_SUPPORT_TICKETS_KEY = "zamazen_aegis_support_ticket_drafts";
     const STORAGE_FORM_RATE_KEY = "zamazen_aegis_secure_form_last_submit";
     const ZAMAZEN_API_BASE_URL = "https://api.zamazenaegis.com";
     const ACCOUNT_API_TIMEOUT_MS = 10000;
@@ -6266,6 +6331,7 @@
     const MAX_EMAIL_LENGTH = 120;
     const MAX_IDEA_MESSAGE_LENGTH = 900;
     const MAX_WAITLIST_MESSAGE_LENGTH = 600;
+    const MAX_TICKET_MESSAGE_LENGTH = 900;
     const SUPPORTED_LANGUAGES = ["es", "en", "fr", "pt"];
     const SUPPORTED_TEXT_SIZES = ["normal", "medium", "large"];
     const COOKIE_DEFAULTS = {
@@ -6309,6 +6375,10 @@
       novedades: "novedades",
       nube: "nube",
       admin: "admin",
+      ayuda: "soporte",
+      soporte: "soporte",
+      "neo-ayuda": "soporte",
+      tickets: "soporte",
       demo: "demo",
       "gestionar-datos": "gestionar-datos",
       "eliminar-cuenta": "eliminar-cuenta",
@@ -6332,6 +6402,7 @@
       ideas: { sections: ["pagina-interna"], detail: "ideas" },
       "salon-guardianes": { sections: ["pagina-interna"], detail: "salon-guardianes" },
       admin: { sections: ["pagina-interna"], detail: "admin" },
+      soporte: { sections: ["pagina-interna"], detail: "soporte" },
       legal: { sections: ["pagina-interna"], detail: "legal" },
       nube: { sections: ["pagina-interna"], detail: "nube" },
       demo: { sections: ["pagina-interna"], detail: "demo" },
@@ -6381,41 +6452,6 @@
       { id: "ragnarok", label: "Ragnarok", glyph: "RG" }
     ];
     const PROFILE_IMAGE_MAX_BYTES = 700 * 1024;
-    const PLAN_SHOWCASE = [
-      {
-        id: "core",
-        name: "Core",
-        glyph: "CO",
-        aura: "is-core",
-        forWho: "Ideal para empezar sin presion.",
-        promise: "Proteccion esencial util, honesta y ligera.",
-        benefits: ["Escaner manual y explicaciones claras", "Historial basico local", "Limpieza segura", "Red Neo saneada con consentimiento"],
-        cta: "Elegir Core",
-        href: "#/core"
-      },
-      {
-        id: "valhalla",
-        name: "Valhalla",
-        glyph: "VA",
-        aura: "is-valhalla",
-        forWho: "Para usuarios que quieren mas contexto.",
-        promise: "Mejora clara en privacidad, permisos y Bunker.",
-        benefits: ["Mas senales para enlaces y apps", "Bunker mejorado", "Tendencias Red Neo", "Personalizacion y estado premium"],
-        cta: "Mejorar a Valhalla",
-        href: "#/valhalla"
-      },
-      {
-        id: "ragnarok",
-        name: "Ragnarok",
-        glyph: "RG",
-        aura: "is-ragnarok",
-        forWho: "Para quien quiere apoyar al maximo.",
-        promise: "La experiencia completa cuando Android y el consentimiento lo permiten.",
-        benefits: ["Banca, identidad y credenciales", "Bunker total", "Red Neo prioritaria", "Resolucion guiada de riesgos complejos"],
-        cta: "Desbloquear Ragnarok",
-        href: "#/ragnarok"
-      }
-    ];
     const DEMO_SCENARIOS = [
       {
         id: "call",
@@ -6571,9 +6607,9 @@
           trial: "Solicitar acceso de prueba",
           demo: "Ver demo guiada",
           plans: [
-            ["core", "Core", "CO", "is-core", "Ideal para empezar sin presión.", "Protección esencial útil, honesta y ligera.", ["Escáner manual y explicaciones claras", "Historial básico local", "Limpieza segura", "Red Neo saneada con consentimiento"], "Elegir Core", "#/core"],
-            ["valhalla", "Valhalla", "VA", "is-valhalla", "Para usuarios que quieren más contexto.", "Mejora clara en privacidad, permisos y Bunker.", ["Más señales para enlaces y apps", "Bunker mejorado", "Tendencias Red Neo", "Personalización y estado premium"], "Mejorar a Valhalla", "#/valhalla"],
-            ["ragnarok", "Ragnarok", "RG", "is-ragnarok", "Para quien quiere apoyar al máximo.", "La experiencia completa cuando Android y el consentimiento lo permiten.", ["Banca, identidad y credenciales", "Bunker total", "Red Neo prioritaria", "Resolución guiada de riesgos complejos"], "Desbloquear Ragnarok", "#/ragnarok"]
+            ["core", "Core — gratis", "CO", "is-core", "Ideal para empezar sin presión.", "Gratis para empezar. Protección básica útil, local y clara.", "0 €/mes", "Disponible como base gratuita; no simula pago ni suscripción.", ["Escáner manual y explicaciones claras", "Historial básico local", "Limpieza segura", "Red Neo saneada con consentimiento"], "Usar Core gratis", "#/core"],
+            ["valhalla", "Valhalla", "VA", "is-valhalla", "Para usuarios que quieren más contexto.", "Más protección, más personalización y funciones avanzadas para quien quiere ir más allá.", "2,49 €/mes", "Precio de lanzamiento previsto. Acceso de prueba mediante invitación cuando esté disponible.", ["Más señales para enlaces y apps", "Bunker mejorado", "Tendencias Red Neo", "Personalización y estado premium"], "Ver Valhalla", "#/valhalla"],
+            ["ragnarok", "Ragnarok", "RG", "is-ragnarok", "Para quien quiere apoyar al máximo.", "La experiencia completa de Zamazen Aegis, con el máximo nivel de funciones disponibles.", "4,99 €/mes", "Precio de lanzamiento previsto. Sin compra real hasta activar pagos seguros.", ["Banca, identidad y credenciales", "Bunker total", "Red Neo prioritaria", "Resolución guiada de riesgos complejos"], "Ver Ragnarok", "#/ragnarok"]
           ]
         },
         demo: {
@@ -6695,6 +6731,57 @@
           points: GUARDIAN_POINT_RULES,
           crowns: GUARDIAN_CROWNS,
           badges: GUARDIAN_BADGES
+        },
+        support: {
+          badge: "Neo Ayuda",
+          title: "Centro de Ayuda del Guardián",
+          body: "Busca respuestas preparadas sobre Zamazen Aegis. Si Neo no encuentra una respuesta segura, puedes preparar un ticket para revisión manual sin enviar secretos.",
+          searchTitle: "Buscador de ayuda",
+          searchLabel: "Buscar en ayuda",
+          searchPlaceholder: "Cuenta, privacidad, Core, Bunker, permisos...",
+          noResult: "No encuentro una respuesta segura con esas palabras. Puedes cambiar la búsqueda o preparar un ticket para revisión manual.",
+          ticketTitle: "Crear ticket seguro",
+          alias: "Nombre o alias",
+          email: "Correo opcional",
+          category: "Tipo de ticket",
+          priority: "Urgencia",
+          message: "Mensaje",
+          consent: "Acepto que el creador revise solo este mensaje y los datos que envío voluntariamente.",
+          wantsReply: "Quiero recibir respuesta si es posible.",
+          submit: "Preparar ticket seguro",
+          mail: "Abrir correo preparado",
+          invalidAlias: "Indica un alias reconocible.",
+          invalidEmail: "Revisa el correo opcional.",
+          shortMessage: "Describe la duda o problema con al menos 20 caracteres.",
+          unsafe: "No envíes contraseñas, códigos, datos bancarios, HTML, scripts ni enlaces.",
+          accept: "Acepta la revisión manual antes de preparar el ticket.",
+          cooldown: "Espera un momento antes de preparar otro ticket.",
+          ready: "Ticket saneado y preparado. Confirma el envío desde tu correo; no se publica nada.",
+          subject: "Ticket soporte Zamazen Aegis",
+          optionalMissing: "No indicado",
+          yes: "Sí",
+          no: "No",
+          privacyBadge: "Privacidad máxima",
+          privacyTitle: "Soporte sin espiar",
+          privacyNotes: [["Solo lo enviado", "El creador solo revisa mensajes, ideas o reportes enviados voluntariamente."], ["Prohibido enviar secretos", "No mandes contraseñas, 2FA, datos bancarios, documentos sensibles ni archivos."], ["Panel protegido", "El ticket real debe vivir en backend con login, rol creator/admin, reglas y auditoría."], ["Sin chat público", "Cada usuario solo debe ver sus propios mensajes; nadie ve cuentas privadas ajenas."]],
+          contact: "Contacto",
+          privacyAction: "Privacidad",
+          articles: [
+            ["Qué es Zamazen Aegis", "General", "que es zamazen aegis neo ayuda proteccion", "Zamazen Aegis ayuda a reconocer señales de riesgo en móvil y a decidir con claridad, sin prometer protección absoluta."],
+            ["Core es gratis", "Planes", "core gratis precio 0", "Core es gratis: 0 €/mes. Sirve para empezar con protección esencial, local y clara."],
+            ["Valhalla y Ragnarok", "Planes", "valhalla ragnarok precios premium lanzamiento", "Valhalla tiene precio previsto de 2,49 €/mes y Ragnarok 4,99 €/mes. Son precios de lanzamiento previstos, sin compra real hasta activar pagos seguros."],
+            ["Cuenta Zamazen y Google", "Cuenta", "cuenta zamazen google oauth perfil guardian", "Cuenta Zamazen es la experiencia completa. Google será acceso rápido cuando OAuth/Credential Manager real estén configurados."],
+            ["Privacidad del creador", "Privacidad", "creador admin ver cuenta privada bunker", "Ser creator/admin no permite ver Bunker, contraseñas, archivos privados ni cuentas ajenas completas. Solo se revisa lo que el usuario envía a soporte o comunidad."],
+            ["Bunker", "Bunker", "bunker contrasenas cifrado nube", "Bunker trata secretos y credenciales con privacidad por defecto. La nube solo debe recibir paquetes cifrados por el usuario cuando esté activa."],
+            ["Red Neo", "Red Neo", "red neo reportes comunidad privacidad", "Red Neo permite reportar indicadores saneados con consentimiento para ayudar a otros sin publicar secretos ni conversaciones completas."],
+            ["Permisos Android", "Permisos", "permisos android sms llamadas play safe", "Los permisos sensibles solo deben pedirse con valor real, explicación y alternativa manual. PlaySafe evita permisos restringidos si no hay aprobación."],
+            ["Acceso de prueba", "Acceso", "beta tester acceso prueba invitacion", "El acceso de prueba se revisa manualmente. Valhalla y Ragnarok podrán probarse mediante invitación, códigos o campañas controladas."],
+            ["Ideas y Salón", "Comunidad", "ideas salon guardianes puntos anonimo", "Las ideas quedan pendientes de revisión. Nada se publica automáticamente y el usuario puede elegir alias, anónimo o no aparecer."],
+            ["Borrar cuenta", "Cuenta", "borrar eliminar cuenta datos", "La eliminación de cuenta debe pasar por una ruta clara y verificación. No envíes contraseñas ni códigos por correo."],
+            ["Reportar un error", "Soporte", "error bug seguridad ticket soporte", "Si Neo no puede responder con seguridad, prepara un ticket. Para seguridad, describe el problema sin publicar datos sensibles."]
+          ],
+          categories: ["Duda general", "Cuenta", "Acceso", "Privacidad", "Planes", "Problema técnico", "Reporte de error", "Reporte de seguridad", "Idea o mejora", "Otro"],
+          priorities: ["baja", "normal", "alta", "seguridad"]
         }
       },
       en: {
@@ -6786,9 +6873,9 @@
           trial: "Request trial access",
           demo: "View guided demo",
           plans: [
-            ["core", "Core", "CO", "is-core", "Ideal to start without pressure.", "Useful, honest and lightweight essential protection.", ["Manual scanner and clear explanations", "Basic local history", "Safe cleanup", "Sanitized Neo Network with consent"], "Choose Core", "#/core"],
-            ["valhalla", "Valhalla", "VA", "is-valhalla", "For users who want more context.", "A clear improvement in privacy, permissions and Bunker.", ["More signals for links and apps", "Improved Bunker", "Neo Network trends", "Premium personalization and status"], "Upgrade to Valhalla", "#/valhalla"],
-            ["ragnarok", "Ragnarok", "RG", "is-ragnarok", "For those who want to support the most.", "The complete experience when Android and consent allow it.", ["Banking, identity and credentials", "Full Bunker", "Priority Neo Network", "Guided resolution for complex risks"], "Unlock Ragnarok", "#/ragnarok"]
+            ["core", "Core — free", "CO", "is-core", "Ideal to start without pressure.", "Free to start. Useful, local and clear essential protection.", "0 €/month", "Available as the free base; it does not simulate payment or subscription.", ["Manual scanner and clear explanations", "Basic local history", "Safe cleanup", "Sanitized Neo Network with consent"], "Use Core free", "#/core"],
+            ["valhalla", "Valhalla", "VA", "is-valhalla", "For users who want more context.", "More protection, more personalization and advanced functions for users who want to go further.", "2.49 €/month", "Expected launch price. Trial access may be offered by invitation when available.", ["More signals for links and apps", "Improved Bunker", "Neo Network trends", "Premium personalization and status"], "View Valhalla", "#/valhalla"],
+            ["ragnarok", "Ragnarok", "RG", "is-ragnarok", "For those who want to support the most.", "The complete Zamazen Aegis experience, with the highest level of available functions.", "4.99 €/month", "Expected launch price. No real purchase until secure payments are active.", ["Banking, identity and credentials", "Full Bunker", "Priority Neo Network", "Guided resolution for complex risks"], "View Ragnarok", "#/ragnarok"]
           ]
         },
         demo: {
@@ -6910,6 +6997,57 @@
           points: [["Useful idea", "+10", "Adds clarity or improves a concrete part of the project."], ["Accepted improvement", "+25", "Can be integrated without breaking stability or privacy."], ["Visual bug found", "+15", "Helps polish trust, responsiveness or visual accessibility."], ["Important functional bug", "+50", "Prevents a real usage, account, data or navigation failure."], ["Accessibility improvement", "+40", "Helps older people, screen readers or large text."], ["Serious security report", "+100", "Reduces real risk without publishing sensitive details."], ["Implemented idea", "+75", "Reaches the app, website or Neo Network after review."], ["Exceptional contribution", "Manual", "The team decides points by real impact, not quantity."]],
           crowns: [["is-gold", "1st", "Ragnarok Guardian", "Gold crown for the most valuable contribution of the period."], ["is-silver", "2nd", "Valhalla Guardian", "Silver crown for outstanding and consistent help."], ["is-bronze", "3rd", "Honorary Core Guardian", "Runic crown for a useful and careful contribution."]],
           badges: ["Neo Ally", "Aegis Sentinel", "Neo Network Watcher", "Bunker Custodian", "Accessibility Guardian", "Legendary Guardian"]
+        },
+        support: {
+          badge: "Neo Help",
+          title: "Guardian Help Center",
+          body: "Search prepared answers about Zamazen Aegis. If Neo cannot answer safely, you can prepare a manually reviewed ticket without sending secrets.",
+          searchTitle: "Help search",
+          searchLabel: "Search help",
+          searchPlaceholder: "Account, privacy, Core, Bunker, permissions...",
+          noResult: "I cannot find a safe answer for those words. Try another search or prepare a manually reviewed ticket.",
+          ticketTitle: "Create a safe ticket",
+          alias: "Name or alias",
+          email: "Optional email",
+          category: "Ticket type",
+          priority: "Urgency",
+          message: "Message",
+          consent: "I accept that the creator reviews only this message and the data I voluntarily send.",
+          wantsReply: "I want a reply if possible.",
+          submit: "Prepare safe ticket",
+          mail: "Open prepared email",
+          invalidAlias: "Enter a recognizable alias.",
+          invalidEmail: "Review the optional email.",
+          shortMessage: "Describe the question or problem with at least 20 characters.",
+          unsafe: "Do not send passwords, codes, banking data, HTML, scripts or links.",
+          accept: "Accept manual review before preparing the ticket.",
+          cooldown: "Wait a moment before preparing another ticket.",
+          ready: "Sanitized ticket prepared. Confirm sending from your email; nothing is published.",
+          subject: "Zamazen Aegis support ticket",
+          optionalMissing: "Not provided",
+          yes: "Yes",
+          no: "No",
+          privacyBadge: "Maximum privacy",
+          privacyTitle: "Support without spying",
+          privacyNotes: [["Only what is sent", "The creator reviews only messages, ideas or reports voluntarily sent."], ["No secrets", "Do not send passwords, 2FA, banking data, sensitive documents or files."], ["Protected panel", "Real tickets must live in a backend with login, creator/admin role, rules and audit."], ["No public chat", "Each user should only see their own messages; nobody sees private accounts of others."]],
+          contact: "Contact",
+          privacyAction: "Privacy",
+          articles: [
+            ["What is Zamazen Aegis", "General", "what is zamazen aegis neo help protection", "Zamazen Aegis helps identify mobile risk signals and make clearer decisions, without promising absolute protection."],
+            ["Core is free", "Plans", "core free price 0", "Core is free: 0 €/month. It helps users start with essential, local and clear protection."],
+            ["Valhalla and Ragnarok", "Plans", "valhalla ragnarok prices premium launch", "Valhalla has an expected launch price of 2.49 €/month and Ragnarok 4.99 €/month. No real purchase is active until secure payments are ready."],
+            ["Zamazen account and Google", "Account", "zamazen account google oauth guardian profile", "The Zamazen account is the full experience. Google becomes quick access when real OAuth/Credential Manager are configured."],
+            ["Creator privacy", "Privacy", "creator admin private account bunker", "Creator/admin does not allow viewing Bunker, passwords, private files or full accounts of other users. Only support/community submissions are reviewed."],
+            ["Bunker", "Bunker", "bunker passwords encryption cloud", "Bunker treats secrets and credentials with privacy by default. Cloud should only receive user-encrypted packages when active."],
+            ["Neo Network", "Neo Network", "neo network reports community privacy", "Neo Network can share sanitized indicators with consent so reports help others without publishing secrets or complete conversations."],
+            ["Android permissions", "Permissions", "android permissions sms calls play safe", "Sensitive permissions should only be requested with real value, explanation and manual fallback. PlaySafe avoids restricted permissions without approval."],
+            ["Trial access", "Access", "beta tester trial access invitation", "Trial access is manually reviewed. Valhalla and Ragnarok may be offered through invitations, codes or controlled campaigns."],
+            ["Ideas and Hall", "Community", "ideas hall guardians points anonymous", "Ideas remain pending review. Nothing is published automatically and users can choose alias, anonymous or not appearing."],
+            ["Delete account", "Account", "delete account data", "Account deletion needs a clear route and verification. Do not send passwords or codes by email."],
+            ["Report an error", "Support", "error bug security ticket support", "If Neo cannot answer safely, prepare a ticket. For security, describe the problem without exposing sensitive data."]
+          ],
+          categories: ["General question", "Account", "Access", "Privacy", "Plans", "Technical issue", "Bug report", "Security report", "Idea or improvement", "Other"],
+          priorities: ["low", "normal", "high", "security"]
         }
       },
       fr: {
@@ -7001,9 +7139,9 @@
           trial: "Demander un accès test",
           demo: "Voir la démo guidée",
           plans: [
-            ["core", "Core", "CO", "is-core", "Idéal pour commencer sans pression.", "Protection essentielle utile, honnête et légère.", ["Scanner manuel et explications claires", "Historique local basique", "Nettoyage sûr", "Red Neo assainie avec consentement"], "Choisir Core", "#/core"],
-            ["valhalla", "Valhalla", "VA", "is-valhalla", "Pour les utilisateurs qui veulent plus de contexte.", "Amélioration nette de confidentialité, autorisations et Bunker.", ["Plus de signaux pour liens et apps", "Bunker amélioré", "Tendances Red Neo", "Personnalisation et statut premium"], "Passer à Valhalla", "#/valhalla"],
-            ["ragnarok", "Ragnarok", "RG", "is-ragnarok", "Pour celles et ceux qui veulent soutenir au maximum.", "L'expérience complète quand Android et le consentement le permettent.", ["Banque, identité et identifiants", "Bunker complet", "Red Neo prioritaire", "Résolution guidée des risques complexes"], "Débloquer Ragnarok", "#/ragnarok"]
+            ["core", "Core — gratuit", "CO", "is-core", "Idéal pour commencer sans pression.", "Gratuit pour commencer. Protection essentielle utile, locale et claire.", "0 €/mois", "Disponible comme base gratuite; aucun paiement ni abonnement n'est simulé.", ["Scanner manuel et explications claires", "Historique local basique", "Nettoyage sûr", "Red Neo assainie avec consentement"], "Utiliser Core gratuit", "#/core"],
+            ["valhalla", "Valhalla", "VA", "is-valhalla", "Pour les utilisateurs qui veulent plus de contexte.", "Plus de protection, de personnalisation et de fonctions avancées pour aller plus loin.", "2,49 €/mois", "Prix de lancement prévu. Accès test possible par invitation quand disponible.", ["Plus de signaux pour liens et apps", "Bunker amélioré", "Tendances Red Neo", "Personnalisation et statut premium"], "Voir Valhalla", "#/valhalla"],
+            ["ragnarok", "Ragnarok", "RG", "is-ragnarok", "Pour celles et ceux qui veulent soutenir au maximum.", "L'expérience complète de Zamazen Aegis, avec le niveau maximal de fonctions disponibles.", "4,99 €/mois", "Prix de lancement prévu. Aucun achat réel tant que les paiements sécurisés ne sont pas actifs.", ["Banque, identité et identifiants", "Bunker complet", "Red Neo prioritaire", "Résolution guidée des risques complexes"], "Voir Ragnarok", "#/ragnarok"]
           ]
         },
         demo: {
@@ -7125,6 +7263,57 @@
           points: [["Idée utile", "+10", "Ajoute de la clarté ou améliore une partie concrète du projet."], ["Amélioration acceptée", "+25", "Peut être intégrée sans casser stabilité ni confidentialité."], ["Erreur visuelle détectée", "+15", "Aide à améliorer confiance, responsive ou accessibilité visuelle."], ["Erreur fonctionnelle importante", "+50", "Évite un vrai échec d'usage, compte, données ou navigation."], ["Amélioration d'accessibilité", "+40", "Aide personnes âgées, lecteur d'écran ou grand texte."], ["Signalement de sécurité sérieux", "+100", "Réduit un risque réel sans publier de détails sensibles."], ["Idée implémentée", "+75", "Arrive dans l'app, le web ou Red Neo après revue."], ["Apport exceptionnel", "Manuel", "L'équipe décide les points selon l'impact réel, pas la quantité."]],
           crowns: [["is-gold", "1er", "Gardien Ragnarok", "Couronne dorée pour l'apport le plus précieux de la période."], ["is-silver", "2e", "Gardien Valhalla", "Couronne argentée pour une aide remarquable et constante."], ["is-bronze", "3e", "Gardien Core honorifique", "Couronne runique pour une contribution utile et soignée."]],
           badges: ["Allié de Neo", "Sentinelle Aegis", "Vigie de Red Neo", "Gardien du Bunker", "Gardien de l'accessibilité", "Gardien légendaire"]
+        },
+        support: {
+          badge: "Aide Neo",
+          title: "Centre d'aide du Gardien",
+          body: "Cherchez des réponses préparées sur Zamazen Aegis. Si Neo ne trouve pas de réponse sûre, vous pouvez préparer un ticket revu manuellement sans envoyer de secrets.",
+          searchTitle: "Recherche d'aide",
+          searchLabel: "Chercher dans l'aide",
+          searchPlaceholder: "Compte, confidentialité, Core, Bunker, permissions...",
+          noResult: "Je ne trouve pas de réponse sûre avec ces mots. Essayez une autre recherche ou préparez un ticket pour revue manuelle.",
+          ticketTitle: "Créer un ticket sûr",
+          alias: "Nom ou alias",
+          email: "Email optionnel",
+          category: "Type de ticket",
+          priority: "Urgence",
+          message: "Message",
+          consent: "J'accepte que le créateur révise seulement ce message et les données envoyées volontairement.",
+          wantsReply: "Je souhaite une réponse si possible.",
+          submit: "Préparer le ticket sûr",
+          mail: "Ouvrir l'email préparé",
+          invalidAlias: "Indiquez un alias reconnaissable.",
+          invalidEmail: "Vérifiez l'email optionnel.",
+          shortMessage: "Décrivez la question ou le problème avec au moins 20 caractères.",
+          unsafe: "N'envoyez pas mots de passe, codes, données bancaires, HTML, scripts ni liens.",
+          accept: "Acceptez la revue manuelle avant de préparer le ticket.",
+          cooldown: "Attendez un moment avant de préparer un autre ticket.",
+          ready: "Ticket assaini et préparé. Confirmez l'envoi depuis votre email; rien n'est publié.",
+          subject: "Ticket support Zamazen Aegis",
+          optionalMissing: "Non indiqué",
+          yes: "Oui",
+          no: "Non",
+          privacyBadge: "Confidentialité maximale",
+          privacyTitle: "Support sans espionnage",
+          privacyNotes: [["Seulement ce qui est envoyé", "Le créateur révise uniquement messages, idées ou rapports envoyés volontairement."], ["Aucun secret", "N'envoyez pas mots de passe, 2FA, données bancaires, documents sensibles ni fichiers."], ["Panneau protégé", "Les vrais tickets doivent vivre dans un backend avec login, rôle creator/admin, règles et audit."], ["Pas de chat public", "Chaque utilisateur doit voir seulement ses messages; personne ne voit les comptes privés d'autrui."]],
+          contact: "Contact",
+          privacyAction: "Confidentialité",
+          articles: [
+            ["Qu'est-ce que Zamazen Aegis", "Général", "zamazen aegis neo aide protection", "Zamazen Aegis aide à reconnaître les signaux de risque mobile et à décider plus clairement, sans promettre une protection absolue."],
+            ["Core est gratuit", "Plans", "core gratuit prix 0", "Core est gratuit: 0 €/mois. Il sert à commencer avec une protection essentielle, locale et claire."],
+            ["Valhalla et Ragnarok", "Plans", "valhalla ragnarok prix premium lancement", "Valhalla a un prix de lancement prévu de 2,49 €/mois et Ragnarok de 4,99 €/mois. Aucun achat réel n'est actif avant les paiements sécurisés."],
+            ["Compte Zamazen et Google", "Compte", "compte zamazen google oauth profil gardien", "Le compte Zamazen est l'expérience complète. Google devient un accès rapide quand OAuth/Credential Manager réels sont configurés."],
+            ["Confidentialité créateur", "Confidentialité", "createur admin compte prive bunker", "Le rôle creator/admin ne permet pas de voir Bunker, mots de passe, fichiers privés ni comptes complets d'autres utilisateurs."],
+            ["Bunker", "Bunker", "bunker mots de passe chiffrement cloud", "Bunker traite secrets et identifiants avec confidentialité par défaut. Le cloud ne doit recevoir que des paquets chiffrés par l'utilisateur."],
+            ["Red Neo", "Red Neo", "red neo rapports communaute confidentialite", "Red Neo peut partager des indicateurs assainis avec consentement pour aider sans publier secrets ni conversations complètes."],
+            ["Permissions Android", "Permissions", "permissions android sms appels play safe", "Les permissions sensibles ne doivent être demandées qu'avec valeur réelle, explication et alternative manuelle."],
+            ["Accès test", "Accès", "beta testeur acces invitation", "L'accès test est revu manuellement. Valhalla et Ragnarok pourront être proposés par invitation, codes ou campagnes contrôlées."],
+            ["Idées et Salon", "Communauté", "idees salon gardiens points anonyme", "Les idées restent en attente de revue. Rien n'est publié automatiquement et l'utilisateur choisit alias, anonymat ou absence."],
+            ["Supprimer le compte", "Compte", "supprimer compte donnees", "La suppression du compte nécessite une route claire et une vérification. N'envoyez pas mots de passe ni codes par email."],
+            ["Signaler une erreur", "Support", "erreur bug securite ticket support", "Si Neo ne peut pas répondre sûrement, préparez un ticket sans exposer de données sensibles."]
+          ],
+          categories: ["Question générale", "Compte", "Accès", "Confidentialité", "Plans", "Problème technique", "Rapport d'erreur", "Rapport de sécurité", "Idée ou amélioration", "Autre"],
+          priorities: ["basse", "normale", "haute", "sécurité"]
         }
       },
       pt: {
@@ -7216,9 +7405,9 @@
           trial: "Solicitar acesso de teste",
           demo: "Ver demo guiada",
           plans: [
-            ["core", "Core", "CO", "is-core", "Ideal para começar sem pressão.", "Proteção essencial útil, honesta e leve.", ["Scanner manual e explicações claras", "Histórico básico local", "Limpeza segura", "Red Neo saneada com consentimento"], "Escolher Core", "#/core"],
-            ["valhalla", "Valhalla", "VA", "is-valhalla", "Para usuários que querem mais contexto.", "Melhoria clara em privacidade, permissões e Bunker.", ["Mais sinais para links e apps", "Bunker melhorado", "Tendências Red Neo", "Personalização e estado premium"], "Melhorar para Valhalla", "#/valhalla"],
-            ["ragnarok", "Ragnarok", "RG", "is-ragnarok", "Para quem quer apoiar ao máximo.", "A experiência completa quando Android e consentimento permitem.", ["Banco, identidade e credenciais", "Bunker total", "Red Neo prioritária", "Resolução guiada de riscos complexos"], "Desbloquear Ragnarok", "#/ragnarok"]
+            ["core", "Core — grátis", "CO", "is-core", "Ideal para começar sem pressão.", "Grátis para começar. Proteção essencial útil, local e clara.", "0 €/mês", "Disponível como base gratuita; não simula pagamento nem subscrição.", ["Scanner manual e explicações claras", "Histórico básico local", "Limpeza segura", "Red Neo saneada com consentimento"], "Usar Core grátis", "#/core"],
+            ["valhalla", "Valhalla", "VA", "is-valhalla", "Para usuários que querem mais contexto.", "Mais proteção, personalização e funções avançadas para quem quer ir além.", "2,49 €/mês", "Preço de lançamento previsto. Acesso de teste por convite quando disponível.", ["Mais sinais para links e apps", "Bunker melhorado", "Tendências Red Neo", "Personalização e estado premium"], "Ver Valhalla", "#/valhalla"],
+            ["ragnarok", "Ragnarok", "RG", "is-ragnarok", "Para quem quer apoiar ao máximo.", "A experiência completa de Zamazen Aegis, com o nível máximo de funções disponíveis.", "4,99 €/mês", "Preço de lançamento previsto. Sem compra real até ativar pagamentos seguros.", ["Banco, identidade e credenciais", "Bunker total", "Red Neo prioritária", "Resolução guiada de riscos complexos"], "Ver Ragnarok", "#/ragnarok"]
           ]
         },
         demo: {
@@ -7340,6 +7529,57 @@
           points: [["Ideia útil", "+10", "Acrescenta clareza ou melhora uma parte concreta do projeto."], ["Melhoria aceite", "+25", "Pode integrar-se sem quebrar estabilidade nem privacidade."], ["Erro visual detetado", "+15", "Ajuda a melhorar confiança, responsive ou acessibilidade visual."], ["Erro funcional importante", "+50", "Evita uma falha real de uso, conta, dados ou navegação."], ["Melhoria de acessibilidade", "+40", "Ajuda pessoas idosas, leitor de tela ou texto grande."], ["Relato de segurança sério", "+100", "Reduz risco real sem publicar detalhes sensíveis."], ["Ideia implementada", "+75", "Chega à app, web ou Red Neo após revisão."], ["Contribuição excecional", "Manual", "A equipa decide pontos segundo impacto real, não quantidade."]],
           crowns: [["is-gold", "1º", "Guardião Ragnarok", "Coroa dourada para a contribuição mais valiosa do período."], ["is-silver", "2º", "Guardião Valhalla", "Coroa prateada para ajuda destacada e constante."], ["is-bronze", "3º", "Guardião Core Honorífico", "Coroa rúnica para contribuição útil e cuidada."]],
           badges: ["Aliado de Neo", "Sentinela Aegis", "Vigilante de Red Neo", "Custódio do Bunker", "Guardião de Acessibilidade", "Guardião Legendário"]
+        },
+        support: {
+          badge: "Neo Ajuda",
+          title: "Centro de Ajuda do Guardião",
+          body: "Procura respostas preparadas sobre Zamazen Aegis. Se Neo não encontrar resposta segura, podes preparar um ticket revisto manualmente sem enviar segredos.",
+          searchTitle: "Busca de ajuda",
+          searchLabel: "Buscar na ajuda",
+          searchPlaceholder: "Conta, privacidade, Core, Bunker, permissões...",
+          noResult: "Não encontro uma resposta segura com essas palavras. Tenta outra busca ou prepara um ticket para revisão manual.",
+          ticketTitle: "Criar ticket seguro",
+          alias: "Nome ou alias",
+          email: "Email opcional",
+          category: "Tipo de ticket",
+          priority: "Urgência",
+          message: "Mensagem",
+          consent: "Aceito que o criador revise apenas esta mensagem e os dados enviados voluntariamente.",
+          wantsReply: "Quero receber resposta se possível.",
+          submit: "Preparar ticket seguro",
+          mail: "Abrir email preparado",
+          invalidAlias: "Indica um alias reconhecível.",
+          invalidEmail: "Revê o email opcional.",
+          shortMessage: "Descreve a dúvida ou problema com pelo menos 20 caracteres.",
+          unsafe: "Não envies senhas, códigos, dados bancários, HTML, scripts nem links.",
+          accept: "Aceita a revisão manual antes de preparar o ticket.",
+          cooldown: "Espera um momento antes de preparar outro ticket.",
+          ready: "Ticket saneado e preparado. Confirma o envio desde teu email; nada é publicado.",
+          subject: "Ticket suporte Zamazen Aegis",
+          optionalMissing: "Não indicado",
+          yes: "Sim",
+          no: "Não",
+          privacyBadge: "Privacidade máxima",
+          privacyTitle: "Suporte sem espiar",
+          privacyNotes: [["Só o que é enviado", "O criador revê apenas mensagens, ideias ou relatos enviados voluntariamente."], ["Sem segredos", "Não envies senhas, 2FA, dados bancários, documentos sensíveis nem arquivos."], ["Painel protegido", "Tickets reais devem viver em backend com login, papel creator/admin, regras e auditoria."], ["Sem chat público", "Cada usuário deve ver só suas mensagens; ninguém vê contas privadas alheias."]],
+          contact: "Contato",
+          privacyAction: "Privacidade",
+          articles: [
+            ["O que é Zamazen Aegis", "Geral", "zamazen aegis neo ajuda protecao", "Zamazen Aegis ajuda a reconhecer sinais de risco móvel e decidir com clareza, sem prometer proteção absoluta."],
+            ["Core é grátis", "Planos", "core gratis preço 0", "Core é grátis: 0 €/mês. Serve para começar com proteção essencial, local e clara."],
+            ["Valhalla e Ragnarok", "Planos", "valhalla ragnarok precos premium lancamento", "Valhalla tem preço previsto de 2,49 €/mês e Ragnarok 4,99 €/mês. Sem compra real até pagamentos seguros estarem ativos."],
+            ["Conta Zamazen e Google", "Conta", "conta zamazen google oauth perfil guardiao", "Conta Zamazen é a experiência completa. Google será acesso rápido quando OAuth/Credential Manager reais estiverem configurados."],
+            ["Privacidade do criador", "Privacidade", "criador admin conta privada bunker", "Ser creator/admin não permite ver Bunker, senhas, arquivos privados nem contas completas de outros usuários."],
+            ["Bunker", "Bunker", "bunker senhas cifragem nuvem", "Bunker trata segredos e credenciais com privacidade por padrão. A nuvem só deve receber pacotes cifrados pelo usuário."],
+            ["Red Neo", "Red Neo", "red neo relatos comunidade privacidade", "Red Neo pode partilhar indicadores saneados com consentimento para ajudar sem publicar segredos nem conversas completas."],
+            ["Permissões Android", "Permissões", "permissoes android sms chamadas play safe", "Permissões sensíveis só devem ser pedidas com valor real, explicação e alternativa manual."],
+            ["Acesso de teste", "Acesso", "beta tester acesso convite", "O acesso de teste é revisto manualmente. Valhalla e Ragnarok poderão ser oferecidos por convite, códigos ou campanhas controladas."],
+            ["Ideias e Salão", "Comunidade", "ideias salao guardioes pontos anonimo", "Ideias ficam pendentes de revisão. Nada é publicado automaticamente e o usuário escolhe alias, anônimo ou não aparecer."],
+            ["Eliminar conta", "Conta", "eliminar conta dados", "A eliminação de conta exige rota clara e verificação. Não envies senhas nem códigos por email."],
+            ["Reportar erro", "Suporte", "erro bug seguranca ticket suporte", "Se Neo não puder responder com segurança, prepara um ticket sem expor dados sensíveis."]
+          ],
+          categories: ["Dúvida geral", "Conta", "Acesso", "Privacidade", "Planos", "Problema técnico", "Reporte de erro", "Reporte de segurança", "Ideia ou melhoria", "Outro"],
+          priorities: ["baixa", "normal", "alta", "segurança"]
         }
       }
     };
@@ -9810,6 +10050,7 @@
         "sobre-zamazenaegis": ["Proyecto", "Sobre Zamazen Aegis", "Zamazen Aegis existe para ayudar a personas reales frente a spam, phishing, estafas moviles y confusion digital, con claridad y sin vender proteccion absoluta.", [["Que protege", "Llamadas, SMS, enlaces, reportes, identidad digital, credenciales y decisiones sensibles dentro de los limites tecnicos reales."], ["Por que existe", "Para que la seguridad sea comprensible, accesible y util en el dia a dia."], ["Pilares", "Coraje, Verdad, Honor, Lealtad, Disciplina, Hospitalidad, Productividad, Perseverancia y Confianza guian cada decision."]], [["Ver equipo", "#/equipo", "primary"], ["Ver funciones", "#/funciones", "secondary"]]],
         equipo: ["Equipo", "Equipo", "Pantalla dedicada a las personas y guardianes detras del proyecto, sin mezclarla con permisos, precios o formularios.", [["Francisco Javier Molina Moreno", "Creador y responsable de la vision de Zamazen Aegis."], ["Maria Isabel Rodriguez Sanchez", "Socia clave del proyecto y apoyo humano en la construccion de confianza."], ["Neo", "Guardian original de Zamazen Aegis: acompana, explica y protege sin convertir el riesgo en miedo."]], [["Sobre el proyecto", "#/sobre-zamazenaegis", "primary"], ["Contacto", "#/contacto", "secondary"]]],
         faq: ["FAQ", "Preguntas frecuentes", "Respuestas rapidas en una pantalla propia para no obligar al usuario a recorrer toda la web.", [["Consume mucha bateria?", "Debe priorizar bajo consumo, foco de pantalla y trabajo minimo en segundo plano."], ["Funciona sin internet?", "Las capas locales siguen siendo utiles; lo online se degrada sin simular exito."], ["Pide permisos sensibles?", "Solo cuando aportan valor real, con explicacion y alternativa manual si corresponde."], ["Promete seguridad total?", "No. Zamazen Aegis ayuda a reducir riesgo, explicar senales y guiar decisiones."]], [["Contacto", "#/contacto", "primary"], ["Ver seguridad", "#/seguridad", "secondary"]]],
+        soporte: ["Ayuda", "Neo Ayuda y tickets", "Buscador local de respuestas y ticket saneado para soporte manual, sin publicar datos ni simular backend.", [["Buscador", "Respuestas preparadas sobre cuenta, privacidad, permisos, planes, Bunker y Red Neo."], ["Ticket", "Solo texto saneado, consentimiento y correo preparado hasta que exista backend protegido."], ["Privacidad", "El creador no puede ver cuentas privadas; solo lo que el usuario envia voluntariamente."]], [["Abrir contacto", "#/contacto", "primary"], ["Privacidad", "#/privacidad", "secondary"]]],
         contacto: ["Contacto", "Ayuda y contacto", "Soporte, privacidad, cuentas y errores criticos tienen una pantalla directa. No envies secretos por correo.", [["Correo oficial", "zamazenaegissupport@gmail.com para soporte, privacidad, cuenta y documentacion."], ["Incidentes", "Priorizar seguridad, cuentas, pagos, borrado y errores criticos."], ["Privacidad", "No enviar contrasenas, codigos 2FA ni datos bancarios completos."]], [["Enviar correo", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
         "estado-proyecto": ["Estado", "Estado del proyecto", "Zamazen Aegis esta en fase final de preparacion 1.6: web activa, app en prueba y conexion de cuenta/nube preparada sin prometer datos que aun no existen.", [["Web activa", "La web publica funciona como centro informativo y panel futuro del ecosistema."], ["App 1.6", "Se esta terminando, revisando y probando antes de declararla lista."], ["Conexion futura", "Cuenta, Red Neo, Bunker y nube se activaran con backend/app real."]], [["Solicitar acceso", "#/lista-espera", "primary"], ["Ver novedades", "#/novedades", "secondary"]]],
         "lista-espera": ["Acceso", "Lista de espera y acceso de prueba", "Pantalla segura para preparar una solicitud de acceso, tester o aviso de lanzamiento sin exponer datos innecesarios ni simular backend.", [["Privado", "El correo es opcional y no se muestra publicamente."], ["Manual", "Cada solicitud se revisa antes de cualquier acceso."], ["Sin archivos", "No se aceptan adjuntos desde esta web."]], [["Enviar idea", "#/ideas", "primary"], ["Contacto", "#/contacto", "secondary"]]],
@@ -9853,6 +10094,7 @@
         "sobre-zamazenaegis": ["Project", "About Zamazen Aegis", "Zamazen Aegis exists to help real people against spam, phishing, mobile scams and digital confusion, with clarity and without selling absolute protection.", [["What it protects", "Calls, SMS, links, reports, digital identity, credentials and sensitive decisions within real technical limits."], ["Why it exists", "To make security understandable, accessible and useful in everyday life."], ["Pillars", "Courage, Truth, Honor, Loyalty, Discipline, Hospitality, Productivity, Perseverance and Trust guide every decision."]], [["View team", "#/equipo", "primary"], ["View features", "#/funciones", "secondary"]]],
         equipo: ["Team", "Team", "A dedicated screen for the people and guardians behind the project, without mixing it with permissions, plans or forms.", [["Francisco Javier Molina Moreno", "Creator and owner of the Zamazen Aegis vision."], ["Maria Isabel Rodriguez Sanchez", "Key partner in the project and human support in building trust."], ["Neo", "Original guardian of Zamazen Aegis: guides, explains and protects without turning risk into fear."]], [["About the project", "#/sobre-zamazenaegis", "primary"], ["Contact", "#/contacto", "secondary"]]],
         faq: ["FAQ", "Frequently asked questions", "Fast answers on their own screen so the user does not have to browse the whole site.", [["Does it use a lot of battery?", "It should prioritize low consumption, visible-screen focus and minimal background work."], ["Does it work offline?", "Local layers remain useful; online features degrade without faking success."], ["Does it request sensitive permissions?", "Only when they bring real value, with explanation and manual fallback when applicable."], ["Does it promise total security?", "No. Zamazen Aegis helps reduce risk, explain signals and guide decisions."]], [["Contact", "#/contacto", "primary"], ["View security", "#/seguridad", "secondary"]]],
+        soporte: ["Help", "Neo Help and tickets", "Local answer search and sanitized ticket for manual support, without publishing data or faking a backend.", [["Search", "Prepared answers about account, privacy, permissions, plans, Bunker and Neo Network."], ["Ticket", "Sanitized text, consent and prepared email until a protected backend exists."], ["Privacy", "The creator cannot view private accounts; only what the user voluntarily sends."]], [["Open contact", "#/contacto", "primary"], ["Privacy", "#/privacidad", "secondary"]]],
         contacto: ["Contact", "Help and contact", "Support, privacy, accounts and critical errors have a direct screen. Do not send secrets by email.", [["Official email", "zamazenaegissupport@gmail.com for support, privacy, accounts and documentation."], ["Incidents", "Prioritize security, accounts, payments, deletion and critical errors."], ["Privacy", "Do not send passwords, 2FA codes or complete banking details."]], [["Send email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
         "estado-proyecto": ["Status", "Project status", "Zamazen Aegis is in final 1.6 preparation: the web is active, the app is being tested and account/cloud connection is prepared without fake data.", [["Web active", "The public website works as information center and future ecosystem panel."], ["App 1.6", "It is being finished, reviewed and tested before being called ready."], ["Future connection", "Account, Neo Network, Bunker and cloud will activate with real backend/app evidence."]], [["Request access", "#/lista-espera", "primary"], ["View news", "#/novedades", "secondary"]]],
         "lista-espera": ["Access", "Waitlist and trial access", "A safe screen to prepare a trial, tester or launch-notice request without exposing unnecessary data or faking a backend.", [["Private", "Email is optional and is never shown publicly."], ["Manual", "Every request is reviewed before access."], ["No files", "Attachments are not accepted from this website."]], [["Send idea", "#/ideas", "primary"], ["Contact", "#/contacto", "secondary"]]],
@@ -9897,6 +10139,7 @@
       "sobre-zamazenaegis": ["Projet", "A propos de Zamazen Aegis", "Zamazen Aegis existe pour aider des personnes reelles face au spam, phishing, arnaques mobiles et confusion numerique, sans vendre une protection absolue.", [["Ce qu'il protege", "Appels, SMS, liens, signalements, identite numerique, identifiants et decisions sensibles dans les limites techniques reelles."], ["Pourquoi il existe", "Pour rendre la securite comprehensible, accessible et utile au quotidien."], ["Piliers", "Courage, Verite, Honneur, Loyaute, Discipline, Hospitalite, Productivite, Perseverance et Confiance guident chaque decision."]], [["Voir l'equipe", "#/equipo", "primary"], ["Voir fonctions", "#/funciones", "secondary"]]],
       equipo: ["Equipe", "Equipe", "Vue dediee aux personnes et gardiens derriere le projet, sans melanger permissions, tarifs ou formulaires.", [["Francisco Javier Molina Moreno", "Createur et responsable de la vision de Zamazen Aegis."], ["Maria Isabel Rodriguez Sanchez", "Partenaire cle du projet et soutien humain dans la construction de confiance."], ["Neo", "Gardien original de Zamazen Aegis: accompagne, explique et protege sans transformer le risque en peur."]], [["A propos", "#/sobre-zamazenaegis", "primary"], ["Contact", "#/contacto", "secondary"]]],
       faq: ["FAQ", "Questions frequentes", "Reponses rapides dans une vue propre pour ne pas parcourir tout le site.", [["Consomme-t-il beaucoup de batterie?", "Il doit prioriser faible consommation, focus ecran et travail minimal en arriere-plan."], ["Fonctionne-t-il sans internet?", "Les couches locales restent utiles; l'online se degrade sans faux succes."], ["Demande-t-il des permissions sensibles?", "Seulement avec valeur reelle, explication et alternative manuelle si besoin."], ["Promet-il une securite totale?", "Non. Zamazen Aegis aide a reduire le risque, expliquer les signaux et guider les decisions."]], [["Contact", "#/contacto", "primary"], ["Voir securite", "#/seguridad", "secondary"]]],
+      soporte: ["Aide", "Aide Neo et tickets", "Recherche locale de réponses et ticket assaini pour support manuel, sans publier de données ni simuler un backend.", [["Recherche", "Réponses préparées sur compte, confidentialité, permissions, plans, Bunker et Red Neo."], ["Ticket", "Texte assaini, consentement et email préparé jusqu'à existence d'un backend protégé."], ["Confidentialité", "Le créateur ne voit pas les comptes privés; seulement ce que l'utilisateur envoie volontairement."]], [["Ouvrir contact", "#/contacto", "primary"], ["Confidentialité", "#/privacidad", "secondary"]]],
       contacto: ["Contact", "Aide et contact", "Support, confidentialite, comptes et erreurs critiques ont une vue directe. N'envoyez pas de secrets par email.", [["Email officiel", "zamazenaegissupport@gmail.com pour support, confidentialite, compte et documentation."], ["Incidents", "Priorite a securite, comptes, paiements, suppression et erreurs critiques."], ["Confidentialite", "Ne pas envoyer mots de passe, codes 2FA ni donnees bancaires completes."]], [["Envoyer un email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
       "estado-proyecto": ["Etat", "Etat du projet", "Zamazen Aegis est en preparation finale 1.6: web active, app en test et connexion compte/cloud preparee sans fausses donnees.", [["Web active", "Le site public fonctionne comme centre d'information et futur panneau ecosysteme."], ["App 1.6", "Elle est terminee, revue et testee avant d'etre declaree prete."], ["Connexion future", "Compte, Reseau Neo, Bunker et cloud s'activeront avec backend/app reels."]], [["Demander acces", "#/lista-espera", "primary"], ["Voir nouveautes", "#/novedades", "secondary"]]],
       "lista-espera": ["Acces", "Liste d'attente et acces test", "Vue sure pour preparer une demande d'acces, tester ou avis de lancement sans exposer de donnees inutiles ni simuler un backend.", [["Prive", "L'email est optionnel et jamais affiche publiquement."], ["Manuel", "Chaque demande est revue avant tout acces."], ["Sans fichiers", "Aucune piece jointe n'est acceptee depuis cette web."]], [["Envoyer une idee", "#/ideas", "primary"], ["Contact", "#/contacto", "secondary"]]],
@@ -9940,6 +10183,7 @@
       "sobre-zamazenaegis": ["Projeto", "Sobre Zamazen Aegis", "Zamazen Aegis existe para ajudar pessoas reais contra spam, phishing, golpes móveis e confusão digital, sem vender proteção absoluta.", [["O que protege", "Chamadas, SMS, links, relatos, identidade digital, credenciais e decisões sensíveis dentro dos limites técnicos reais."], ["Por que existe", "Para tornar segurança compreensível, acessível e útil no dia a dia."], ["Pilares", "Coragem, Verdade, Honra, Lealdade, Disciplina, Hospitalidade, Produtividade, Perseverança e Confiança guiam cada decisão."]], [["Ver equipe", "#/equipo", "primary"], ["Ver funções", "#/funciones", "secondary"]]],
       equipo: ["Equipe", "Equipe", "Tela dedicada às pessoas e guardiões por trás do projeto, sem misturar permissões, preços ou formulários.", [["Francisco Javier Molina Moreno", "Criador e responsável pela visão de Zamazen Aegis."], ["Maria Isabel Rodriguez Sanchez", "Parceira chave do projeto e apoio humano na construção de confiança."], ["Neo", "Guardião original de Zamazen Aegis: acompanha, explica e protege sem transformar risco em medo."]], [["Sobre o projeto", "#/sobre-zamazenaegis", "primary"], ["Contato", "#/contacto", "secondary"]]],
       faq: ["FAQ", "Perguntas frequentes", "Respostas rápidas em uma tela própria para não obrigar o usuário a percorrer todo o site.", [["Consome muita bateria?", "Deve priorizar baixo consumo, foco de tela e trabalho mínimo em segundo plano."], ["Funciona sem internet?", "As camadas locais continuam úteis; o online degrada sem fingir sucesso."], ["Pede permissões sensíveis?", "Só quando trazem valor real, com explicação e alternativa manual quando aplicável."], ["Promete segurança total?", "Não. Zamazen Aegis ajuda a reduzir risco, explicar sinais e guiar decisões."]], [["Contato", "#/contacto", "primary"], ["Ver segurança", "#/seguridad", "secondary"]]],
+      soporte: ["Ajuda", "Neo Ajuda e tickets", "Busca local de respostas e ticket saneado para suporte manual, sem publicar dados nem simular backend.", [["Busca", "Respostas preparadas sobre conta, privacidade, permissões, planos, Bunker e Red Neo."], ["Ticket", "Texto saneado, consentimento e email preparado até existir backend protegido."], ["Privacidade", "O criador não vê contas privadas; só o que o usuário envia voluntariamente."]], [["Abrir contato", "#/contacto", "primary"], ["Privacidade", "#/privacidad", "secondary"]]],
       contacto: ["Contato", "Ajuda e contato", "Suporte, privacidade, contas e erros críticos têm uma tela direta. Não envie segredos por email.", [["Email oficial", "zamazenaegissupport@gmail.com para suporte, privacidade, conta e documentação."], ["Incidentes", "Priorizar segurança, contas, pagamentos, eliminação e erros críticos."], ["Privacidade", "Não enviar senhas, códigos 2FA nem dados bancários completos."]], [["Enviar email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
       "estado-proyecto": ["Estado", "Estado do projeto", "Zamazen Aegis está em preparação final 1.6: web ativa, app em testes e conexão conta/nuvem preparada sem dados falsos.", [["Web ativa", "A web pública funciona como centro informativo e futuro painel do ecossistema."], ["App 1.6", "Está sendo finalizada, revisada e testada antes de ser chamada de pronta."], ["Conexão futura", "Conta, Red Neo, Bunker e nuvem serão ativados com backend/app reais."]], [["Solicitar acesso", "#/lista-espera", "primary"], ["Ver novidades", "#/novedades", "secondary"]]],
       "lista-espera": ["Acesso", "Lista de espera e acesso de teste", "Tela segura para preparar pedido de acesso, tester ou aviso de lançamento sem expor dados desnecessários nem simular backend.", [["Privado", "O email é opcional e nunca é mostrado publicamente."], ["Manual", "Cada pedido é revisado antes de qualquer acesso."], ["Sem arquivos", "Anexos não são aceitos nesta web."]], [["Enviar ideia", "#/ideas", "primary"], ["Contato", "#/contacto", "secondary"]]],
@@ -10493,13 +10737,15 @@
     function renderPlanExperience(detailKey) {
       setRouteDetailVariant("is-plan-screen");
       const copy = getRichRouteCopy("plan");
-      const plans = copy.plans.map(([id, name, glyph, aura, forWho, promise, benefits, cta, href]) => ({
+      const plans = copy.plans.map(([id, name, glyph, aura, forWho, promise, price, availability, benefits, cta, href]) => ({
         id,
         name,
         glyph,
         aura,
         forWho,
         promise,
+        price,
+        availability,
         benefits,
         cta,
         href
@@ -10517,12 +10763,18 @@
       plans.forEach((plan) => {
         const card = createElement("article", `plan-showcase-card ${plan.aura}`);
         const benefits = createElement("ul", "plan-benefit-list");
+        const price = createElement("div", "plan-price");
         plan.benefits.forEach((benefit) => benefits.append(createElement("li", "", benefit)));
+        price.append(
+          createElement("strong", "", plan.price),
+          createElement("span", "", plan.availability)
+        );
         card.append(
           createElement("div", "plan-glyph", plan.glyph),
           createElement("span", "experience-status", plan.forWho),
           createElement("h3", "", plan.name),
           createElement("p", "", plan.promise),
+          price,
           benefits,
           createProfileAction(plan.cta, plan.href, plan.id === "ragnarok" ? "primary" : "secondary")
         );
@@ -10691,22 +10943,26 @@
     function renderAdminExperience() {
       setRouteDetailVariant("");
       routeDetailBadge.textContent = "Privado";
-      routeDetailTitle.textContent = "Panel administrador protegido";
-      routeDetailBody.textContent = "Esta ruta no expone datos administrativos. El panel real de ideas, testers y recompensas requerira backend, login, rol de administrador, auditoria y reglas por usuario.";
+      routeDetailTitle.textContent = "Panel del Creador protegido";
+      routeDetailBody.textContent = "Esta ruta no expone datos administrativos. El panel real solo debe aparecer si la sesion tiene rol creator o admin, con backend, auditoria y reglas por usuario.";
       const locked = createElement("section", "locked-admin-card");
       locked.append(
         createElement("span", "experience-status", "Acceso bloqueado"),
         createElement("h3", "", "Nada sensible vive en el frontend publico"),
-        createElement("p", "", "No hay lista de ideas recibidas, correos, IPs, notas internas, recompensas ni claves en esta pagina estatica.")
+        createElement("p", "", "No hay lista de ideas recibidas, correos, IPs, notas internas, recompensas, tickets ni claves en esta pagina estatica.")
       );
       routeDetailGrid.className = "profile-dashboard";
       routeDetailGrid.replaceChildren(locked, createSecureNoteList([
-        ["Login obligatorio", "El panel real debe verificar identidad y rol."],
-        ["Revision manual", "Aprobacion antes de publicar agradecimientos."],
-        ["Recompensas controladas", "Codigos con caducidad, un solo uso y trazabilidad cuando existan."]
+        ["Rol creator/admin", "Solo una cuenta con rol interno creator o admin debe ver el acceso privado. Los usuarios normales no deben ver botones, rutas ni menus administrativos."],
+        ["Correo operativo", "Las notificaciones y soporte deben usar zamazenaegissupport@gmail.com como canal publico, sin exponer credenciales en el frontend."],
+        ["Privacidad interna", "Ser creador no permite ver Bunker, contrasenas, archivos privados, conversaciones privadas ni cuentas ajenas completas."],
+        ["Revision manual", "Ideas, tickets, testers, puntos, insignias, recompensas y Salon de Guardianes deben quedar pendientes hasta aprobacion del creador."],
+        ["Recompensas controladas", "Codigos temporales Valhalla/Ragnarok solo con caducidad, un solo uso, trazabilidad y confirmacion antes de acciones criticas."],
+        ["Base de datos futura", "profiles.role debe permitir user, tester, admin y creator; support_tickets y contributions deben aplicar reglas estrictas por rol."]
       ]));
       routeDetailActions.replaceChildren(
         createProfileAction("Volver a ideas", "#/ideas", "primary"),
+        createProfileAction("Abrir soporte", "#/soporte", "secondary"),
         createProfileAction("Inicio", "#/inicio", "secondary")
       );
     }
@@ -11002,6 +11258,185 @@
       );
     }
 
+    function renderSupportExperience() {
+      setRouteDetailVariant("");
+      const copy = getRichRouteCopy("support");
+      const articles = copy.articles.map(([title, category, keywords, body]) => ({
+        title,
+        category,
+        keywords,
+        body
+      }));
+      routeDetailBadge.textContent = copy.badge;
+      routeDetailTitle.textContent = copy.title;
+      routeDetailBody.textContent = copy.body;
+      routeDetailGrid.className = "support-layout";
+
+      const searchCard = createElement("section", "secure-form-card help-search-card");
+      const searchInput = createElement("input", "form-input");
+      searchInput.type = "search";
+      searchInput.maxLength = 80;
+      searchInput.placeholder = copy.searchPlaceholder;
+      searchInput.setAttribute("aria-label", copy.searchLabel);
+      const resultList = createElement("div", "help-result-list");
+
+      const renderResults = () => {
+        const query = normalizeFormText(searchInput.value, 80).toLowerCase();
+        const matchedArticles = articles.filter((article) => {
+          if (!query) return true;
+          return `${article.title} ${article.category} ${article.keywords} ${article.body}`.toLowerCase().includes(query);
+        }).slice(0, 8);
+
+        if (matchedArticles.length === 0) {
+          resultList.replaceChildren(createElement("p", "account-status", copy.noResult));
+          return;
+        }
+
+        resultList.replaceChildren(...matchedArticles.map((article) => {
+          const card = createElement("article", "help-result-card");
+          card.append(
+            createElement("span", "experience-status", article.category),
+            createElement("strong", "", article.title),
+            createElement("p", "", article.body)
+          );
+          return card;
+        }));
+      };
+
+      searchInput.addEventListener("input", renderResults);
+      searchCard.append(
+        createElement("span", "experience-status", copy.badge),
+        createElement("h3", "", copy.searchTitle),
+        createSecureField(copy.searchLabel, searchInput),
+        resultList
+      );
+      renderResults();
+
+      const form = createElement("form", "secure-form-card secure-form-grid");
+      const aliasInput = createElement("input", "form-input");
+      aliasInput.type = "text";
+      aliasInput.maxLength = MAX_ALIAS_LENGTH;
+      aliasInput.autocomplete = "name";
+      const emailInput = createElement("input", "form-input");
+      emailInput.type = "email";
+      emailInput.maxLength = MAX_EMAIL_LENGTH;
+      emailInput.autocomplete = "email";
+      const categorySelect = createElement("select", "form-input");
+      copy.categories.forEach((value) => {
+        const option = createElement("option", "", value);
+        option.value = value;
+        categorySelect.append(option);
+      });
+      const prioritySelect = createElement("select", "form-input");
+      copy.priorities.forEach((value) => {
+        const option = createElement("option", "", value);
+        option.value = value;
+        prioritySelect.append(option);
+      });
+      const messageInput = createElement("textarea", "form-input");
+      messageInput.maxLength = MAX_TICKET_MESSAGE_LENGTH;
+      const honeypot = createElement("input", "form-input secure-hidden-field");
+      honeypot.type = "text";
+      honeypot.tabIndex = -1;
+      honeypot.autocomplete = "off";
+      const consent = document.createElement("input");
+      consent.type = "checkbox";
+      const wantsReply = document.createElement("input");
+      wantsReply.type = "checkbox";
+      const status = createElement("p", "account-status");
+      status.setAttribute("role", "status");
+      status.setAttribute("aria-live", "polite");
+      const mailLink = createElement("a", "form-secondary-link", copy.mail);
+      mailLink.hidden = true;
+
+      form.append(
+        createElement("h3", "", copy.ticketTitle),
+        createSecureField(copy.alias, aliasInput),
+        createSecureField(copy.email, emailInput),
+        createSecureField(copy.category, categorySelect),
+        createSecureField(copy.priority, prioritySelect),
+        createSecureField(copy.message, messageInput),
+        honeypot,
+        createElement("label", "secure-check-row"),
+        createElement("label", "secure-check-row"),
+        createElement("button", "cta-primary", copy.submit),
+        status,
+        mailLink
+      );
+
+      const checks = form.querySelectorAll(".secure-check-row");
+      checks[0].append(consent, createElement("span", "", copy.consent));
+      checks[1].append(wantsReply, createElement("span", "", copy.wantsReply));
+      form.querySelector("button").type = "submit";
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const alias = normalizeFormText(aliasInput.value, MAX_ALIAS_LENGTH);
+        const email = normalizeFormText(emailInput.value, MAX_EMAIL_LENGTH);
+        const message = normalizeFormText(messageInput.value, MAX_TICKET_MESSAGE_LENGTH);
+        if (honeypot.value) return;
+        if (!alias || alias.length < 2) {
+          status.textContent = copy.invalidAlias;
+          return;
+        }
+        if (!isValidOptionalEmail(email)) {
+          status.textContent = copy.invalidEmail;
+          return;
+        }
+        if (message.length < 20) {
+          status.textContent = copy.shortMessage;
+          return;
+        }
+        if (hasUnsafeContributionText(`${alias} ${email} ${message}`)) {
+          status.textContent = copy.unsafe;
+          return;
+        }
+        if (!consent.checked) {
+          status.textContent = copy.accept;
+          return;
+        }
+        if (!canSubmitSecureForm("support")) {
+          status.textContent = copy.cooldown;
+          return;
+        }
+        const draft = {
+          type: categorySelect.value,
+          priority: prioritySelect.value,
+          alias,
+          email,
+          message,
+          consentToReview: true,
+          wantsReply: Boolean(wantsReply.checked),
+          createdAt: new Date().toISOString()
+        };
+        appendLocalDraft(STORAGE_SUPPORT_TICKETS_KEY, draft);
+        markSecureFormSubmitted("support");
+        mailLink.href = buildMailtoLink(copy.subject, [
+          `Alias: ${alias}`,
+          `${copy.email}: ${email || copy.optionalMissing}`,
+          `${copy.category}: ${categorySelect.value}`,
+          `${copy.priority}: ${prioritySelect.value}`,
+          `${copy.wantsReply}: ${wantsReply.checked ? copy.yes : copy.no}`,
+          "",
+          message
+        ]);
+        mailLink.hidden = false;
+        status.textContent = copy.ready;
+      });
+
+      const privacy = createElement("aside", "secure-form-card");
+      privacy.append(
+        createElement("span", "experience-status", copy.privacyBadge),
+        createElement("h3", "", copy.privacyTitle),
+        createSecureNoteList(copy.privacyNotes)
+      );
+
+      routeDetailGrid.replaceChildren(searchCard, form, privacy);
+      routeDetailActions.replaceChildren(
+        createProfileAction(copy.contact, "#/contacto", "primary"),
+        createProfileAction(copy.privacyAction, "#/privacidad", "secondary")
+      );
+    }
+
     function renderGuardianHallExperience() {
       setRouteDetailVariant("");
       const copy = getRichRouteCopy("hall");
@@ -11172,6 +11607,11 @@
 
       if (detailKey === "lista-espera") {
         renderWaitlistExperience();
+        return;
+      }
+
+      if (detailKey === "soporte") {
+        renderSupportExperience();
         return;
       }
 
