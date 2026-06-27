@@ -19,6 +19,7 @@
   <link rel="manifest" href="site.webmanifest">
   <meta name="keywords" content="Zamazen Aegis, seguridad Android, anti phishing, spam, Red Neo, Bunker, privacidad, Valhalla, Ragnarok">
   <meta name="theme-color" content="#050816">
+  <meta name="google-signin-client_id" content="">
   <meta name="robots" content="index,follow">
   <meta property="og:site_name" content="Zamazen Aegis">
   <meta property="og:locale" content="es_ES">
@@ -1433,6 +1434,17 @@
 
     .auth-google-button {
       width: 100%;
+    }
+
+    .google-identity-slot {
+      display: grid;
+      min-height: 44px;
+      place-items: center;
+      width: 100%;
+    }
+
+    .google-identity-slot[hidden] {
+      display: none;
     }
 
     .auth-provider-note {
@@ -4697,6 +4709,15 @@
         bottom: calc(14px + env(safe-area-inset-bottom));
       }
 
+      body[data-route="login"] .quick-launcher,
+      body[data-route="crear-cuenta"] .quick-launcher,
+      body[data-route="recuperar-cuenta"] .quick-launcher,
+      body[data-route="soporte"] .quick-launcher,
+      body[data-route="ideas"] .quick-launcher,
+      body[data-route="lista-espera"] .quick-launcher {
+        display: none;
+      }
+
       .quick-menu-toggle {
         width: 50px;
         height: 50px;
@@ -5896,6 +5917,7 @@
               <button class="cta-primary" type="submit" data-i18n="auth.loginSubmit">Entrar</button>
               <div class="auth-provider-options">
                 <button class="cta-secondary auth-google-button" type="button" data-google-auth="login" data-i18n="auth.googleButton">Continuar con Google</button>
+                <div class="google-identity-slot" data-google-slot="login" hidden></div>
                 <p class="auth-provider-note" data-i18n="auth.googleNote">Google es la opción rápida; la cuenta Zamazen seguirá siendo la experiencia completa del Guardián.</p>
               </div>
               <p class="account-status" id="loginStatus" role="status" aria-live="polite"></p>
@@ -5922,6 +5944,7 @@
               <button class="cta-primary" type="submit" data-i18n="account.submit">Crear cuenta Zamazen</button>
               <div class="auth-provider-options">
                 <button class="cta-secondary auth-google-button" type="button" data-google-auth="register" data-i18n="auth.googleButton">Continuar con Google</button>
+                <div class="google-identity-slot" data-google-slot="register" hidden></div>
                 <p class="auth-provider-note" data-i18n="auth.googleNote">Google es la opción rápida; la cuenta Zamazen seguirá siendo la experiencia completa del Guardián.</p>
               </div>
               <p class="account-status" id="accountStatus" role="status" aria-live="polite"></p>
@@ -6367,6 +6390,10 @@
     const STORAGE_FORM_RATE_KEY = "zamazen_aegis_secure_form_last_submit";
     const ZAMAZEN_API_BASE_URL = "https://api.zamazenaegis.com";
     const ACCOUNT_API_TIMEOUT_MS = 10000;
+    const GOOGLE_IDENTITY_SCRIPT_URL = "https://accounts.google.com/gsi/client";
+    const GOOGLE_OAUTH_CLIENT_ID_META_NAME = "google-signin-client_id";
+    const GOOGLE_OAUTH_CLIENT_ID_STORAGE_KEY = "zamazen_google_oauth_client_id";
+    const GOOGLE_OAUTH_CLIENT_ID_PATTERN = /^[0-9a-z._-]+\.apps\.googleusercontent\.com$/i;
     const SUPPORT_API_TIMEOUT_MS = 10000;
     const HEALTH_API_TIMEOUT_MS = 3500;
     const SECURE_FORM_COOLDOWN_MS = 45000;
@@ -6381,6 +6408,9 @@
     const SUPPORT_TICKET_PRIORITY_VALUES = ["low", "normal", "high", "security"];
     const CREATOR_TICKET_STATUS_VALUES = ["pending", "in_review", "answered", "resolved", "closed", "spam"];
     const SUPPORTED_TEXT_SIZES = ["normal", "medium", "large"];
+    let googleIdentityScriptPromise = null;
+    let googleIdentityInitializedClientId = "";
+    let googleIdentityNonce = "";
     const COOKIE_DEFAULTS = {
       necessary: true,
       analytics: false,
@@ -8070,6 +8100,16 @@
           googleButton: "Continuar con Google",
           googleNote: "Google es la opción rápida; la cuenta Zamazen seguirá siendo la experiencia completa del Guardián.",
           googleStatus: "Google se validará con OAuth/Credential Manager real. Esta web no crea una sesión falsa ni guarda tokens si el proveedor no está configurado.",
+          googleLoading: "Preparando Google Identity Services...",
+          googleReady: "OAuth de Google preparado. Usa el botón oficial de Google; el token se enviará al backend Zamazen para crear la sesión.",
+          googleMissingClientId: "Falta configurar el Web Client ID de Google OAuth. No uses claves API: debe terminar en .apps.googleusercontent.com.",
+          googleUnavailable: "Google Identity Services no está disponible ahora. No se ha creado sesión.",
+          googlePending: "Validando token de Google con la API Zamazen...",
+          googleSuccess: "Cuenta Google verificada por el backend. Sesión online creada sin guardar el token de Google en esta web.",
+          googleBackendMissing: "La API Zamazen aún no tiene Google OAuth configurado. No se ha creado sesión falsa.",
+          googleAudienceInvalid: "El Client ID de Google no coincide con el autorizado en el backend. Revisa Google Cloud y Render.",
+          googleError: "No se pudo completar Google. No se ha creado sesión local falsa.",
+          googleOffline: "La API Zamazen no responde. Google no puede crear sesión Zamazen todavía.",
           visualBadgeLogin: "Despertar Guardián",
           visualTitleLogin: "¿Nuevo en Zamazen?",
           visualBodyLogin: "Crea tu cuenta para activar perfil cloud, sesiones y recuperación sin perder la protección local.",
@@ -8517,6 +8557,16 @@
           googleButton: "Continue with Google",
           googleNote: "Google is the fast option; the Zamazen account remains the complete Guardian experience.",
           googleStatus: "Google will be validated with real OAuth/Credential Manager. This website does not fake a session or store tokens when the provider is not configured.",
+          googleLoading: "Preparing Google Identity Services...",
+          googleReady: "Google OAuth is ready. Use the official Google button; the token will be sent to the Zamazen backend to create the session.",
+          googleMissingClientId: "The Google OAuth Web Client ID is not configured. Do not use API keys: it must end in .apps.googleusercontent.com.",
+          googleUnavailable: "Google Identity Services is not available now. No session was created.",
+          googlePending: "Validating the Google token with the Zamazen API...",
+          googleSuccess: "Google account verified by the backend. Online session created without storing the Google token on this website.",
+          googleBackendMissing: "The Zamazen API does not have Google OAuth configured yet. No fake session was created.",
+          googleAudienceInvalid: "The Google Client ID does not match the backend allowlist. Review Google Cloud and Render.",
+          googleError: "Google could not be completed. No fake local session was created.",
+          googleOffline: "The Zamazen API is not responding. Google cannot create a Zamazen session yet.",
           visualBadgeLogin: "Guardian awakening",
           visualTitleLogin: "New to Zamazen?",
           visualBodyLogin: "Create your account to enable cloud profile, sessions and recovery without losing local protection.",
@@ -8964,6 +9014,16 @@
           googleButton: "Continuer avec Google",
           googleNote: "Google est l'option rapide; le compte Zamazen reste l'expérience complète du Gardien.",
           googleStatus: "Google sera validé avec OAuth/Credential Manager réel. Ce site ne simule pas de session et ne garde pas de jetons si le fournisseur n'est pas configuré.",
+          googleLoading: "Préparation de Google Identity Services...",
+          googleReady: "OAuth Google est prêt. Utilisez le bouton officiel Google; le jeton sera envoyé au backend Zamazen pour créer la session.",
+          googleMissingClientId: "Le Web Client ID Google OAuth n'est pas configuré. N'utilisez pas de clés API: il doit finir par .apps.googleusercontent.com.",
+          googleUnavailable: "Google Identity Services n'est pas disponible maintenant. Aucune session n'a été créée.",
+          googlePending: "Validation du jeton Google avec l'API Zamazen...",
+          googleSuccess: "Compte Google vérifié par le backend. Session en ligne créée sans stocker le jeton Google sur ce site.",
+          googleBackendMissing: "L'API Zamazen n'a pas encore Google OAuth configuré. Aucune fausse session n'a été créée.",
+          googleAudienceInvalid: "Le Client ID Google ne correspond pas à la liste autorisée du backend. Vérifiez Google Cloud et Render.",
+          googleError: "Google n'a pas pu être terminé. Aucune fausse session locale n'a été créée.",
+          googleOffline: "L'API Zamazen ne répond pas. Google ne peut pas encore créer une session Zamazen.",
           visualBadgeLogin: "Éveil du Gardien",
           visualTitleLogin: "Nouveau sur Zamazen ?",
           visualBodyLogin: "Créez votre compte pour activer profil cloud, sessions et récupération sans perdre la protection locale.",
@@ -9411,6 +9471,16 @@
           googleButton: "Continuar com Google",
           googleNote: "Google é a opção rápida; a conta Zamazen continua sendo a experiência completa do Guardião.",
           googleStatus: "Google será validado com OAuth/Credential Manager real. Este site não cria sessão falsa nem guarda tokens se o provedor não estiver configurado.",
+          googleLoading: "Preparando Google Identity Services...",
+          googleReady: "OAuth do Google está pronto. Use o botão oficial do Google; o token será enviado ao backend Zamazen para criar a sessão.",
+          googleMissingClientId: "O Web Client ID do Google OAuth não está configurado. Não use chaves API: deve terminar em .apps.googleusercontent.com.",
+          googleUnavailable: "Google Identity Services não está disponível agora. Nenhuma sessão foi criada.",
+          googlePending: "Validando o token Google com a API Zamazen...",
+          googleSuccess: "Conta Google verificada pelo backend. Sessão online criada sem guardar o token Google neste site.",
+          googleBackendMissing: "A API Zamazen ainda não tem Google OAuth configurado. Nenhuma sessão falsa foi criada.",
+          googleAudienceInvalid: "O Client ID Google não corresponde à lista permitida no backend. Revise Google Cloud e Render.",
+          googleError: "Não foi possível concluir Google. Nenhuma sessão local falsa foi criada.",
+          googleOffline: "A API Zamazen não responde. Google ainda não pode criar sessão Zamazen.",
           visualBadgeLogin: "Despertar Guardião",
           visualTitleLogin: "Novo no Zamazen?",
           visualBodyLogin: "Crie sua conta para ativar perfil cloud, sessões e recuperação sem perder a proteção local.",
@@ -12096,6 +12166,207 @@
       }
     }
 
+    function setGoogleAuthStatus(statusElement, key) {
+      if (!statusElement) return;
+      statusElement.textContent = translate(key);
+    }
+
+    function setAllGoogleAuthStatuses(key) {
+      googleAuthButtons.forEach((button) => {
+        setGoogleAuthStatus(button.closest("form")?.querySelector(".account-status"), key);
+      });
+    }
+
+    function isValidGoogleOAuthClientId(value = "") {
+      return GOOGLE_OAUTH_CLIENT_ID_PATTERN.test(String(value || "").trim());
+    }
+
+    function readConfiguredGoogleOAuthClientId() {
+      const globalClientId = String(window.ZAMAZEN_GOOGLE_OAUTH_CLIENT_ID || "").trim();
+      const metaClientId = String(
+        document.querySelector(`meta[name="${GOOGLE_OAUTH_CLIENT_ID_META_NAME}"]`)?.content || "",
+      ).trim();
+      const canUseLocalOverride = ["localhost", "127.0.0.1", ""].includes(window.location.hostname);
+      const localClientId = canUseLocalOverride
+        ? String(localStorage.getItem(GOOGLE_OAUTH_CLIENT_ID_STORAGE_KEY) || "").trim()
+        : "";
+
+      return [globalClientId, metaClientId, localClientId].find(isValidGoogleOAuthClientId) || "";
+    }
+
+    function createGoogleOAuthNonce() {
+      if (!window.crypto?.getRandomValues) return "";
+      const bytes = new Uint8Array(24);
+      window.crypto.getRandomValues(bytes);
+      return Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("");
+    }
+
+    function getGoogleIdentityButtonWidth(slot) {
+      const slotWidth = Math.floor(slot.getBoundingClientRect?.().width || 0);
+      const parentWidth = Math.floor(slot.parentElement?.getBoundingClientRect?.().width || 0);
+      const availableWidth = slotWidth || parentWidth || 320;
+      return Math.max(200, Math.min(320, availableWidth));
+    }
+
+    function loadGoogleIdentityScript() {
+      if (window.google?.accounts?.id) {
+        return Promise.resolve(window.google);
+      }
+
+      if (googleIdentityScriptPromise) {
+        return googleIdentityScriptPromise;
+      }
+
+      googleIdentityScriptPromise = new Promise((resolve, reject) => {
+        const existingScript = document.querySelector(`script[src="${GOOGLE_IDENTITY_SCRIPT_URL}"]`);
+        const script = existingScript || document.createElement("script");
+
+        script.src = GOOGLE_IDENTITY_SCRIPT_URL;
+        script.async = true;
+        script.defer = true;
+        script.onload = () => {
+          if (window.google?.accounts?.id) {
+            resolve(window.google);
+          } else {
+            reject(new Error("google_identity_unavailable"));
+          }
+        };
+        script.onerror = () => reject(new Error("google_identity_unavailable"));
+
+        if (!existingScript) {
+          document.head.append(script);
+        }
+      });
+
+      return googleIdentityScriptPromise;
+    }
+
+    async function submitGoogleCredentialToZamazen(idToken, nonce) {
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), ACCOUNT_API_TIMEOUT_MS);
+
+      try {
+        const response = await fetch(`${ZAMAZEN_API_BASE_URL}/api/accounts/google`, {
+          method: "POST",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+          },
+          cache: "no-store",
+          signal: controller.signal,
+          body: JSON.stringify({ idToken, nonce })
+        });
+        const payload = await response.json().catch(() => ({}));
+
+        if (response.ok && payload && payload.ok && payload.session?.token) {
+          return { ok: true, payload };
+        }
+
+        return {
+          ok: false,
+          status: response.status,
+          reason: payload?.message || "google_sign_in_failed"
+        };
+      } catch (error) {
+        return { ok: false, status: 0, reason: "api_unavailable" };
+      } finally {
+        window.clearTimeout(timeoutId);
+      }
+    }
+
+    async function handleGoogleCredentialResponse(response = {}) {
+      const credential = String(response.credential || "").trim();
+      if (!credential) {
+        setAllGoogleAuthStatuses("auth.googleError");
+        return;
+      }
+
+      setAllGoogleAuthStatuses("auth.googlePending");
+      const result = await submitGoogleCredentialToZamazen(credential, googleIdentityNonce);
+
+      if (!result.ok) {
+        if (result.reason === "google_not_configured") {
+          setAllGoogleAuthStatuses("auth.googleBackendMissing");
+        } else if (result.reason === "google_audience_invalid") {
+          setAllGoogleAuthStatuses("auth.googleAudienceInvalid");
+        } else if (result.reason === "api_unavailable") {
+          setAllGoogleAuthStatuses("auth.googleOffline");
+        } else {
+          setAllGoogleAuthStatuses("auth.googleError");
+        }
+        return;
+      }
+
+      const payload = result.payload || {};
+      const profile = payload.profile || {};
+      const now = new Date().toISOString();
+      writeOnlineSessionToken(payload.session.token);
+      writeAccountPreview({
+        name: profile.name || profile.emailMasked || "Cuenta Google",
+        email: profile.email || profile.emailMasked || "Cuenta Google verificada",
+        provider: "zamazen-online-account",
+        authProvider: "google",
+        googleLinked: true,
+        onlineAccountId: profile.id || "",
+        role: profile.role || "user",
+        permissions: profile.permissions || {},
+        signedInOnlineAt: now,
+        lastSyncAt: now,
+        syncStatus: "Google verificado por backend; esperando enlace con app móvil"
+      });
+      setAllGoogleAuthStatuses("auth.googleSuccess");
+    }
+
+    async function initializeGoogleIdentityButtons(options = {}) {
+      const { silent = false, statusElement = null } = options;
+      const clientId = readConfiguredGoogleOAuthClientId();
+      if (!clientId) {
+        if (!silent) setGoogleAuthStatus(statusElement, "auth.googleMissingClientId");
+        return false;
+      }
+
+      try {
+        const googleApi = await loadGoogleIdentityScript();
+        if (googleIdentityInitializedClientId !== clientId) {
+          googleIdentityNonce = createGoogleOAuthNonce();
+          googleApi.accounts.id.initialize({
+            client_id: clientId,
+            callback: handleGoogleCredentialResponse,
+            nonce: googleIdentityNonce,
+            ux_mode: "popup",
+            auto_select: false,
+            cancel_on_tap_outside: true
+          });
+          googleIdentityInitializedClientId = clientId;
+        }
+
+        googleAuthButtons.forEach((button) => {
+          const mode = button.dataset.googleAuth || "login";
+          const slot = button.parentElement?.querySelector(`[data-google-slot="${mode}"]`);
+          if (!slot || slot.dataset.googleRendered === "true") return;
+
+          slot.hidden = false;
+          googleApi.accounts.id.renderButton(slot, {
+            theme: "outline",
+            size: "large",
+            type: "standard",
+            shape: "rectangular",
+            text: "continue_with",
+            logo_alignment: "left",
+            width: getGoogleIdentityButtonWidth(slot)
+          });
+          slot.dataset.googleRendered = "true";
+          button.hidden = true;
+        });
+
+        if (!silent) setGoogleAuthStatus(statusElement, "auth.googleReady");
+        return true;
+      } catch (error) {
+        if (!silent) setGoogleAuthStatus(statusElement, "auth.googleUnavailable");
+        return false;
+      }
+    }
+
     function formatProfileDate(value) {
       if (!value) return "Pendiente";
       const date = new Date(value);
@@ -12770,14 +13041,16 @@
     }
 
     googleAuthButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const selectedLanguage = document.documentElement.lang || localStorage.getItem(STORAGE_LANGUAGE_KEY) || "es";
+      button.addEventListener("click", async () => {
         const status = button.closest("form")?.querySelector(".account-status");
-        if (status) {
-          status.textContent =
-            getTranslationValue(selectedLanguage, "auth.googleStatus") ||
-            getTranslationValue("es", "auth.googleStatus") ||
-            "";
+        setGoogleAuthStatus(status, "auth.googleLoading");
+        const ready = await initializeGoogleIdentityButtons({ statusElement: status });
+        if (!ready) return;
+
+        try {
+          window.google?.accounts?.id?.prompt();
+        } catch (error) {
+          setGoogleAuthStatus(status, "auth.googleReady");
         }
       });
     });
@@ -13046,6 +13319,7 @@
     initializeCookieConsent();
     renderCurrentRoute({ preserveScroll: true });
     updateUserPanelPreview();
+    initializeGoogleIdentityButtons({ silent: true });
     setLiveMotion(localStorage.getItem(STORAGE_MOTION_KEY) !== "off");
     updateClock();
     updateLocaleInsight();
