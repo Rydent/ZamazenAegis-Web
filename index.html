@@ -12814,6 +12814,45 @@
       }
     }
 
+    const visibleCadenceJobs = [];
+
+    function isDocumentVisible() {
+      return document.visibilityState !== "hidden";
+    }
+
+    function stopVisibleCadence() {
+      visibleCadenceJobs.forEach((job) => {
+        if (job.timerId !== null) {
+          window.clearInterval(job.timerId);
+          job.timerId = null;
+        }
+      });
+    }
+
+    function startVisibleCadence() {
+      if (!isDocumentVisible()) return;
+
+      visibleCadenceJobs.forEach((job) => {
+        if (job.timerId !== null) return;
+        job.callback();
+        job.timerId = window.setInterval(() => {
+          if (isDocumentVisible()) job.callback();
+        }, job.intervalMs);
+      });
+    }
+
+    function syncVisibleCadence() {
+      if (isDocumentVisible()) {
+        startVisibleCadence();
+      } else {
+        stopVisibleCadence();
+      }
+    }
+
+    function addVisibleCadence(callback, intervalMs) {
+      visibleCadenceJobs.push({ callback, intervalMs, timerId: null });
+    }
+
     function setNetworkState(state, key) {
       if (liveNetworkDot) {
         liveNetworkDot.classList.toggle("status-dot--warning", state === "checking" || state === "limited");
@@ -12873,6 +12912,10 @@
       }
 
       setTranslatedText(liveMotionLabel, isEnabled ? "live.motionOn" : "live.motionOff");
+    }
+
+    function refreshOnlineStatusWhenVisible() {
+      if (isDocumentVisible()) refreshOnlineStatus();
     }
 
     function revealVisibleItems() {
@@ -13321,14 +13364,13 @@
     updateUserPanelPreview();
     initializeGoogleIdentityButtons({ silent: true });
     setLiveMotion(localStorage.getItem(STORAGE_MOTION_KEY) !== "off");
-    updateClock();
-    updateLocaleInsight();
-    window.setInterval(updateClock, 1000);
-    window.setInterval(updateLocaleInsight, 60000);
-    refreshOnlineStatus();
-    window.setInterval(refreshOnlineStatus, 60000);
-    window.addEventListener("online", refreshOnlineStatus);
-    window.addEventListener("offline", refreshOnlineStatus);
+    addVisibleCadence(updateClock, 1000);
+    addVisibleCadence(updateLocaleInsight, 60000);
+    addVisibleCadence(refreshOnlineStatus, 60000);
+    syncVisibleCadence();
+    document.addEventListener("visibilitychange", syncVisibleCadence);
+    window.addEventListener("online", refreshOnlineStatusWhenVisible);
+    window.addEventListener("offline", refreshOnlineStatusWhenVisible);
   </script>
 </body>
 </html>
