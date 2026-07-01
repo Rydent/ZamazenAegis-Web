@@ -1436,6 +1436,14 @@
       width: 100%;
     }
 
+    .auth-google-button:disabled,
+    .auth-google-button[aria-disabled="true"] {
+      cursor: default;
+      opacity: 0.68;
+      transform: none;
+      box-shadow: none;
+    }
+
     .google-identity-slot {
       display: grid;
       min-height: 44px;
@@ -4800,7 +4808,7 @@
                 <div class="user-menu-header">
                   <span class="user-menu-avatar" id="userMenuAvatar" aria-hidden="true">ᛟ</span>
                   <div>
-                    <strong id="userPanelName" data-i18n="userPanel.guestName">Invitado local</strong>
+                    <strong id="userPanelName" data-i18n="userPanel.guestName">Usuario local</strong>
                     <span id="userPanelEmail" data-i18n="userPanel.guestEmail">Sin sesión online en esta web</span>
                     <span class="user-level" id="userPanelLevel" data-i18n="userPanel.levelCore">Core</span>
                   </div>
@@ -6394,6 +6402,10 @@
     const GOOGLE_OAUTH_CLIENT_ID_META_NAME = "google-signin-client_id";
     const GOOGLE_OAUTH_CLIENT_ID_STORAGE_KEY = "zamazen_google_oauth_client_id";
     const GOOGLE_OAUTH_CLIENT_ID_PATTERN = /^[0-9a-z._-]+\.apps\.googleusercontent\.com$/i;
+    const GOOGLE_OAUTH_REDIRECT_URIS = Object.freeze({
+      production: "https://rydent.github.io/ZamazenAegis-Web/auth/callback",
+      development: "http://localhost:5173/auth/callback"
+    });
     const SUPPORT_API_TIMEOUT_MS = 10000;
     const HEALTH_API_TIMEOUT_MS = 3500;
     const SECURE_FORM_COOLDOWN_MS = 45000;
@@ -6624,7 +6636,7 @@
           badge: "Perfil",
           title: "Perfil Zamazen",
           body: "Identidad, avatar, nivel, estado de protección y sincronización preparados para convivir con la app móvil sin inventar datos online.",
-          defaultName: "Invitado local",
+          defaultName: "Usuario local",
           defaultEmail: "Sin sesión online en esta web",
           nickMissing: "Nick no configurado",
           onlineVerified: "Online verificada",
@@ -6893,7 +6905,7 @@
           badge: "Profile",
           title: "Zamazen profile",
           body: "Identity, avatar, level, protection state and sync are prepared to work with the mobile app without inventing online data.",
-          defaultName: "Local guest",
+          defaultName: "Local user",
           defaultEmail: "No online session in this website",
           nickMissing: "Nickname not configured",
           onlineVerified: "Online verified",
@@ -7162,7 +7174,7 @@
           badge: "Profil",
           title: "Profil Zamazen",
           body: "Identité, avatar, niveau, état de protection et synchronisation sont préparés pour fonctionner avec l'app mobile sans inventer de données en ligne.",
-          defaultName: "Invité local",
+          defaultName: "Utilisateur local",
           defaultEmail: "Aucune session en ligne sur ce site",
           nickMissing: "Pseudo non configuré",
           onlineVerified: "En ligne vérifié",
@@ -7431,7 +7443,7 @@
           badge: "Perfil",
           title: "Perfil Zamazen",
           body: "Identidade, avatar, nível, estado de proteção e sincronização preparados para conviver com a app móvel sem inventar dados online.",
-          defaultName: "Convidado local",
+          defaultName: "Usuário local",
           defaultEmail: "Sem sessão online neste site",
           nickMissing: "Nick não configurado",
           onlineVerified: "Online verificada",
@@ -7679,7 +7691,16 @@
     }
 
     function localizeAccountForProfile(account, profileCopy) {
-      const defaultNames = ["Invitado local", "Local guest", "Invité local", "Convidado local"];
+      const defaultNames = [
+        "Usuario local",
+        "Local user",
+        "Utilisateur local",
+        "Usuário local",
+        "Invitado local",
+        "Local guest",
+        "Invité local",
+        "Convidado local"
+      ];
       const defaultEmails = [
         "Sin sesión online en esta web",
         "No online session in this website",
@@ -8038,7 +8059,7 @@
         userPanel: {
           open: "Abrir panel de usuario",
           label: "Panel de usuario",
-          guestName: "Invitado local",
+          guestName: "Usuario local",
           guestEmail: "Sin sesión online en esta web",
           levelCore: "Core",
           levelOnline: "Online",
@@ -8098,7 +8119,8 @@
           recoverBack: "Volver al acceso",
           recoverGuidance: "Solicitud preparada. Cuando la API de recuperación esté disponible, se enviará desde aquí; mientras tanto usa soporte oficial sin enviar contraseñas ni códigos.",
           googleButton: "Continuar con Google",
-          googleNote: "Google es la opción rápida; la cuenta Zamazen seguirá siendo la experiencia completa del Guardián.",
+          googleDisabledButton: "Google pendiente de configuración",
+          googleNote: "Google solo se activa con OAuth real: Web Client ID válido, backend Zamazen configurado y token verificado. La cuenta Zamazen sigue siendo la experiencia completa del Guardián.",
           googleStatus: "Google se validará con OAuth/Credential Manager real. Esta web no crea una sesión falsa ni guarda tokens si el proveedor no está configurado.",
           googleLoading: "Preparando Google Identity Services...",
           googleReady: "OAuth de Google preparado. Usa el botón oficial de Google; el token se enviará al backend Zamazen para crear la sesión.",
@@ -8495,7 +8517,7 @@
         userPanel: {
           open: "Open user panel",
           label: "User panel",
-          guestName: "Local guest",
+          guestName: "Local user",
           guestEmail: "No online session on this website",
           levelCore: "Core",
           levelOnline: "Online",
@@ -8555,7 +8577,8 @@
           recoverBack: "Back to sign-in",
           recoverGuidance: "Request prepared. When the recovery API is available, it will be sent from here; until then use official support without sending passwords or codes.",
           googleButton: "Continue with Google",
-          googleNote: "Google is the fast option; the Zamazen account remains the complete Guardian experience.",
+          googleDisabledButton: "Google setup pending",
+          googleNote: "Google is enabled only with real OAuth: a valid Web Client ID, configured Zamazen backend and verified token. The Zamazen account remains the complete Guardian experience.",
           googleStatus: "Google will be validated with real OAuth/Credential Manager. This website does not fake a session or store tokens when the provider is not configured.",
           googleLoading: "Preparing Google Identity Services...",
           googleReady: "Google OAuth is ready. Use the official Google button; the token will be sent to the Zamazen backend to create the session.",
@@ -8952,7 +8975,7 @@
         userPanel: {
           open: "Ouvrir le panneau utilisateur",
           label: "Panneau utilisateur",
-          guestName: "Invité local",
+          guestName: "Utilisateur local",
           guestEmail: "Aucune session en ligne sur ce site",
           levelCore: "Core",
           levelOnline: "En ligne",
@@ -9012,7 +9035,8 @@
           recoverBack: "Retour à la connexion",
           recoverGuidance: "Demande préparée. Lorsque l'API de récupération sera disponible, elle partira d'ici; en attendant utilisez le support officiel sans envoyer de mots de passe ni de codes.",
           googleButton: "Continuer avec Google",
-          googleNote: "Google est l'option rapide; le compte Zamazen reste l'expérience complète du Gardien.",
+          googleDisabledButton: "Configuration Google en attente",
+          googleNote: "Google s'active uniquement avec OAuth réel: Web Client ID valide, backend Zamazen configuré et jeton vérifié. Le compte Zamazen reste l'expérience complète du Gardien.",
           googleStatus: "Google sera validé avec OAuth/Credential Manager réel. Ce site ne simule pas de session et ne garde pas de jetons si le fournisseur n'est pas configuré.",
           googleLoading: "Préparation de Google Identity Services...",
           googleReady: "OAuth Google est prêt. Utilisez le bouton officiel Google; le jeton sera envoyé au backend Zamazen pour créer la session.",
@@ -9409,7 +9433,7 @@
         userPanel: {
           open: "Abrir painel do usuário",
           label: "Painel do usuário",
-          guestName: "Convidado local",
+          guestName: "Usuário local",
           guestEmail: "Sem sessão online neste site",
           levelCore: "Core",
           levelOnline: "Online",
@@ -9469,7 +9493,8 @@
           recoverBack: "Voltar ao acesso",
           recoverGuidance: "Solicitação preparada. Quando a API de recuperação estiver disponível, será enviada daqui; enquanto isso use o suporte oficial sem enviar senhas nem códigos.",
           googleButton: "Continuar com Google",
-          googleNote: "Google é a opção rápida; a conta Zamazen continua sendo a experiência completa do Guardião.",
+          googleDisabledButton: "Google pendente de configuração",
+          googleNote: "Google só é ativado com OAuth real: Web Client ID válido, backend Zamazen configurado e token verificado. A conta Zamazen continua sendo a experiência completa do Guardião.",
           googleStatus: "Google será validado com OAuth/Credential Manager real. Este site não cria sessão falsa nem guarda tokens se o provedor não estiver configurado.",
           googleLoading: "Preparando Google Identity Services...",
           googleReady: "OAuth do Google está pronto. Use o botão oficial do Google; o token será enviado ao backend Zamazen para criar a sessão.",
@@ -10419,6 +10444,7 @@
       updateLocaleInsight();
       updateUserPanelPreview();
       setAuthMode(authShell?.dataset.mode || "login");
+      syncGoogleAuthButtonAvailability();
       setLiveMotion(localStorage.getItem(STORAGE_MOTION_KEY) !== "off");
       renderCurrentRoute({ preserveScroll: true });
 
@@ -12101,7 +12127,7 @@
 
       return {
         ...safeAccount,
-        name: String(safeAccount.name || "").trim() || "Invitado local",
+        name: String(safeAccount.name || "").trim() || "Usuario local",
         email: String(safeAccount.email || "").trim() || "Sin sesión online en esta web",
         nick: String(safeAccount.nick || "").trim(),
         provider,
@@ -12192,6 +12218,28 @@
         : "";
 
       return [globalClientId, metaClientId, localClientId].find(isValidGoogleOAuthClientId) || "";
+    }
+
+    function syncGoogleAuthButtonAvailability() {
+      const hasClientId = Boolean(readConfiguredGoogleOAuthClientId());
+
+      googleAuthButtons.forEach((button) => {
+        button.disabled = !hasClientId;
+        button.setAttribute("aria-disabled", String(!hasClientId));
+        button.classList.toggle("is-disabled", !hasClientId);
+        button.title = hasClientId ? "" : translate("auth.googleMissingClientId");
+        button.dataset.i18n = hasClientId ? "auth.googleButton" : "auth.googleDisabledButton";
+        button.textContent = translate(button.dataset.i18n);
+
+        if (!hasClientId) {
+          setGoogleAuthStatus(
+            button.closest("form")?.querySelector(".account-status"),
+            "auth.googleMissingClientId",
+          );
+        }
+      });
+
+      return hasClientId;
     }
 
     function createGoogleOAuthNonce() {
@@ -12321,9 +12369,12 @@
       const { silent = false, statusElement = null } = options;
       const clientId = readConfiguredGoogleOAuthClientId();
       if (!clientId) {
+        syncGoogleAuthButtonAvailability();
         if (!silent) setGoogleAuthStatus(statusElement, "auth.googleMissingClientId");
         return false;
       }
+
+      syncGoogleAuthButtonAvailability();
 
       try {
         const googleApi = await loadGoogleIdentityScript();

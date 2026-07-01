@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Callback publico de Google OAuth para devolver al usuario a la cuenta segura de Zamazen Aegis sin almacenar tokens.">
+  <meta name="robots" content="noindex,nofollow">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <link rel="canonical" href="https://rydent.github.io/ZamazenAegis-Web/auth/callback">
+  <title>Zamazen Aegis - Google OAuth callback</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #08100d;
+      color: #f4f8f2;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(63, 185, 128, 0.18), transparent 32%),
+        linear-gradient(145deg, #07100d 0%, #10201a 48%, #060908 100%);
+    }
+
+    main {
+      width: min(100%, 520px);
+      border: 1px solid rgba(185, 222, 200, 0.26);
+      border-radius: 8px;
+      padding: 28px;
+      background: rgba(8, 16, 13, 0.82);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.36);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 18px;
+      line-height: 1.55;
+      color: #dcebdd;
+    }
+
+    a {
+      color: #9ee8bb;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main aria-live="polite">
+    <h1>Google OAuth</h1>
+    <p id="callbackStatus">Volviendo a Zamazen Aegis...</p>
+    <a id="continueLink" href="../../index.html#/cuenta">Volver a la cuenta</a>
+  </main>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const GOOGLE_OAUTH_REDIRECT_URIS = Object.freeze({
+        production: "https://rydent.github.io/ZamazenAegis-Web/auth/callback",
+        development: "http://localhost:5173/auth/callback"
+      });
+      const params = new URLSearchParams(window.location.search || "");
+      const error = params.get("error");
+      const hasCode = params.has("code");
+      const isProjectPage = window.location.pathname.includes("/ZamazenAegis-Web/");
+      const basePath = isProjectPage ? "/ZamazenAegis-Web/" : "/";
+      const route = error ? "login" : "cuenta";
+      const targetUrl = `${window.location.origin}${basePath}index.html#/${route}`;
+      const status = document.getElementById("callbackStatus");
+      const continueLink = document.getElementById("continueLink");
+
+      window.ZAMAZEN_GOOGLE_OAUTH_REDIRECT_URIS = GOOGLE_OAUTH_REDIRECT_URIS;
+
+      if (continueLink) {
+        continueLink.href = targetUrl;
+      }
+
+      if (status) {
+        if (error) {
+          status.textContent = "Google devolvio un error. Zamazen no ha creado ninguna sesion falsa.";
+        } else if (hasCode) {
+          status.textContent = "Callback recibido. Zamazen volvera a la pantalla de cuenta para continuar de forma segura.";
+        } else {
+          status.textContent = "Callback abierto sin datos de Google. Volviendo a la cuenta.";
+        }
+      }
+
+      window.setTimeout(() => {
+        window.location.replace(targetUrl);
+      }, 1600);
+    })();
+  </script>
+</body>
+</html>
