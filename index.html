@@ -22,7 +22,10 @@
   <meta name="google-signin-client_id" content="67457777183-pqbhkk1bgoe4aim10f2kcjdrb0n5c3kp.apps.googleusercontent.com">
   <meta name="robots" content="index,follow">
   <meta property="og:site_name" content="Zamazen Aegis">
-  <meta property="og:locale" content="es_ES">
+  <meta id="openGraphLocale" property="og:locale" content="es_ES">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:locale:alternate" content="pt_PT">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://rydent.github.io/ZamazenAegis-Web/">
   <meta property="og:title" data-i18n-attr="content:meta.title" content="Zamazen Aegis | Seguridad Inteligente contra Estafas, Spam y Phishing">
@@ -1113,6 +1116,42 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
+    }
+
+    .acknowledgements-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .acknowledgement-card {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      background:
+        linear-gradient(145deg, rgba(94, 240, 189, 0.1), rgba(91, 168, 255, 0.06) 58%, transparent),
+        rgba(8, 17, 35, 0.86);
+    }
+
+    .acknowledgement-card h2 {
+      margin: 0 0 12px;
+      color: #f8fbff;
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      line-height: 1.25;
+    }
+
+    .acknowledgement-card:last-child {
+      grid-column: 1 / -1;
+      border-color: rgba(94, 240, 189, 0.34);
+    }
+
+    @media (max-width: 720px) {
+      .acknowledgements-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .acknowledgement-card:last-child {
+        grid-column: auto;
+      }
     }
 
     .route-link-card,
@@ -4754,11 +4793,11 @@
         </a>
 
         <div class="nav-wrapper" id="navWrapper">
-          <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Abrir menú">
+          <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Abrir menú" data-i18n-attr="aria-label:accessibility.navToggle">
             <span class="nav-toggle-line"></span>
           </button>
 
-          <nav class="nav" id="siteNav" aria-label="Principal">
+          <nav class="nav" id="siteNav" aria-label="Principal" data-i18n-attr="aria-label:accessibility.mainNavigation">
             <a href="#/inicio" data-i18n="nav.home">Inicio</a>
             <a href="#/estado-proyecto" data-i18n="nav.projectStatus">Estado</a>
             <a href="#/funciones" data-i18n="nav.features">Funciones</a>
@@ -4774,20 +4813,20 @@
             <a href="#/contacto" data-i18n="legalDocs.contactShort">Contacto</a>
           </nav>
 
-          <div class="control-switchers" aria-label="Idioma y tamaño de texto">
-            <div class="language-switcher" id="languageSwitcher" aria-label="Language selector">
+          <div class="control-switchers" aria-label="Idioma y tamaño de texto" data-i18n-attr="aria-label:accessibility.controls">
+            <div class="language-switcher" id="languageSwitcher" aria-label="Selector de idioma" data-i18n-attr="aria-label:accessibility.languageSelector">
               <button class="language-button" type="button" data-lang="es" aria-pressed="true">ES</button>
               <button class="language-button" type="button" data-lang="en" aria-pressed="false">EN</button>
               <button class="language-button" type="button" data-lang="fr" aria-pressed="false">FR</button>
               <button class="language-button" type="button" data-lang="pt" aria-pressed="false">PT</button>
-              <select class="language-select" id="languageSelect" aria-label="Idioma">
+              <select class="language-select" id="languageSelect" aria-label="Idioma" data-i18n-attr="aria-label:accessibility.languageSelect">
                 <option value="es">ES</option>
                 <option value="en">EN</option>
                 <option value="fr">FR</option>
                 <option value="pt">PT</option>
               </select>
             </div>
-            <div class="text-size-switcher" id="textSizeSwitcher" aria-label="Tamaño de letra">
+            <div class="text-size-switcher" id="textSizeSwitcher" aria-label="Tamaño de letra" data-i18n-attr="aria-label:accessibility.textSizeSelector">
               <button class="text-size-button is-active" type="button" data-text-size="normal" aria-pressed="true" aria-label="Normal" data-i18n-attr="aria-label:accessibility.normal">A</button>
               <button class="text-size-button" type="button" data-text-size="medium" aria-pressed="false" aria-label="Mediano" data-i18n-attr="aria-label:accessibility.medium">A+</button>
               <button class="text-size-button" type="button" data-text-size="large" aria-pressed="false" aria-label="Grande" data-i18n-attr="aria-label:accessibility.large">A++</button>
@@ -4853,10 +4892,10 @@
               <a class="cta-secondary" href="#/funciones" data-i18n="hero.secondaryCta">Ver cómo funciona</a>
               <a class="cta-secondary" href="#/demo" data-i18n="hero.demoCta">Ver demo guiada</a>
               <a class="cta-secondary" href="#/crear-cuenta" data-open-auth="register" data-i18n="hero.accountCta">Acceder / crear cuenta</a>
-              <a class="cta-secondary" href="#/lista-espera" data-i18n="hero.waitlistCta">Solicitar acceso</a>
+              <a class="cta-secondary" href="#/estado-proyecto" data-i18n="hero.waitlistCta">Ver disponibilidad oficial</a>
             </div>
 
-            <div class="hero-points" aria-label="Puntos clave">
+            <div class="hero-points" aria-label="Puntos clave" data-i18n-attr="aria-label:accessibility.heroPoints">
               <span data-i18n="hero.point1">Bloquea amenazas antes de que se conviertan en un problema real.</span>
               <span data-i18n="hero.point2">Neo explica cada riesgo como un asistente, no como una alarma vacía.</span>
               <span data-i18n="hero.point3">Protección firme, ligera y pensada para un uso diario sin fricción.</span>
@@ -4864,7 +4903,7 @@
 
             <div class="section-runes" aria-hidden="true">ᛉ ᚦ ᛟ</div>
 
-            <div class="proof-strip" aria-label="Pruebas reales del sistema">
+            <div class="proof-strip" aria-label="Pruebas reales del sistema" data-i18n-attr="aria-label:accessibility.proofStrip">
               <div class="proof-card">
                 <strong data-i18n="hero.proof1Title">Ejemplo del sistema: llamada sospechosa señalada</strong>
                 <span data-i18n="hero.proof1Body">Número desconocido detectado como posible spam comercial y marcado para revisión.</span>
@@ -4876,7 +4915,7 @@
             </div>
           </div>
 
-          <div class="hero-visual reveal" aria-label="Vista previa del producto">
+          <div class="hero-visual reveal" aria-label="Vista previa del producto" data-i18n-attr="aria-label:accessibility.heroPreview">
             <div class="hero-orb"></div>
             <div class="hero-rune-field" aria-hidden="false">
               <div class="rune rune--algiz" tabindex="0" aria-label="Protección activa del dispositivo" data-i18n-attr="aria-label:runeTips.algizProtection">
@@ -5537,7 +5576,7 @@
 
       <section class="section" id="legal">
         <div class="container legal-grid">
-          <aside class="legal-index reveal" aria-label="Documentos legales de Zamazen Aegis">
+          <aside class="legal-index reveal" aria-label="Documentos legales de Zamazen Aegis" data-i18n-attr="aria-label:accessibility.legalDocuments">
             <span class="section-tag" data-i18n="legalDocs.badge">Legal claro</span>
             <a href="#/privacidad" data-i18n="legalDocs.privacyShort">Política de privacidad</a>
             <a href="#/gestionar-datos" data-i18n="legalDocs.dataShort">Gestionar datos</a>
@@ -5870,7 +5909,7 @@
 
           <div class="download-panel reveal">
             <div class="download-rune-anchor">
-              <div class="rune rune--raidho" tabindex="0" aria-label="Testing and release path">
+              <div class="rune rune--raidho" tabindex="0" aria-label="Ruta de pruebas y publicación" data-i18n-attr="aria-label:runeTips.testingRelease">
                 <span class="rune__symbol">ᚱ</span>
                 <span class="rune__tooltip">Testing and release path</span>
               </div>
@@ -5880,7 +5919,7 @@
             <p style="margin: 0 0 18px; color: var(--muted); line-height: 1.7;" data-i18n="store.body">
               La versión de prueba y el material de Play Store se preparan con builds reales, política de privacidad y permisos explicados con claridad.
             </p>
-            <a class="store-button" href="mailto:zamazenaegissupport@gmail.com?subject=Acceso%20testing%20Zamazen%20Aegis" aria-label="Solicitar acceso de prueba por correo" data-i18n="store.cta" data-i18n-attr="aria-label:store.aria">Solicitar acceso de prueba</a>
+            <a class="store-button" href="#/estado-proyecto" aria-label="Ver disponibilidad oficial" data-i18n="store.cta" data-i18n-attr="aria-label:store.aria">Ver disponibilidad oficial</a>
           </div>
         </div>
       </section>
@@ -6110,33 +6149,33 @@
                 <span class="rune__tooltip" data-i18n="runeTips.systemResilience">Resiliencia del sistema</span>
               </div>
             </div>
-            <nav class="footer-social" aria-label="Redes sociales oficiales de Zamazen Aegis">
-              <a class="social-link social-link--youtube" href="https://www.youtube.com/@ZamazenAegis" target="_blank" rel="noopener noreferrer" aria-label="YouTube oficial de Zamazen Aegis">
+            <nav class="footer-social" aria-label="Redes sociales oficiales de Zamazen Aegis" data-i18n-attr="aria-label:accessibility.socialNavigation">
+              <a class="social-link social-link--youtube" href="https://www.youtube.com/@ZamazenAegis" target="_blank" rel="noopener noreferrer" aria-label="YouTube oficial de Zamazen Aegis" data-i18n-attr="aria-label:accessibility.socialYoutube">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path d="M21.7 7.1a3.1 3.1 0 0 0-2.2-2.2C17.6 4.4 12 4.4 12 4.4s-5.6 0-7.5.5a3.1 3.1 0 0 0-2.2 2.2A32.2 32.2 0 0 0 1.8 12c0 1.7.1 3.4.5 4.9a3.1 3.1 0 0 0 2.2 2.2c1.9.5 7.5.5 7.5.5s5.6 0 7.5-.5a3.1 3.1 0 0 0 2.2-2.2c.4-1.5.5-3.2.5-4.9s-.1-3.4-.5-4.9zM10 15.5v-7l6 3.5-6 3.5z" />
                 </svg>
                 <span>YouTube</span>
               </a>
-              <a class="social-link social-link--tiktok" href="https://www.tiktok.com/@officialzamazenaegis" target="_blank" rel="noopener noreferrer" aria-label="TikTok oficial de Zamazen Aegis">
+              <a class="social-link social-link--tiktok" href="https://www.tiktok.com/@officialzamazenaegis" target="_blank" rel="noopener noreferrer" aria-label="TikTok oficial de Zamazen Aegis" data-i18n-attr="aria-label:accessibility.socialTiktok">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path fill="currentColor" d="M15.2 3.2c.5 2.5 1.9 4 4.3 4.3v3.1c-1.6 0-3-.5-4.2-1.4v5.8c0 3.5-2.2 5.8-5.5 5.8-2.8 0-5.1-2-5.1-4.8 0-3.1 2.4-5 5.6-5 .4 0 .8 0 1.1.1v3.2c-.3-.1-.7-.2-1.1-.2-1.4 0-2.3.7-2.3 1.8 0 1 .8 1.7 1.8 1.7 1.4 0 2.1-.8 2.1-2.5V3.2h3.3z" />
                 </svg>
                 <span>TikTok</span>
               </a>
-              <a class="social-link social-link--x" href="https://x.com/zamazenaegis" target="_blank" rel="noopener noreferrer" aria-label="X oficial de Zamazen Aegis">
+              <a class="social-link social-link--x" href="https://x.com/zamazenaegis" target="_blank" rel="noopener noreferrer" aria-label="X oficial de Zamazen Aegis" data-i18n-attr="aria-label:accessibility.socialX">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path d="M4 4l16 16" />
                   <path d="M20 4L4 20" />
                 </svg>
                 <span>X</span>
               </a>
-              <a class="social-link social-link--facebook" href="https://www.facebook.com/profile.php?id=61590513834451" target="_blank" rel="noopener noreferrer" aria-label="Facebook oficial de Zamazen Aegis">
+              <a class="social-link social-link--facebook" href="https://www.facebook.com/profile.php?id=61590513834451" target="_blank" rel="noopener noreferrer" aria-label="Facebook oficial de Zamazen Aegis" data-i18n-attr="aria-label:accessibility.socialFacebook">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path d="M14 8h2V4h-2.7C10.4 4 9 5.7 9 8.5V11H7v4h2v5h4v-5h2.6l.4-4h-3V8.7c0-.5.2-.7 1-.7z" />
                 </svg>
                 <span>Facebook</span>
               </a>
-              <a class="social-link social-link--instagram" href="https://www.instagram.com/zamazenaegis/" target="_blank" rel="noopener noreferrer" aria-label="Instagram oficial de Zamazen Aegis">
+              <a class="social-link social-link--instagram" href="https://www.instagram.com/zamazenaegis/" target="_blank" rel="noopener noreferrer" aria-label="Instagram oficial de Zamazen Aegis" data-i18n-attr="aria-label:accessibility.socialInstagram">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <rect x="4" y="4" width="16" height="16" rx="5" />
                   <circle cx="12" cy="12" r="3.5" />
@@ -6144,19 +6183,19 @@
                 </svg>
                 <span>Instagram</span>
               </a>
-              <a class="social-link social-link--reddit" href="https://www.reddit.com/user/Fun-Mind3914/" target="_blank" rel="noopener noreferrer" aria-label="Reddit oficial de Zamazen Aegis">
+              <a class="social-link social-link--reddit" href="https://www.reddit.com/user/Fun-Mind3914/" target="_blank" rel="noopener noreferrer" aria-label="Reddit oficial de Zamazen Aegis" data-i18n-attr="aria-label:accessibility.socialReddit">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm4.7 10.4c0 2.1-2.1 3.7-4.7 3.7s-4.7-1.6-4.7-3.7c0-1.4 1-2.7 2.5-3.3l.7-3 3.4.8c.3-.5.8-.8 1.4-.8.9 0 1.6.7 1.6 1.6 0 .3-.1.6-.2.8l1 .9a1.8 1.8 0 0 1 1.2-.4 1.7 1.7 0 0 1 1.7 1.7c0 .8-.6 1.5-1.4 1.7z" />
                 </svg>
                 <span>Reddit</span>
               </a>
-              <a class="social-link social-link--linkedin" href="https://www.linkedin.com/in/zamazen-aegis-897839410/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn oficial de Zamazen Aegis">
+              <a class="social-link social-link--linkedin" href="https://www.linkedin.com/in/zamazen-aegis-897839410/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn oficial de Zamazen Aegis" data-i18n-attr="aria-label:accessibility.socialLinkedin">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path d="M5 8.5h3.1V20H5V8.5zm1.6-5A1.8 1.8 0 1 1 6.5 7a1.8 1.8 0 0 1 .1-3.5zM10.2 8.5h3v1.6h.1c.4-.8 1.5-1.9 3.1-1.9 3.3 0 3.9 2.2 3.9 5V20h-3.1v-6c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3V20h-3V8.5z" />
                 </svg>
                 <span>LinkedIn</span>
               </a>
-              <a class="social-link social-link--discord" href="https://discord.gg/Task2dUwA" target="_blank" rel="noopener noreferrer" aria-label="Discord oficial de Zamazen Aegis">
+              <a class="social-link social-link--discord" href="https://discord.gg/Task2dUwA" target="_blank" rel="noopener noreferrer" aria-label="Discord oficial de Zamazen Aegis" data-i18n-attr="aria-label:accessibility.socialDiscord">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path d="M19.6 5.4A16.8 16.8 0 0 0 15.5 4l-.2.4c1.5.4 2.2 1 2.2 1a13.4 13.4 0 0 0-10.9 0s.7-.6 2.3-1L8.7 4a16.8 16.8 0 0 0-4.1 1.4c-2.6 3.8-3.3 7.5-2.9 11.2A16.9 16.9 0 0 0 6.8 19s.6-.8 1.1-1.5a7.2 7.2 0 0 1-1.8-.9l.4-.3a11.7 11.7 0 0 0 11 0l.4.3a7.2 7.2 0 0 1-1.8.9c.5.7 1.1 1.5 1.1 1.5a16.9 16.9 0 0 0 5.1-2.4c.5-4.3-.7-7.9-2.7-11.2zM8.7 14.3c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z" />
                 </svg>
@@ -6171,7 +6210,7 @@
             <a href="#/funciones" data-i18n="nav.features">Funciones</a>
             <a href="#/precios" data-i18n="nav.premium">Precios</a>
             <a href="#/estado-proyecto" data-i18n="nav.projectStatus">Estado</a>
-            <a href="#/lista-espera" data-i18n="nav.waitlist">Acceso de prueba</a>
+            <a href="#/lista-espera" data-i18n="nav.waitlist">Disponibilidad oficial</a>
           </div>
 
           <div class="footer-links">
@@ -6236,7 +6275,7 @@
     <button class="quick-menu-toggle" id="quickMenuToggle" type="button" aria-expanded="false" aria-controls="quickMenu" aria-label="Abrir accesos rápidos" data-i18n-attr="aria-label:quickMenu.open">ᛉ</button>
   </div>
 
-  <section class="cookie-banner" id="cookieBanner" aria-live="polite" aria-label="Preferencias de privacidad y cookies">
+  <section class="cookie-banner" id="cookieBanner" aria-live="polite" aria-label="Preferencias de privacidad y cookies" data-i18n-attr="aria-label:accessibility.cookieBanner">
     <div class="cookie-copy">
       <span class="section-tag" data-i18n="cookie.badge">Privacidad</span>
       <strong data-i18n="cookie.title">Respetamos tu privacidad.</strong>
@@ -6262,7 +6301,7 @@
             Elige qué categorías puede usar la web. Las necesarias permanecen activas porque sostienen funciones básicas como idioma, preferencias y consentimiento.
           </p>
         </div>
-        <button class="cookie-close" type="button" id="cookieClose" aria-label="Cerrar preferencias">×</button>
+        <button class="cookie-close" type="button" id="cookieClose" aria-label="Cerrar preferencias" data-i18n-attr="aria-label:accessibility.cookieClose">×</button>
       </div>
 
       <div class="cookie-category">
@@ -6270,7 +6309,7 @@
           <strong data-i18n="cookie.necessaryTitle">Cookies necesarias</strong>
           <span data-i18n="cookie.necessaryBody">Siempre activas para funcionamiento básico, idioma y guardado de consentimiento.</span>
         </div>
-        <input class="cookie-switch" type="checkbox" checked disabled aria-label="Cookies necesarias siempre activas">
+        <input class="cookie-switch" type="checkbox" checked disabled aria-label="Cookies necesarias siempre activas" data-i18n-attr="aria-label:accessibility.necessaryCookies">
       </div>
 
       <label class="cookie-category" for="cookieAnalytics">
@@ -6311,6 +6350,7 @@
     const navLinks = document.querySelectorAll(".nav a");
     const languageButtons = document.querySelectorAll(".language-button");
     const languageSelect = document.getElementById("languageSelect");
+    const openGraphLocale = document.getElementById("openGraphLocale");
     const textSizeButtons = document.querySelectorAll(".text-size-button");
     const protectionFill = document.getElementById("protectionFill");
     const protectionValue = document.getElementById("protectionValue");
@@ -6392,7 +6432,6 @@
     const STORAGE_COOKIE_KEY = "zamazen_aegis_cookie_preferences";
     const STORAGE_MOTION_KEY = "zamazen_aegis_live_motion";
     const STORAGE_CONTRIBUTIONS_KEY = "zamazen_aegis_contribution_drafts";
-    const STORAGE_WAITLIST_KEY = "zamazen_aegis_waitlist_drafts";
     const STORAGE_SUPPORT_TICKETS_KEY = "zamazen_aegis_support_ticket_drafts";
     const STORAGE_ACCOUNT_SESSION_TOKEN_KEY = "zamazen_aegis_online_session_token";
     const STORAGE_FORM_RATE_KEY = "zamazen_aegis_secure_form_last_submit";
@@ -6412,7 +6451,6 @@
     const MAX_ALIAS_LENGTH = 60;
     const MAX_EMAIL_LENGTH = 120;
     const MAX_IDEA_MESSAGE_LENGTH = 900;
-    const MAX_WAITLIST_MESSAGE_LENGTH = 600;
     const MAX_TICKET_MESSAGE_LENGTH = 900;
     const MAX_CREATOR_RESPONSE_LENGTH = 900;
     const SUPPORTED_LANGUAGES = ["es", "en", "fr", "pt"];
@@ -6452,7 +6490,7 @@
       descargar: "descargar",
       ideas: "ideas",
       mejoras: "ideas",
-      agradecimientos: "ideas",
+      agradecimientos: "agradecimientos",
       salon: "salon-guardianes",
       "salon-guardianes": "salon-guardianes",
       guardianes: "salon-guardianes",
@@ -6489,6 +6527,7 @@
       confianza: { sections: ["pagina-interna"], detail: "confianza" },
       novedades: { sections: ["pagina-interna"], detail: "novedades" },
       ideas: { sections: ["pagina-interna"], detail: "ideas" },
+      agradecimientos: { sections: ["pagina-interna"], detail: "agradecimientos" },
       "salon-guardianes": { sections: ["pagina-interna"], detail: "salon-guardianes" },
       admin: { sections: ["pagina-interna"], detail: "admin" },
       soporte: { sections: ["pagina-interna"], detail: "soporte" },
@@ -6638,6 +6677,8 @@
           body: "Identidad, avatar, nivel, estado de protección y sincronización preparados para convivir con la app móvil sin inventar datos online.",
           defaultName: "Usuario local",
           defaultEmail: "Sin sesión online en esta web",
+          googleAccount: "Cuenta Google",
+          googleVerifiedAccount: "Cuenta Google verificada",
           nickMissing: "Nick no configurado",
           onlineVerified: "Online verificada",
           localSafe: "Vista local segura",
@@ -6659,6 +6700,13 @@
           protection: "Protección",
           webReady: "Escudo web listo",
           syncStatus: "Pendiente de conectar app móvil",
+          syncStatuses: {
+            mobilePending: "Pendiente de conectar app móvil",
+            webVerifiedWaitingMobile: "Sesión web verificada; esperando enlace con la app móvil",
+            googleVerifiedWaitingMobile: "Google verificado por el backend; esperando enlace con la app móvil",
+            accountCreatedWaitingMobile: "Cuenta online creada; esperando enlace con la app móvil",
+            localSavedApiUnavailable: "Vista local guardada; la API no está disponible ahora"
+          },
           redNeo: "Red Neo",
           redNeoLocal: "Modo local seguro hasta enlazar app",
           webOnline: "Web online",
@@ -6693,7 +6741,7 @@
           upgradeTitle: "Qué ganas al subir",
           upgradeBody: "Cada nivel aumenta contexto, personalización e integración, pero Zamazen Aegis mantiene los límites reales de Android, permisos y consentimiento.",
           create: "Crear cuenta Zamazen",
-          trial: "Solicitar acceso de prueba",
+          trial: "Ver disponibilidad oficial",
           demo: "Ver demo guiada",
           plans: [
             ["core", "Core — gratis", "CO", "is-core", "Ideal para empezar sin presión.", "Gratis para empezar. Protección básica útil, local y clara.", "0 €/mes", "Disponible como base gratuita; no simula pago ni suscripción.", ["Escáner manual y explicaciones claras", "Historial básico local", "Limpieza segura", "Red Neo saneada con consentimiento"], "Usar Core gratis", "#/core"],
@@ -6722,15 +6770,22 @@
           ]
         },
         waitlist: {
-          badge: "Acceso",
-          title: "Lista de espera y acceso de prueba",
-          body: "Solicitud segura: sin archivos, sin HTML, sin publicación automática y sin backend falso. La web prepara un borrador saneado para envío manual.",
-          formTitle: "Solicitar acceso",
+          badge: "Disponibilidad",
+          title: "Testing temporal cerrado",
+          body: "El testing temporal está cerrado. No se aceptan nuevas solicitudes ni redescargas de builds de prueba caducadas. Cuando la aplicación oficial esté disponible, este canal mostrará su descarga.",
+          closedStatusBadge: "Testing cerrado",
+          closedStatusTitle: "No se reactivan builds de prueba",
+          closedStatusBody: "Una build de testing caducada no puede reactivarse ni volver a descargarse. Esta web no prepara solicitudes de acceso de testing.",
+          officialBadge: "Canal oficial",
+          officialTitle: "Aplicación oficial",
+          officialBody: "La descarga oficial aparecerá aquí cuando esté publicada y disponible para todos.",
+          officialAction: "Ver disponibilidad oficial",
+          formTitle: "Testing cerrado",
           alias: "Nombre o alias",
           email: "Correo opcional",
           interest: "Interés principal",
           message: "Mensaje breve",
-          submit: "Preparar solicitud segura",
+          submit: "Testing cerrado",
           privacyText: "Acepto que esta solicitud se revise manualmente y que no se publique mi correo.",
           mail: "Abrir correo preparado",
           invalidAlias: "Indica un alias reconocible.",
@@ -6738,13 +6793,13 @@
           unsafe: "Por seguridad no se aceptan enlaces, HTML, scripts ni código.",
           accept: "Acepta la revisión manual y privacidad antes de preparar el envío.",
           cooldown: "Espera un momento antes de preparar otra solicitud.",
-          ready: "Borrador seguro preparado. Confirma el envío desde tu correo; no se publica nada automáticamente.",
-          subject: "Solicitud de acceso Zamazen Aegis",
+          ready: "El testing temporal está cerrado. Consulta la disponibilidad oficial.",
+          subject: "Disponibilidad oficial de Zamazen Aegis",
           optionalMissing: "No indicado",
           noMessage: "Sin mensaje adicional",
           notesBadge: "Privacidad",
-          notesTitle: "Qué ocurre con tu solicitud",
-          notes: [["Sin backend falso", "La web estática no inventa una inscripción online."], ["Sin archivos", "No se aceptan adjuntos ni documentos desde esta pantalla."], ["Revisión manual", "El testing temporal se decide cuando exista canal real y seguro; Valhalla/Ragnarok solo se previsualizan sin desbloqueo premium real."]],
+          notesTitle: "Estado del canal",
+          notes: [["Sin redescarga", "Una build de prueba caducada no vuelve a estar disponible."], ["Sin solicitud", "Esta pantalla no prepara ni envía solicitudes de testing."], ["Canal oficial", "La aplicación oficial se mostrará cuando exista una publicación real."]],
           ideaAction: "Enviar idea",
           levels: ["Core", "Valhalla", "Ragnarok", "Tester", "No lo sé aún"]
         },
@@ -6779,7 +6834,7 @@
           rules: [["Nada automático", "Las ideas no aparecen públicamente sin revisión y permiso."], ["Sin archivos", "No se aceptan imágenes, PDFs, ZIPs, ejecutables ni scripts."], ["Sin enlaces", "La primera versión bloquea enlaces para reducir spam y phishing."], ["Sin recompensas falsas", "Códigos Valhalla/Ragnarok o insignias solo tras valoración manual."], ["Admin privado", "La revisión real debe vivir en backend protegido, no en HTML público."]],
           hallAction: "Abrir Salón de Guardianes",
           adminAction: "Ver panel privado preparado",
-          waitlistAction: "Solicitar acceso",
+          waitlistAction: "Ver disponibilidad oficial",
           trustAction: "Centro de confianza",
           types: ["Idea", "Mejora", "Error", "Seguridad", "Accesibilidad", "Web", "App", "Función futura"],
           levels: ["Sin cuenta", "Core", "Valhalla", "Ragnarok", "Tester"]
@@ -6867,7 +6922,7 @@
             ["Bunker", "Bunker", "bunker contrasenas cifrado nube", "Bunker trata secretos y credenciales con privacidad por defecto. La nube solo debe recibir paquetes cifrados por el usuario cuando esté activa."],
             ["Red Neo", "Red Neo", "red neo reportes comunidad privacidad", "Red Neo permite reportar indicadores saneados con consentimiento para ayudar a otros sin publicar secretos ni conversaciones completas."],
             ["Permisos Android", "Permisos", "permisos android sms llamadas play safe", "Los permisos sensibles solo deben pedirse con valor real, explicación y alternativa manual. PlaySafe evita permisos restringidos si no hay aprobación."],
-            ["Acceso de prueba", "Acceso", "beta tester acceso prueba invitacion", "El acceso de prueba se revisa manualmente. Valhalla y Ragnarok podrán probarse mediante invitación, códigos o campañas controladas."],
+            ["Disponibilidad oficial", "Estado", "aplicacion oficial descarga testing cerrado", "El testing temporal está cerrado. Una build caducada no se reactiva ni vuelve a descargarse; la aplicación oficial aparecerá en el canal oficial cuando esté publicada."],
             ["Ideas y Salón", "Comunidad", "ideas salon guardianes puntos anonimo", "Las ideas quedan pendientes de revisión. Nada se publica automáticamente y el usuario puede elegir alias, anónimo o no aparecer."],
             ["Borrar cuenta", "Cuenta", "borrar eliminar cuenta datos", "La eliminación de cuenta debe pasar por una ruta clara y verificación. No envíes contraseñas ni códigos por correo."],
             ["Reportar un error", "Soporte", "error bug seguridad ticket soporte", "Si Neo no puede responder con seguridad, prepara un ticket. Para seguridad, describe el problema sin publicar datos sensibles."]
@@ -6907,6 +6962,8 @@
           body: "Identity, avatar, level, protection state and sync are prepared to work with the mobile app without inventing online data.",
           defaultName: "Local user",
           defaultEmail: "No online session in this website",
+          googleAccount: "Google account",
+          googleVerifiedAccount: "Verified Google account",
           nickMissing: "Nickname not configured",
           onlineVerified: "Online verified",
           localSafe: "Safe local view",
@@ -6928,6 +6985,13 @@
           protection: "Protection",
           webReady: "Web shield ready",
           syncStatus: "Waiting to connect mobile app",
+          syncStatuses: {
+            mobilePending: "Waiting to connect the mobile app",
+            webVerifiedWaitingMobile: "Web session verified; waiting to link the mobile app",
+            googleVerifiedWaitingMobile: "Google verified by the backend; waiting to link the mobile app",
+            accountCreatedWaitingMobile: "Online account created; waiting to link the mobile app",
+            localSavedApiUnavailable: "Local view saved; the API is currently unavailable"
+          },
           redNeo: "Neo Network",
           redNeoLocal: "Safe local mode until the app is linked",
           webOnline: "Web online",
@@ -6962,7 +7026,7 @@
           upgradeTitle: "What improves when you upgrade",
           upgradeBody: "Each level increases context, personalization and integration, while Zamazen Aegis keeps the real limits of Android, permissions and consent clear.",
           create: "Create Zamazen account",
-          trial: "Request trial access",
+          trial: "View official availability",
           demo: "View guided demo",
           plans: [
             ["core", "Core — free", "CO", "is-core", "Ideal to start without pressure.", "Free to start. Useful, local and clear essential protection.", "0 €/month", "Available as the free base; it does not simulate payment or subscription.", ["Manual scanner and clear explanations", "Basic local history", "Safe cleanup", "Sanitized Neo Network with consent"], "Use Core free", "#/core"],
@@ -6991,15 +7055,22 @@
           ]
         },
         waitlist: {
-          badge: "Access",
-          title: "Waitlist and trial access",
-          body: "Safe request: no files, no HTML, no automatic publishing and no fake backend. The website prepares a sanitized draft for manual sending.",
-          formTitle: "Request access",
+          badge: "Availability",
+          title: "Temporary testing closed",
+          body: "Temporary testing is closed. New requests and redownloads of expired test builds are not accepted. When the official app is available, this channel will show its download.",
+          closedStatusBadge: "Testing closed",
+          closedStatusTitle: "Expired test builds are not reactivated",
+          closedStatusBody: "An expired testing build cannot be reactivated or downloaded again. This website does not prepare testing-access requests.",
+          officialBadge: "Official channel",
+          officialTitle: "Official app",
+          officialBody: "The official download will appear here when it is genuinely published and available to everyone.",
+          officialAction: "View official availability",
+          formTitle: "Testing closed",
           alias: "Name or alias",
           email: "Optional email",
           interest: "Main interest",
           message: "Short message",
-          submit: "Prepare safe request",
+          submit: "Testing closed",
           privacyText: "I accept manual review and understand my email will not be published.",
           mail: "Open prepared email",
           invalidAlias: "Enter a recognizable alias.",
@@ -7007,13 +7078,13 @@
           unsafe: "For security, links, HTML, scripts and code are not accepted.",
           accept: "Accept manual review and privacy before preparing the request.",
           cooldown: "Wait a moment before preparing another request.",
-          ready: "Safe draft prepared. Confirm sending from your email; nothing is published automatically.",
-          subject: "Zamazen Aegis access request",
+          ready: "Temporary testing is closed. Check official availability.",
+          subject: "Zamazen Aegis official availability",
           optionalMissing: "Not provided",
           noMessage: "No additional message",
           notesBadge: "Privacy",
-          notesTitle: "What happens to your request",
-          notes: [["No fake backend", "The static website does not invent an online registration."], ["No files", "Attachments and documents are not accepted from this screen."], ["Manual review", "Temporary testing is decided when a real and safe channel exists; Valhalla/Ragnarok are previewed without a real premium unlock."]],
+          notesTitle: "Channel status",
+          notes: [["No redownload", "An expired test build is not made available again."], ["No request", "This screen does not prepare or send testing-access requests."], ["Official channel", "The official app appears here only after a real publication."]],
           ideaAction: "Send idea",
           levels: ["Core", "Valhalla", "Ragnarok", "Tester", "Not sure yet"]
         },
@@ -7048,7 +7119,7 @@
           rules: [["Nothing automatic", "Ideas do not appear publicly without review and permission."], ["No files", "Images, PDFs, ZIPs, executables and scripts are not accepted."], ["No links", "The first version blocks links to reduce spam and phishing."], ["No fake rewards", "Valhalla/Ragnarok codes or badges only after manual assessment."], ["Private admin", "Real review must live in a protected backend, not public HTML."]],
           hallAction: "Open Hall of Guardians",
           adminAction: "View prepared private panel",
-          waitlistAction: "Request access",
+          waitlistAction: "View official availability",
           trustAction: "Trust center",
           types: ["Idea", "Improvement", "Bug", "Security", "Accessibility", "Web", "App", "Future feature"],
           levels: ["No account", "Core", "Valhalla", "Ragnarok", "Tester"]
@@ -7136,7 +7207,7 @@
             ["Bunker", "Bunker", "bunker passwords encryption cloud", "Bunker treats secrets and credentials with privacy by default. Cloud should only receive user-encrypted packages when active."],
             ["Neo Network", "Neo Network", "neo network reports community privacy", "Neo Network can share sanitized indicators with consent so reports help others without publishing secrets or complete conversations."],
             ["Android permissions", "Permissions", "android permissions sms calls play safe", "Sensitive permissions should only be requested with real value, explanation and manual fallback. PlaySafe avoids restricted permissions without approval."],
-            ["Trial access", "Access", "beta tester trial access invitation", "Testing access is manually reviewed. Valhalla and Ragnarok are only previewed without a real premium unlock until paid access exists."],
+            ["Official availability", "Status", "official app download testing closed", "Temporary testing is closed. An expired build is not reactivated or downloaded again; the official app appears in the official channel after publication."],
             ["Ideas and Hall", "Community", "ideas hall guardians points anonymous", "Ideas remain pending review. Nothing is published automatically and users can choose alias, anonymous or not appearing."],
             ["Delete account", "Account", "delete account data", "Account deletion needs a clear route and verification. Do not send passwords or codes by email."],
             ["Report an error", "Support", "error bug security ticket support", "If Neo cannot answer safely, prepare a ticket. For security, describe the problem without exposing sensitive data."]
@@ -7176,6 +7247,8 @@
           body: "Identité, avatar, niveau, état de protection et synchronisation sont préparés pour fonctionner avec l'app mobile sans inventer de données en ligne.",
           defaultName: "Utilisateur local",
           defaultEmail: "Aucune session en ligne sur ce site",
+          googleAccount: "Compte Google",
+          googleVerifiedAccount: "Compte Google vérifié",
           nickMissing: "Pseudo non configuré",
           onlineVerified: "En ligne vérifié",
           localSafe: "Vue locale sûre",
@@ -7197,6 +7270,13 @@
           protection: "Protection",
           webReady: "Bouclier web prêt",
           syncStatus: "En attente de connexion avec l'app mobile",
+          syncStatuses: {
+            mobilePending: "En attente de connexion avec l'app mobile",
+            webVerifiedWaitingMobile: "Session web vérifiée ; en attente de liaison avec l'app mobile",
+            googleVerifiedWaitingMobile: "Google vérifié par le backend ; en attente de liaison avec l'app mobile",
+            accountCreatedWaitingMobile: "Compte en ligne créé ; en attente de liaison avec l'app mobile",
+            localSavedApiUnavailable: "Vue locale enregistrée ; l'API est actuellement indisponible"
+          },
           redNeo: "Red Neo",
           redNeoLocal: "Mode local sûr jusqu'à liaison avec l'app",
           webOnline: "Web en ligne",
@@ -7231,7 +7311,7 @@
           upgradeTitle: "Ce qui s'améliore en montant",
           upgradeBody: "Chaque niveau ajoute contexte, personnalisation et intégration, tout en gardant claires les limites réelles d'Android, des autorisations et du consentement.",
           create: "Créer un compte Zamazen",
-          trial: "Demander un accès test",
+          trial: "Voir la disponibilité officielle",
           demo: "Voir la démo guidée",
           plans: [
             ["core", "Core — gratuit", "CO", "is-core", "Idéal pour commencer sans pression.", "Gratuit pour commencer. Protection essentielle utile, locale et claire.", "0 €/mois", "Disponible comme base gratuite; aucun paiement ni abonnement n'est simulé.", ["Scanner manuel et explications claires", "Historique local basique", "Nettoyage sûr", "Red Neo assainie avec consentement"], "Utiliser Core gratuit", "#/core"],
@@ -7260,15 +7340,22 @@
           ]
         },
         waitlist: {
-          badge: "Accès",
-          title: "Liste d'attente et accès test",
-          body: "Demande sûre: pas de fichiers, pas de HTML, pas de publication automatique et pas de faux backend. Le site prépare un brouillon assaini pour envoi manuel.",
-          formTitle: "Demander un accès",
+          badge: "Disponibilité",
+          title: "Test temporaire fermé",
+          body: "Le test temporaire est fermé. Les nouvelles demandes et les retéléchargements de builds de test expirées ne sont pas acceptés. Lorsque l'application officielle sera disponible, ce canal affichera son téléchargement.",
+          closedStatusBadge: "Test fermé",
+          closedStatusTitle: "Les builds de test expirées ne sont pas réactivées",
+          closedStatusBody: "Une build de test expirée ne peut pas être réactivée ni téléchargée à nouveau. Ce site ne prépare aucune demande d'accès au test.",
+          officialBadge: "Canal officiel",
+          officialTitle: "Application officielle",
+          officialBody: "Le téléchargement officiel apparaîtra ici lorsqu'il sera réellement publié et disponible pour tous.",
+          officialAction: "Voir la disponibilité officielle",
+          formTitle: "Test fermé",
           alias: "Nom ou alias",
           email: "Email optionnel",
           interest: "Intérêt principal",
           message: "Message bref",
-          submit: "Préparer une demande sûre",
+          submit: "Test fermé",
           privacyText: "J'accepte la revue manuelle et comprends que mon email ne sera pas publié.",
           mail: "Ouvrir l'email préparé",
           invalidAlias: "Indiquez un alias reconnaissable.",
@@ -7276,13 +7363,13 @@
           unsafe: "Par sécurité, les liens, HTML, scripts et code ne sont pas acceptés.",
           accept: "Acceptez la revue manuelle et la confidentialité avant de préparer la demande.",
           cooldown: "Attendez un moment avant de préparer une autre demande.",
-          ready: "Brouillon sûr préparé. Confirmez l'envoi depuis votre email; rien n'est publié automatiquement.",
-          subject: "Demande d'accès Zamazen Aegis",
+          ready: "Le test temporaire est fermé. Consultez la disponibilité officielle.",
+          subject: "Disponibilité officielle de Zamazen Aegis",
           optionalMissing: "Non indiqué",
           noMessage: "Aucun message supplémentaire",
           notesBadge: "Confidentialité",
-          notesTitle: "Ce qui arrive à votre demande",
-          notes: [["Pas de faux backend", "Le site statique n'invente pas une inscription en ligne."], ["Pas de fichiers", "Les pièces jointes et documents ne sont pas acceptés depuis cet écran."], ["Revue manuelle", "Le testing temporaire sera décidé quand un canal réel et sûr existera; Valhalla/Ragnarok restent en preview sans déblocage premium réel."]],
+          notesTitle: "État du canal",
+          notes: [["Pas de retéléchargement", "Une build de test expirée n'est pas rendue disponible à nouveau."], ["Aucune demande", "Cet écran ne prépare ni n'envoie de demande d'accès au test."], ["Canal officiel", "L'application officielle apparaîtra ici après une publication réelle."]],
           ideaAction: "Envoyer une idée",
           levels: ["Core", "Valhalla", "Ragnarok", "Tester", "Pas encore sûr"]
         },
@@ -7317,7 +7404,7 @@
           rules: [["Rien d'automatique", "Les idées n'apparaissent pas publiquement sans revue et permission."], ["Pas de fichiers", "Images, PDFs, ZIPs, exécutables et scripts ne sont pas acceptés."], ["Pas de liens", "La première version bloque les liens pour réduire spam et phishing."], ["Pas de fausses récompenses", "Codes Valhalla/Ragnarok ou badges seulement après évaluation manuelle."], ["Admin privé", "La revue réelle doit vivre dans un backend protégé, pas dans le HTML public."]],
           hallAction: "Ouvrir le Salon des Gardiens",
           adminAction: "Voir le panneau privé préparé",
-          waitlistAction: "Demander un accès",
+          waitlistAction: "Voir la disponibilité officielle",
           trustAction: "Centre de confiance",
           types: ["Idée", "Amélioration", "Erreur", "Sécurité", "Accessibilité", "Web", "App", "Fonction future"],
           levels: ["Sans compte", "Core", "Valhalla", "Ragnarok", "Tester"]
@@ -7405,7 +7492,7 @@
             ["Bunker", "Bunker", "bunker mots de passe chiffrement cloud", "Bunker traite secrets et identifiants avec confidentialité par défaut. Le cloud ne doit recevoir que des paquets chiffrés par l'utilisateur."],
             ["Red Neo", "Red Neo", "red neo rapports communaute confidentialite", "Red Neo peut partager des indicateurs assainis avec consentement pour aider sans publier secrets ni conversations complètes."],
             ["Permissions Android", "Permissions", "permissions android sms appels play safe", "Les permissions sensibles ne doivent être demandées qu'avec valeur réelle, explication et alternative manuelle."],
-            ["Accès test", "Accès", "beta testeur acces invitation", "L'accès test est revu manuellement. Valhalla et Ragnarok restent en preview sans déblocage premium réel jusqu'à l'accès payant."],
+            ["Disponibilité officielle", "État", "application officielle téléchargement test fermé", "Le test temporaire est fermé. Une build expirée n'est pas réactivée ni téléchargée à nouveau; l'application officielle apparaîtra dans le canal officiel après sa publication."],
             ["Idées et Salon", "Communauté", "idees salon gardiens points anonyme", "Les idées restent en attente de revue. Rien n'est publié automatiquement et l'utilisateur choisit alias, anonymat ou absence."],
             ["Supprimer le compte", "Compte", "supprimer compte donnees", "La suppression du compte nécessite une route claire et une vérification. N'envoyez pas mots de passe ni codes par email."],
             ["Signaler une erreur", "Support", "erreur bug securite ticket support", "Si Neo ne peut pas répondre sûrement, préparez un ticket sans exposer de données sensibles."]
@@ -7445,6 +7532,8 @@
           body: "Identidade, avatar, nível, estado de proteção e sincronização preparados para conviver com a app móvel sem inventar dados online.",
           defaultName: "Usuário local",
           defaultEmail: "Sem sessão online neste site",
+          googleAccount: "Conta Google",
+          googleVerifiedAccount: "Conta Google verificada",
           nickMissing: "Nick não configurado",
           onlineVerified: "Online verificada",
           localSafe: "Vista local segura",
@@ -7466,6 +7555,13 @@
           protection: "Proteção",
           webReady: "Escudo web pronto",
           syncStatus: "Pendente de conectar app móvel",
+          syncStatuses: {
+            mobilePending: "Pendente de conectar a app móvel",
+            webVerifiedWaitingMobile: "Sessão web verificada; aguardando vínculo com a app móvel",
+            googleVerifiedWaitingMobile: "Google verificado pelo backend; aguardando vínculo com a app móvel",
+            accountCreatedWaitingMobile: "Conta online criada; aguardando vínculo com a app móvel",
+            localSavedApiUnavailable: "Vista local guardada; a API está indisponível agora"
+          },
           redNeo: "Red Neo",
           redNeoLocal: "Modo local seguro até vincular a app",
           webOnline: "Web online",
@@ -7500,7 +7596,7 @@
           upgradeTitle: "O que melhora ao subir",
           upgradeBody: "Cada nível aumenta contexto, personalização e integração, mantendo claros os limites reais do Android, permissões e consentimento.",
           create: "Criar conta Zamazen",
-          trial: "Solicitar acesso de teste",
+          trial: "Ver disponibilidade oficial",
           demo: "Ver demo guiada",
           plans: [
             ["core", "Core — grátis", "CO", "is-core", "Ideal para começar sem pressão.", "Grátis para começar. Proteção essencial útil, local e clara.", "0 €/mês", "Disponível como base gratuita; não simula pagamento nem subscrição.", ["Scanner manual e explicações claras", "Histórico básico local", "Limpeza segura", "Red Neo saneada com consentimento"], "Usar Core grátis", "#/core"],
@@ -7529,15 +7625,22 @@
           ]
         },
         waitlist: {
-          badge: "Acesso",
-          title: "Lista de espera e acesso de teste",
-          body: "Pedido seguro: sem arquivos, sem HTML, sem publicação automática e sem backend falso. A web prepara um rascunho saneado para envio manual.",
-          formTitle: "Solicitar acesso",
+          badge: "Disponibilidade",
+          title: "Teste temporário fechado",
+          body: "O teste temporário está fechado. Não são aceites novos pedidos nem novos downloads de builds de teste expiradas. Quando a app oficial estiver disponível, este canal mostrará a sua descarga.",
+          closedStatusBadge: "Teste fechado",
+          closedStatusTitle: "As builds de teste expiradas não são reativadas",
+          closedStatusBody: "Uma build de teste expirada não pode ser reativada nem descarregada novamente. Esta web não prepara pedidos de acesso ao teste.",
+          officialBadge: "Canal oficial",
+          officialTitle: "App oficial",
+          officialBody: "A descarga oficial aparecerá aqui quando for realmente publicada e estiver disponível para todos.",
+          officialAction: "Ver disponibilidade oficial",
+          formTitle: "Teste fechado",
           alias: "Nome ou alias",
           email: "Email opcional",
           interest: "Interesse principal",
           message: "Mensagem breve",
-          submit: "Preparar pedido seguro",
+          submit: "Teste fechado",
           privacyText: "Aceito revisão manual e entendo que meu email não será publicado.",
           mail: "Abrir email preparado",
           invalidAlias: "Indica um alias reconhecível.",
@@ -7545,13 +7648,13 @@
           unsafe: "Por segurança, links, HTML, scripts e código não são aceites.",
           accept: "Aceita revisão manual e privacidade antes de preparar o pedido.",
           cooldown: "Espera um momento antes de preparar outro pedido.",
-          ready: "Rascunho seguro preparado. Confirma o envio desde teu email; nada é publicado automaticamente.",
-          subject: "Pedido de acesso Zamazen Aegis",
+          ready: "O teste temporário está fechado. Consulta a disponibilidade oficial.",
+          subject: "Disponibilidade oficial do Zamazen Aegis",
           optionalMissing: "Não indicado",
           noMessage: "Sem mensagem adicional",
           notesBadge: "Privacidade",
-          notesTitle: "O que acontece ao teu pedido",
-          notes: [["Sem backend falso", "A web estática não inventa inscrição online."], ["Sem arquivos", "Anexos e documentos não são aceites nesta tela."], ["Revisão manual", "O testing temporário será decidido quando existir canal real e seguro; Valhalla/Ragnarok ficam em preview sem desbloqueio premium real."]],
+          notesTitle: "Estado do canal",
+          notes: [["Sem novo download", "Uma build de teste expirada não volta a ficar disponível."], ["Sem pedido", "Esta tela não prepara nem envia pedidos de acesso ao teste."], ["Canal oficial", "A app oficial aparecerá aqui depois de uma publicação real."]],
           ideaAction: "Enviar ideia",
           levels: ["Core", "Valhalla", "Ragnarok", "Tester", "Ainda não sei"]
         },
@@ -7586,7 +7689,7 @@
           rules: [["Nada automático", "Ideias não aparecem publicamente sem revisão e permissão."], ["Sem arquivos", "Imagens, PDFs, ZIPs, executáveis e scripts não são aceites."], ["Sem links", "A primeira versão bloqueia links para reduzir spam e phishing."], ["Sem recompensas falsas", "Códigos Valhalla/Ragnarok ou insígnias só após avaliação manual."], ["Admin privado", "A revisão real deve viver em backend protegido, não em HTML público."]],
           hallAction: "Abrir Salão de Guardiões",
           adminAction: "Ver painel privado preparado",
-          waitlistAction: "Solicitar acesso",
+          waitlistAction: "Ver disponibilidade oficial",
           trustAction: "Centro de confiança",
           types: ["Ideia", "Melhoria", "Erro", "Segurança", "Acessibilidade", "Web", "App", "Função futura"],
           levels: ["Sem conta", "Core", "Valhalla", "Ragnarok", "Tester"]
@@ -7732,14 +7835,30 @@
         "Les autorisations Android se vérifient depuis l'app",
         "Permissões Android são revistas desde a app"
       ];
+      const legacySyncStatusCodes = {
+        "Sesión web verificada; sincronización móvil pendiente": "webVerifiedWaitingMobile",
+        "Sesión web verificada; esperando enlace con app móvil": "webVerifiedWaitingMobile",
+        "Cuenta online creada; esperando enlace con app móvil": "accountCreatedWaitingMobile",
+        "Vista local guardada; API no disponible ahora": "localSavedApiUnavailable",
+        "Google verificado por backend; esperando enlace con app móvil": "googleVerifiedWaitingMobile"
+      };
+      const syncStatusCode = account.syncStatusCode || legacySyncStatusCodes[account.syncStatus] || "";
+      const localizedSyncStatus = profileCopy.syncStatuses?.[syncStatusCode]
+        || (defaultSync.includes(account.syncStatus) ? profileCopy.syncStatus : account.syncStatus)
+        || profileCopy.syncStatuses?.mobilePending
+        || profileCopy.syncStatus;
 
       return {
         ...account,
-        name: defaultNames.includes(account.name) ? profileCopy.defaultName : account.name,
-        email: defaultEmails.includes(account.email) ? profileCopy.defaultEmail : account.email,
+        name: account.nameDisplayCode === "googleAccount"
+          ? profileCopy.googleAccount
+          : (defaultNames.includes(account.name) ? profileCopy.defaultName : account.name),
+        email: account.emailDisplayCode === "googleVerifiedAccount"
+          ? profileCopy.googleVerifiedAccount
+          : (defaultEmails.includes(account.email) ? profileCopy.defaultEmail : account.email),
         avatarLabel: profileCopy.avatarLabels?.[account.avatarId] || account.avatarLabel,
         protectionStatus: defaultProtection.includes(account.protectionStatus) ? profileCopy.webReady : account.protectionStatus,
-        syncStatus: defaultSync.includes(account.syncStatus) ? profileCopy.syncStatus : account.syncStatus,
+        syncStatus: localizedSyncStatus,
         redNeoStatus: defaultRedNeo.includes(account.redNeoStatus) ? profileCopy.redNeoLocal : account.redNeoStatus,
         bunkerStatus: defaultBunker.includes(account.bunkerStatus) ? profileCopy.bunkerLocal : account.bunkerStatus,
         permissionStatus: defaultPermissions.includes(account.permissionStatus) ? profileCopy.permissionsMobile : account.permissionStatus,
@@ -7768,7 +7887,7 @@
           news: "Novedades",
           ideas: "Ideas",
           guardianHall: "Salón",
-          waitlist: "Acceso de prueba",
+          waitlist: "Disponibilidad oficial",
           cloud: "Nube",
           security: "Seguridad",
           account: "Cuenta",
@@ -7785,9 +7904,31 @@
           cta: "Activar escudo"
         },
         accessibility: {
+          controls: "Idioma y tamaño de texto",
+          languageSelector: "Selector de idioma",
+          languageSelect: "Idioma",
+          textSizeSelector: "Tamaño de letra",
           normal: "Normal",
           medium: "Mediano",
-          large: "Grande"
+          large: "Grande",
+          navToggle: "Abrir menú",
+          mainNavigation: "Navegación principal",
+          heroPoints: "Puntos clave",
+          proofStrip: "Pruebas reales del sistema",
+          heroPreview: "Vista previa del producto",
+          legalDocuments: "Documentos legales de Zamazen Aegis",
+          socialNavigation: "Redes sociales oficiales de Zamazen Aegis",
+          socialYoutube: "YouTube oficial de Zamazen Aegis",
+          socialTiktok: "TikTok oficial de Zamazen Aegis",
+          socialX: "X oficial de Zamazen Aegis",
+          socialFacebook: "Facebook oficial de Zamazen Aegis",
+          socialInstagram: "Instagram oficial de Zamazen Aegis",
+          socialReddit: "Reddit oficial de Zamazen Aegis",
+          socialLinkedin: "LinkedIn oficial de Zamazen Aegis",
+          socialDiscord: "Discord oficial de Zamazen Aegis",
+          cookieBanner: "Preferencias de privacidad y cookies",
+          cookieClose: "Cerrar preferencias",
+          necessaryCookies: "Cookies necesarias siempre activas"
         },
         runeTips: {
           algizProtection: "Protección activa del dispositivo",
@@ -7800,7 +7941,8 @@
           guardianSignal: "Señal de protección del Guardián",
           semanticRunes: "Sistema semántico de runas",
           premiumValue: "Valor premium",
-          systemResilience: "Resiliencia del sistema"
+          systemResilience: "Resiliencia del sistema",
+          testingRelease: "Ruta de pruebas y publicación"
         },
         hero: {
           eyebrow: "Escudo digital inteligente",
@@ -7811,7 +7953,7 @@
           secondaryCta: "Ver cómo funciona",
           demoCta: "Ver demo guiada",
           accountCta: "Acceder / crear cuenta",
-          waitlistCta: "Solicitar acceso",
+          waitlistCta: "Ver disponibilidad oficial",
           microcopy: "Sin registro obligatorio. Cuenta Zamazen opcional para reforzar sesiones y privacidad.",
           point1: "Bloquea amenazas antes de que se conviertan en un problema real.",
           point2: "Neo explica cada riesgo como un asistente, no como una alarma vacía.",
@@ -8185,8 +8327,8 @@
           badge: "Tienda",
           title: "Testing privado y Google Play",
           body: "La versión de prueba y el material de Play Store se preparan con builds reales, política de privacidad y permisos explicados con claridad.",
-          cta: "Solicitar acceso de prueba",
-          aria: "Solicitar acceso de prueba por correo"
+          cta: "Ver disponibilidad oficial",
+          aria: "Ver disponibilidad oficial"
         },
         music: {
           badge: "Identidad sonora",
@@ -8262,9 +8404,9 @@
           description: "Zamazen Aegis helps review reported risk signals in calls, SMS and links with Neo, clear privacy and a futuristic experience designed to anticipate risk."
         },
         brand: { name: "Zamazen Aegis", tagline: "Intelligent Security", homeAria: "Go to the Zamazen Aegis start" },
-        nav: { home: "Home", projectStatus: "Status", features: "Features", center: "Center", trust: "Trust", news: "News", ideas: "Ideas", guardianHall: "Hall", waitlist: "Trial access", cloud: "Cloud", security: "Security", account: "Account", data: "Data", deleteAccount: "Delete account", premium: "Plans", bunker: "Bunker", neoNetwork: "Neo Network", about: "About", team: "Team", help: "Help", music: "Music", faq: "FAQ", cta: "Activate shield" },
-        accessibility: { normal: "Normal", medium: "Medium", large: "Large" },
-        runeTips: { algizProtection: "Active device protection", ansuzNeo: "Neo security assistant", thurisazThreat: "Smart threat review", raidhoSafeBrowsing: "Safe browsing protection", kenazScanner: "Device security scanner", othalaPrivacy: "Privacy and data protection", communityProtection: "Community-powered protection", guardianSignal: "Guardian protection signal", semanticRunes: "Semantic rune system", premiumValue: "Premium value", systemResilience: "System resilience" },
+        nav: { home: "Home", projectStatus: "Status", features: "Features", center: "Center", trust: "Trust", news: "News", ideas: "Ideas", guardianHall: "Hall", waitlist: "Official availability", cloud: "Cloud", security: "Security", account: "Account", data: "Data", deleteAccount: "Delete account", premium: "Plans", bunker: "Bunker", neoNetwork: "Neo Network", about: "About", team: "Team", help: "Help", music: "Music", faq: "FAQ", cta: "Activate shield" },
+        accessibility: { controls: "Language and text size", languageSelector: "Language selector", languageSelect: "Language", textSizeSelector: "Text size", normal: "Normal", medium: "Medium", large: "Large", navToggle: "Open menu", mainNavigation: "Main navigation", heroPoints: "Key points", proofStrip: "Real system evidence", heroPreview: "Product preview", legalDocuments: "Zamazen Aegis legal documents", socialNavigation: "Official Zamazen Aegis social networks", socialYoutube: "Official Zamazen Aegis YouTube", socialTiktok: "Official Zamazen Aegis TikTok", socialX: "Official Zamazen Aegis X profile", socialFacebook: "Official Zamazen Aegis Facebook", socialInstagram: "Official Zamazen Aegis Instagram", socialReddit: "Official Zamazen Aegis Reddit", socialLinkedin: "Official Zamazen Aegis LinkedIn", socialDiscord: "Official Zamazen Aegis Discord", cookieBanner: "Privacy and cookie preferences", cookieClose: "Close preferences", necessaryCookies: "Necessary cookies always enabled" },
+        runeTips: { algizProtection: "Active device protection", ansuzNeo: "Neo security assistant", thurisazThreat: "Smart threat review", raidhoSafeBrowsing: "Safe browsing protection", kenazScanner: "Device security scanner", othalaPrivacy: "Privacy and data protection", communityProtection: "Community-powered protection", guardianSignal: "Guardian protection signal", semanticRunes: "Semantic rune system", premiumValue: "Premium value", systemResilience: "System resilience", testingRelease: "Testing and release path" },
         hero: {
           eyebrow: "Intelligent digital shield",
           title: "Before they try to trick you, your phone is already protected.",
@@ -8274,7 +8416,7 @@
           secondaryCta: "See how it works",
           demoCta: "See guided demo",
           accountCta: "Sign in / create account",
-          waitlistCta: "Request access",
+          waitlistCta: "View official availability",
           microcopy: "No mandatory sign-up. Zamazen account is optional for stronger sessions and privacy.",
           point1: "Blocks threats before they become a real problem.",
           point2: "Neo explains every risk like an assistant, not like an empty alarm.",
@@ -8643,8 +8785,8 @@
           badge: "Store",
           title: "Private testing and Google Play",
           body: "The test version and Google Play material are prepared with real builds, privacy policy and clearly explained permissions.",
-          cta: "Request test access",
-          aria: "Request test access by email"
+          cta: "View official availability",
+          aria: "View official availability"
         },
         music: {
           badge: "Sound identity",
@@ -8720,9 +8862,9 @@
           description: "Zamazen Aegis aide à examiner les signaux de risque signalés dans les appels, SMS et liens avec Neo, une confidentialité claire et une expérience futuriste conçue pour anticiper le risque."
         },
         brand: { name: "Zamazen Aegis", tagline: "Sécurité Intelligente", homeAria: "Aller au début de Zamazen Aegis" },
-        nav: { home: "Accueil", projectStatus: "État", features: "Fonctions", center: "Centre", trust: "Confiance", news: "Nouveautés", ideas: "Idées", guardianHall: "Salon", waitlist: "Accès test", cloud: "Cloud", security: "Sécurité", account: "Compte", data: "Données", deleteAccount: "Supprimer le compte", premium: "Tarifs", bunker: "Bunker", neoNetwork: "Réseau Neo", about: "Projet", team: "Équipe", help: "Aide", music: "Musique", faq: "FAQ", cta: "Activer le bouclier" },
-        accessibility: { normal: "Normal", medium: "Moyen", large: "Grand" },
-        runeTips: { algizProtection: "Protection active de l'appareil", ansuzNeo: "Assistant de sécurité Neo", thurisazThreat: "Analyse intelligente des menaces", raidhoSafeBrowsing: "Protection de navigation sûre", kenazScanner: "Scanner de sécurité de l'appareil", othalaPrivacy: "Protection de la confidentialité et des données", communityProtection: "Protection portée par la communauté", guardianSignal: "Signal de protection du Gardien", semanticRunes: "Système sémantique de runes", premiumValue: "Valeur premium", systemResilience: "Résilience du système" },
+        nav: { home: "Accueil", projectStatus: "État", features: "Fonctions", center: "Centre", trust: "Confiance", news: "Nouveautés", ideas: "Idées", guardianHall: "Salon", waitlist: "Disponibilité officielle", cloud: "Cloud", security: "Sécurité", account: "Compte", data: "Données", deleteAccount: "Supprimer le compte", premium: "Tarifs", bunker: "Bunker", neoNetwork: "Réseau Neo", about: "Projet", team: "Équipe", help: "Aide", music: "Musique", faq: "FAQ", cta: "Activer le bouclier" },
+        accessibility: { controls: "Langue et taille du texte", languageSelector: "Sélecteur de langue", languageSelect: "Langue", textSizeSelector: "Taille du texte", normal: "Normal", medium: "Moyen", large: "Grand", navToggle: "Ouvrir le menu", mainNavigation: "Navigation principale", heroPoints: "Points clés", proofStrip: "Preuves réelles du système", heroPreview: "Aperçu du produit", legalDocuments: "Documents juridiques de Zamazen Aegis", socialNavigation: "Réseaux sociaux officiels de Zamazen Aegis", socialYoutube: "YouTube officiel de Zamazen Aegis", socialTiktok: "TikTok officiel de Zamazen Aegis", socialX: "Profil X officiel de Zamazen Aegis", socialFacebook: "Facebook officiel de Zamazen Aegis", socialInstagram: "Instagram officiel de Zamazen Aegis", socialReddit: "Reddit officiel de Zamazen Aegis", socialLinkedin: "LinkedIn officiel de Zamazen Aegis", socialDiscord: "Discord officiel de Zamazen Aegis", cookieBanner: "Préférences de confidentialité et de cookies", cookieClose: "Fermer les préférences", necessaryCookies: "Cookies nécessaires toujours activés" },
+        runeTips: { algizProtection: "Protection active de l'appareil", ansuzNeo: "Assistant de sécurité Neo", thurisazThreat: "Analyse intelligente des menaces", raidhoSafeBrowsing: "Protection de navigation sûre", kenazScanner: "Scanner de sécurité de l'appareil", othalaPrivacy: "Protection de la confidentialité et des données", communityProtection: "Protection portée par la communauté", guardianSignal: "Signal de protection du Gardien", semanticRunes: "Système sémantique de runes", premiumValue: "Valeur premium", systemResilience: "Résilience du système", testingRelease: "Parcours de test et de publication" },
         hero: {
           eyebrow: "Bouclier numérique intelligent",
           title: "Avant qu'ils n'essaient de vous piéger, votre mobile est déjà protégé.",
@@ -8732,7 +8874,7 @@
           secondaryCta: "Voir comment ça marche",
           demoCta: "Voir la démo guidée",
           accountCta: "Accéder / créer un compte",
-          waitlistCta: "Demander accès",
+          waitlistCta: "Voir la disponibilité officielle",
           microcopy: "Sans inscription obligatoire. Le compte Zamazen reste optionnel pour renforcer sessions et confidentialité.",
           point1: "Bloque les menaces avant qu'elles ne deviennent un vrai problème.",
           point2: "Neo explique chaque risque comme un assistant, pas comme une alerte vide.",
@@ -9101,8 +9243,8 @@
           badge: "Store",
           title: "Test privé et Google Play",
           body: "La version de test et les éléments Google Play sont préparés avec des builds réels, une politique de confidentialité et des permissions clairement expliquées.",
-          cta: "Demander un accès test",
-          aria: "Demander un accès test par email"
+          cta: "Voir la disponibilité officielle",
+          aria: "Voir la disponibilité officielle"
         },
         music: {
           badge: "Identité sonore",
@@ -9178,9 +9320,9 @@
           description: "Zamazen Aegis ajuda a revisar sinais de risco reportados em chamadas, SMS e links com Neo, privacidade clara e uma experiência futurista criada para antecipar riscos."
         },
         brand: { name: "Zamazen Aegis", tagline: "Segurança Inteligente", homeAria: "Ir para o início de Zamazen Aegis" },
-        nav: { home: "Início", projectStatus: "Estado", features: "Funções", center: "Centro", trust: "Confiança", news: "Novidades", ideas: "Ideias", guardianHall: "Salão", waitlist: "Acesso teste", cloud: "Nuvem", security: "Segurança", account: "Conta", data: "Dados", deleteAccount: "Eliminar conta", premium: "Preços", bunker: "Bunker", neoNetwork: "Red Neo", about: "Projeto", team: "Equipe", help: "Ajuda", music: "Música", faq: "FAQ", cta: "Ativar escudo" },
-        accessibility: { normal: "Normal", medium: "Médio", large: "Grande" },
-        runeTips: { algizProtection: "Proteção ativa do dispositivo", ansuzNeo: "Assistente de segurança Neo", thurisazThreat: "Revisão inteligente de ameaças", raidhoSafeBrowsing: "Proteção de navegação segura", kenazScanner: "Scanner de segurança do dispositivo", othalaPrivacy: "Proteção de privacidade e dados", communityProtection: "Proteção impulsionada pela comunidade", guardianSignal: "Sinal de proteção do Guardião", semanticRunes: "Sistema semântico de runas", premiumValue: "Valor premium", systemResilience: "Resiliência do sistema" },
+        nav: { home: "Início", projectStatus: "Estado", features: "Funções", center: "Centro", trust: "Confiança", news: "Novidades", ideas: "Ideias", guardianHall: "Salão", waitlist: "Disponibilidade oficial", cloud: "Nuvem", security: "Segurança", account: "Conta", data: "Dados", deleteAccount: "Eliminar conta", premium: "Preços", bunker: "Bunker", neoNetwork: "Red Neo", about: "Projeto", team: "Equipe", help: "Ajuda", music: "Música", faq: "FAQ", cta: "Ativar escudo" },
+        accessibility: { controls: "Idioma e tamanho do texto", languageSelector: "Seletor de idioma", languageSelect: "Idioma", textSizeSelector: "Tamanho do texto", normal: "Normal", medium: "Médio", large: "Grande", navToggle: "Abrir menu", mainNavigation: "Navegação principal", heroPoints: "Pontos principais", proofStrip: "Evidências reais do sistema", heroPreview: "Prévia do produto", legalDocuments: "Documentos legais do Zamazen Aegis", socialNavigation: "Redes sociais oficiais do Zamazen Aegis", socialYoutube: "YouTube oficial do Zamazen Aegis", socialTiktok: "TikTok oficial do Zamazen Aegis", socialX: "Perfil X oficial do Zamazen Aegis", socialFacebook: "Facebook oficial do Zamazen Aegis", socialInstagram: "Instagram oficial do Zamazen Aegis", socialReddit: "Reddit oficial do Zamazen Aegis", socialLinkedin: "LinkedIn oficial do Zamazen Aegis", socialDiscord: "Discord oficial do Zamazen Aegis", cookieBanner: "Preferências de privacidade e cookies", cookieClose: "Fechar preferências", necessaryCookies: "Cookies necessários sempre ativos" },
+        runeTips: { algizProtection: "Proteção ativa do dispositivo", ansuzNeo: "Assistente de segurança Neo", thurisazThreat: "Revisão inteligente de ameaças", raidhoSafeBrowsing: "Proteção de navegação segura", kenazScanner: "Scanner de segurança do dispositivo", othalaPrivacy: "Proteção de privacidade e dados", communityProtection: "Proteção impulsionada pela comunidade", guardianSignal: "Sinal de proteção do Guardião", semanticRunes: "Sistema semântico de runas", premiumValue: "Valor premium", systemResilience: "Resiliência do sistema", testingRelease: "Percurso de testes e publicação" },
         hero: {
           eyebrow: "Escudo digital inteligente",
           title: "Antes que tentem enganar você, seu celular já está protegido.",
@@ -9190,7 +9332,7 @@
           secondaryCta: "Ver como funciona",
           demoCta: "Ver demo guiada",
           accountCta: "Entrar / criar conta",
-          waitlistCta: "Solicitar acesso",
+          waitlistCta: "Ver disponibilidade oficial",
           microcopy: "Sem cadastro obrigatório. A conta Zamazen é opcional para reforçar sessões e privacidade.",
           point1: "Bloqueia ameaças antes que se tornem um problema real.",
           point2: "Neo explica cada risco como um assistente, não como um alerta vazio.",
@@ -9559,8 +9701,8 @@
           badge: "Loja",
           title: "Teste privado e Google Play",
           body: "A versão de teste e o material do Google Play são preparados com builds reais, política de privacidade e permissões explicadas com clareza.",
-          cta: "Solicitar acesso de teste",
-          aria: "Solicitar acesso de teste por email"
+          cta: "Ver disponibilidade oficial",
+          aria: "Ver disponibilidade oficial"
         },
         music: {
           badge: "Identidade sonora",
@@ -10115,37 +10257,37 @@
         home: {
           badge: "Plan du site",
           title: "Explorez Zamazen Aegis par branches",
-          body: "L'accueil resume le projet. Les decisions importantes ont leurs propres vues pour avancer sans se perdre.",
+          body: "L'accueil résume le projet. Les décisions importantes ont leurs propres vues pour avancer sans se perdre.",
           cards: [
-            ["Compte", "Creer un compte", "Inscription dediee pour profil, sessions et recuperation quand l'API est disponible.", "#/crear-cuenta"],
-            ["Compte", "Se connecter", "Acces clair: le site ne stocke pas de mots de passe et ne simule pas de sessions.", "#/login"],
-            ["Tarifs", "Core, Valhalla et Ragnarok", "Comparez les editions sans tout melanger dans l'accueil.", "#/precios"],
-            ["Fonction", "Bunker", "Voyez comment identifiants, donnees bancaires et donnees sensibles sont proteges.", "#/bunker"],
-            ["Fonction", "Reseau Neo", "Comprenez les signalements assainis, le consentement et la file en ligne.", "#/red-neo"],
-            ["Projet", "Equipe", "Decouvrez Francisco Javier Molina Moreno, Maria Isabel Rodriguez Sanchez et Neo.", "#/equipo"]
+            ["Compte", "Créer un compte", "Inscription dédiée pour le profil, les sessions et la récupération quand l'API est disponible.", "#/crear-cuenta"],
+            ["Compte", "Se connecter", "Accès clair : le site ne stocke pas de mots de passe et ne simule pas de sessions.", "#/login"],
+            ["Tarifs", "Core, Valhalla et Ragnarok", "Comparez les éditions sans tout mélanger dans l'accueil.", "#/precios"],
+            ["Fonction", "Bunker", "Voyez comment les identifiants, données bancaires et données sensibles sont protégés.", "#/bunker"],
+            ["Fonction", "Réseau Neo", "Comprenez les signalements assainis, le consentement et la file en ligne.", "#/red-neo"],
+            ["Projet", "Équipe", "Découvrez Francisco Javier Molina Moreno, María Isabel Rodríguez Sánchez et Neo.", "#/equipo"]
           ]
         },
         features: {
           badge: "Arbre des fonctions",
           title: "Chaque fonction importante a sa propre branche",
-          body: "Ouvrez seulement ce dont vous avez besoin: scanner, Bunker, Reseau Neo, nettoyage, historique ou Gardien familial.",
+          body: "Ouvrez seulement ce dont vous avez besoin : scanner, Bunker, Réseau Neo, nettoyage, historique ou Gardien familial.",
           cards: [
-            ["Fonction", "Scanner", "Revision appels, SMS, liens et signaux d'arnaque avec explications claires.", "#/escaner"],
-            ["Fonction", "Bunker", "Couche pour secrets et donnees sensibles avec chiffrement et limites honnetes.", "#/bunker"],
-            ["Fonction", "Reseau Neo", "Signalements communautaires assainis et controles par consentement.", "#/red-neo"],
-            ["Fonction", "Nettoyage", "Actions sures pour cache, preferences et donnees controlees par l'app.", "#/limpieza"],
-            ["Fonction", "Historique", "Memoire locale des evenements pour comprendre et mieux decider.", "#/historial"],
-            ["Fonction", "Gardien familial", "Mode sur pour utilisateurs moins experimentes sans controle cache.", "#/guardian-familiar"]
+            ["Fonction", "Scanner", "Révision des appels, SMS, liens et signaux d'arnaque avec des explications claires.", "#/escaner"],
+            ["Fonction", "Bunker", "Couche pour les secrets et données sensibles avec chiffrement et limites honnêtes.", "#/bunker"],
+            ["Fonction", "Réseau Neo", "Signalements communautaires assainis et contrôlés par consentement.", "#/red-neo"],
+            ["Fonction", "Nettoyage", "Actions sûres pour le cache, les préférences et les données contrôlées par l'app.", "#/limpieza"],
+            ["Fonction", "Historique", "Mémoire locale des événements pour comprendre et mieux décider.", "#/historial"],
+            ["Fonction", "Gardien familial", "Mode sûr pour les utilisateurs moins expérimentés, sans contrôle caché.", "#/guardian-familiar"]
           ]
         },
         pricing: {
           badge: "Branches tarifaires",
-          title: "Core, Valhalla et Ragnarok en vues separees",
-          body: "La comparaison generale est ici; chaque edition a aussi sa vue pour revoir sa valeur sans pression.",
+          title: "Core, Valhalla et Ragnarok dans des vues séparées",
+          body: "La comparaison générale est ici ; chaque édition dispose aussi de sa vue pour examiner sa valeur sans pression.",
           cards: [
-            ["Edition", "Core", "Protection essentielle, scanner manuel, historique basique, nettoyage sur et Reseau Neo assaini.", "#/core"],
-            ["Edition", "Valhalla", "Plus de contexte, confidentialite, permissions, liens, tendances en ligne et Bunker ameliore.", "#/valhalla"],
-            ["Edition", "Ragnarok", "Experience complete pour banque, identifiants, identite numerique et risques complexes.", "#/ragnarok"]
+            ["Édition", "Core", "Protection essentielle, scanner manuel, historique basique, nettoyage sûr et Réseau Neo assaini.", "#/core"],
+            ["Édition", "Valhalla", "Plus de contexte, confidentialité, permissions, liens, tendances en ligne et Bunker amélioré.", "#/valhalla"],
+            ["Édition", "Ragnarok", "Expérience complète pour la banque, les identifiants, l'identité numérique et les risques complexes.", "#/ragnarok"]
           ]
         }
       },
@@ -10205,13 +10347,13 @@
         "politica-producto": ["Producto", "Politica de producto", "Zamazen Aegis ayuda a revisar senales de riesgo reportadas sin prometer seguridad total ni deteccion perfecta.", [["Limites honestos", "Ninguna app elimina todo riesgo ni sustituye el criterio del usuario."], ["Permisos", "Si una funcion necesita permisos o conexion, se explica antes."], ["Accion real", "Solo se bloquea o automatiza cuando existe funcion, permiso y consentimiento."]], [["Ver seguridad", "#/seguridad", "primary"], ["Ver funciones", "#/funciones", "secondary"]]],
         "cobertura-wifi": ["Conexion", "Cobertura, internet movil y WiFi", "La app puede orientar ante problemas de red, pero no promete crear cobertura ni saltarse limites del operador.", [["Diagnostico", "Puede indicar perdida de conexion, WiFi debil o red abierta cuando Android lo permite."], ["Acciones reales", "Guia a modo avion, 4G/5G, llamadas WiFi o cambio de red segura."], ["Sin humo", "No promete cambiar antenas ni mejorar fisicamente la senal."]], [["Contacto", "#/contacto", "primary"], ["Politica de producto", "#/politica-producto", "secondary"]]],
         "contrato-licencia": ["Legal", "Contrato de licencia / EULA", "Uso personal, limitado y sujeto a la ley, Play Store y terminos publicados de Zamazen Aegis.", [["Uso correcto", "No manipular, revender ni intentar romper sistemas de proteccion."], ["Planes", "Core, Valhalla y Ragnarok deben usarse respetando permisos y privacidad."], ["Evolucion", "Las funciones conectadas pueden cambiar para mejorar seguridad, estabilidad o cumplimiento."]], [["Contacto", "#/contacto", "primary"], ["Sobre el proyecto", "#/sobre-zamazenaegis", "secondary"]]],
-        "sobre-zamazenaegis": ["Proyecto", "Sobre Zamazen Aegis", "Zamazen Aegis existe para ayudar a personas reales frente a spam, phishing, estafas moviles y confusion digital, con claridad y sin vender proteccion absoluta.", [["Que protege", "Llamadas, SMS, enlaces, reportes, identidad digital, credenciales y decisiones sensibles dentro de los limites tecnicos reales."], ["Por que existe", "Para que la seguridad sea comprensible, accesible y util en el dia a dia."], ["Pilares", "Coraje, Verdad, Honor, Lealtad, Disciplina, Hospitalidad, Productividad, Perseverancia y Confianza guian cada decision."]], [["Ver equipo", "#/equipo", "primary"], ["Ver funciones", "#/funciones", "secondary"]]],
+        "sobre-zamazenaegis": ["Proyecto", "Sobre Zamazen Aegis", "Zamazen Aegis existe para ayudar a personas reales frente a spam, phishing, estafas moviles y confusion digital, con claridad y sin vender proteccion absoluta.", [["Que protege", "Llamadas, SMS, enlaces, reportes, identidad digital, credenciales y decisiones sensibles dentro de los limites tecnicos reales."], ["Por que existe", "Para que la seguridad sea comprensible, accesible y util en el dia a dia."], ["Pilares", "Coraje, Verdad, Honor, Lealtad, Disciplina, Hospitalidad, Productividad, Perseverancia y Confianza guian cada decision."]], [["Ver equipo", "#/equipo", "primary"], ["Agradecimientos", "#/agradecimientos", "secondary"], ["Ver funciones", "#/funciones", "secondary"]]],
         equipo: ["Equipo", "Equipo", "Pantalla dedicada a las personas y guardianes detras del proyecto, sin mezclarla con permisos, precios o formularios.", [["Francisco Javier Molina Moreno", "Creador y responsable de la vision de Zamazen Aegis."], ["Maria Isabel Rodriguez Sanchez", "Socia clave del proyecto y apoyo humano en la construccion de confianza."], ["Neo", "Guardian original de Zamazen Aegis: acompana, explica y protege sin convertir el riesgo en miedo."]], [["Sobre el proyecto", "#/sobre-zamazenaegis", "primary"], ["Contacto", "#/contacto", "secondary"]]],
         faq: ["FAQ", "Preguntas frecuentes", "Respuestas rapidas en una pantalla propia para no obligar al usuario a recorrer toda la web.", [["Consume mucha bateria?", "Debe priorizar bajo consumo, foco de pantalla y trabajo minimo en segundo plano."], ["Funciona sin internet?", "Las capas locales siguen siendo utiles; lo online se degrada sin simular exito."], ["Pide permisos sensibles?", "Solo cuando aportan valor real, con explicacion y alternativa manual si corresponde."], ["Promete seguridad total?", "No. Zamazen Aegis ayuda a reducir riesgo, explicar senales y guiar decisiones."]], [["Contacto", "#/contacto", "primary"], ["Ver seguridad", "#/seguridad", "secondary"]]],
         soporte: ["Ayuda", "Neo Ayuda y tickets", "Buscador local de respuestas y ticket saneado para soporte manual, sin publicar datos ni simular backend.", [["Buscador", "Respuestas preparadas sobre cuenta, privacidad, permisos, planes, Bunker y Red Neo."], ["Ticket", "Solo texto saneado, consentimiento y correo preparado hasta que exista backend protegido."], ["Privacidad", "El creador no puede ver cuentas privadas; solo lo que el usuario envia voluntariamente."]], [["Abrir contacto", "#/contacto", "primary"], ["Privacidad", "#/privacidad", "secondary"]]],
         contacto: ["Contacto", "Ayuda y contacto", "Soporte, privacidad, cuentas y errores criticos tienen una pantalla directa. No envies secretos por correo.", [["Correo oficial", "zamazenaegissupport@gmail.com para soporte, privacidad, cuenta y documentacion."], ["Incidentes", "Priorizar seguridad, cuentas, pagos, borrado y errores criticos."], ["Privacidad", "No enviar contrasenas, codigos 2FA ni datos bancarios completos."]], [["Enviar correo", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
-        "estado-proyecto": ["Estado", "Estado del proyecto", "Zamazen Aegis esta en fase final de preparacion 1.6: web activa, app en prueba y conexion de cuenta/nube preparada sin prometer datos que aun no existen.", [["Web activa", "La web publica funciona como centro informativo y panel futuro del ecosistema."], ["App 1.6", "Se esta terminando, revisando y probando antes de declararla lista."], ["Conexion futura", "Cuenta, Red Neo, Bunker y nube se activaran con backend/app real."]], [["Solicitar acceso", "#/lista-espera", "primary"], ["Ver novedades", "#/novedades", "secondary"]]],
-        "lista-espera": ["Acceso", "Lista de espera y acceso de prueba", "Pantalla segura para preparar una solicitud de acceso, tester o aviso de lanzamiento sin exponer datos innecesarios ni simular backend.", [["Privado", "El correo es opcional y no se muestra publicamente."], ["Manual", "Cada solicitud se revisa antes de cualquier acceso."], ["Sin archivos", "No se aceptan adjuntos desde esta web."]], [["Enviar idea", "#/ideas", "primary"], ["Contacto", "#/contacto", "secondary"]]],
+        "estado-proyecto": ["Estado", "Estado del proyecto", "Zamazen Aegis esta en fase final de preparacion 1.6: web activa, app en prueba y testing temporal cerrado sin prometer disponibilidad que aun no existe.", [["Web activa", "La web publica funciona como centro informativo y panel futuro del ecosistema."], ["App 1.6", "Se esta terminando, revisando y probando antes de declararla lista."], ["Canal oficial", "La aplicacion oficial aparecera aqui cuando exista una publicacion real."]], [["Ver disponibilidad oficial", "#/descargar", "primary"], ["Ver novedades", "#/novedades", "secondary"]]],
+        "lista-espera": ["Disponibilidad", "Testing temporal cerrado", "No se aceptan nuevas solicitudes ni redescargas de builds de prueba caducadas. La aplicacion oficial aparecera en el canal oficial cuando este publicada.", [["Sin reactivacion", "Una build de testing caducada no puede volver a utilizarse."], ["Sin redescarga", "Esta web no prepara ni envia solicitudes de acceso al testing."], ["Canal oficial", "La descarga oficial se mostrara cuando exista una publicacion real."]], [["Ver disponibilidad oficial", "#/descargar", "primary"], ["Contacto", "#/contacto", "secondary"]]],
         confianza: ["Confianza", "Centro de confianza y privacidad", "Una pantalla clara para entender que protege Zamazen, que permisos puede pedir, que datos evita y que limites reales tiene Android.", [["Permisos explicados", "Nada sensible se pide sin utilidad, consentimiento y alternativa manual cuando haga falta."], ["Datos minimos", "No se publican secretos, correos ni reportes sin saneamiento."], ["Cero humo", "No se promete proteccion absoluta ni deteccion perfecta."]], [["Gestionar datos", "#/datos", "primary"], ["Ver permisos", "#/permisos", "secondary"]]],
         novedades: ["Novedades", "Historial del Guardian", "Resumen de cambios recientes de la web, avances de la app y proximos pasos generales para demostrar que el proyecto esta vivo.", [["Web tipo arbol", "Las rutas internas sustituyen la landing interminable."], ["Perfil vivo", "Cuenta, avatar, nivel y sincronizacion preparada."], ["Comunidad segura", "Ideas y agradecimientos se revisan manualmente antes de aparecer."]], [["Estado del proyecto", "#/estado-proyecto", "primary"], ["Ideas", "#/ideas", "secondary"]]],
         ideas: ["Ideas", "Ideas, mejoras y agradecimientos", "Recibe propuestas utiles de forma segura: sin archivos, sin scripts, sin publicacion automatica y siempre con revision manual.", [["Formulario controlado", "Solo texto limitado, validado y saneado."], ["Moderacion", "Nada aparece en agradecimientos sin permiso y revision."], ["Recompensas", "Los codigos o reconocimientos nunca son automaticos."]], [["Enviar propuesta", "#/ideas", "primary"], ["Estado del proyecto", "#/estado-proyecto", "secondary"]]],
@@ -10249,13 +10391,13 @@
         "politica-producto": ["Product", "Product policy", "Zamazen Aegis helps review reported risk signals without promising total security or perfect detection.", [["Honest limits", "No app removes all risk or replaces user judgment."], ["Permissions", "If a feature needs permissions or connection, it is explained first."], ["Real action", "Blocking or automation happens only when there is a feature, permission and consent."]], [["View security", "#/seguridad", "primary"], ["View features", "#/funciones", "secondary"]]],
         "cobertura-wifi": ["Connection", "Coverage, mobile internet and WiFi", "The app can guide around network issues, but it does not promise to create coverage or bypass carrier limits.", [["Diagnostics", "It can indicate lost connection, weak WiFi or open networks when Android allows it."], ["Real actions", "It guides to airplane mode, 4G/5G, WiFi calling or a safe network change."], ["No smoke", "It does not promise to change antennas or physically improve signal."]], [["Contact", "#/contacto", "primary"], ["Product policy", "#/politica-producto", "secondary"]]],
         "contrato-licencia": ["Legal", "License agreement / EULA", "Personal, limited use subject to law, Play Store and published Zamazen Aegis terms.", [["Correct use", "Do not manipulate, resell or try to break protection systems."], ["Plans", "Core, Valhalla and Ragnarok must be used respecting permissions and privacy."], ["Evolution", "Connected features may change to improve security, stability or compliance."]], [["Contact", "#/contacto", "primary"], ["About the project", "#/sobre-zamazenaegis", "secondary"]]],
-        "sobre-zamazenaegis": ["Project", "About Zamazen Aegis", "Zamazen Aegis exists to help real people against spam, phishing, mobile scams and digital confusion, with clarity and without selling absolute protection.", [["What it protects", "Calls, SMS, links, reports, digital identity, credentials and sensitive decisions within real technical limits."], ["Why it exists", "To make security understandable, accessible and useful in everyday life."], ["Pillars", "Courage, Truth, Honor, Loyalty, Discipline, Hospitality, Productivity, Perseverance and Trust guide every decision."]], [["View team", "#/equipo", "primary"], ["View features", "#/funciones", "secondary"]]],
+        "sobre-zamazenaegis": ["Project", "About Zamazen Aegis", "Zamazen Aegis exists to help real people against spam, phishing, mobile scams and digital confusion, with clarity and without selling absolute protection.", [["What it protects", "Calls, SMS, links, reports, digital identity, credentials and sensitive decisions within real technical limits."], ["Why it exists", "To make security understandable, accessible and useful in everyday life."], ["Pillars", "Courage, Truth, Honor, Loyalty, Discipline, Hospitality, Productivity, Perseverance and Trust guide every decision."]], [["View team", "#/equipo", "primary"], ["Acknowledgements", "#/agradecimientos", "secondary"], ["View features", "#/funciones", "secondary"]]],
         equipo: ["Team", "Team", "A dedicated screen for the people and guardians behind the project, without mixing it with permissions, plans or forms.", [["Francisco Javier Molina Moreno", "Creator and owner of the Zamazen Aegis vision."], ["Maria Isabel Rodriguez Sanchez", "Key partner in the project and human support in building trust."], ["Neo", "Original guardian of Zamazen Aegis: guides, explains and protects without turning risk into fear."]], [["About the project", "#/sobre-zamazenaegis", "primary"], ["Contact", "#/contacto", "secondary"]]],
         faq: ["FAQ", "Frequently asked questions", "Fast answers on their own screen so the user does not have to browse the whole site.", [["Does it use a lot of battery?", "It should prioritize low consumption, visible-screen focus and minimal background work."], ["Does it work offline?", "Local layers remain useful; online features degrade without faking success."], ["Does it request sensitive permissions?", "Only when they bring real value, with explanation and manual fallback when applicable."], ["Does it promise total security?", "No. Zamazen Aegis helps reduce risk, explain signals and guide decisions."]], [["Contact", "#/contacto", "primary"], ["View security", "#/seguridad", "secondary"]]],
         soporte: ["Help", "Neo Help and tickets", "Local answer search and sanitized ticket for manual support, without publishing data or faking a backend.", [["Search", "Prepared answers about account, privacy, permissions, plans, Bunker and Neo Network."], ["Ticket", "Sanitized text, consent and prepared email until a protected backend exists."], ["Privacy", "The creator cannot view private accounts; only what the user voluntarily sends."]], [["Open contact", "#/contacto", "primary"], ["Privacy", "#/privacidad", "secondary"]]],
         contacto: ["Contact", "Help and contact", "Support, privacy, accounts and critical errors have a direct screen. Do not send secrets by email.", [["Official email", "zamazenaegissupport@gmail.com for support, privacy, accounts and documentation."], ["Incidents", "Prioritize security, accounts, payments, deletion and critical errors."], ["Privacy", "Do not send passwords, 2FA codes or complete banking details."]], [["Send email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
-        "estado-proyecto": ["Status", "Project status", "Zamazen Aegis is in final 1.6 preparation: the web is active, the app is being tested and account/cloud connection is prepared without fake data.", [["Web active", "The public website works as information center and future ecosystem panel."], ["App 1.6", "It is being finished, reviewed and tested before being called ready."], ["Future connection", "Account, Neo Network, Bunker and cloud will activate with real backend/app evidence."]], [["Request access", "#/lista-espera", "primary"], ["View news", "#/novedades", "secondary"]]],
-        "lista-espera": ["Access", "Waitlist and trial access", "A safe screen to prepare a trial, tester or launch-notice request without exposing unnecessary data or faking a backend.", [["Private", "Email is optional and is never shown publicly."], ["Manual", "Every request is reviewed before access."], ["No files", "Attachments are not accepted from this website."]], [["Send idea", "#/ideas", "primary"], ["Contact", "#/contacto", "secondary"]]],
+        "estado-proyecto": ["Status", "Project status", "Zamazen Aegis is in final 1.6 preparation: the web is active, the app is being tested and temporary testing is closed without promising availability that does not exist yet.", [["Web active", "The public website works as information center and future ecosystem panel."], ["App 1.6", "It is being finished, reviewed and tested before being called ready."], ["Official channel", "The official app appears here after a real publication."]], [["View official availability", "#/descargar", "primary"], ["View news", "#/novedades", "secondary"]]],
+        "lista-espera": ["Availability", "Temporary testing closed", "New requests and redownloads of expired test builds are not accepted. The official app appears in the official channel after publication.", [["No reactivation", "An expired testing build cannot be used again."], ["No redownload", "This website does not prepare testing-access requests."], ["Official channel", "The official download appears after a real publication."]], [["View official availability", "#/descargar", "primary"], ["Contact", "#/contacto", "secondary"]]],
         confianza: ["Trust", "Trust and privacy center", "A clear screen to understand what Zamazen protects, which permissions it may need, what data it avoids and Android's real limits.", [["Permissions explained", "Nothing sensitive is requested without value, consent and manual fallback."], ["Minimal data", "No secrets, emails or reports are published without sanitization."], ["No smoke", "No absolute protection or perfect detection promises."]], [["Manage data", "#/datos", "primary"], ["View permissions", "#/permisos", "secondary"]]],
         novedades: ["News", "Guardian changelog", "Recent web changes, app progress and general next steps to show that the project is alive.", [["Tree web", "Internal routes replaced the endless landing."], ["Living profile", "Account, avatar, level and sync readiness."], ["Safe community", "Ideas and acknowledgements are manually reviewed before publication."]], [["Project status", "#/estado-proyecto", "primary"], ["Ideas", "#/ideas", "secondary"]]],
         ideas: ["Ideas", "Ideas, improvements and acknowledgements", "Useful proposals are received safely: no files, no scripts, no automatic publishing and always manual review.", [["Controlled form", "Only limited, validated and sanitized text."], ["Moderation", "Nothing appears in acknowledgements without permission and review."], ["Rewards", "Codes or recognition are never automatic."]], [["Send proposal", "#/ideas", "primary"], ["Project status", "#/estado-proyecto", "secondary"]]],
@@ -10294,13 +10436,13 @@
       "politica-producto": ["Produit", "Politique produit", "Zamazen Aegis aide a revoir des signaux de risque sans promettre securite totale ni detection parfaite.", [["Limites honnetes", "Aucune app ne supprime tout risque ni ne remplace le jugement utilisateur."], ["Permissions", "Si une fonction exige permission ou connexion, c'est explique avant."], ["Action reelle", "Blocage ou automatisation seulement avec fonction, permission et consentement."]], [["Voir securite", "#/seguridad", "primary"], ["Voir fonctions", "#/funciones", "secondary"]]],
       "cobertura-wifi": ["Connexion", "Couverture, internet mobile et WiFi", "L'app peut guider face aux problemes reseau, mais ne promet pas de creer couverture ni contourner l'operateur.", [["Diagnostic", "Peut indiquer perte de connexion, WiFi faible ou reseau ouvert quand Android l'autorise."], ["Actions reelles", "Guide vers mode avion, 4G/5G, appels WiFi ou changement de reseau sur."], ["Sans fumee", "Ne promet pas de changer les antennes ni d'ameliorer physiquement le signal."]], [["Contact", "#/contacto", "primary"], ["Politique produit", "#/politica-producto", "secondary"]]],
       "contrato-licencia": ["Legal", "Contrat de licence / EULA", "Usage personnel et limite, soumis a la loi, au Play Store et aux conditions publiees de Zamazen Aegis.", [["Bon usage", "Ne pas manipuler, revendre ni tenter de casser les protections."], ["Plans", "Core, Valhalla et Ragnarok doivent respecter permissions et confidentialite."], ["Evolution", "Les fonctions connectees peuvent changer pour securite, stabilite ou conformite."]], [["Contact", "#/contacto", "primary"], ["A propos", "#/sobre-zamazenaegis", "secondary"]]],
-      "sobre-zamazenaegis": ["Projet", "A propos de Zamazen Aegis", "Zamazen Aegis existe pour aider des personnes reelles face au spam, phishing, arnaques mobiles et confusion numerique, sans vendre une protection absolue.", [["Ce qu'il protege", "Appels, SMS, liens, signalements, identite numerique, identifiants et decisions sensibles dans les limites techniques reelles."], ["Pourquoi il existe", "Pour rendre la securite comprehensible, accessible et utile au quotidien."], ["Piliers", "Courage, Verite, Honneur, Loyaute, Discipline, Hospitalite, Productivite, Perseverance et Confiance guident chaque decision."]], [["Voir l'equipe", "#/equipo", "primary"], ["Voir fonctions", "#/funciones", "secondary"]]],
+      "sobre-zamazenaegis": ["Projet", "A propos de Zamazen Aegis", "Zamazen Aegis existe pour aider des personnes reelles face au spam, phishing, arnaques mobiles et confusion numerique, sans vendre une protection absolue.", [["Ce qu'il protege", "Appels, SMS, liens, signalements, identite numerique, identifiants et decisions sensibles dans les limites techniques reelles."], ["Pourquoi il existe", "Pour rendre la securite comprehensible, accessible et utile au quotidien."], ["Piliers", "Courage, Verite, Honneur, Loyaute, Discipline, Hospitalite, Productivite, Perseverance et Confiance guident chaque decision."]], [["Voir l'equipe", "#/equipo", "primary"], ["Remerciements", "#/agradecimientos", "secondary"], ["Voir fonctions", "#/funciones", "secondary"]]],
       equipo: ["Equipe", "Equipe", "Vue dediee aux personnes et gardiens derriere le projet, sans melanger permissions, tarifs ou formulaires.", [["Francisco Javier Molina Moreno", "Createur et responsable de la vision de Zamazen Aegis."], ["Maria Isabel Rodriguez Sanchez", "Partenaire cle du projet et soutien humain dans la construction de confiance."], ["Neo", "Gardien original de Zamazen Aegis: accompagne, explique et protege sans transformer le risque en peur."]], [["A propos", "#/sobre-zamazenaegis", "primary"], ["Contact", "#/contacto", "secondary"]]],
       faq: ["FAQ", "Questions frequentes", "Reponses rapides dans une vue propre pour ne pas parcourir tout le site.", [["Consomme-t-il beaucoup de batterie?", "Il doit prioriser faible consommation, focus ecran et travail minimal en arriere-plan."], ["Fonctionne-t-il sans internet?", "Les couches locales restent utiles; l'online se degrade sans faux succes."], ["Demande-t-il des permissions sensibles?", "Seulement avec valeur reelle, explication et alternative manuelle si besoin."], ["Promet-il une securite totale?", "Non. Zamazen Aegis aide a reduire le risque, expliquer les signaux et guider les decisions."]], [["Contact", "#/contacto", "primary"], ["Voir securite", "#/seguridad", "secondary"]]],
       soporte: ["Aide", "Aide Neo et tickets", "Recherche locale de réponses et ticket assaini pour support manuel, sans publier de données ni simuler un backend.", [["Recherche", "Réponses préparées sur compte, confidentialité, permissions, plans, Bunker et Red Neo."], ["Ticket", "Texte assaini, consentement et email préparé jusqu'à existence d'un backend protégé."], ["Confidentialité", "Le créateur ne voit pas les comptes privés; seulement ce que l'utilisateur envoie volontairement."]], [["Ouvrir contact", "#/contacto", "primary"], ["Confidentialité", "#/privacidad", "secondary"]]],
       contacto: ["Contact", "Aide et contact", "Support, confidentialite, comptes et erreurs critiques ont une vue directe. N'envoyez pas de secrets par email.", [["Email officiel", "zamazenaegissupport@gmail.com pour support, confidentialite, compte et documentation."], ["Incidents", "Priorite a securite, comptes, paiements, suppression et erreurs critiques."], ["Confidentialite", "Ne pas envoyer mots de passe, codes 2FA ni donnees bancaires completes."]], [["Envoyer un email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
-      "estado-proyecto": ["Etat", "Etat du projet", "Zamazen Aegis est en preparation finale 1.6: web active, app en test et connexion compte/cloud preparee sans fausses donnees.", [["Web active", "Le site public fonctionne comme centre d'information et futur panneau ecosysteme."], ["App 1.6", "Elle est terminee, revue et testee avant d'etre declaree prete."], ["Connexion future", "Compte, Reseau Neo, Bunker et cloud s'activeront avec backend/app reels."]], [["Demander acces", "#/lista-espera", "primary"], ["Voir nouveautes", "#/novedades", "secondary"]]],
-      "lista-espera": ["Acces", "Liste d'attente et acces test", "Vue sure pour preparer une demande d'acces, tester ou avis de lancement sans exposer de donnees inutiles ni simuler un backend.", [["Prive", "L'email est optionnel et jamais affiche publiquement."], ["Manuel", "Chaque demande est revue avant tout acces."], ["Sans fichiers", "Aucune piece jointe n'est acceptee depuis cette web."]], [["Envoyer une idee", "#/ideas", "primary"], ["Contact", "#/contacto", "secondary"]]],
+      "estado-proyecto": ["État", "État du projet", "Zamazen Aegis est en préparation finale 1.6 : le web est actif, l'app est en test et le test temporaire est fermé sans promettre une disponibilité qui n'existe pas encore.", [["Web actif", "Le site public fonctionne comme centre d'information et futur panneau de l'écosystème."], ["App 1.6", "Elle est en cours de finalisation, de révision et de test avant d'être déclarée prête."], ["Canal officiel", "L'application officielle apparaîtra ici après une publication réelle."]], [["Voir la disponibilité officielle", "#/descargar", "primary"], ["Voir les nouveautés", "#/novedades", "secondary"]]],
+      "lista-espera": ["Disponibilité", "Test temporaire fermé", "Les nouvelles demandes et les retéléchargements de builds de test expirées ne sont pas acceptés. L'application officielle apparaîtra dans le canal officiel après sa publication.", [["Pas de réactivation", "Une build de test expirée ne peut plus être utilisée."], ["Pas de retéléchargement", "Ce site ne prépare aucune demande d'accès au test."], ["Canal officiel", "Le téléchargement officiel apparaîtra après une publication réelle."]], [["Voir la disponibilité officielle", "#/descargar", "primary"], ["Contact", "#/contacto", "secondary"]]],
       confianza: ["Confiance", "Centre de confiance et confidentialite", "Une vue claire pour comprendre ce que Zamazen protege, quelles permissions il peut demander, quelles donnees il evite et les limites d'Android.", [["Permissions expliquees", "Rien de sensible sans utilite, consentement et alternative manuelle."], ["Donnees minimales", "Aucun secret, email ou signalement publie sans assainissement."], ["Zero fumee", "Pas de promesse de protection absolue ni de detection parfaite."]], [["Gerer les donnees", "#/datos", "primary"], ["Voir permissions", "#/permisos", "secondary"]]],
       novedades: ["Nouveautes", "Historique du Gardien", "Changements recents de la web, avancees de l'app et prochaines etapes pour montrer que le projet evolue avec ordre.", [["Web en arbre", "Les routes internes remplacent la landing interminable."], ["Profil vivant", "Compte, avatar, niveau et synchronisation prepares."], ["Communaute sure", "Idees et remerciements sont revus manuellement avant publication."]], [["Etat du projet", "#/estado-proyecto", "primary"], ["Idees", "#/ideas", "secondary"]]],
       ideas: ["Idees", "Idees, ameliorations et remerciements", "Recevoir des propositions utiles en securite: pas de fichiers, pas de scripts, pas de publication automatique et toujours revue manuelle.", [["Formulaire controle", "Texte limite, valide et assaini."], ["Moderation", "Rien n'apparait en remerciements sans permission et revue."], ["Recompenses", "Codes ou reconnaissance ne sont jamais automatiques."]], [["Envoyer proposition", "#/ideas", "primary"], ["Etat du projet", "#/estado-proyecto", "secondary"]]],
@@ -10338,13 +10480,13 @@
       "politica-producto": ["Produto", "Política de produto", "Zamazen Aegis ajuda a revisar sinais de risco relatados sem prometer segurança total nem detecção perfeita.", [["Limites honestos", "Nenhuma app remove todo risco nem substitui o julgamento do usuário."], ["Permissões", "Se uma função precisa de permissão ou conexão, isso é explicado antes."], ["Ação real", "Bloqueio ou automação só ocorre com função, permissão e consentimento."]], [["Ver segurança", "#/seguridad", "primary"], ["Ver funções", "#/funciones", "secondary"]]],
       "cobertura-wifi": ["Conexão", "Cobertura, internet móvel e WiFi", "A app pode orientar em problemas de rede, mas não promete criar cobertura nem contornar limites da operadora.", [["Diagnóstico", "Pode indicar perda de conexão, WiFi fraco ou rede aberta quando Android permite."], ["Ações reais", "Guia para modo avião, 4G/5G, chamadas WiFi ou troca de rede segura."], ["Sem fumaça", "Não promete mudar antenas nem melhorar fisicamente o sinal."]], [["Contato", "#/contacto", "primary"], ["Política de produto", "#/politica-producto", "secondary"]]],
       "contrato-licencia": ["Legal", "Contrato de licença / EULA", "Uso pessoal e limitado, sujeito à lei, Play Store e termos publicados de Zamazen Aegis.", [["Uso correto", "Não manipular, revender nem tentar quebrar sistemas de proteção."], ["Planos", "Core, Valhalla e Ragnarok devem respeitar permissões e privacidade."], ["Evolução", "Funções conectadas podem mudar para melhorar segurança, estabilidade ou conformidade."]], [["Contato", "#/contacto", "primary"], ["Sobre o projeto", "#/sobre-zamazenaegis", "secondary"]]],
-      "sobre-zamazenaegis": ["Projeto", "Sobre Zamazen Aegis", "Zamazen Aegis existe para ajudar pessoas reais contra spam, phishing, golpes móveis e confusão digital, sem vender proteção absoluta.", [["O que protege", "Chamadas, SMS, links, relatos, identidade digital, credenciais e decisões sensíveis dentro dos limites técnicos reais."], ["Por que existe", "Para tornar segurança compreensível, acessível e útil no dia a dia."], ["Pilares", "Coragem, Verdade, Honra, Lealdade, Disciplina, Hospitalidade, Produtividade, Perseverança e Confiança guiam cada decisão."]], [["Ver equipe", "#/equipo", "primary"], ["Ver funções", "#/funciones", "secondary"]]],
+      "sobre-zamazenaegis": ["Projeto", "Sobre Zamazen Aegis", "Zamazen Aegis existe para ajudar pessoas reais contra spam, phishing, golpes móveis e confusão digital, sem vender proteção absoluta.", [["O que protege", "Chamadas, SMS, links, relatos, identidade digital, credenciais e decisões sensíveis dentro dos limites técnicos reais."], ["Por que existe", "Para tornar segurança compreensível, acessível e útil no dia a dia."], ["Pilares", "Coragem, Verdade, Honra, Lealdade, Disciplina, Hospitalidade, Produtividade, Perseverança e Confiança guiam cada decisão."]], [["Ver equipe", "#/equipo", "primary"], ["Agradecimentos", "#/agradecimientos", "secondary"], ["Ver funções", "#/funciones", "secondary"]]],
       equipo: ["Equipe", "Equipe", "Tela dedicada às pessoas e guardiões por trás do projeto, sem misturar permissões, preços ou formulários.", [["Francisco Javier Molina Moreno", "Criador e responsável pela visão de Zamazen Aegis."], ["Maria Isabel Rodriguez Sanchez", "Parceira chave do projeto e apoio humano na construção de confiança."], ["Neo", "Guardião original de Zamazen Aegis: acompanha, explica e protege sem transformar risco em medo."]], [["Sobre o projeto", "#/sobre-zamazenaegis", "primary"], ["Contato", "#/contacto", "secondary"]]],
       faq: ["FAQ", "Perguntas frequentes", "Respostas rápidas em uma tela própria para não obrigar o usuário a percorrer todo o site.", [["Consome muita bateria?", "Deve priorizar baixo consumo, foco de tela e trabalho mínimo em segundo plano."], ["Funciona sem internet?", "As camadas locais continuam úteis; o online degrada sem fingir sucesso."], ["Pede permissões sensíveis?", "Só quando trazem valor real, com explicação e alternativa manual quando aplicável."], ["Promete segurança total?", "Não. Zamazen Aegis ajuda a reduzir risco, explicar sinais e guiar decisões."]], [["Contato", "#/contacto", "primary"], ["Ver segurança", "#/seguridad", "secondary"]]],
       soporte: ["Ajuda", "Neo Ajuda e tickets", "Busca local de respostas e ticket saneado para suporte manual, sem publicar dados nem simular backend.", [["Busca", "Respostas preparadas sobre conta, privacidade, permissões, planos, Bunker e Red Neo."], ["Ticket", "Texto saneado, consentimento e email preparado até existir backend protegido."], ["Privacidade", "O criador não vê contas privadas; só o que o usuário envia voluntariamente."]], [["Abrir contato", "#/contacto", "primary"], ["Privacidade", "#/privacidad", "secondary"]]],
       contacto: ["Contato", "Ajuda e contato", "Suporte, privacidade, contas e erros críticos têm uma tela direta. Não envie segredos por email.", [["Email oficial", "zamazenaegissupport@gmail.com para suporte, privacidade, conta e documentação."], ["Incidentes", "Priorizar segurança, contas, pagamentos, eliminação e erros críticos."], ["Privacidade", "Não enviar senhas, códigos 2FA nem dados bancários completos."]], [["Enviar email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
-      "estado-proyecto": ["Estado", "Estado do projeto", "Zamazen Aegis está em preparação final 1.6: web ativa, app em testes e conexão conta/nuvem preparada sem dados falsos.", [["Web ativa", "A web pública funciona como centro informativo e futuro painel do ecossistema."], ["App 1.6", "Está sendo finalizada, revisada e testada antes de ser chamada de pronta."], ["Conexão futura", "Conta, Red Neo, Bunker e nuvem serão ativados com backend/app reais."]], [["Solicitar acesso", "#/lista-espera", "primary"], ["Ver novidades", "#/novedades", "secondary"]]],
-      "lista-espera": ["Acesso", "Lista de espera e acesso de teste", "Tela segura para preparar pedido de acesso, tester ou aviso de lançamento sem expor dados desnecessários nem simular backend.", [["Privado", "O email é opcional e nunca é mostrado publicamente."], ["Manual", "Cada pedido é revisado antes de qualquer acesso."], ["Sem arquivos", "Anexos não são aceitos nesta web."]], [["Enviar ideia", "#/ideas", "primary"], ["Contato", "#/contacto", "secondary"]]],
+      "estado-proyecto": ["Estado", "Estado do projeto", "Zamazen Aegis está em preparação final 1.6: web ativa, app em testes e o teste temporário está fechado sem prometer uma disponibilidade que ainda não existe.", [["Web ativa", "A web pública funciona como centro informativo e futuro painel do ecossistema."], ["App 1.6", "Está sendo finalizada, revisada e testada antes de ser chamada de pronta."], ["Canal oficial", "A app oficial aparecerá aqui depois de uma publicação real."]], [["Ver disponibilidade oficial", "#/descargar", "primary"], ["Ver novidades", "#/novedades", "secondary"]]],
+      "lista-espera": ["Disponibilidade", "Teste temporário fechado", "Novos pedidos e novos downloads de builds de teste expiradas não são aceites. A app oficial aparecerá no canal oficial depois da publicação.", [["Sem reativação", "Uma build de teste expirada não pode voltar a ser usada."], ["Sem novo download", "Esta web não prepara pedidos de acesso ao teste."], ["Canal oficial", "A descarga oficial aparecerá depois de uma publicação real."]], [["Ver disponibilidade oficial", "#/descargar", "primary"], ["Contato", "#/contacto", "secondary"]]],
       confianza: ["Confiança", "Centro de confiança e privacidade", "Uma tela clara para entender o que Zamazen protege, quais permissões pode pedir, quais dados evita e os limites reais do Android.", [["Permissões explicadas", "Nada sensível é pedido sem utilidade, consentimento e alternativa manual."], ["Dados mínimos", "Segredos, emails ou relatos não são publicados sem saneamento."], ["Zero fumaça", "Não promete proteção absoluta nem detecção perfeita."]], [["Gerenciar dados", "#/datos", "primary"], ["Ver permissões", "#/permisos", "secondary"]]],
       novedades: ["Novidades", "Histórico do Guardião", "Mudanças recentes da web, avanços da app e próximos passos gerais para mostrar que o projeto evolui com ordem.", [["Web em árvore", "As rotas internas substituem a landing interminável."], ["Perfil vivo", "Conta, avatar, nível e sincronização preparados."], ["Comunidade segura", "Ideias e agradecimentos são revisados manualmente antes de aparecer."]], [["Estado do projeto", "#/estado-proyecto", "primary"], ["Ideias", "#/ideas", "secondary"]]],
       ideas: ["Ideias", "Ideias, melhorias e agradecimentos", "Recebe propostas úteis com segurança: sem arquivos, sem scripts, sem publicação automática e sempre com revisão manual.", [["Formulário controlado", "Texto limitado, validado e saneado."], ["Moderação", "Nada aparece em agradecimentos sem permissão e revisão."], ["Recompensas", "Códigos ou reconhecimento nunca são automáticos."]], [["Enviar proposta", "#/ideas", "primary"], ["Estado do projeto", "#/estado-proyecto", "secondary"]]],
@@ -10366,6 +10508,69 @@
       historial: ["Função", "Histórico", "O histórico ajuda a entender o que aconteceu, o que o usuário decidiu e quais sinais foram detectados.", [["Memória local", "Eventos recentes sem envio desnecessário."], ["Contexto útil", "Explica chamadas, mensagens, links e ações de proteção."], ["Controle", "O usuário pode apagar dados pela app quando aplicável."]], [["Ver funções", "#/funciones", "primary"], ["Privacidade", "#/privacidad", "secondary"]]],
       "guardian-familiar": ["Função", "Guardião familiar", "Modo seguro para pessoas idosas, famílias ou usuários menos experientes sem controle parental oculto.", [["Estado seguro", "Ativa modo simples, avisos importantes e baixo consumo."], ["Sem permissões silenciosas", "Não muda permissões Android por trás nem lê apps de terceiros."], ["Reversível", "O usuário mantém controle e explicações claras."]], [["Ver funções", "#/funciones", "primary"], ["Sobre o projeto", "#/sobre-zamazenaegis", "secondary"]]],
       "ayuda-contacto": ["Ajuda", "Ajuda e contato", "Suporte, privacidade, contas e erros críticos têm entrada clara sem percorrer todo o site.", [["Email oficial", "zamazenaegissupport@gmail.com para suporte, privacidade e contas."], ["FAQ", "Respostas sobre bateria, conectividade, permissões e segurança."], ["Sem segredos", "Nunca envie senhas, códigos 2FA nem dados bancários completos por email."]], [["Enviar email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["Eliminar conta", "#/eliminar-cuenta", "secondary"]]]
+    };
+
+    const ACKNOWLEDGEMENTS_CONTENT = {
+      es: [
+        "Agradecimientos permanentes",
+        "Quienes hicieron posible Zamazen Aegis",
+        "Zamazen Aegis nació del deseo de crear algo que protegiera de verdad: una herramienta clara, cercana y humana, concebida para convertirse en un escudo frente a los riesgos digitales y, con el tiempo, ayudar también ante situaciones del mundo real.",
+        [
+          ["Un proyecto independiente", "Este proyecto ha sido desarrollado de forma independiente por Francisco Javier Molina Moreno, paso a paso, a partir de todo lo aprendido sobre tecnología, seguridad, privacidad y las amenazas que afectan cada día a personas que muchas veces no saben cómo defenderse."],
+          ["María Isabel Rodríguez Sánchez", "A María Isabel Rodríguez Sánchez, mi esposa, primera aliada y compañera de este proyecto. Su apoyo, su paciencia y su confianza hicieron que nunca me rindiera, incluso en los momentos más difíciles, y que Zamazen Aegis pudiera llegar hasta aquí."],
+          ["Neo, corazón protector", "A Neo, mi gran compañero e inspiración de Zamazen Aegis. Siempre permaneció a mi lado, especialmente cuando me encontraba mal, cuidándome con una lealtad que no necesita palabras. Su compañía y su espíritu protector representan el corazón de esta aplicación."],
+          ["ChatGPT (Dean) y Codex", "Desarrollar en solitario una aplicación tan ambiciosa habría sido mucho más difícil sin las herramientas creadas por OpenAI. Mi agradecimiento a ChatGPT —al que cariñosamente llamo Dean— y a Codex por acompañarme como herramientas de apoyo durante el aprendizaje, la planificación, la programación, la revisión y las pruebas."],
+          ["Quienes crearon las herramientas", "También agradezco profundamente a las personas que hicieron posibles estas herramientas. Gracias a su trabajo, una sola persona con recursos limitados ha podido acercarse a construir una aplicación cuyo propósito es reforzar la protección de las personas frente a riesgos digitales y, progresivamente, ofrecer ayuda clara ante determinadas situaciones del mundo real, siempre dentro de sus límites."],
+          ["Autoría y responsabilidad", "La visión, el propósito, las decisiones y la responsabilidad final de Zamazen Aegis pertenecen exclusivamente a su creador, Francisco Javier Molina Moreno. ChatGPT y Codex son herramientas de apoyo dentro de un proyecto independiente; su uso no implica patrocinio, asociación, respaldo, propiedad ni relación oficial con OpenAI."],
+          ["Nació para proteger", "Zamazen Aegis no nació para impresionar. Nació para proteger."]
+        ],
+        [["Sobre el proyecto", "#/sobre-zamazenaegis", "primary"], ["Reconocimientos futuros de la comunidad", "#/salon-guardianes", "secondary"]]
+      ],
+      en: [
+        "Permanent acknowledgements",
+        "The people who made Zamazen Aegis possible",
+        "Zamazen Aegis was born from the desire to create something that would truly protect: a clear, approachable and humane tool, conceived as a shield against digital risks and, over time, as help in real-world situations too.",
+        [
+          ["An independent project", "This project was developed independently by Francisco Javier Molina Moreno, step by step, drawing on everything learned about technology, security, privacy and the threats that affect people every day when they often do not know how to defend themselves."],
+          ["María Isabel Rodríguez Sánchez", "To María Isabel Rodríguez Sánchez, my wife, first ally and companion throughout this project. Her support, patience and trust kept me from giving up, even during the hardest moments, and helped Zamazen Aegis reach this point."],
+          ["Neo, its protective heart", "To Neo, my great companion and the inspiration for Zamazen Aegis. Neo always stayed by my side, especially when I was unwell, caring for me with a loyalty that needs no words. That companionship and protective spirit represent the heart of this application."],
+          ["ChatGPT (Dean) and Codex", "Developing such an ambitious application alone would have been much harder without the tools created by OpenAI. My thanks go to ChatGPT —which I affectionately call Dean— and Codex for assisting me as support tools throughout learning, planning, programming, review and testing."],
+          ["The people behind the tools", "I am also deeply grateful to the people who made these tools possible. Their work has enabled one person with limited resources to move closer to building an application whose purpose is to strengthen people's protection against digital risks and, progressively, offer clear help in specific real-world situations, always within its limits."],
+          ["Authorship and responsibility", "The vision, purpose, decisions and final responsibility for Zamazen Aegis belong exclusively to its creator, Francisco Javier Molina Moreno. ChatGPT and Codex are support tools within an independent project; their use does not imply OpenAI sponsorship, association or partnership, endorsement, ownership, or any official relationship."],
+          ["Born to protect", "Zamazen Aegis was not born to impress. It was born to protect."]
+        ],
+        [["About the project", "#/sobre-zamazenaegis", "primary"], ["Future community recognition", "#/salon-guardianes", "secondary"]]
+      ],
+      fr: [
+        "Remerciements permanents",
+        "Celles et ceux qui ont rendu Zamazen Aegis possible",
+        "Zamazen Aegis est né du désir de créer quelque chose qui protège réellement : un outil clair, proche et humain, pensé comme un bouclier contre les risques numériques et, avec le temps, comme une aide face aux situations du monde réel.",
+        [
+          ["Un projet indépendant", "Ce projet a été développé de manière indépendante par Francisco Javier Molina Moreno, étape par étape, à partir de tout ce qui a été appris sur la technologie, la sécurité, la confidentialité et les menaces qui touchent chaque jour des personnes ne sachant souvent pas comment se défendre."],
+          ["María Isabel Rodríguez Sánchez", "À María Isabel Rodríguez Sánchez, mon épouse, première alliée et compagne tout au long de ce projet. Son soutien, sa patience et sa confiance m’ont empêché d’abandonner, même dans les moments les plus difficiles, et ont permis à Zamazen Aegis d’arriver jusqu’ici."],
+          ["Neo, son cœur protecteur", "À Neo, mon grand compagnon et l’inspiration de Zamazen Aegis. Neo est toujours resté à mes côtés, surtout lorsque je n’allais pas bien, veillant sur moi avec une loyauté qui n’a pas besoin de mots. Cette présence et cet esprit protecteur représentent le cœur de cette application."],
+          ["ChatGPT (Dean) et Codex", "Développer seul une application aussi ambitieuse aurait été bien plus difficile sans les outils créés par OpenAI. Je remercie ChatGPT —que j’appelle affectueusement Dean— et Codex de m’avoir accompagné comme outils de soutien pendant l’apprentissage, la planification, la programmation, la révision et les tests."],
+          ["Les personnes derrière les outils", "Je remercie aussi profondément les personnes qui ont rendu ces outils possibles. Grâce à leur travail, une seule personne disposant de ressources limitées a pu se rapprocher de la création d’une application dont le but est de renforcer la protection des personnes face aux risques numériques et, progressivement, d’offrir une aide claire dans certaines situations du monde réel, toujours dans les limites de l’application."],
+          ["Création et responsabilité", "La vision, la finalité, les décisions et la responsabilité finale de Zamazen Aegis appartiennent exclusivement à son créateur, Francisco Javier Molina Moreno. ChatGPT et Codex sont des outils de soutien au sein d’un projet indépendant ; leur utilisation n’implique aucun parrainage, association ou partenariat, soutien officiel, droit de propriété ni relation officielle avec OpenAI."],
+          ["Né pour protéger", "Zamazen Aegis n’est pas né pour impressionner. Il est né pour protéger."]
+        ],
+        [["À propos du projet", "#/sobre-zamazenaegis", "primary"], ["Reconnaissances futures de la communauté", "#/salon-guardianes", "secondary"]]
+      ],
+      pt: [
+        "Agradecimentos permanentes",
+        "Quem tornou Zamazen Aegis possível",
+        "Zamazen Aegis nasceu do desejo de criar algo que protegesse de verdade: uma ferramenta clara, próxima e humana, concebida como um escudo contra riscos digitais e, com o tempo, como ajuda também em situações do mundo real.",
+        [
+          ["Um projeto independente", "Este projeto foi desenvolvido de forma independente por Francisco Javier Molina Moreno, passo a passo, a partir de tudo o que foi aprendido sobre tecnologia, segurança, privacidade e as ameaças que afetam diariamente pessoas que muitas vezes não sabem como se defender."],
+          ["María Isabel Rodríguez Sánchez", "A María Isabel Rodríguez Sánchez, minha esposa, primeira aliada e companheira ao longo deste projeto. Seu apoio, sua paciência e sua confiança fizeram com que eu nunca desistisse, mesmo nos momentos mais difíceis, e permitiram que Zamazen Aegis chegasse até aqui."],
+          ["Neo, seu coração protetor", "A Neo, meu grande companheiro e inspiração de Zamazen Aegis. Neo sempre permaneceu ao meu lado, especialmente quando eu não estava bem, cuidando de mim com uma lealdade que dispensa palavras. Sua companhia e seu espírito protetor representam o coração deste aplicativo."],
+          ["ChatGPT (Dean) e Codex", "Desenvolver sozinho um aplicativo tão ambicioso teria sido muito mais difícil sem as ferramentas criadas pela OpenAI. Agradeço ao ChatGPT —que chamo carinhosamente de Dean— e ao Codex por me acompanharem como ferramentas de apoio durante a aprendizagem, o planejamento, a programação, a revisão e os testes."],
+          ["As pessoas por trás das ferramentas", "Também agradeço profundamente às pessoas que tornaram essas ferramentas possíveis. Graças ao trabalho delas, uma única pessoa com recursos limitados conseguiu se aproximar da construção de um aplicativo cujo propósito é reforçar a proteção das pessoas contra riscos digitais e, progressivamente, oferecer ajuda clara em determinadas situações do mundo real, sempre dentro dos limites do aplicativo."],
+          ["Autoria e responsabilidade", "A visão, o propósito, as decisões e a responsabilidade final por Zamazen Aegis pertencem exclusivamente ao seu criador, Francisco Javier Molina Moreno. ChatGPT e Codex são ferramentas de apoio em um projeto independente; seu uso não implica patrocínio, associação ou parceria, respaldo oficial, propriedade nem relação oficial com a OpenAI."],
+          ["Nasceu para proteger", "Zamazen Aegis não nasceu para impressionar. Nasceu para proteger."]
+        ],
+        [["Sobre o projeto", "#/sobre-zamazenaegis", "primary"], ["Reconhecimentos futuros da comunidade", "#/salon-guardianes", "secondary"]]
+      ]
     };
 
     function getTranslationValue(language, key) {
@@ -10413,9 +10618,11 @@
 
     function setLanguage(language, options = {}) {
       const selectedLanguage = translations[language] ? language : "es";
+      const openGraphLocales = { es: "es_ES", en: "en_US", fr: "fr_FR", pt: "pt_PT" };
 
       document.body.classList.add("is-language-switching");
       document.documentElement.lang = selectedLanguage;
+      if (openGraphLocale) openGraphLocale.content = openGraphLocales[selectedLanguage] || openGraphLocales.es;
 
       document.querySelectorAll("[data-i18n]").forEach((element) => {
         const key = element.dataset.i18n;
@@ -10952,7 +11159,7 @@
       routeDetailGrid.replaceChildren(grid, clarity);
       routeDetailActions.replaceChildren(
         createProfileAction(copy.create, "#/crear-cuenta", "primary"),
-        createProfileAction(copy.trial, "#/lista-espera", "secondary"),
+        createProfileAction(copy.trial, "#/descargar", "secondary"),
         createProfileAction(copy.demo, "#/demo", "secondary")
       );
     }
@@ -11014,7 +11221,58 @@
       );
     }
 
-    function renderStatusExperience() {
+    function renderLocalizedRouteExperience(content, options = {}) {
+      const [badge, title, body, cards, actions] = content;
+      const { timeline = false, locked = false } = options;
+      setRouteDetailVariant("");
+      routeDetailBadge.textContent = badge;
+      routeDetailTitle.textContent = title;
+      routeDetailBody.textContent = body;
+
+      if (timeline) {
+        const timelineCard = createElement("section", "timeline-card");
+        timelineCard.append(createElement("h3", "", title));
+        timelineCard.append(createSecureNoteList(cards.map(([cardTitle, cardBody]) => [cardTitle, cardBody])));
+        routeDetailGrid.className = "profile-dashboard";
+        routeDetailGrid.replaceChildren(timelineCard);
+      } else {
+        routeDetailGrid.className = locked ? "profile-dashboard" : "experience-dashboard";
+        routeDetailGrid.replaceChildren(...cards.map(([cardTitle, cardBody]) => (
+          createStatusCard(cardTitle, cardBody, badge)
+        )));
+      }
+
+      routeDetailActions.replaceChildren(...actions.map(([label, href, variant]) => (
+        createProfileAction(label, href, variant)
+      )));
+    }
+
+    function renderAcknowledgementsExperience(content) {
+      const [badge, title, body, cards, actions] = content;
+      setRouteDetailVariant("");
+      routeDetailBadge.textContent = badge;
+      routeDetailTitle.textContent = title;
+      routeDetailBody.textContent = body;
+      routeDetailGrid.className = "acknowledgements-grid";
+      routeDetailGrid.setAttribute("aria-labelledby", "routeDetailTitle");
+      routeDetailGrid.replaceChildren(...cards.map(([cardTitle, cardBody], index) => {
+        const article = createElement("article", "route-detail-card acknowledgement-card");
+        const heading = createElement("h2", "", cardTitle);
+        heading.id = `acknowledgement-heading-${index + 1}`;
+        article.setAttribute("aria-labelledby", heading.id);
+        article.append(heading, createElement("p", "", cardBody));
+        return article;
+      }));
+      routeDetailActions.replaceChildren(...actions.map(([label, href, variant]) => (
+        createProfileAction(label, href, variant)
+      )));
+    }
+
+    function renderStatusExperience(content) {
+      if (getCurrentLanguage() !== "es") {
+        renderLocalizedRouteExperience(content);
+        return;
+      }
       setRouteDetailVariant("");
       routeDetailBadge.textContent = "Estado";
       routeDetailTitle.textContent = "Zamazen Aegis esta vivo y en fase final";
@@ -11026,16 +11284,20 @@
         createStatusCard("Cuenta Zamazen", "Estructura web lista; autenticacion real requiere backend conectado.", "Preparada"),
         createStatusCard("Red Neo", "Modelo de consentimiento y saneamiento preparado.", "Pruebas"),
         createStatusCard("Bunker Cloud", "Solo se activara con paquetes cifrados y reglas por usuario.", "Futuro seguro"),
-        createStatusCard("Siguiente paso", "Publicar, revisar como usuario real y recoger acceso/testers.", "Manual")
+        createStatusCard("Siguiente paso", "Publicar cuando corresponda y revisar como usuario real; no se reabre el testing temporal.", "Manual")
       );
       routeDetailActions.replaceChildren(
-        createProfileAction("Solicitar acceso", "#/lista-espera", "primary"),
+        createProfileAction("Ver disponibilidad oficial", "#/descargar", "primary"),
         createProfileAction("Ver novedades", "#/novedades", "secondary"),
         createProfileAction("Enviar idea", "#/ideas", "secondary")
       );
     }
 
-    function renderTrustCenterExperience() {
+    function renderTrustCenterExperience(content) {
+      if (getCurrentLanguage() !== "es") {
+        renderLocalizedRouteExperience(content);
+        return;
+      }
       setRouteDetailVariant("");
       routeDetailBadge.textContent = "Confianza";
       routeDetailTitle.textContent = "Centro de confianza y privacidad";
@@ -11056,7 +11318,11 @@
       );
     }
 
-    function renderChangelogExperience() {
+    function renderChangelogExperience(content) {
+      if (getCurrentLanguage() !== "es") {
+        renderLocalizedRouteExperience(content, { timeline: true });
+        return;
+      }
       setRouteDetailVariant("");
       routeDetailBadge.textContent = "Novedades";
       routeDetailTitle.textContent = "Historial del Guardian";
@@ -11078,7 +11344,11 @@
       );
     }
 
-    function renderCloudExperience() {
+    function renderCloudExperience(content) {
+      if (getCurrentLanguage() !== "es") {
+        renderLocalizedRouteExperience(content);
+        return;
+      }
       setRouteDetailVariant("");
       routeDetailBadge.textContent = "Nube";
       routeDetailTitle.textContent = "Nube y sincronizacion";
@@ -11218,7 +11488,11 @@
       return card;
     }
 
-    function renderAdminExperience() {
+    function renderAdminExperience(content) {
+      if (getCurrentLanguage() !== "es") {
+        renderLocalizedRouteExperience(content, { locked: true });
+        return;
+      }
       const account = normalizeAccountPreview(readAccountPreview());
       if (!hasCreatorPanelSession(account)) {
         renderAdminLockedExperience(account);
@@ -11283,7 +11557,11 @@
       loadTickets();
     }
 
-    function renderNotFoundExperience() {
+    function renderNotFoundExperience(content) {
+      if (getCurrentLanguage() !== "es") {
+        renderLocalizedRouteExperience(content);
+        return;
+      }
       setRouteDetailVariant("");
       routeDetailBadge.textContent = "404";
       routeDetailTitle.textContent = "Neo no ha encontrado esta camara";
@@ -11301,7 +11579,11 @@
       );
     }
 
-    function renderNeoExperience() {
+    function renderNeoExperience(content) {
+      if (getCurrentLanguage() !== "es") {
+        renderLocalizedRouteExperience(content);
+        return;
+      }
       setRouteDetailVariant("");
       routeDetailBadge.textContent = "Neo";
       routeDetailTitle.textContent = "Neo, el Guardian original";
@@ -11318,7 +11600,11 @@
       );
     }
 
-    function renderRunesExperience() {
+    function renderRunesExperience(content) {
+      if (getCurrentLanguage() !== "es") {
+        renderLocalizedRouteExperience(content);
+        return;
+      }
       setRouteDetailVariant("");
       routeDetailBadge.textContent = "Runas";
       routeDetailTitle.textContent = "Runas oficiales del Guardian";
@@ -11342,98 +11628,15 @@
       routeDetailBadge.textContent = copy.badge;
       routeDetailTitle.textContent = copy.title;
       routeDetailBody.textContent = copy.body;
-      routeDetailGrid.className = "secure-form-layout";
-
-      const form = createElement("form", "secure-form-card secure-form-grid");
-      const aliasInput = createElement("input", "form-input");
-      aliasInput.type = "text";
-      aliasInput.maxLength = MAX_ALIAS_LENGTH;
-      aliasInput.autocomplete = "name";
-      const emailInput = createElement("input", "form-input");
-      emailInput.type = "email";
-      emailInput.maxLength = MAX_EMAIL_LENGTH;
-      emailInput.autocomplete = "email";
-      const levelSelect = createElement("select", "form-input");
-      copy.levels.forEach((value) => {
-        const option = createElement("option", "", value);
-        option.value = value;
-        levelSelect.append(option);
-      });
-      const messageInput = createElement("textarea", "form-input");
-      messageInput.maxLength = MAX_WAITLIST_MESSAGE_LENGTH;
-      const honeypot = createElement("input", "form-input secure-hidden-field");
-      honeypot.type = "text";
-      honeypot.tabIndex = -1;
-      honeypot.autocomplete = "off";
-      const privacy = document.createElement("input");
-      privacy.type = "checkbox";
-      const status = createElement("p", "account-status");
-      status.setAttribute("role", "status");
-      status.setAttribute("aria-live", "polite");
-      const mailLink = createElement("a", "form-secondary-link", copy.mail);
-      mailLink.hidden = true;
-      form.append(
-        createElement("h3", "", copy.formTitle),
-        createSecureField(copy.alias, aliasInput),
-        createSecureField(copy.email, emailInput),
-        createSecureField(copy.interest, levelSelect),
-        createSecureField(copy.message, messageInput),
-        honeypot,
-        createElement("label", "secure-check-row"),
-        createElement("button", "cta-primary", copy.submit),
-        status,
-        mailLink
+      routeDetailGrid.className = "experience-dashboard";
+      routeDetailGrid.replaceChildren(
+        createStatusCard(copy.closedStatusTitle, copy.closedStatusBody, copy.closedStatusBadge),
+        createStatusCard(copy.officialTitle, copy.officialBody, copy.officialBadge)
       );
-      const privacyLabel = form.querySelector(".secure-check-row");
-      privacyLabel.append(privacy, createElement("span", "", copy.privacyText));
-      form.querySelector("button").type = "submit";
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const alias = normalizeFormText(aliasInput.value, MAX_ALIAS_LENGTH);
-        const email = normalizeFormText(emailInput.value, MAX_EMAIL_LENGTH);
-        const message = normalizeFormText(messageInput.value, MAX_WAITLIST_MESSAGE_LENGTH);
-        if (honeypot.value) return;
-        if (!alias || alias.length < 2) {
-          status.textContent = copy.invalidAlias;
-          return;
-        }
-        if (!isValidOptionalEmail(email)) {
-          status.textContent = copy.invalidEmail;
-          return;
-        }
-        if (hasUnsafeContributionText(`${alias} ${email} ${message}`)) {
-          status.textContent = copy.unsafe;
-          return;
-        }
-        if (!privacy.checked) {
-          status.textContent = copy.accept;
-          return;
-        }
-        if (!canSubmitSecureForm("waitlist")) {
-          status.textContent = copy.cooldown;
-          return;
-        }
-        const draft = { type: "waitlist", alias, email, interest: levelSelect.value, message, createdAt: new Date().toISOString() };
-        appendLocalDraft(STORAGE_WAITLIST_KEY, draft);
-        markSecureFormSubmitted("waitlist");
-        mailLink.href = buildMailtoLink(copy.subject, [
-          `Alias: ${alias}`,
-          `${copy.email}: ${email || copy.optionalMissing}`,
-          `${copy.interest}: ${levelSelect.value}`,
-          `${copy.message}: ${message || copy.noMessage}`
-        ]);
-        mailLink.hidden = false;
-        status.textContent = copy.ready;
-      });
-
-      const notes = createElement("aside", "secure-form-card");
-      notes.append(
-        createElement("span", "experience-status", copy.notesBadge),
-        createElement("h3", "", copy.notesTitle),
-        createSecureNoteList(copy.notes)
+      routeDetailActions.replaceChildren(
+        createProfileAction(copy.officialAction, "#/descargar", "primary"),
+        createProfileAction(copy.ideaAction, "#/ideas", "secondary")
       );
-      routeDetailGrid.replaceChildren(form, notes);
-      routeDetailActions.replaceChildren(createProfileAction(copy.ideaAction, "#/ideas", "secondary"));
     }
 
     function renderSecureIdeasExperience() {
@@ -11569,7 +11772,7 @@
       );
       routeDetailGrid.replaceChildren(form, security);
       routeDetailActions.replaceChildren(
-        createProfileAction(copy.waitlistAction, "#/lista-espera", "primary"),
+        createProfileAction(copy.waitlistAction, "#/descargar", "primary"),
         createProfileAction(copy.trustAction, "#/confianza", "secondary")
       );
     }
@@ -11892,14 +12095,21 @@
 
     function renderRouteDetail(detailKey) {
       const language = getCurrentLanguage();
-      const content = detailKey && (
-        ROUTE_DETAIL_CONTENT[language]?.[detailKey]
-        || ROUTE_DETAIL_CONTENT.en?.[detailKey]
-        || ROUTE_DETAIL_CONTENT.es?.[detailKey]
-      );
+      const content = detailKey === "agradecimientos"
+        ? (ACKNOWLEDGEMENTS_CONTENT[language] || ACKNOWLEDGEMENTS_CONTENT.en)
+        : detailKey && (
+          ROUTE_DETAIL_CONTENT[language]?.[detailKey]
+          || ROUTE_DETAIL_CONTENT.en?.[detailKey]
+          || ROUTE_DETAIL_CONTENT.es?.[detailKey]
+        );
 
       if (!content || !routeDetailSection) return;
-      const useRichLocalizedRoute = language === "es";
+      const useRichLocalizedRoute = SUPPORTED_LANGUAGES.includes(language);
+
+      if (detailKey === "agradecimientos") {
+        renderAcknowledgementsExperience(content);
+        return;
+      }
 
       if (detailKey === "cuenta") {
         renderAccountExperience();
@@ -11922,22 +12132,22 @@
       }
 
       if (useRichLocalizedRoute && detailKey === "estado-proyecto") {
-        renderStatusExperience();
+        renderStatusExperience(content);
         return;
       }
 
       if (useRichLocalizedRoute && detailKey === "confianza") {
-        renderTrustCenterExperience();
+        renderTrustCenterExperience(content);
         return;
       }
 
       if (useRichLocalizedRoute && detailKey === "novedades") {
-        renderChangelogExperience();
+        renderChangelogExperience(content);
         return;
       }
 
       if (useRichLocalizedRoute && detailKey === "nube") {
-        renderCloudExperience();
+        renderCloudExperience(content);
         return;
       }
 
@@ -11962,22 +12172,22 @@
       }
 
       if (useRichLocalizedRoute && detailKey === "admin") {
-        renderAdminExperience();
+        renderAdminExperience(content);
         return;
       }
 
       if (useRichLocalizedRoute && detailKey === "neo") {
-        renderNeoExperience();
+        renderNeoExperience(content);
         return;
       }
 
       if (useRichLocalizedRoute && detailKey === "runas") {
-        renderRunesExperience();
+        renderRunesExperience(content);
         return;
       }
 
       if (useRichLocalizedRoute && detailKey === "no-encontrado") {
-        renderNotFoundExperience();
+        renderNotFoundExperience(content);
         return;
       }
 
@@ -12013,6 +12223,9 @@
 
     function routeTitleFor(routeName, definition) {
       const language = getCurrentLanguage();
+      if (definition.detail === "agradecimientos") {
+        return (ACKNOWLEDGEMENTS_CONTENT[language] || ACKNOWLEDGEMENTS_CONTENT.en)[1];
+      }
       const detail = definition.detail && (
         ROUTE_DETAIL_CONTENT[language]?.[definition.detail]
         || ROUTE_DETAIL_CONTENT.en?.[definition.detail]
@@ -12141,9 +12354,10 @@
         avatarImageData: safeAccount.avatarImageData || "",
         level: safeAccount.level || "Core",
         protectionStatus: safeAccount.protectionStatus || "Escudo web listo",
-        syncStatus: safeAccount.syncStatus || (isOnline
-          ? "Sesión web verificada; sincronización móvil pendiente"
-          : "Pendiente de conectar app móvil"),
+        syncStatusCode: safeAccount.syncStatusCode || (!safeAccount.syncStatus
+          ? (isOnline ? "webVerifiedWaitingMobile" : "mobilePending")
+          : ""),
+        syncStatus: String(safeAccount.syncStatus || "").trim(),
         redNeoStatus: safeAccount.redNeoStatus || "Modo local seguro hasta enlazar app",
         bunkerStatus: safeAccount.bunkerStatus || "Bunker no sincronizado; cloud solo con paquete cifrado",
         permissionStatus: safeAccount.permissionStatus || "Permisos Android se revisan desde la app",
@@ -12350,8 +12564,10 @@
       const now = new Date().toISOString();
       writeOnlineSessionToken(payload.session.token);
       writeAccountPreview({
-        name: profile.name || profile.emailMasked || "Cuenta Google",
-        email: profile.email || profile.emailMasked || "Cuenta Google verificada",
+        name: profile.name || profile.emailMasked || "",
+        nameDisplayCode: profile.name || profile.emailMasked ? "" : "googleAccount",
+        email: profile.email || profile.emailMasked || "",
+        emailDisplayCode: profile.email || profile.emailMasked ? "" : "googleVerifiedAccount",
         provider: "zamazen-online-account",
         authProvider: "google",
         googleLinked: true,
@@ -12360,7 +12576,8 @@
         permissions: profile.permissions || {},
         signedInOnlineAt: now,
         lastSyncAt: now,
-        syncStatus: "Google verificado por backend; esperando enlace con app móvil"
+        syncStatusCode: "googleVerifiedWaitingMobile",
+        syncStatus: ""
       });
       setAllGoogleAuthStatuses("auth.googleSuccess");
     }
@@ -12690,7 +12907,10 @@
 
     function updateUserPanelPreview() {
       const rawAccount = readAccountPreview();
-      const account = normalizeAccountPreview(rawAccount);
+      const account = localizeAccountForProfile(
+        normalizeAccountPreview(rawAccount),
+        getRichRouteCopy("profile")
+      );
       const hasAccount = Boolean(rawAccount);
       const name = hasAccount ? String(account.name).slice(0, 80) : "";
       const email = hasAccount ? String(account.email).slice(0, 120) : "";
@@ -13224,7 +13444,8 @@
               permissions: profile.permissions || {},
               signedInOnlineAt: new Date().toISOString(),
               lastSyncAt: new Date().toISOString(),
-              syncStatus: "Sesión web verificada; esperando enlace con app móvil"
+              syncStatusCode: "webVerifiedWaitingMobile",
+              syncStatus: ""
             });
             loginForm.reset();
             setStatus("auth.loginSuccess");
@@ -13325,7 +13546,8 @@
               permissions: payload.profile?.permissions || {},
               createdOnlineAt: new Date().toISOString(),
               lastSyncAt: new Date().toISOString(),
-              syncStatus: "Cuenta online creada; esperando enlace con app móvil"
+              syncStatusCode: "accountCreatedWaitingMobile",
+              syncStatus: ""
             });
             accountForm.reset();
             setStatus("account.success");
@@ -13344,7 +13566,8 @@
           writeAccountPreview({
             ...account,
             attemptedOnlineAt: new Date().toISOString(),
-            syncStatus: "Vista local guardada; API no disponible ahora"
+            syncStatusCode: "localSavedApiUnavailable",
+            syncStatus: ""
           });
           setStatus("account.fallback");
         } finally {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Callback publico de Google OAuth para devolver al usuario a la cuenta segura de Zamazen Aegis sin almacenar tokens.">
+  <meta id="callbackDescription" name="description" content="Callback público de Google OAuth para devolver al usuario a la cuenta segura de Zamazen Aegis sin almacenar tokens.">
   <meta name="robots" content="noindex,nofollow">
   <meta http-equiv="Cache-Control" content="no-store">
   <link rel="canonical" href="https://rydent.github.io/ZamazenAegis-Web/auth/callback">
@@ -69,29 +69,84 @@
         production: "https://rydent.github.io/ZamazenAegis-Web/auth/callback",
         development: "http://localhost:5173/auth/callback"
       });
+      const SUPPORTED_CALLBACK_LANGUAGES = ["es", "en", "fr", "pt"];
+      const CALLBACK_COPY = {
+        es: {
+          title: "Zamazen Aegis - Retorno de Google OAuth",
+          description: "Retorno público de Google OAuth para volver a la cuenta segura de Zamazen Aegis sin almacenar tokens.",
+          returning: "Volviendo a Zamazen Aegis...",
+          continue: "Volver a la cuenta",
+          error: "Google devolvió un error. Zamazen no ha creado ninguna sesión falsa.",
+          code: "Retorno recibido. Zamazen volverá a la pantalla de cuenta para continuar de forma segura.",
+          empty: "Retorno abierto sin datos de Google. Volviendo a la cuenta."
+        },
+        en: {
+          title: "Zamazen Aegis - Google OAuth return",
+          description: "Public Google OAuth return page that sends the user back to the secure Zamazen Aegis account without storing tokens.",
+          returning: "Returning to Zamazen Aegis...",
+          continue: "Return to the account",
+          error: "Google returned an error. Zamazen did not create a fake session.",
+          code: "Return received. Zamazen will go back to the account screen to continue safely.",
+          empty: "Return opened without Google data. Going back to the account."
+        },
+        fr: {
+          title: "Zamazen Aegis - Retour Google OAuth",
+          description: "Page publique de retour Google OAuth qui renvoie l'utilisateur vers le compte sécurisé Zamazen Aegis sans stocker de jetons.",
+          returning: "Retour vers Zamazen Aegis...",
+          continue: "Revenir au compte",
+          error: "Google a renvoyé une erreur. Zamazen n'a créé aucune fausse session.",
+          code: "Retour reçu. Zamazen revient à l'écran du compte pour continuer en toute sécurité.",
+          empty: "Retour ouvert sans données Google. Retour vers le compte."
+        },
+        pt: {
+          title: "Zamazen Aegis - Retorno Google OAuth",
+          description: "Página pública de retorno Google OAuth que leva o usuário de volta à conta segura Zamazen Aegis sem guardar tokens.",
+          returning: "Voltando ao Zamazen Aegis...",
+          continue: "Voltar à conta",
+          error: "O Google devolveu um erro. O Zamazen não criou nenhuma sessão falsa.",
+          code: "Retorno recebido. O Zamazen voltará à tela da conta para continuar com segurança.",
+          empty: "Retorno aberto sem dados do Google. Voltando à conta."
+        }
+      };
       const params = new URLSearchParams(window.location.search || "");
       const error = params.get("error");
       const hasCode = params.has("code");
+      const requestedLanguage = params.get("lang");
+      let storedLanguage = "";
+      try {
+        storedLanguage = localStorage.getItem("lang") || "";
+      } catch (storageError) {
+        storedLanguage = "";
+      }
+      const browserLanguage = String(navigator.language || "es").slice(0, 2).toLowerCase();
+      const language = [requestedLanguage, storedLanguage, browserLanguage]
+        .find((candidate) => SUPPORTED_CALLBACK_LANGUAGES.includes(candidate)) || "es";
+      const copy = CALLBACK_COPY[language];
       const isProjectPage = window.location.pathname.includes("/ZamazenAegis-Web/");
       const basePath = isProjectPage ? "/ZamazenAegis-Web/" : "/";
       const route = error ? "login" : "cuenta";
-      const targetUrl = `${window.location.origin}${basePath}index.html#/${route}`;
+      const targetUrl = `${window.location.origin}${basePath}index.html?lang=${language}#/${route}`;
       const status = document.getElementById("callbackStatus");
       const continueLink = document.getElementById("continueLink");
 
       window.ZAMAZEN_GOOGLE_OAUTH_REDIRECT_URIS = GOOGLE_OAUTH_REDIRECT_URIS;
 
+      document.documentElement.lang = language;
+      document.title = copy.title;
+      document.getElementById("callbackDescription").content = copy.description;
+
       if (continueLink) {
         continueLink.href = targetUrl;
+        continueLink.textContent = copy.continue;
       }
 
       if (status) {
         if (error) {
-          status.textContent = "Google devolvio un error. Zamazen no ha creado ninguna sesion falsa.";
+          status.textContent = copy.error;
         } else if (hasCode) {
-          status.textContent = "Callback recibido. Zamazen volvera a la pantalla de cuenta para continuar de forma segura.";
+          status.textContent = copy.code;
         } else {
-          status.textContent = "Callback abierto sin datos de Google. Volviendo a la cuenta.";
+          status.textContent = copy.empty;
         }
       }
 
