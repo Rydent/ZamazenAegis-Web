@@ -10,15 +10,17 @@
     data-i18n-attr="content:meta.description"
     content="Zamazen Aegis ayuda a revisar señales de riesgo en llamadas, SMS y enlaces reportados con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo."
   >
-  <link rel="canonical" href="https://zamazenaegis.app/">
+  <link rel="canonical" id="canonicalUrl" href="https://rydent.github.io/ZamazenAegis-Web/">
+  <link rel="preload" as="image" href="images/neo/neo_guardian_hologram.png" fetchpriority="high">
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
-  <meta name="keywords" content="Zamazen Aegis, seguridad Android, anti phishing, spam, Red Neo, Bunker, privacidad, Valhalla, Ragnarok">
-  <meta name="theme-color" content="#050816">
+      <meta name="keywords" content="Zamazen Aegis, seguridad Android, anti phishing, spam, Red Neo, Bunker, privacidad, Valhalla, Ragnarok">
+  <meta name="author" content="Francisco Javier Molina Moreno">
+      <meta name="theme-color" content="#050816">
   <meta name="google-signin-client_id" content="67457777183-pqbhkk1bgoe4aim10f2kcjdrb0n5c3kp.apps.googleusercontent.com">
   <meta name="robots" content="index,follow">
   <meta property="og:site_name" content="Zamazen Aegis">
@@ -31,14 +33,19 @@
   <meta property="og:title" data-i18n-attr="content:meta.title" content="Zamazen Aegis | Seguridad Inteligente contra Estafas, Spam y Phishing">
   <meta property="og:description" data-i18n-attr="content:meta.description" content="Zamazen Aegis ayuda a revisar señales de riesgo en llamadas, SMS y enlaces reportados con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo.">
   <meta property="og:image" content="https://rydent.github.io/ZamazenAegis-Web/assets/og-zamazen-aegis.png">
+  <meta property="og:image:alt" content="Neo, guardián holográfico de Zamazen Aegis ante un escudo rúnico">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" data-i18n-attr="content:meta.title" content="Zamazen Aegis | Seguridad Inteligente contra Estafas, Spam y Phishing">
   <meta name="twitter:description" data-i18n-attr="content:meta.description" content="Zamazen Aegis ayuda a revisar señales de riesgo en llamadas, SMS y enlaces reportados con Neo, privacidad clara y una experiencia futurista pensada para anticiparse al riesgo.">
   <meta name="twitter:image" content="https://rydent.github.io/ZamazenAegis-Web/assets/og-zamazen-aegis.png">
-  <link rel="alternate" hreflang="es" href="?lang=es">
-  <link rel="alternate" hreflang="en" href="?lang=en">
-  <link rel="alternate" hreflang="fr" href="?lang=fr">
-  <link rel="alternate" hreflang="pt" href="?lang=pt">
+  <meta name="twitter:image:alt" content="Neo, guardián holográfico de Zamazen Aegis ante un escudo rúnico">
+  <link rel="alternate" hreflang="es" href="https://rydent.github.io/ZamazenAegis-Web/?lang=es">
+  <link rel="alternate" hreflang="en" href="https://rydent.github.io/ZamazenAegis-Web/?lang=en">
+  <link rel="alternate" hreflang="fr" href="https://rydent.github.io/ZamazenAegis-Web/?lang=fr">
+  <link rel="alternate" hreflang="pt" href="https://rydent.github.io/ZamazenAegis-Web/?lang=pt">
+  <link rel="alternate" hreflang="x-default" href="https://rydent.github.io/ZamazenAegis-Web/">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -50,13 +57,29 @@
       "publisher": {
         "@type": "Organization",
         "name": "Zamazen Aegis",
-        "url": "https://zamazenaegis.app/"
+      "url": "https://rydent.github.io/ZamazenAegis-Web/"
       },
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/PreOrder"
+      },
+      "inLanguage": ["es", "en", "fr", "pt"]
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Zamazen Aegis",
+      "url": "https://rydent.github.io/ZamazenAegis-Web/",
+      "description": "Centro público de Zamazen Aegis para conocer su aplicación de seguridad, Neo, Bunker, privacidad y disponibilidad oficial.",
+      "inLanguage": ["es", "en", "fr", "pt"],
+      "publisher": {
+        "@type": "Organization",
+        "name": "Zamazen Aegis",
+        "url": "https://rydent.github.io/ZamazenAegis-Web/"
       }
     }
   </script>
@@ -74,6 +97,9 @@
       --blue-strong: #2f7cff;
       --green: #5ef0bd;
       --green-strong: #1bcf92;
+      --copper: #d6a463;
+      --copper-soft: rgba(214, 164, 99, 0.22);
+      --ice: #dff8ff;
       --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
       --radius-xl: 28px;
       --radius-lg: 20px;
@@ -115,8 +141,9 @@
       font-family: "Segoe UI", "Arial Nova", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 20% 0%, rgba(47, 124, 255, 0.18), transparent 34%),
-        radial-gradient(circle at 100% 10%, rgba(27, 207, 146, 0.12), transparent 28%),
+        radial-gradient(ellipse at 16% -8%, rgba(47, 124, 255, 0.26), transparent 38%),
+        radial-gradient(ellipse at 92% 4%, rgba(27, 207, 146, 0.16), transparent 30%),
+        radial-gradient(ellipse at 50% 36%, rgba(214, 164, 99, 0.045), transparent 34%),
         linear-gradient(180deg, #07101f 0%, #040812 55%, #02050c 100%);
       min-height: 100vh;
       overflow-x: hidden;
@@ -130,7 +157,7 @@
         var(--pattern),
         radial-gradient(circle at 14% 18%, rgba(255,255,255,0.02), transparent 10%),
         radial-gradient(circle at 82% 26%, rgba(94,240,189,0.04), transparent 12%);
-      opacity: 0.5;
+      opacity: 0.34;
       pointer-events: none;
       z-index: -2;
     }
@@ -216,8 +243,21 @@
       z-index: 100;
       height: var(--header-height);
       backdrop-filter: blur(18px);
-      background: rgba(4, 10, 21, 0.72);
-      border-bottom: 1px solid rgba(111, 150, 232, 0.14);
+      background: linear-gradient(180deg, rgba(4, 10, 21, 0.9), rgba(4, 10, 21, 0.66));
+      border-bottom: 1px solid rgba(111, 150, 232, 0.18);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+    }
+
+    .header::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(94, 240, 189, 0.52), rgba(214, 164, 99, 0.32), transparent);
+      opacity: 0.72;
+      pointer-events: none;
     }
 
     .header .container {
@@ -742,7 +782,38 @@
     }
 
     .hero {
-      padding: 46px 0 24px;
+      position: relative;
+      isolation: isolate;
+      min-height: calc(100svh - var(--header-height));
+      display: flex;
+      align-items: center;
+      padding: clamp(62px, 8vw, 112px) 0 70px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(5, 8, 22, 0.96) 0%, rgba(5, 8, 22, 0.68) 38%, rgba(5, 8, 22, 0.14) 78%, rgba(5, 8, 22, 0.48) 100%),
+        radial-gradient(ellipse at 73% 18%, rgba(94, 240, 189, 0.14), transparent 34%),
+        radial-gradient(ellipse at 16% 82%, rgba(47, 124, 255, 0.12), transparent 34%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: min(980px, 86vw);
+      height: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent, rgba(94, 240, 189, 0.42), rgba(214, 164, 99, 0.38), transparent);
+      box-shadow: 0 0 24px rgba(94, 240, 189, 0.18);
+      pointer-events: none;
     }
 
     .hero-grid {
@@ -752,25 +823,58 @@
     }
 
     .eyebrow {
+      position: relative;
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(111, 150, 232, 0.16);
-      background: rgba(9, 17, 36, 0.66);
-      color: #c0d4f9;
-      letter-spacing: 0.08em;
+      padding: 0 0 12px 28px;
+      color: var(--copper);
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      font-size: 0.76rem;
+      font-size: 0.68rem;
+      font-weight: 900;
+    }
+
+    .eyebrow::before {
+      content: "ᛉ";
+      position: absolute;
+      left: 0;
+      top: -4px;
+      color: var(--green);
+      font-size: 1rem;
+      text-shadow: 0 0 18px rgba(94, 240, 189, 0.4);
+    }
+
+    .eyebrow::after {
+      content: "";
+      position: absolute;
+      left: 28px;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(214, 164, 99, 0.78), transparent);
     }
 
     .hero h1 {
-      margin: 18px 0 16px;
-      font-size: clamp(2.5rem, 6vw, 4.9rem);
-      line-height: 0.98;
-      letter-spacing: -0.04em;
-      max-width: 11ch;
+      position: relative;
+      margin: 18px 0 20px;
+      font-size: clamp(2.65rem, 6.2vw, 5.9rem);
+      line-height: 0.93;
+      letter-spacing: -0.055em;
+      max-width: 10.5ch;
+      text-wrap: balance;
+      text-shadow: 0 12px 44px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero h1::after {
+      content: "ᚱ";
+      position: absolute;
+      right: -0.1em;
+      bottom: -0.12em;
+      color: rgba(214, 164, 99, 0.24);
+      font-size: 0.26em;
+      letter-spacing: 0;
+      text-shadow: 0 0 24px rgba(214, 164, 99, 0.36);
     }
 
     .hero p {
@@ -785,7 +889,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 26px;
+      margin-top: 30px;
     }
 
     .hero-points {
@@ -820,9 +924,56 @@
 
     .hero-visual {
       position: relative;
-      min-height: 520px;
+      min-height: 630px;
       display: grid;
       place-items: center;
+      overflow: visible;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      width: min(96%, 590px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(94, 240, 189, 0.16);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 28px rgba(94, 240, 189, 0.025),
+        0 0 0 56px rgba(91, 168, 255, 0.018),
+        inset 0 0 50px rgba(94, 240, 189, 0.06);
+      animation: orbitBreath 12s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .hero-visual::after {
+      content: "ᛉ ᚨ ᛟ ᚱ";
+      position: absolute;
+      right: 3%;
+      bottom: 8%;
+      z-index: 4;
+      color: rgba(214, 164, 99, 0.54);
+      letter-spacing: 0.5em;
+      font-size: 0.72rem;
+      text-shadow: 0 0 16px rgba(214, 164, 99, 0.24);
+      pointer-events: none;
+    }
+
+    .hero-neo-image {
+      position: absolute;
+      z-index: 0;
+      width: min(96%, 520px);
+      height: min(96%, 620px);
+      object-fit: cover;
+      object-position: center 38%;
+      border-radius: 48% 48% 38% 38%;
+      opacity: 0.5;
+      mix-blend-mode: screen;
+      filter: saturate(0.92) contrast(1.08) brightness(0.84);
+      mask-image: linear-gradient(180deg, transparent 0%, #000 16%, #000 72%, transparent 100%);
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 16%, #000 72%, transparent 100%);
+      transform: translate(7%, 2%) scale(1.05);
+      animation: neoHover 9s ease-in-out infinite;
+      pointer-events: none;
     }
 
     .hero-orb {
@@ -882,6 +1033,7 @@
 
     .phone-frame {
       position: relative;
+      z-index: 2;
       width: min(86vw, 320px);
       border-radius: 36px;
       padding: 12px;
@@ -893,6 +1045,7 @@
         0 0 42px rgba(47, 124, 255, 0.18);
       transform: translateY(0);
       animation: drift 6s ease-in-out infinite;
+      backdrop-filter: blur(8px);
     }
 
     .phone-frame::before {
@@ -4287,6 +4440,16 @@
       50% { transform: translate3d(0, -8px, 0); }
     }
 
+    @keyframes orbitBreath {
+      0%, 100% { transform: scale(0.98) rotate(0deg); opacity: 0.62; }
+      50% { transform: scale(1.02) rotate(2deg); opacity: 1; }
+    }
+
+    @keyframes neoHover {
+      0%, 100% { transform: translate(7%, 2%) scale(1.05); opacity: 0.44; }
+      50% { transform: translate(7%, -1%) scale(1.08); opacity: 0.58; }
+    }
+
     @media (min-width: 768px) {
       .container {
         width: min(var(--max-width), calc(100% - 48px));
@@ -4776,6 +4939,403 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
+
+    /* Runic Aurora / Aegis Forge visual layer. The content and route contracts stay above this layer. */
+    [hidden] {
+      display: none !important;
+    }
+
+    main > section:not([hidden]) {
+      position: relative;
+      isolation: isolate;
+    }
+
+    main > section:not(#inicio):not([hidden]) {
+      border-top: 1px solid rgba(111, 150, 232, 0.12);
+      background:
+        linear-gradient(180deg, rgba(4, 10, 21, 0.16), transparent 24%),
+        radial-gradient(ellipse at 82% 0%, rgba(94, 240, 189, 0.045), transparent 30%);
+    }
+
+    main > section:not(#inicio):not([hidden])::before {
+      content: "ᛉ──────────────ᚨ──────────────ᛟ";
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      z-index: -1;
+      transform: translateX(-50%);
+      max-width: calc(100% - 32px);
+      overflow: hidden;
+      color: rgba(214, 164, 99, 0.16);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .section {
+      padding: clamp(58px, 8vw, 110px) 0;
+    }
+
+    .section-head {
+      position: relative;
+      max-width: 760px;
+      margin-bottom: clamp(28px, 4vw, 46px);
+    }
+
+    .section-head::after {
+      content: "";
+      display: block;
+      width: 104px;
+      height: 1px;
+      margin-top: 24px;
+      background: linear-gradient(90deg, var(--copper), rgba(94, 240, 189, 0.7), transparent);
+      box-shadow: 0 0 14px rgba(94, 240, 189, 0.18);
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--copper);
+      letter-spacing: 0.18em;
+      font-weight: 900;
+    }
+
+    .section-tag::before {
+      content: "ᛟ";
+      color: var(--green);
+      font-size: 0.9rem;
+      text-shadow: 0 0 12px rgba(94, 240, 189, 0.36);
+    }
+
+    .section-head h2,
+    .route-detail-head h1 {
+      text-wrap: balance;
+    }
+
+    .route-tree-grid,
+    .route-detail-grid {
+      gap: 18px;
+    }
+
+    .route-link-card,
+    .route-detail-card {
+      overflow: hidden;
+      border-radius: 12px 24px 12px 24px;
+      border-color: rgba(214, 164, 99, 0.18);
+      background:
+        linear-gradient(135deg, rgba(94, 240, 189, 0.1), transparent 36%),
+        linear-gradient(315deg, rgba(214, 164, 99, 0.06), transparent 34%),
+        rgba(7, 15, 31, 0.86);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .route-link-card::before,
+    .route-detail-card::before {
+      content: "ᛉ";
+      position: absolute;
+      right: 18px;
+      bottom: 14px;
+      color: rgba(214, 164, 99, 0.36);
+      font-size: 1.18rem;
+      pointer-events: none;
+    }
+
+    .route-link-card::after {
+      content: "↗";
+      right: 18px;
+      top: 16px;
+      color: var(--green);
+    }
+
+    .route-link-card:hover,
+    .route-link-card:focus-visible {
+      transform: translateY(-6px);
+      border-color: rgba(94, 240, 189, 0.58);
+      box-shadow: 0 28px 72px rgba(0, 0, 0, 0.34), 0 0 28px rgba(94, 240, 189, 0.1);
+    }
+
+    .route-detail-shell,
+    .card,
+    .comparison-panel,
+    .neo-panel {
+      border-color: rgba(111, 150, 232, 0.2);
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.045);
+    }
+
+    .route-detail-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px 34px 16px 34px;
+      background:
+        radial-gradient(ellipse at 84% 0%, rgba(94, 240, 189, 0.12), transparent 30%),
+        radial-gradient(ellipse at 0% 100%, rgba(214, 164, 99, 0.07), transparent 34%),
+        rgba(5, 12, 26, 0.84);
+    }
+
+    .route-detail-shell::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(214, 164, 99, 0.12);
+      border-radius: 12px 28px 12px 28px;
+      pointer-events: none;
+    }
+
+    .route-detail-head,
+    .route-detail-grid,
+    .route-detail-actions {
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-card,
+    .security-card,
+    .premium-card {
+      border-radius: 12px 26px 12px 26px;
+      background:
+        linear-gradient(150deg, rgba(94, 240, 189, 0.11), transparent 36%),
+        linear-gradient(330deg, rgba(214, 164, 99, 0.06), transparent 32%),
+        rgba(8, 17, 35, 0.86);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-7px) rotate(-0.2deg);
+      border-color: rgba(214, 164, 99, 0.34);
+      box-shadow: 0 30px 74px rgba(0, 0, 0, 0.34), 0 0 28px rgba(94, 240, 189, 0.1);
+    }
+
+    .feature-icon {
+      border-radius: 13px 20px 13px 20px;
+      border-color: rgba(214, 164, 99, 0.26);
+      background:
+        linear-gradient(135deg, rgba(214, 164, 99, 0.22), rgba(94, 240, 189, 0.12)),
+        rgba(7, 17, 32, 0.9);
+      box-shadow: 0 0 26px rgba(214, 164, 99, 0.1);
+    }
+
+    .problem-panel,
+    .trust-panel,
+    .impact-panel {
+      border-color: rgba(214, 164, 99, 0.2) !important;
+      background:
+        radial-gradient(ellipse at 90% 0%, rgba(94, 240, 189, 0.11), transparent 28%),
+        linear-gradient(135deg, rgba(214, 164, 99, 0.07), transparent 38%),
+        rgba(7, 14, 29, 0.86) !important;
+    }
+
+    .problem-badge,
+    .trust-badge {
+      color: var(--copper);
+      border-color: rgba(214, 164, 99, 0.26);
+      background: rgba(214, 164, 99, 0.06);
+    }
+
+    .cookie-banner {
+      border-radius: 14px 28px 14px 28px;
+      border-color: rgba(214, 164, 99, 0.3);
+      background:
+        linear-gradient(120deg, rgba(214, 164, 99, 0.1), transparent 34%),
+        rgba(5, 8, 22, 0.97);
+      box-shadow: 0 26px 90px rgba(0, 0, 0, 0.58), 0 0 36px rgba(94, 240, 189, 0.1);
+    }
+
+    footer {
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(2, 5, 12, 0), rgba(2, 5, 12, 0.72)),
+        radial-gradient(ellipse at 20% 0%, rgba(47, 124, 255, 0.08), transparent 34%);
+    }
+
+    @media (max-width: 767px) {
+      .hero {
+        min-height: auto;
+        padding: 56px 0 38px;
+      }
+
+      .hero h1 {
+        max-width: 12ch;
+        font-size: clamp(2.7rem, 13vw, 4.5rem);
+      }
+
+      .hero-visual {
+        display: grid;
+        min-height: 430px;
+        margin-top: 12px;
+      }
+
+      .hero-neo-image {
+        width: 100%;
+        height: 420px;
+        transform: translate(3%, 0) scale(1.04);
+      }
+
+      .phone-frame {
+        width: min(78vw, 300px);
+      }
+
+      .hero-visual::after {
+        right: 0;
+        bottom: 1%;
+      }
+
+      .route-detail-shell::before {
+        inset: 10px;
+      }
+
+      main > section:not(#inicio):not([hidden])::before {
+        top: 12px;
+        font-size: 0.56rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-visual::before,
+      .hero-neo-image,
+      .hero-orb,
+      .phone-frame,
+      .shield-aura .rune-sigil,
+      .neo-core-image-frame {
+        animation: none !important;
+      }
+    }
+
+    /* First-viewport composition: the desktop forge keeps the message, CTA,
+       proof points and Neo visible as one deliberate scene. */
+    @media (min-width: 980px) {
+      .hero {
+        min-height: min(900px, calc(100svh - var(--header-height)));
+        padding: 42px 0 48px;
+      }
+
+      .hero-grid {
+        min-height: calc(100svh - var(--header-height) - 90px);
+      }
+
+      .hero h1 {
+        max-width: 12.5ch;
+        margin-top: 12px;
+        font-size: clamp(3.3rem, 5.4vw, 5.4rem);
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .hero-actions .cta-stack {
+        display: grid;
+        grid-column: 1 / -1;
+        grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1fr);
+        align-items: center;
+        gap: 14px;
+        width: 100%;
+      }
+
+      .hero-actions .cta-stack .cta-primary {
+        width: 100%;
+      }
+
+      .hero-actions .cta-secondary {
+        display: flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 14px;
+        text-align: center;
+      }
+
+      .hero-points {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 18px;
+        font-size: 0.86rem;
+        line-height: 1.42;
+      }
+
+      .hero-points span {
+        align-items: flex-start;
+        gap: 7px;
+      }
+
+      .hero-points span::before {
+        flex: 0 0 7px;
+        width: 7px;
+        height: 7px;
+        margin-top: 0.42em;
+      }
+
+      .section-runes {
+        margin-top: 14px;
+      }
+
+      .proof-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .proof-card {
+        padding: 13px 14px;
+      }
+
+      .proof-card strong {
+        font-size: 0.82rem;
+      }
+
+      .proof-card span {
+        font-size: 0.79rem;
+        line-height: 1.45;
+      }
+
+      .hero-visual {
+        min-height: 570px;
+        transform: translateY(-12px);
+      }
+
+      .hero-neo-image {
+        width: min(100%, 560px);
+        height: min(100%, 650px);
+        opacity: 0.66;
+      }
+
+      .hero-visual .phone-frame {
+        animation: heroPhoneDrift 6s ease-in-out infinite;
+      }
+
+      .cookie-banner {
+        left: 50%;
+        right: auto;
+        width: min(1160px, calc(100% - 48px));
+        padding: 14px 16px;
+        gap: 14px;
+        transform: translateX(-50%);
+      }
+
+      .cookie-copy {
+        gap: 3px;
+      }
+
+      .cookie-copy p {
+        max-width: 68ch;
+        font-size: 0.84rem;
+        line-height: 1.42;
+      }
+
+      .cookie-button {
+        min-height: 38px;
+        padding: 8px 12px;
+        font-size: 0.82rem;
+      }
+    }
+
+    @keyframes heroPhoneDrift {
+      0%, 100% { transform: translateY(-14px) scale(0.88); }
+      50% { transform: translateY(-24px) scale(0.9); }
+    }
   </style>
 </head>
 <body>
@@ -4917,6 +5477,7 @@
 
           <div class="hero-visual reveal" aria-label="Vista previa del producto" data-i18n-attr="aria-label:accessibility.heroPreview">
             <div class="hero-orb"></div>
+            <img class="hero-neo-image" src="images/neo/neo_guardian_hologram.png" alt="" aria-hidden="true" loading="eager" decoding="async">
             <div class="hero-rune-field" aria-hidden="false">
               <div class="rune rune--algiz" tabindex="0" aria-label="Protección activa del dispositivo" data-i18n-attr="aria-label:runeTips.algizProtection">
                 <span class="rune__symbol">ᛉ</span>

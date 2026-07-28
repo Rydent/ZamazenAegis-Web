@@ -1,7 +1,7 @@
 {
   "name": "Zamazen Aegis",
   "short_name": "Zamazen",
-  "description": "Escudo digital inteligente para seguridad movil, privacidad y proteccion antiestafas.",
+  "description": "Escudo digital inteligente para seguridad móvil, privacidad y protección antiestafas.",
   "start_url": "https://rydent.github.io/ZamazenAegis-Web/",
   "scope": "https://rydent.github.io/ZamazenAegis-Web/",
   "display": "standalone",
