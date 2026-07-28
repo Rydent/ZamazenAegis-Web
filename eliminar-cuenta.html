@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eliminar cuenta | Zamazen Aegis</title>
+  <meta id="pageDescription" name="description" content="Alias oficial para la página de eliminación de cuenta de Zamazen Aegis.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://rydent.github.io/ZamazenAegis-Web/delete-account.html">
+  <link rel="alternate" hreflang="es" href="?lang=es">
+  <link rel="alternate" hreflang="en" href="?lang=en">
+  <link rel="alternate" hreflang="fr" href="?lang=fr">
+  <link rel="alternate" hreflang="pt" href="?lang=pt">
+  <meta http-equiv="refresh" content="1; url=delete-account.html">
+  <meta name="theme-color" content="#050816">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050816;
+      --panel: rgba(9, 16, 32, 0.94);
+      --line: rgba(118, 229, 200, 0.35);
+      --text: #edf5ff;
+      --muted: #9caece;
+      --green: #5ef0bd;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(47, 124, 255, 0.18), transparent 34%),
+        radial-gradient(circle at 100% 10%, rgba(27, 207, 146, 0.12), transparent 28%),
+        linear-gradient(180deg, #07101f 0%, #040812 55%, #02050c 100%);
+    }
+
+    main {
+      width: min(620px, 100%);
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--panel);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.7rem, 5vw, 2.4rem);
+      line-height: 1.05;
+    }
+
+    p {
+      margin: 0 0 20px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 12px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #06111d;
+      background: var(--green);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 id="aliasTitle">Eliminar cuenta</h1>
+    <p id="aliasBody">Esta dirección se mantiene por compatibilidad. Te llevamos a la página oficial y canónica de eliminación de cuenta.</p>
+    <a id="aliasLink" href="delete-account.html?lang=es" aria-label="Abrir la página oficial de eliminación de cuenta">Abrir página oficial</a>
+  </main>
+  <script>
+    (() => {
+      "use strict";
+
+      const SUPPORTED_DELETE_ACCOUNT_ALIAS_LANGUAGES = ["es", "en", "fr", "pt"];
+      const DELETE_ACCOUNT_ALIAS_COPY = {
+        es: {
+          title: "Eliminar cuenta | Zamazen Aegis",
+          description: "Acceso compatible a la página oficial de eliminación de cuenta y datos de Zamazen Aegis.",
+          heading: "Eliminar cuenta",
+          body: "Esta dirección se mantiene por compatibilidad. Te llevamos a la página oficial y canónica de eliminación de cuenta.",
+          action: "Abrir página oficial",
+          linkAria: "Abrir la página oficial de eliminación de cuenta"
+        },
+        en: {
+          title: "Delete account | Zamazen Aegis",
+          description: "Compatible access to the official Zamazen Aegis account and data deletion page.",
+          heading: "Delete account",
+          body: "This address is kept for compatibility. We are taking you to the official canonical account deletion page.",
+          action: "Open official page",
+          linkAria: "Open the official account deletion page"
+        },
+        fr: {
+          title: "Supprimer le compte | Zamazen Aegis",
+          description: "Accès compatible à la page officielle de suppression du compte et des données de Zamazen Aegis.",
+          heading: "Supprimer le compte",
+          body: "Cette adresse est conservée pour compatibilité. Vous allez être redirigé vers la page officielle et canonique de suppression du compte.",
+          action: "Ouvrir la page officielle",
+          linkAria: "Ouvrir la page officielle de suppression du compte"
+        },
+        pt: {
+          title: "Eliminar conta | Zamazen Aegis",
+          description: "Acesso compatível à página oficial de eliminação da conta e dos dados do Zamazen Aegis.",
+          heading: "Eliminar conta",
+          body: "Este endereço é mantido por compatibilidade. Vamos levar você à página oficial e canônica de eliminação da conta.",
+          action: "Abrir página oficial",
+          linkAria: "Abrir a página oficial de eliminação da conta"
+        }
+      };
+
+      function detectLanguage() {
+        const requested = new URLSearchParams(window.location.search).get("lang");
+        if (SUPPORTED_DELETE_ACCOUNT_ALIAS_LANGUAGES.includes(requested)) return requested;
+        let stored = "";
+        try {
+          stored = localStorage.getItem("lang") || "";
+        } catch (storageError) {
+          stored = "";
+        }
+        if (SUPPORTED_DELETE_ACCOUNT_ALIAS_LANGUAGES.includes(stored)) return stored;
+        const browser = String(navigator.language || "es").slice(0, 2).toLowerCase();
+        return SUPPORTED_DELETE_ACCOUNT_ALIAS_LANGUAGES.includes(browser) ? browser : "es";
+      }
+
+      const language = detectLanguage();
+      const copy = DELETE_ACCOUNT_ALIAS_COPY[language];
+      const targetParameters = new URLSearchParams(window.location.search);
+      targetParameters.set("lang", language);
+      const targetUrl = `delete-account.html?${targetParameters.toString()}${window.location.hash}`;
+
+      document.documentElement.lang = language;
+      document.title = copy.title;
+      document.getElementById("pageDescription").content = copy.description;
+      document.getElementById("aliasTitle").textContent = copy.heading;
+      document.getElementById("aliasBody").textContent = copy.body;
+      document.getElementById("aliasLink").textContent = copy.action;
+      document.getElementById("aliasLink").setAttribute("aria-label", copy.linkAria);
+      document.getElementById("aliasLink").href = targetUrl;
+      window.location.replace(targetUrl);
+    })();
+  </script>
+</body>
+</html>

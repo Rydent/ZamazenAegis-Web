@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rydent.github.io/ZamazenAegis-Web/sitemap.xml
