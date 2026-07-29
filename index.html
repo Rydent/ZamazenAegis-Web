@@ -5859,6 +5859,273 @@
         animation: none;
       }
     }
+
+    /* Guardian observatory: a visual system layer that makes the first viewport
+       feel like a product, while keeping every signal explicitly illustrative. */
+    .hero-observatory-kicker,
+    .hero-signal-card,
+    .hero-command-pod {
+      position: absolute;
+      z-index: 9;
+      border: 1px solid rgba(126, 209, 255, 0.26);
+      background: linear-gradient(145deg, rgba(8, 24, 43, 0.92), rgba(4, 10, 23, 0.82));
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.3), 0 0 30px rgba(47, 124, 255, 0.12);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero-observatory-kicker {
+      top: 3%;
+      left: 50%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-color: rgba(94, 240, 189, 0.34);
+      border-radius: 999px;
+      color: #dff8ff;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+
+    .hero-observatory-kicker::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 14px rgba(94, 240, 189, 0.9);
+    }
+
+    .hero-observatory-kicker strong {
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+    }
+
+    .hero-observatory-kicker small {
+      color: #9eb9d9;
+      font-size: 0.68rem;
+    }
+
+    .hero-observatory-sweep {
+      position: absolute;
+      top: 14%;
+      left: 13%;
+      z-index: 4;
+      width: 74%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(94, 240, 189, 0.75), transparent);
+      box-shadow: 0 0 18px rgba(94, 240, 189, 0.52);
+      opacity: 0.65;
+      animation: observatorySweep 6.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .hero-observatory-sweep::after {
+      content: "";
+      position: absolute;
+      right: 14%;
+      top: -2px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 16px rgba(94, 240, 189, 0.95);
+    }
+
+    .hero-signal-card {
+      display: grid;
+      grid-template-columns: 26px minmax(0, 1fr);
+      align-items: center;
+      gap: 8px;
+      width: 142px;
+      padding: 9px 10px;
+      border-radius: 14px;
+      color: #eaf6ff;
+    }
+
+    .hero-signal-card--calls {
+      top: 27%;
+      left: -4%;
+      animation: signalCardFloat 7s ease-in-out infinite;
+    }
+
+    .hero-signal-card--messages {
+      top: 42%;
+      right: -4%;
+      animation: signalCardFloat 7s ease-in-out 1.2s infinite;
+    }
+
+    .hero-signal-card--links {
+      bottom: 20%;
+      left: 2%;
+      animation: signalCardFloat 7s ease-in-out 2.1s infinite;
+    }
+
+    .hero-signal-glyph {
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border: 1px solid rgba(94, 240, 189, 0.32);
+      border-radius: 9px;
+      color: var(--green);
+      background: rgba(94, 240, 189, 0.08);
+      font-size: 0.9rem;
+    }
+
+    .hero-signal-copy {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .hero-signal-copy strong {
+      font-size: 0.66rem;
+      letter-spacing: 0.11em;
+    }
+
+    .hero-signal-copy small {
+      overflow: hidden;
+      color: #9eb9d9;
+      font-size: 0.64rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .hero-command-pod {
+      right: 1%;
+      bottom: 3%;
+      width: min(234px, 52%);
+      padding: 12px;
+      border-color: rgba(214, 164, 99, 0.34);
+      border-radius: 18px;
+      color: #edf5ff;
+    }
+
+    .hero-command-head,
+    .hero-command-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .hero-command-head {
+      color: var(--copper);
+      font-size: 0.62rem;
+      font-weight: 900;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .hero-command-mode {
+      padding: 3px 6px;
+      border: 1px solid rgba(94, 240, 189, 0.34);
+      border-radius: 999px;
+      color: var(--green);
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-command-body {
+      margin: 10px 0;
+      color: #c8daf3;
+      font-size: 0.72rem;
+      line-height: 1.4;
+    }
+
+    .hero-command-track {
+      height: 4px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(126, 168, 255, 0.14);
+    }
+
+    .hero-command-track span {
+      display: block;
+      width: 72%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+      box-shadow: 0 0 14px rgba(94, 240, 189, 0.56);
+      animation: commandPulse 4.8s ease-in-out infinite;
+    }
+
+    .hero-command-foot {
+      margin-top: 8px;
+      color: #8ea8cc;
+      font-size: 0.62rem;
+    }
+
+    .hero-command-foot strong {
+      color: var(--green);
+      font-size: 0.9rem;
+    }
+
+    @keyframes observatorySweep {
+      0%, 100% { transform: translateY(-10px) scaleX(0.68); opacity: 0.18; }
+      48%, 52% { transform: translateY(250px) scaleX(1); opacity: 0.82; }
+    }
+
+    @keyframes signalCardFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes commandPulse {
+      0%, 100% { width: 64%; opacity: 0.72; }
+      50% { width: 88%; opacity: 1; }
+    }
+
+    @media (max-width: 767px) {
+      .hero-observatory-kicker {
+        top: 1.5%;
+        max-width: 92%;
+      }
+
+      .hero-observatory-kicker strong {
+        font-size: 0.54rem;
+      }
+
+      .hero-observatory-kicker small {
+        font-size: 0.6rem;
+      }
+
+      .hero-signal-card {
+        width: 124px;
+        padding: 8px;
+      }
+
+      .hero-signal-card--calls {
+        top: 24%;
+        left: -2%;
+      }
+
+      .hero-signal-card--messages {
+        top: 39%;
+        right: -2%;
+      }
+
+      .hero-signal-card--links {
+        bottom: 17%;
+        left: -2%;
+      }
+
+      .hero-command-pod {
+        right: 50%;
+        bottom: 1%;
+        width: 210px;
+        transform: translateX(50%);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-observatory-sweep,
+      .hero-signal-card,
+      .hero-command-track span {
+        animation: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -5999,6 +6266,44 @@
           </div>
 
           <div class="hero-visual reveal" aria-label="Vista previa del producto" data-i18n-attr="aria-label:accessibility.heroPreview">
+            <div class="hero-observatory-kicker" aria-hidden="true">
+              <strong data-i18n="hero.observatoryTitle">OBSERVATORIO AEGIS</strong>
+              <small data-i18n="hero.observatoryBody">Protección anticipada</small>
+            </div>
+            <div class="hero-observatory-sweep" aria-hidden="true"></div>
+            <div class="hero-signal-card hero-signal-card--calls" aria-hidden="true">
+              <span class="hero-signal-glyph">ᚲ</span>
+              <span class="hero-signal-copy">
+                <strong data-i18n="hero.signalCalls">LLAMADAS</strong>
+                <small data-i18n="hero.signalReady">Señal lista</small>
+              </span>
+            </div>
+            <div class="hero-signal-card hero-signal-card--messages" aria-hidden="true">
+              <span class="hero-signal-glyph">ᚨ</span>
+              <span class="hero-signal-copy">
+                <strong data-i18n="hero.signalMessages">SMS</strong>
+                <small data-i18n="hero.signalContext">Contexto revisado</small>
+              </span>
+            </div>
+            <div class="hero-signal-card hero-signal-card--links" aria-hidden="true">
+              <span class="hero-signal-glyph">ᛉ</span>
+              <span class="hero-signal-copy">
+                <strong data-i18n="hero.signalLinks">ENLACES</strong>
+                <small data-i18n="hero.signalSafe">Decisión clara</small>
+              </span>
+            </div>
+            <div class="hero-command-pod" aria-label="Panel visual del núcleo Aegis" data-i18n-attr="aria-label:hero.commandAria">
+              <div class="hero-command-head">
+                <span data-i18n="hero.commandTitle">Núcleo Aegis</span>
+                <span class="hero-command-mode" data-i18n="hero.commandMode">MODO PREPARADO</span>
+              </div>
+              <p class="hero-command-body" data-i18n="hero.commandBody">Tres señales. Una decisión más clara.</p>
+              <div class="hero-command-track" aria-hidden="true"><span></span></div>
+              <div class="hero-command-foot">
+                <span data-i18n="hero.commandFoot">Protección con contexto</span>
+                <strong aria-hidden="true">ᛉ</strong>
+              </div>
+            </div>
             <div class="hero-beam" aria-hidden="true"></div>
             <div class="hero-horizon" aria-hidden="true"></div>
             <div class="hero-orb"></div>
@@ -9098,7 +9403,20 @@
           neoName: "Neo",
           neoBot: "BOT",
           neoBody: "Te ayuda a entender el riesgo antes de actuar.",
-          neoAria: "Neo, asistente de seguridad identificado como bot"
+          neoAria: "Neo, asistente de seguridad identificado como bot",
+          observatoryTitle: "OBSERVATORIO AEGIS",
+          observatoryBody: "Protección anticipada",
+          signalCalls: "LLAMADAS",
+          signalMessages: "SMS",
+          signalLinks: "ENLACES",
+          signalReady: "Señal lista",
+          signalContext: "Contexto revisado",
+          signalSafe: "Decisión clara",
+          commandTitle: "Núcleo Aegis",
+          commandMode: "MODO PREPARADO",
+          commandBody: "Tres señales. Una decisión más clara.",
+          commandFoot: "Protección con contexto",
+          commandAria: "Panel visual del núcleo Aegis"
         },
         phone: {
           status: "Sistema activo",
@@ -9578,7 +9896,20 @@
           neoName: "Neo",
           neoBot: "BOT",
           neoBody: "Helps you understand risk before you act.",
-          neoAria: "Neo, security assistant identified as a bot"
+          neoAria: "Neo, security assistant identified as a bot",
+          observatoryTitle: "AEGIS OBSERVATORY",
+          observatoryBody: "Anticipatory protection",
+          signalCalls: "CALLS",
+          signalMessages: "SMS",
+          signalLinks: "LINKS",
+          signalReady: "Signal ready",
+          signalContext: "Context reviewed",
+          signalSafe: "Clear decision",
+          commandTitle: "Aegis core",
+          commandMode: "READY MODE",
+          commandBody: "Three signals. One clearer decision.",
+          commandFoot: "Context-led protection",
+          commandAria: "Visual Aegis core panel"
         },
         phone: {
           status: "System active",
@@ -10053,7 +10384,20 @@
           neoName: "Neo",
           neoBot: "BOT",
           neoBody: "Vous aide à comprendre le risque avant d'agir.",
-          neoAria: "Neo, assistant de sécurité identifié comme bot"
+          neoAria: "Neo, assistant de sécurité identifié comme bot",
+          observatoryTitle: "OBSERVATOIRE AEGIS",
+          observatoryBody: "Protection anticipée",
+          signalCalls: "APPELS",
+          signalMessages: "SMS",
+          signalLinks: "LIENS",
+          signalReady: "Signal prêt",
+          signalContext: "Contexte vérifié",
+          signalSafe: "Décision claire",
+          commandTitle: "Noyau Aegis",
+          commandMode: "MODE PRÊT",
+          commandBody: "Trois signaux. Une décision plus claire.",
+          commandFoot: "Protection avec contexte",
+          commandAria: "Panneau visuel du noyau Aegis"
         },
         phone: {
           status: "Système actif",
@@ -10528,7 +10872,20 @@
           neoName: "Neo",
           neoBot: "BOT",
           neoBody: "Ajuda você a entender o risco antes de agir.",
-          neoAria: "Neo, assistente de segurança identificado como bot"
+          neoAria: "Neo, assistente de segurança identificado como bot",
+          observatoryTitle: "OBSERVATÓRIO AEGIS",
+          observatoryBody: "Proteção antecipada",
+          signalCalls: "CHAMADAS",
+          signalMessages: "SMS",
+          signalLinks: "LINKS",
+          signalReady: "Sinal pronto",
+          signalContext: "Contexto revisto",
+          signalSafe: "Decisão clara",
+          commandTitle: "Núcleo Aegis",
+          commandMode: "MODO PRONTO",
+          commandBody: "Três sinais. Uma decisão mais clara.",
+          commandFoot: "Proteção com contexto",
+          commandAria: "Painel visual do núcleo Aegis"
         },
         phone: {
           status: "Sistema ativo",
