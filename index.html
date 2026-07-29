@@ -5914,6 +5914,24 @@
       min-height: 680px;
       overflow: visible;
       isolation: isolate;
+      --hero-light-x: 50%;
+      --hero-light-y: 42%;
+      --hero-light-opacity: 0;
+    }
+
+    .hero-pointer-light {
+      position: absolute;
+      inset: -12%;
+      z-index: 3;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at var(--hero-light-x) var(--hero-light-y), rgba(94, 240, 189, 0.2) 0%, rgba(91, 168, 255, 0.1) 15%, transparent 43%),
+        radial-gradient(circle at calc(var(--hero-light-x) + 7%) calc(var(--hero-light-y) + 9%), rgba(214, 164, 99, 0.09), transparent 31%);
+      mix-blend-mode: screen;
+      opacity: var(--hero-light-opacity);
+      pointer-events: none;
+      transition: opacity 360ms ease;
+      will-change: background;
     }
 
     .hero-beam {
@@ -6062,9 +6080,15 @@
 
     @media (prefers-reduced-motion: reduce) {
       .hero-beam,
-      .hero-neo-card {
+      .hero-neo-card,
+      .hero-pointer-light {
         animation: none;
+        opacity: 0 !important;
       }
+    }
+
+    body.motion-softened .hero-pointer-light {
+      opacity: 0;
     }
 
     /* Guardian observatory: a visual system layer that makes the first viewport
@@ -7029,6 +7053,7 @@
               <small data-i18n="hero.observatoryBody">Protección anticipada</small>
             </div>
             <div class="hero-observatory-sweep" aria-hidden="true"></div>
+            <div class="hero-pointer-light" aria-hidden="true"></div>
             <div class="hero-signal-card hero-signal-card--calls" aria-hidden="true">
               <span class="hero-signal-glyph">ᚲ</span>
               <span class="hero-signal-copy">
@@ -8761,6 +8786,7 @@
     const liveNetworkStatus = document.getElementById("liveNetworkStatus");
     const liveMotionSwitch = document.getElementById("liveMotionSwitch");
     const liveMotionLabel = document.getElementById("liveMotionLabel");
+    const heroVisual = document.querySelector(".hero-visual");
     const arrivalConsole = document.getElementById("arrivalConsole");
     const arrivalPulseButton = document.getElementById("arrivalPulseButton");
     const arrivalPulseLabel = document.getElementById("arrivalPulseLabel");
@@ -13465,6 +13491,45 @@
       element.dataset.i18n = key;
       element.textContent = translate(key);
     }
+
+    let heroPointerFrame = 0;
+
+    function resetHeroPointer() {
+      if (!heroVisual) return;
+      if (heroPointerFrame) cancelAnimationFrame(heroPointerFrame);
+      heroPointerFrame = 0;
+      heroVisual.style.setProperty("--hero-light-x", "50%");
+      heroVisual.style.setProperty("--hero-light-y", "42%");
+      heroVisual.style.setProperty("--hero-light-opacity", "0");
+    }
+
+    function handleHeroPointerMove(event) {
+      if (
+        !heroVisual
+        || event.pointerType === "touch"
+        || document.body.classList.contains("motion-softened")
+        || window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        || !window.matchMedia("(pointer: fine)").matches
+      ) return;
+
+      const rect = heroVisual.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const x = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+      const y = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
+
+      if (heroPointerFrame) cancelAnimationFrame(heroPointerFrame);
+      heroPointerFrame = requestAnimationFrame(() => {
+        heroVisual.style.setProperty("--hero-light-x", `${Math.round(x * 100)}%`);
+        heroVisual.style.setProperty("--hero-light-y", `${Math.round(y * 100)}%`);
+        heroVisual.style.setProperty("--hero-light-opacity", "1");
+        heroPointerFrame = 0;
+      });
+    }
+
+    heroVisual?.addEventListener("pointermove", handleHeroPointerMove, { passive: true });
+    heroVisual?.addEventListener("pointerleave", resetHeroPointer, { passive: true });
+    heroVisual?.addEventListener("pointercancel", resetHeroPointer, { passive: true });
+    window.addEventListener("resize", resetHeroPointer, { passive: true });
 
     let arrivalStepIndex = -1;
 
