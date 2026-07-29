@@ -6126,6 +6126,188 @@
         animation: none;
       }
     }
+
+    .hero-deck {
+      position: relative;
+      z-index: 4;
+      margin-top: clamp(24px, 4vw, 46px);
+    }
+
+    .hero-deck-shell {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(16px, 2.4vw, 24px);
+      border: 1px solid rgba(126, 209, 255, 0.2);
+      border-radius: 28px;
+      background:
+        linear-gradient(135deg, rgba(10, 26, 48, 0.9), rgba(4, 10, 23, 0.84)),
+        radial-gradient(circle at 86% 0%, rgba(94, 240, 189, 0.12), transparent 34%);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28), inset 0 1px rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero-deck-shell::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 9%;
+      width: 34%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--green), transparent);
+      box-shadow: 0 0 18px rgba(94, 240, 189, 0.62);
+    }
+
+    .hero-deck-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .hero-deck-kicker {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--copper);
+      font-size: 0.62rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .hero-deck-title {
+      margin: 0;
+      color: #edf5ff;
+      font-size: clamp(1.05rem, 2vw, 1.45rem);
+      letter-spacing: -0.025em;
+    }
+
+    .hero-deck-body {
+      max-width: 42ch;
+      margin: 0;
+      color: #9eb9d9;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      text-align: right;
+    }
+
+    .hero-deck-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .hero-deck-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr) auto;
+      grid-template-rows: auto 1fr;
+      gap: 4px 10px;
+      min-height: 108px;
+      padding: 13px;
+      overflow: hidden;
+      border: 1px solid rgba(126, 168, 255, 0.16);
+      border-radius: 17px;
+      background: rgba(5, 13, 28, 0.56);
+      transition: border-color 0.24s ease, background 0.24s ease, transform 0.24s ease, box-shadow 0.24s ease;
+    }
+
+    .hero-deck-card::after {
+      content: "";
+      position: absolute;
+      right: -18px;
+      bottom: -26px;
+      width: 82px;
+      height: 82px;
+      border: 1px solid rgba(94, 240, 189, 0.15);
+      border-radius: 50%;
+      box-shadow: 0 0 0 12px rgba(94, 240, 189, 0.025), 0 0 0 24px rgba(91, 168, 255, 0.02);
+      pointer-events: none;
+    }
+
+    .hero-deck-card:hover,
+    .hero-deck-card:focus-visible {
+      border-color: rgba(94, 240, 189, 0.58);
+      background: rgba(9, 28, 47, 0.78);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22), 0 0 24px rgba(94, 240, 189, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .hero-deck-icon {
+      display: grid;
+      grid-row: 1 / span 2;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(94, 240, 189, 0.32);
+      border-radius: 11px;
+      color: var(--green);
+      background: linear-gradient(145deg, rgba(94, 240, 189, 0.15), rgba(47, 124, 255, 0.12));
+      font-size: 1rem;
+      box-shadow: 0 0 18px rgba(94, 240, 189, 0.08);
+    }
+
+    .hero-deck-card strong {
+      align-self: center;
+      color: #edf5ff;
+      font-size: 0.76rem;
+      line-height: 1.2;
+    }
+
+    .hero-deck-card p {
+      grid-column: 2 / span 2;
+      align-self: start;
+      margin: 2px 0 0;
+      color: #90a9cb;
+      font-size: 0.68rem;
+      line-height: 1.4;
+    }
+
+    .hero-deck-arrow {
+      align-self: center;
+      color: var(--copper);
+      font-size: 1rem;
+      transition: transform 0.24s ease, color 0.24s ease;
+    }
+
+    .hero-deck-card:hover .hero-deck-arrow,
+    .hero-deck-card:focus-visible .hero-deck-arrow {
+      color: var(--green);
+      transform: translate(2px, -2px);
+    }
+
+    @media (max-width: 900px) {
+      .hero-deck-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero-deck-head {
+        display: grid;
+        gap: 7px;
+      }
+
+      .hero-deck-body {
+        max-width: none;
+        text-align: left;
+      }
+
+      .hero-deck-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-deck-card {
+        min-height: 82px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-deck-card,
+      .hero-deck-arrow {
+        transition: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -6384,6 +6566,44 @@
             </a>
           </div>
         </div>
+
+        <nav class="container hero-deck" aria-label="Accesos principales del ecosistema" data-i18n-attr="aria-label:hero.deckAria">
+          <div class="hero-deck-shell">
+            <div class="hero-deck-head">
+              <div>
+                <span class="hero-deck-kicker" data-i18n="hero.deckKicker">Panel de entrada</span>
+                <h2 class="hero-deck-title" data-i18n="hero.deckTitle">El ecosistema del Guardián, a un toque</h2>
+              </div>
+              <p class="hero-deck-body" data-i18n="hero.deckBody">Protección, identidad, comunidad y reconocimiento en una misma casa.</p>
+            </div>
+            <div class="hero-deck-grid">
+              <a class="hero-deck-card" href="#/neo">
+                <span class="hero-deck-icon" aria-hidden="true">ᚨ</span>
+                <strong data-i18n="hero.deckNeoTitle">Hablar con Neo</strong>
+                <span class="hero-deck-arrow" aria-hidden="true">↗</span>
+                <p data-i18n="hero.deckNeoBody">Entiende el riesgo antes de actuar.</p>
+              </a>
+              <a class="hero-deck-card" href="#/crear-cuenta" data-open-auth="register">
+                <span class="hero-deck-icon" aria-hidden="true">ᛟ</span>
+                <strong data-i18n="hero.deckAccountTitle">Tu cuenta Zamazen</strong>
+                <span class="hero-deck-arrow" aria-hidden="true">↗</span>
+                <p data-i18n="hero.deckAccountBody">Perfil, sesión y control cuando tú decidas.</p>
+              </a>
+              <a class="hero-deck-card" href="#/ideas">
+                <span class="hero-deck-icon" aria-hidden="true">ᛉ</span>
+                <strong data-i18n="hero.deckCommunityTitle">Red Neo</strong>
+                <span class="hero-deck-arrow" aria-hidden="true">↗</span>
+                <p data-i18n="hero.deckCommunityBody">Aporta una idea segura al Guardián.</p>
+              </a>
+              <a class="hero-deck-card" href="#/salon-guardianes">
+                <span class="hero-deck-icon" aria-hidden="true">ᚱ</span>
+                <strong data-i18n="hero.deckRankingTitle">Salón de Guardianes</strong>
+                <span class="hero-deck-arrow" aria-hidden="true">↗</span>
+                <p data-i18n="hero.deckRankingBody">Descubre contribuciones aprobadas.</p>
+              </a>
+            </div>
+          </div>
+        </nav>
 
         <div class="container sibling-bridge sibling-bridge--home" id="niofra-bridge">
           <div class="section-head reveal">
@@ -9416,7 +9636,19 @@
           commandMode: "MODO PREPARADO",
           commandBody: "Tres señales. Una decisión más clara.",
           commandFoot: "Protección con contexto",
-          commandAria: "Panel visual del núcleo Aegis"
+          commandAria: "Panel visual del núcleo Aegis",
+          deckKicker: "Panel de entrada",
+          deckTitle: "El ecosistema del Guardián, a un toque",
+          deckBody: "Protección, identidad, comunidad y reconocimiento en una misma casa.",
+          deckNeoTitle: "Hablar con Neo",
+          deckNeoBody: "Entiende el riesgo antes de actuar.",
+          deckAccountTitle: "Tu cuenta Zamazen",
+          deckAccountBody: "Perfil, sesión y control cuando tú decidas.",
+          deckCommunityTitle: "Red Neo",
+          deckCommunityBody: "Aporta una idea segura al Guardián.",
+          deckRankingTitle: "Salón de Guardianes",
+          deckRankingBody: "Descubre contribuciones aprobadas.",
+          deckAria: "Accesos principales del ecosistema"
         },
         phone: {
           status: "Sistema activo",
@@ -9909,7 +10141,19 @@
           commandMode: "READY MODE",
           commandBody: "Three signals. One clearer decision.",
           commandFoot: "Context-led protection",
-          commandAria: "Visual Aegis core panel"
+          commandAria: "Visual Aegis core panel",
+          deckKicker: "Entry panel",
+          deckTitle: "The Guardian ecosystem, one tap away",
+          deckBody: "Protection, identity, community and recognition in one home.",
+          deckNeoTitle: "Talk to Neo",
+          deckNeoBody: "Understand risk before you act.",
+          deckAccountTitle: "Your Zamazen account",
+          deckAccountBody: "Profile, session and control when you choose.",
+          deckCommunityTitle: "Neo Network",
+          deckCommunityBody: "Bring a safe idea to the Guardian.",
+          deckRankingTitle: "Hall of Guardians",
+          deckRankingBody: "Discover approved contributions.",
+          deckAria: "Main ecosystem access points"
         },
         phone: {
           status: "System active",
@@ -10397,7 +10641,19 @@
           commandMode: "MODE PRÊT",
           commandBody: "Trois signaux. Une décision plus claire.",
           commandFoot: "Protection avec contexte",
-          commandAria: "Panneau visuel du noyau Aegis"
+          commandAria: "Panneau visuel du noyau Aegis",
+          deckKicker: "Panneau d'entrée",
+          deckTitle: "L'écosystème du Gardien, en un geste",
+          deckBody: "Protection, identité, communauté et reconnaissance réunies.",
+          deckNeoTitle: "Parler avec Neo",
+          deckNeoBody: "Comprenez le risque avant d'agir.",
+          deckAccountTitle: "Votre compte Zamazen",
+          deckAccountBody: "Profil, session et contrôle quand vous le décidez.",
+          deckCommunityTitle: "Réseau Neo",
+          deckCommunityBody: "Proposez une idée sûre au Gardien.",
+          deckRankingTitle: "Salon des Gardiens",
+          deckRankingBody: "Découvrez les contributions approuvées.",
+          deckAria: "Accès principaux de l'écosystème"
         },
         phone: {
           status: "Système actif",
@@ -10885,7 +11141,19 @@
           commandMode: "MODO PRONTO",
           commandBody: "Três sinais. Uma decisão mais clara.",
           commandFoot: "Proteção com contexto",
-          commandAria: "Painel visual do núcleo Aegis"
+          commandAria: "Painel visual do núcleo Aegis",
+          deckKicker: "Painel de entrada",
+          deckTitle: "O ecossistema do Guardião, num toque",
+          deckBody: "Proteção, identidade, comunidade e reconhecimento numa só casa.",
+          deckNeoTitle: "Falar com Neo",
+          deckNeoBody: "Compreende o risco antes de agir.",
+          deckAccountTitle: "A tua conta Zamazen",
+          deckAccountBody: "Perfil, sessão e controlo quando decidires.",
+          deckCommunityTitle: "Rede Neo",
+          deckCommunityBody: "Traz uma ideia segura ao Guardião.",
+          deckRankingTitle: "Salão dos Guardiões",
+          deckRankingBody: "Descobre contribuições aprovadas.",
+          deckAria: "Acessos principais do ecossistema"
         },
         phone: {
           status: "Sistema ativo",
