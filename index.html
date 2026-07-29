@@ -4517,6 +4517,52 @@
       transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
     }
 
+    .quick-menu-header {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 2px 4px 5px;
+      color: #9eb9d9;
+      font-size: 0.63rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .quick-menu-header strong {
+      color: var(--green);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+    }
+
+    .quick-menu-toggle {
+      position: relative;
+      isolation: isolate;
+      --scroll-progress: 0%;
+    }
+
+    .quick-menu-toggle::before {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      z-index: 0;
+      border-radius: 22px;
+      background: conic-gradient(var(--green) var(--scroll-progress), rgba(126, 168, 255, 0.16) 0);
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      padding: 1px;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .quick-menu-toggle-glyph {
+      position: relative;
+      z-index: 1;
+      display: block;
+      line-height: 1;
+    }
+
     .quick-launcher.is-open .quick-menu {
       opacity: 1;
       transform: translateY(0) scale(1);
@@ -8139,6 +8185,10 @@
 
   <div class="quick-launcher" id="quickLauncher">
     <nav class="quick-menu" id="quickMenu" aria-label="Accesos rápidos" data-i18n-attr="aria-label:quickMenu.label">
+      <div class="quick-menu-header">
+        <span data-i18n="quickMenu.kicker">Control del Guardián</span>
+        <strong id="quickMenuProgress">0%</strong>
+      </div>
       <a href="#/estado"><span class="quick-menu-icon" aria-hidden="true">ᛉ</span><span data-i18n="quickMenu.shield">Escudo</span></a>
       <a href="#/red-neo"><span class="quick-menu-icon" aria-hidden="true">ᚨ</span><span data-i18n="quickMenu.neo">Red Neo</span></a>
       <a href="#/seguridad"><span class="quick-menu-icon" aria-hidden="true">ᚦ</span><span data-i18n="nav.security">Seguridad</span></a>
@@ -8146,7 +8196,7 @@
       <a href="#/precios"><span class="quick-menu-icon" aria-hidden="true">ᚠ</span><span data-i18n="quickMenu.premium">Precios</span></a>
       <a href="#/soporte"><span class="quick-menu-icon" aria-hidden="true">ᚲ</span><span data-i18n="nav.help">Ayuda</span></a>
     </nav>
-    <button class="quick-menu-toggle" id="quickMenuToggle" type="button" aria-expanded="false" aria-controls="quickMenu" aria-label="Abrir accesos rápidos" data-i18n-attr="aria-label:quickMenu.open">ᛉ</button>
+    <button class="quick-menu-toggle" id="quickMenuToggle" type="button" aria-expanded="false" aria-controls="quickMenu" aria-label="Abrir accesos rápidos" data-i18n-attr="aria-label:quickMenu.open"><span class="quick-menu-toggle-glyph" aria-hidden="true">ᛉ</span></button>
   </div>
 
   <section class="cookie-banner" id="cookieBanner" aria-live="polite" aria-label="Preferencias de privacidad y cookies" data-i18n-attr="aria-label:accessibility.cookieBanner">
@@ -8254,6 +8304,7 @@
     const userPanelLogout = document.getElementById("userPanelLogout");
     const quickLauncher = document.getElementById("quickLauncher");
     const quickMenuToggle = document.getElementById("quickMenuToggle");
+    const quickMenuProgress = document.getElementById("quickMenuProgress");
     const quickMenuLinks = document.querySelectorAll(".quick-menu a");
     const neoChatWidget = document.getElementById("neoChatWidget");
     const neoChatToggle = document.getElementById("neoChatToggle");
@@ -10139,6 +10190,7 @@
         quickMenu: {
           label: "Accesos rápidos",
           open: "Abrir accesos rápidos",
+          kicker: "Control del Guardián",
           shield: "Escudo",
           neo: "Red Neo",
           security: "Seguridad",
@@ -10653,6 +10705,7 @@
         quickMenu: {
           label: "Quick access",
           open: "Open quick access",
+          kicker: "Guardian control",
           shield: "Shield",
           neo: "Neo Network",
           security: "Security",
@@ -11167,6 +11220,7 @@
         quickMenu: {
           label: "Accès rapides",
           open: "Ouvrir les accès rapides",
+          kicker: "Contrôle du Gardien",
           shield: "Bouclier",
           neo: "Réseau Neo",
           security: "Sécurité",
@@ -11681,6 +11735,7 @@
         quickMenu: {
           label: "Acessos rápidos",
           open: "Abrir acessos rápidos",
+          kicker: "Controlo do Guardião",
           shield: "Escudo",
           neo: "Red Neo",
           security: "Segurança",
@@ -14491,6 +14546,7 @@
       updateRouteLinks(routeName);
       document.title = routeTitleFor(routeName, definition).replace(/\s+/g, " ").trim() + " | Zamazen Aegis";
       revealVisibleItems();
+      updateQuickMenuProgress();
 
       if (!options.preserveScroll) {
         window.setTimeout(() => {
@@ -15255,6 +15311,23 @@
       if (!quickLauncher || !quickMenuToggle) return;
       quickLauncher.classList.remove("is-open");
       quickMenuToggle.setAttribute("aria-expanded", "false");
+    }
+
+    let quickMenuScrollFrame = 0;
+    function updateQuickMenuProgress() {
+      if (!quickMenuToggle) return;
+      if (quickMenuScrollFrame) return;
+
+      quickMenuScrollFrame = window.requestAnimationFrame(() => {
+        const scrollableHeight = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+        const progress = scrollableHeight > 0
+          ? Math.min(Math.max(window.scrollY / scrollableHeight, 0), 1)
+          : 0;
+        const percent = Math.round(progress * 100);
+        quickMenuToggle.style.setProperty("--scroll-progress", `${percent}%`);
+        if (quickMenuProgress) quickMenuProgress.textContent = `${percent}%`;
+        quickMenuScrollFrame = 0;
+      });
     }
 
     function closeAccountActions() {
@@ -16172,6 +16245,9 @@
     document.addEventListener("visibilitychange", syncVisibleCadence);
     window.addEventListener("online", refreshOnlineStatusWhenVisible);
     window.addEventListener("offline", refreshOnlineStatusWhenVisible);
+    window.addEventListener("scroll", updateQuickMenuProgress, { passive: true });
+    window.addEventListener("resize", updateQuickMenuProgress);
+    updateQuickMenuProgress();
   </script>
 </body>
 </html>
