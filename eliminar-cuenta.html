@@ -130,8 +130,10 @@
         }
       };
 
+      const requestedLanguage = new URLSearchParams(window.location.search).get("lang");
+
       function detectLanguage() {
-        const requested = new URLSearchParams(window.location.search).get("lang");
+        const requested = requestedLanguage;
         if (SUPPORTED_DELETE_ACCOUNT_ALIAS_LANGUAGES.includes(requested)) return requested;
         let stored = "";
         try {
@@ -140,15 +142,15 @@
           stored = "";
         }
         if (SUPPORTED_DELETE_ACCOUNT_ALIAS_LANGUAGES.includes(stored)) return stored;
-        const browser = String(navigator.language || "es").slice(0, 2).toLowerCase();
-        return SUPPORTED_DELETE_ACCOUNT_ALIAS_LANGUAGES.includes(browser) ? browser : "es";
+        return "es";
       }
 
       const language = detectLanguage();
       const copy = DELETE_ACCOUNT_ALIAS_COPY[language];
       const targetParameters = new URLSearchParams(window.location.search);
-      targetParameters.set("lang", language);
-      const targetUrl = `delete-account.html?${targetParameters.toString()}${window.location.hash}`;
+      if (requestedLanguage) targetParameters.set("lang", language);
+      const targetQuery = targetParameters.toString();
+      const targetUrl = `delete-account.html${targetQuery ? `?${targetQuery}` : ""}${window.location.hash}`;
 
       document.documentElement.lang = language;
       document.title = copy.title;
