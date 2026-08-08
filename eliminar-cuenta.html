@@ -142,7 +142,8 @@
           stored = "";
         }
         if (SUPPORTED_DELETE_ACCOUNT_ALIAS_LANGUAGES.includes(stored)) return stored;
-        return "es";
+        const browser = String(navigator.language || "es").slice(0, 2).toLowerCase();
+        return SUPPORTED_DELETE_ACCOUNT_ALIAS_LANGUAGES.includes(browser) ? browser : "es";
       }
 
       const language = detectLanguage();

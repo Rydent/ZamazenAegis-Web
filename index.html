@@ -19,8 +19,12 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
       <meta name="keywords" content="Zamazen Aegis, seguridad Android, anti phishing, spam, Red Neo, Bunker, privacidad, Valhalla, Ragnarok">
-  <meta name="author" content="Francisco Javier Molina Moreno">
+      <meta name="author" content="Francisco Javier Molina Moreno">
       <meta name="theme-color" content="#050816">
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; img-src 'self' data: blob: https://*.googleusercontent.com; script-src 'self' 'sha256-q3EZAk62RW6097shQg1M968iuu5ESBEk7wSOkvl2t+s=' https://accounts.google.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.zamazenaegis.com https://accounts.google.com https://www.googleapis.com; frame-src https://accounts.google.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:"
+  >
   <meta name="google-signin-client_id" content="67457777183-pqbhkk1bgoe4aim10f2kcjdrb0n5c3kp.apps.googleusercontent.com">
   <meta name="robots" content="index,follow">
   <meta property="og:site_name" content="Zamazen Aegis">
@@ -812,6 +816,13 @@
       background: linear-gradient(90deg, transparent, rgba(94, 240, 189, 0.42), rgba(214, 164, 99, 0.38), transparent);
       box-shadow: 0 0 24px rgba(94, 240, 189, 0.18);
       pointer-events: none;
+    }
+
+    /* The mobile arrival keeps a trace of Neo in the first viewport without
+       moving the full observatory below the reading flow. It is decorative,
+       reuses the canonical Neo asset, and never carries product claims. */
+    .hero-mobile-beacon {
+      display: none;
     }
 
     .hero-grid {
@@ -5934,6 +5945,59 @@
       will-change: background;
     }
 
+    .hero-awakening-scan {
+      position: absolute;
+      top: 51%;
+      left: 50%;
+      z-index: 6;
+      width: min(72vw, 340px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(94, 240, 189, 0.58);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 10px rgba(94, 240, 189, 0.035),
+        0 0 36px rgba(94, 240, 189, 0.28),
+        inset 0 0 26px rgba(91, 168, 255, 0.18);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0.42);
+      mix-blend-mode: screen;
+    }
+
+    .hero-awakening-scan::before {
+      content: "";
+      position: absolute;
+      inset: 11%;
+      border: 1px solid rgba(214, 164, 99, 0.28);
+      border-radius: 50%;
+      box-shadow: 0 0 0 22px rgba(91, 168, 255, 0.025);
+    }
+
+    .hero-awakening-scan::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 14px;
+      height: 14px;
+      border: 1px solid rgba(239, 255, 250, 0.9);
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 7px rgba(94, 240, 189, 0.08), 0 0 24px rgba(94, 240, 189, 0.9);
+      transform: translate(-50%, -50%);
+    }
+
+    .hero-awakening-scan.is-active {
+      animation: heroAwakeningScan 2.8s cubic-bezier(0.16, 0.82, 0.24, 1) both;
+    }
+
+    @keyframes heroAwakeningScan {
+      0% { opacity: 0; filter: blur(4px); transform: translate(-50%, -50%) scale(0.42); }
+      16% { opacity: 0.92; filter: blur(0); }
+      52% { opacity: 0.64; transform: translate(-50%, -50%) scale(0.92); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.28); }
+    }
+
     .hero-beam {
       position: absolute;
       top: -12%;
@@ -6063,6 +6127,65 @@
         min-height: auto;
       }
 
+      .hero-grid {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-mobile-beacon {
+        position: absolute;
+        top: clamp(430px, 58vw, 520px);
+        left: 50%;
+        z-index: 0;
+        display: block;
+        width: min(92vw, 380px);
+        height: 190px;
+        overflow: hidden;
+        border: 1px solid rgba(94, 240, 189, 0.28);
+        border-radius: 34px;
+        background:
+          linear-gradient(180deg, rgba(5, 12, 25, 0.52), rgba(5, 12, 25, 0.88)),
+          radial-gradient(circle at 50% 45%, rgba(94, 240, 189, 0.28), transparent 46%),
+          url("images/neo/neo_guardian_hologram.png") center 43% / auto 226px no-repeat;
+        box-shadow:
+          0 0 0 1px rgba(91, 168, 255, 0.12),
+          0 24px 58px rgba(0, 0, 0, 0.34),
+          0 0 42px rgba(94, 240, 189, 0.12),
+          inset 0 0 34px rgba(91, 168, 255, 0.13);
+        opacity: 0.68;
+        pointer-events: none;
+        transform: translateX(-50%);
+        clip-path: polygon(50% 0, 96% 22%, 92% 72%, 74% 100%, 26% 100%, 8% 72%, 4% 22%);
+      }
+
+      .hero-mobile-beacon::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 118px;
+        height: 118px;
+        border: 1px solid rgba(94, 240, 189, 0.56);
+        border-radius: 50%;
+        box-shadow:
+          0 0 0 12px rgba(94, 240, 189, 0.05),
+          0 0 28px rgba(94, 240, 189, 0.22),
+          inset 0 0 24px rgba(91, 168, 255, 0.18);
+        transform: translate(-50%, -50%);
+      }
+
+      .hero-mobile-beacon::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 1px;
+        height: 100%;
+        background: linear-gradient(180deg, transparent, rgba(94, 240, 189, 0.62), transparent);
+        box-shadow: 0 0 16px rgba(94, 240, 189, 0.3);
+        transform: translateX(-50%);
+      }
+
       .hero-visual {
         min-height: 620px;
       }
@@ -6085,9 +6208,18 @@
         animation: none;
         opacity: 0 !important;
       }
+
+      .hero-mobile-beacon {
+        opacity: 0.42;
+      }
+
+      .hero-awakening-scan {
+        display: none;
+      }
     }
 
-    body.motion-softened .hero-pointer-light {
+    body.motion-softened .hero-pointer-light,
+    body.motion-softened .hero-awakening-scan {
       opacity: 0;
     }
 
@@ -6388,6 +6520,18 @@
       box-shadow: 0 0 18px rgba(94, 240, 189, 0.62);
     }
 
+    .hero-deck-shell::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: 14px;
+      background: linear-gradient(180deg, var(--green), transparent);
+      box-shadow: 0 0 14px rgba(94, 240, 189, 0.58);
+      pointer-events: none;
+    }
+
     .hero-deck-head {
       display: flex;
       align-items: end;
@@ -6423,9 +6567,38 @@
     }
 
     .hero-deck-grid {
+      position: relative;
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 10px;
+      padding-top: 14px;
+    }
+
+    .hero-deck-grid::before {
+      content: "";
+      position: absolute;
+      top: 4px;
+      right: 8%;
+      left: 8%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(94, 240, 189, 0.62), rgba(91, 168, 255, 0.46), transparent);
+      box-shadow: 0 0 18px rgba(94, 240, 189, 0.14);
+      pointer-events: none;
+    }
+
+    .hero-deck-grid::after {
+      content: "";
+      position: absolute;
+      top: 1px;
+      left: 50%;
+      width: 7px;
+      height: 7px;
+      border: 1px solid rgba(239, 255, 250, 0.84);
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 5px rgba(94, 240, 189, 0.055), 0 0 16px rgba(94, 240, 189, 0.82);
+      transform: translateX(-50%);
+      pointer-events: none;
     }
 
     .hero-deck-card {
@@ -6471,7 +6644,7 @@
       width: 34px;
       height: 34px;
       border: 1px solid rgba(94, 240, 189, 0.32);
-      border-radius: 11px;
+      border-radius: 50%;
       color: var(--green);
       background: linear-gradient(145deg, rgba(94, 240, 189, 0.15), rgba(47, 124, 255, 0.12));
       font-size: 1rem;
@@ -6526,6 +6699,13 @@
 
       .hero-deck-grid {
         grid-template-columns: 1fr;
+        padding-top: 0;
+      }
+
+      .hero-deck-grid::before,
+      .hero-deck-grid::after,
+      .hero-deck-shell::after {
+        display: none;
       }
 
       .hero-deck-card {
@@ -7016,6 +7196,8 @@
               Protección que se anticipa al impacto, para que no tengas que reaccionar tarde.
             </p>
 
+            <div class="hero-mobile-beacon" aria-hidden="true"></div>
+
             <div class="hero-actions">
               <div class="cta-stack">
                 <a class="cta-primary" href="#/descargar" data-i18n="hero.primaryCta">Proteger mi móvil</a>
@@ -7054,6 +7236,7 @@
             </div>
             <div class="hero-observatory-sweep" aria-hidden="true"></div>
             <div class="hero-pointer-light" aria-hidden="true"></div>
+            <div class="hero-awakening-scan" id="heroAwakeningScan" aria-hidden="true"></div>
             <div class="hero-signal-card hero-signal-card--calls" aria-hidden="true">
               <span class="hero-signal-glyph">ᚲ</span>
               <span class="hero-signal-copy">
@@ -7687,8 +7870,8 @@
               </div>
               <div class="permission-list">
                 <div class="permission-row"><strong data-i18n="center.permissionPlayTitle">PlaySafe</strong><span data-i18n="center.permissionPlayBody">No declara lectura de llamadas, SMS, contactos, almacenamiento completo, overlay, VPN, administrador del dispositivo ni servicio de accesibilidad.</span></div>
-                <div class="permission-row"><strong data-i18n="center.permissionCallsTitle">Llamadas y SMS</strong><span data-i18n="center.permissionCallsBody">Las variantes Full/Ragnarok pueden usar READ_PHONE_STATE, READ_CALL_LOG o RECEIVE_SMS solo con consentimiento explícito y utilidad real.</span></div>
-                <div class="permission-row"><strong data-i18n="center.permissionNotificationsTitle">Notificaciones</strong><span data-i18n="center.permissionNotificationsBody">POST_NOTIFICATIONS es opcional; si el usuario lo rechaza, la app debe seguir funcionando con experiencia básica. En 1.6 no se promete leer conversaciones de otras apps.</span></div>
+                <div class="permission-row"><strong data-i18n="center.permissionCallsTitle">Llamadas y SMS</strong><span data-i18n="center.permissionCallsBody">Las variantes Full/Ragnarok pueden usar información del teléfono, registro de llamadas o recepción de SMS solo con consentimiento explícito y utilidad real.</span></div>
+                <div class="permission-row"><strong data-i18n="center.permissionNotificationsTitle">Notificaciones</strong><span data-i18n="center.permissionNotificationsBody">El permiso de notificaciones es opcional; si el usuario lo rechaza, la app debe seguir funcionando con experiencia básica. En 1.6 no se promete leer conversaciones de otras apps.</span></div>
                 <div class="permission-row"><strong data-i18n="center.permissionBunkerTitle">Bunker</strong><span data-i18n="center.permissionBunkerBody">El Bunker trata credenciales y datos sensibles como secretos: cifrado local y paquetes cloud cifrados por el usuario, nunca contraseñas en claro.</span></div>
                 <div class="permission-row"><strong data-i18n="center.permissionNetworkTitle">Red Neo</strong><span data-i18n="center.permissionNetworkBody">Los reportes online se envían saneados, con mínimos datos necesarios y sin conversaciones completas, códigos, credenciales ni datos bancarios completos.</span></div>
                 <div class="permission-row"><strong data-i18n="center.permissionRecoveryTitle">Recuperación</strong><span data-i18n="center.permissionRecoveryBody">Si un servicio falla, la app conserva modo local, cola segura y guía clara; la recuperación forma parte del diseño, no de un parche posterior.</span></div>
@@ -7905,8 +8088,8 @@
                 <li data-i18n="legalDocs.privacyPoint1">Los permisos se piden con contexto y pueden desactivarse desde Ajustes.</li>
                 <li data-i18n="legalDocs.privacyPoint2">Cuenta Zamazen, Red Neo online y diagnósticos usan datos mínimos, saneados y consentidos cuando el usuario activa servicios conectados.</li>
                 <li data-i18n="legalDocs.privacyPoint3">No se promete vigilancia secreta ni protección absoluta; Neo informa, ayuda y actúa con consentimiento.</li>
-                <li>Neo Call Guardian puede usar registro de llamadas y cribado solo con permiso y consentimiento para detectar llamadas sospechosas o números bloqueados por el usuario.</li>
-                <li>SMS sospechoso usa SMS entrantes para detectar smishing; no envía SMS, no borra conversaciones y no solicita lectura completa de mensajes antiguos.</li>
+                <li data-i18n="legalDocs.callGuardianPrivacy">Neo Guardián de llamadas puede usar el registro y el filtrado de llamadas solo con permiso y consentimiento para detectar llamadas sospechosas o números que el usuario haya bloqueado.</li>
+                <li data-i18n="legalDocs.smsPrivacy">SMS sospechoso analiza los SMS entrantes para detectar smishing; no envía SMS, no borra conversaciones ni solicita leer mensajes antiguos completos.</li>
               </ul>
               <p class="legal-callout">
                 <span data-i18n="legalDocs.deleteCallout">Si tienes una cuenta Zamazen, puedes solicitar la eliminación de la cuenta y datos asociados desde la página pública de eliminación.</span>
@@ -8787,6 +8970,7 @@
     const liveMotionSwitch = document.getElementById("liveMotionSwitch");
     const liveMotionLabel = document.getElementById("liveMotionLabel");
     const heroVisual = document.querySelector(".hero-visual");
+    const heroAwakeningScan = document.getElementById("heroAwakeningScan");
     const arrivalConsole = document.getElementById("arrivalConsole");
     const arrivalPulseButton = document.getElementById("arrivalPulseButton");
     const arrivalPulseLabel = document.getElementById("arrivalPulseLabel");
@@ -8839,7 +9023,6 @@
     const STORAGE_MOTION_KEY = "zamazen_aegis_live_motion";
     const STORAGE_CONTRIBUTIONS_KEY = "zamazen_aegis_contribution_drafts";
     const STORAGE_SUPPORT_TICKETS_KEY = "zamazen_aegis_support_ticket_drafts";
-    const STORAGE_ACCOUNT_SESSION_TOKEN_KEY = "zamazen_aegis_online_session_token";
     const STORAGE_FORM_RATE_KEY = "zamazen_aegis_secure_form_last_submit";
     const ZAMAZEN_API_BASE_URL = "https://api.zamazenaegis.com";
     const SUPPORT_EMAIL_ADDRESS = "zamazenaegissupport@gmail.com";
@@ -8869,6 +9052,7 @@
     let googleIdentityScriptPromise = null;
     let googleIdentityInitializedClientId = "";
     let googleIdentityNonce = "";
+    let webSessionAuthenticated = false;
     const NEO_CHAT_COPY = {
       es: {
         toggle: "Hablar con Neo", subtitle: "Asistente del refugio · respuestas claras y honestas", disclaimer: "Soy Neo, un asistente de Zamazen Aegis. No soy una persona ni sustituyo ayuda profesional; si no sé algo, te lo diré.", inputLabel: "Escribe una pregunta", placeholder: "¿Qué quieres saber?", send: "Enviar", neo: "Neo", you: "Tú", greeting: "Estoy aquí. Pregúntame por Aegis, su misión, la cuenta, Google, la app o Niofra.", escalationTitle: "¿Quieres que lo revise el creador?", escalationBody: "No tengo una respuesta segura para eso. Deja un correo opcional y prepararé un aviso saneado para zamazenaegissupport@gmail.com.", contactPlaceholder: "Tu correo (opcional)", escalate: "Enviar a soporte", sent: "Aviso enviado al canal de soporte.", queued: "Aviso guardado para revisión; el canal automático de correo necesita configuración.", manual: "No se pudo entregar automáticamente. Puedes enviar este resumen por correo.", invalidEmail: "Escribe un correo válido o déjalo vacío.", unavailable: "Ahora no puedo consultar la capa online, pero mantengo la guía local.", fallback: "Puedo orientarte sobre Aegis, Neo, cuenta, privacidad, Google, Play, ideas, quejas y Niofra. Si tu pregunta es muy concreta, envíamela al soporte.", emailSubject: "Pregunta para Zamazen Aegis"
@@ -9016,48 +9200,6 @@
       { id: "ragnarok", label: "Ragnarok", glyph: "RG" }
     ];
     const PROFILE_IMAGE_MAX_BYTES = 700 * 1024;
-    const DEMO_SCENARIOS = [
-      {
-        id: "call",
-        label: "Llamada sospechosa",
-        title: "Neo detecta una llamada con senales de fraude",
-        body: "Numero desconocido, urgencia comercial y patron de repeticion. Zamazen recomienda no devolver la llamada sin verificar.",
-        action: "Bloquear o revisar manualmente",
-        risk: 72
-      },
-      {
-        id: "sms",
-        label: "SMS phishing",
-        title: "Un SMS imita a una entidad bancaria",
-        body: "El mensaje presiona con urgencia y un enlace dudoso. Neo explica que no se deben introducir credenciales desde el enlace.",
-        action: "Marcar para revisar y reportar",
-        risk: 86
-      },
-      {
-        id: "link",
-        label: "Enlace dudoso",
-        title: "El enlace necesita verificacion antes de abrir",
-        body: "Dominio raro, redireccion y palabras de premio. Zamazen ayuda a decidir sin ejecutar contenido peligroso.",
-        action: "Analizar antes de abrir",
-        risk: 64
-      },
-      {
-        id: "permission",
-        label: "Permiso delicado",
-        title: "Android pide un permiso sensible",
-        body: "La app explica para que se usa, que alternativa existe y que ocurre si el usuario no lo concede.",
-        action: "Conceder solo si aporta valor",
-        risk: 48
-      },
-      {
-        id: "network",
-        label: "Red Neo",
-        title: "Un reporte puede ayudar sin publicar secretos",
-        body: "Antes de enviarse, se sanea el contenido para evitar tokens, correos sensibles, codigos y datos privados.",
-        action: "Compartir indicador saneado",
-        risk: 38
-      }
-    ];
     const GUARDIAN_POINT_RULES = [
       ["Idea útil", "+10", "Aporta claridad o mejora una parte concreta del proyecto."],
       ["Mejora aceptada", "+25", "Puede integrarse sin romper estabilidad ni privacidad."],
@@ -10154,7 +10296,7 @@
 
     function getRichRouteCopy(section) {
       const language = getCurrentLanguage();
-      return RICH_ROUTE_COPY[language]?.[section] || RICH_ROUTE_COPY.es[section];
+      return RICH_ROUTE_COPY[language]?.[section];
     }
 
     function localizeAccountForProfile(account, profileCopy) {
@@ -10528,9 +10670,9 @@
           permissionPlayTitle: "PlaySafe",
           permissionPlayBody: "No declara lectura de llamadas, SMS, contactos, almacenamiento completo, overlay, VPN, administrador del dispositivo ni servicio de accesibilidad.",
           permissionCallsTitle: "Llamadas y SMS",
-          permissionCallsBody: "Las variantes Full/Ragnarok pueden usar READ_PHONE_STATE, READ_CALL_LOG o RECEIVE_SMS solo con consentimiento explícito y utilidad real.",
+          permissionCallsBody: "Las variantes Full/Ragnarok pueden usar información del teléfono, registro de llamadas o recepción de SMS solo con consentimiento explícito y utilidad real.",
           permissionNotificationsTitle: "Notificaciones",
-          permissionNotificationsBody: "POST_NOTIFICATIONS es opcional; si el usuario lo rechaza, la app debe seguir funcionando con experiencia básica. En 1.6 no se promete leer conversaciones de otras apps.",
+          permissionNotificationsBody: "El permiso de notificaciones es opcional; si el usuario lo rechaza, la app debe seguir funcionando con experiencia básica. En 1.6 no se promete leer conversaciones de otras apps.",
           permissionBunkerTitle: "Bunker",
           permissionBunkerBody: "El Bunker trata credenciales y datos sensibles como secretos: cifrado local y paquetes cloud cifrados por el usuario, nunca contraseñas en claro.",
           permissionNetworkTitle: "Red Neo",
@@ -11071,9 +11213,9 @@
           permissionPlayTitle: "PlaySafe",
           permissionPlayBody: "Does not declare call log/SMS reading, contacts, full storage, overlay, VPN, Device Admin or Accessibility Service.",
           permissionCallsTitle: "Calls and SMS",
-          permissionCallsBody: "Full/Ragnarok variants may use READ_PHONE_STATE, READ_CALL_LOG or RECEIVE_SMS only with explicit consent and real utility.",
+          permissionCallsBody: "Full/Ragnarok variants may use phone information, call history or incoming SMS only with explicit consent and real utility.",
           permissionNotificationsTitle: "Notifications",
-          permissionNotificationsBody: "POST_NOTIFICATIONS is optional; if the user denies it, the app must keep its basic experience. Version 1.6 does not promise to read other apps' conversations.",
+          permissionNotificationsBody: "The notification permission is optional; if the user denies it, the app must keep its basic experience. Version 1.6 does not promise to read other apps' conversations.",
           permissionBunkerTitle: "Bunker",
           permissionBunkerBody: "Bunker treats credentials and sensitive data as secrets: local encryption and user-encrypted cloud packages, never plain passwords.",
           permissionNetworkTitle: "Neo Network",
@@ -11609,9 +11751,9 @@
           permissionPlayTitle: "PlaySafe",
           permissionPlayBody: "Ne déclare pas la lecture des appels, SMS, contacts, stockage complet, overlay, VPN, administrateur d'appareil ni service d'accessibilité.",
           permissionCallsTitle: "Appels et SMS",
-          permissionCallsBody: "Les variantes Full/Ragnarok peuvent utiliser READ_PHONE_STATE, READ_CALL_LOG ou RECEIVE_SMS uniquement avec consentement explicite et utilité réelle.",
+          permissionCallsBody: "Les variantes Full/Ragnarok peuvent utiliser des informations du téléphone, le journal des appels ou la réception des SMS uniquement avec consentement explicite et utilité réelle.",
           permissionNotificationsTitle: "Notifications",
-          permissionNotificationsBody: "POST_NOTIFICATIONS est optionnel; si l'utilisateur refuse, l'app doit conserver son expérience de base. En 1.6, elle ne promet pas de lire les conversations d'autres apps.",
+          permissionNotificationsBody: "L’autorisation de notifications est facultative; si l’utilisateur refuse, l’app doit conserver son expérience de base. En 1.6, elle ne promet pas de lire les conversations d’autres apps.",
           permissionBunkerTitle: "Bunker",
           permissionBunkerBody: "Le Bunker traite identifiants et données sensibles comme des secrets: chiffrement local et paquets cloud chiffrés par l'utilisateur, jamais de mots de passe en clair.",
           permissionNetworkTitle: "Réseau Neo",
@@ -12147,9 +12289,9 @@
           permissionPlayTitle: "PlaySafe",
           permissionPlayBody: "Não declara leitura de chamadas, SMS, contatos, armazenamento completo, overlay, VPN, administrador do dispositivo nem serviço de acessibilidade.",
           permissionCallsTitle: "Chamadas e SMS",
-          permissionCallsBody: "As variantes Full/Ragnarok podem usar READ_PHONE_STATE, READ_CALL_LOG ou RECEIVE_SMS apenas com consentimento explícito e utilidade real.",
+          permissionCallsBody: "As variantes Full/Ragnarok podem usar informações do telefone, o registo de chamadas ou a receção de SMS apenas com consentimento explícito e utilidade real.",
           permissionNotificationsTitle: "Notificações",
-          permissionNotificationsBody: "POST_NOTIFICATIONS é opcional; se o usuário recusar, o app deve manter a experiência básica. Na 1.6 não promete ler conversas de outros apps.",
+          permissionNotificationsBody: "A permissão de notificações é opcional; se o usuário recusar, o app deve manter a experiência básica. Na 1.6 não promete ler conversas de outros apps.",
           permissionBunkerTitle: "Bunker",
           permissionBunkerBody: "O Bunker trata credenciais e dados sensíveis como segredos: cifragem local e pacotes cloud cifrados pelo usuário, nunca senhas em claro.",
           permissionNetworkTitle: "Red Neo",
@@ -12480,6 +12622,8 @@
           privacyPoint1: "Los permisos se piden con contexto y pueden desactivarse desde Ajustes.",
           privacyPoint2: "Cuenta Zamazen, Red Neo online y diagnósticos usan datos mínimos, saneados y consentidos cuando el usuario activa servicios conectados.",
           privacyPoint3: "No se promete vigilancia secreta ni protección absoluta; Neo informa, ayuda y actúa con consentimiento.",
+          callGuardianPrivacy: "Neo Guardián de llamadas puede usar el registro y el filtrado de llamadas solo con permiso y consentimiento para detectar llamadas sospechosas o números que el usuario haya bloqueado.",
+          smsPrivacy: "SMS sospechoso analiza los SMS entrantes para detectar smishing; no envía SMS, no borra conversaciones ni solicita leer mensajes antiguos completos.",
           deleteCallout: "Si tienes una cuenta Zamazen, puedes solicitar la eliminación de la cuenta y datos asociados desde la página pública de eliminación.",
           deleteAction: "Solicitar eliminación de cuenta",
           dataTitle: "Gestionar y eliminar datos parciales",
@@ -12578,6 +12722,8 @@
           privacyPoint1: "Permissions are requested with context and can be disabled from Settings.",
           privacyPoint2: "Zamazen account, online Neo Network and diagnostics use minimal, sanitized and consented data when the user enables connected services.",
           privacyPoint3: "No secret surveillance or absolute protection is promised; Neo informs, helps and acts with consent.",
+          callGuardianPrivacy: "Neo Call Guardian may use call-log access and call screening only with permission and consent to detect suspicious calls or numbers the user has blocked.",
+          smsPrivacy: "Suspicious SMS analyzes incoming text messages for smishing; it does not send SMS, delete conversations or request full access to old messages.",
           deleteCallout: "If you have a Zamazen account, you can request deletion of the account and associated data from the public deletion page.",
           deleteAction: "Request account deletion",
           dataTitle: "Manage and delete partial data",
@@ -12676,6 +12822,8 @@
           privacyPoint1: "Les autorisations sont demandées avec contexte et peuvent être désactivées depuis les réglages.",
           privacyPoint2: "Le compte Zamazen, Red Neo en ligne et les diagnostics utilisent des données minimales, assainies et consenties lorsque l'utilisateur active les services connectés.",
           privacyPoint3: "Aucune surveillance secrète ni protection absolue n'est promise; Neo informe, aide et agit avec consentement.",
+          callGuardianPrivacy: "Neo Gardien d’appels peut utiliser le journal et le filtrage des appels uniquement avec autorisation et consentement pour détecter les appels suspects ou les numéros bloqués par l’utilisateur.",
+          smsPrivacy: "Les SMS suspects analysent les messages entrants pour détecter le smishing ; ils n’envoient pas de SMS, ne suppriment pas les conversations et ne demandent pas l’accès complet aux anciens messages.",
           deleteCallout: "Si vous avez un compte Zamazen, vous pouvez demander la suppression du compte et des données associées depuis la page publique de suppression.",
           deleteAction: "Demander la suppression du compte",
           dataTitle: "Gérer et supprimer des données partielles",
@@ -12774,6 +12922,8 @@
           privacyPoint1: "As permissões são solicitadas com contexto e podem ser desativadas nas Configurações.",
           privacyPoint2: "Conta Zamazen, Red Neo online e diagnósticos usam dados mínimos, saneados e consentidos quando o usuário ativa serviços conectados.",
           privacyPoint3: "Não há promessa de vigilância secreta nem proteção absoluta; Neo informa, ajuda e age com consentimento.",
+          callGuardianPrivacy: "O Neo Guardião de chamadas pode usar o registo e a filtragem de chamadas apenas com permissão e consentimento para detetar chamadas suspeitas ou números bloqueados pelo utilizador.",
+          smsPrivacy: "O SMS suspeito analisa mensagens recebidas para detetar smishing; não envia SMS, não apaga conversas nem pede acesso completo a mensagens antigas.",
           deleteCallout: "Se você tem uma conta Zamazen, pode solicitar a eliminação da conta e dos dados associados pela página pública de eliminação.",
           deleteAction: "Solicitar eliminação da conta",
           dataTitle: "Gerir e eliminar dados parciais",
@@ -12869,35 +13019,35 @@
           title: "Explora Zamazen Aegis por ramas",
           body: "La home resume el proyecto. Las decisiones importantes viven en vistas propias para que puedas avanzar sin perderte.",
           cards: [
-            ["Cuenta", "Crear cuenta", "Registro dedicado para activar perfil, sesiones y recuperacion cuando la API esta disponible.", "#/crear-cuenta"],
-            ["Cuenta", "Iniciar sesion", "Acceso claro: la web no guarda contrasenas ni simula sesiones falsas.", "#/login"],
-            ["Precios", "Core, Valhalla y Ragnarok", "Compara las ediciones sin mezclarlo con toda la pagina principal.", "#/precios"],
-            ["Funcion", "Bunker", "Consulta como se protegen credenciales, registros bancarios y datos sensibles.", "#/bunker"],
-            ["Funcion", "Red Neo", "Entiende los reportes saneados, el consentimiento y la cola online.", "#/red-neo"],
-            ["Proyecto", "Equipo", "Conoce a Francisco Javier Molina Moreno, Maria Isabel Rodriguez Sanchez y Neo.", "#/equipo"]
+            ["Cuenta", "Crear cuenta", "Registro dedicado para activar perfil, sesiones y recuperación cuando la API está disponible.", "#/crear-cuenta"],
+            ["Cuenta", "Iniciar sesión", "Acceso claro: la web no guarda contraseñas ni simula sesiones falsas.", "#/login"],
+            ["Precios", "Core, Valhalla y Ragnarok", "Compara las ediciones sin mezclarlo con toda la página principal.", "#/precios"],
+            ["Función", "Bunker", "Consulta cómo se protegen credenciales, registros bancarios y datos sensibles.", "#/bunker"],
+            ["Función", "Red Neo", "Entiende los reportes saneados, el consentimiento y la cola online.", "#/red-neo"],
+            ["Proyecto", "Equipo", "Conoce a Francisco Javier Molina Moreno, María Isabel Rodríguez Sánchez y Neo.", "#/equipo"]
           ]
         },
         features: {
-          badge: "Arbol de funciones",
-          title: "Cada funcion importante tiene su propia rama",
-          body: "Entra solo en lo que necesitas: escaner, Bunker, Red Neo, limpieza, historial o Guardian familiar.",
+          badge: "Árbol de funciones",
+          title: "Cada función importante tiene su propia rama",
+          body: "Entra solo en lo que necesitas: escáner, Bunker, Red Neo, limpieza, historial o Guardián familiar.",
           cards: [
-            ["Funcion", "Escaner", "Revision de llamadas, SMS, enlaces y senales de estafa con explicacion clara.", "#/escaner"],
-            ["Funcion", "Bunker", "Capa para secretos y datos sensibles con cifrado y limites honestos.", "#/bunker"],
-            ["Funcion", "Red Neo", "Reportes comunitarios saneados y controlados por consentimiento.", "#/red-neo"],
-            ["Funcion", "Limpieza", "Acciones seguras para cache, preferencias y elementos controlados por la app.", "#/limpieza"],
-            ["Funcion", "Historial", "Memoria local de eventos para entender que paso y decidir mejor.", "#/historial"],
-            ["Funcion", "Guardian familiar", "Modo seguro para personas con menos experiencia sin control oculto.", "#/guardian-familiar"]
+            ["Función", "Escáner", "Revisión de llamadas, SMS, enlaces y señales de estafa con explicación clara.", "#/escaner"],
+            ["Función", "Bunker", "Capa para secretos y datos sensibles con cifrado y límites honestos.", "#/bunker"],
+            ["Función", "Red Neo", "Reportes comunitarios saneados y controlados por consentimiento.", "#/red-neo"],
+            ["Función", "Limpieza", "Acciones seguras para caché, preferencias y elementos controlados por la app.", "#/limpieza"],
+            ["Función", "Historial", "Memoria local de eventos para entender qué pasó y decidir mejor.", "#/historial"],
+            ["Función", "Guardián familiar", "Modo seguro para personas con menos experiencia sin control oculto.", "#/guardian-familiar"]
           ]
         },
         pricing: {
           badge: "Ramas de precios",
           title: "Core, Valhalla y Ragnarok como vistas separadas",
-          body: "La comparativa general esta aqui; cada edicion tiene tambien una vista propia para revisar su valor sin presion.",
+          body: "La comparativa general está aquí; cada edición tiene también una vista propia para revisar su valor sin presión.",
           cards: [
-            ["Edicion", "Core", "Proteccion esencial, escaner manual, historial basico, limpieza segura y Red Neo saneada.", "#/core"],
-            ["Edicion", "Valhalla", "Mas contexto, privacidad, permisos, enlaces, tendencias online y Bunker mejorado.", "#/valhalla"],
-            ["Edicion", "Ragnarok", "Experiencia completa para banca, credenciales, identidad digital y riesgos complejos.", "#/ragnarok"]
+            ["Edición", "Core", "Protección esencial, escáner manual, historial básico, limpieza segura y Red Neo saneada.", "#/core"],
+            ["Edición", "Valhalla", "Más contexto, privacidad, permisos, enlaces, tendencias online y Bunker mejorado.", "#/valhalla"],
+            ["Edición", "Ragnarok", "Experiencia completa para banca, credenciales, identidad digital y riesgos complejos.", "#/ragnarok"]
           ]
         }
       },
@@ -12981,37 +13131,37 @@
         home: {
           badge: "Mapa do site",
           title: "Explore Zamazen Aegis por ramos",
-          body: "A pagina inicial resume o projeto. Decisoes importantes vivem em vistas proprias para voce avancar sem se perder.",
+          body: "A página inicial resume o projeto. Decisões importantes vivem em vistas próprias para você avançar sem se perder.",
           cards: [
-            ["Conta", "Criar conta", "Cadastro dedicado para perfil, sessoes e recuperacao quando a API esta disponivel.", "#/crear-cuenta"],
-            ["Conta", "Entrar", "Acesso claro: o site nao guarda senhas nem simula sessoes falsas.", "#/login"],
-            ["Precos", "Core, Valhalla e Ragnarok", "Compare as edicoes sem misturar tudo na pagina inicial.", "#/precios"],
-            ["Funcao", "Bunker", "Veja como credenciais, registros bancarios e dados sensiveis sao protegidos.", "#/bunker"],
-            ["Funcao", "Red Neo", "Entenda reportes saneados, consentimento e fila online.", "#/red-neo"],
-            ["Projeto", "Equipe", "Conheca Francisco Javier Molina Moreno, Maria Isabel Rodriguez Sanchez e Neo.", "#/equipo"]
+            ["Conta", "Criar conta", "Cadastro dedicado para perfil, sessões e recuperação quando a API está disponível.", "#/crear-cuenta"],
+            ["Conta", "Entrar", "Acesso claro: o site não guarda senhas nem simula sessões falsas.", "#/login"],
+            ["Preços", "Core, Valhalla e Ragnarok", "Compare as edições sem misturar tudo na página inicial.", "#/precios"],
+            ["Função", "Bunker", "Veja como credenciais, registros bancários e dados sensíveis são protegidos.", "#/bunker"],
+            ["Função", "Red Neo", "Entenda relatos saneados, consentimento e fila online.", "#/red-neo"],
+            ["Projeto", "Equipe", "Conheça Francisco Javier Molina Moreno, María Isabel Rodríguez Sánchez e Neo.", "#/equipo"]
           ]
         },
         features: {
-          badge: "Arvore de funcoes",
-          title: "Cada funcao importante tem seu proprio ramo",
-          body: "Entre apenas no que precisa: scanner, Bunker, Red Neo, limpeza, historico ou Guardiao familiar.",
+          badge: "Árvore de funções",
+          title: "Cada função importante tem seu próprio ramo",
+          body: "Entre apenas no que precisa: scanner, Bunker, Red Neo, limpeza, histórico ou Guardião familiar.",
           cards: [
-            ["Funcao", "Scanner", "Revisao de chamadas, SMS, links e sinais de golpe com explicacao clara.", "#/escaner"],
-            ["Funcao", "Bunker", "Camada para segredos e dados sensiveis com cifragem e limites honestos.", "#/bunker"],
-            ["Funcao", "Red Neo", "Reportes comunitarios saneados e controlados por consentimento.", "#/red-neo"],
-            ["Funcao", "Limpeza", "Acoes seguras para cache, preferencias e dados controlados pelo app.", "#/limpieza"],
-            ["Funcao", "Historico", "Memoria local de eventos para entender o que aconteceu e decidir melhor.", "#/historial"],
-            ["Funcao", "Guardiao familiar", "Modo seguro para usuarios com menos experiencia sem controle oculto.", "#/guardian-familiar"]
+            ["Função", "Scanner", "Revisão de chamadas, SMS, links e sinais de golpe com explicação clara.", "#/escaner"],
+            ["Função", "Bunker", "Camada para segredos e dados sensíveis com cifragem e limites honestos.", "#/bunker"],
+            ["Função", "Red Neo", "Relatos comunitários saneados e controlados por consentimento.", "#/red-neo"],
+            ["Função", "Limpeza", "Ações seguras para cache, preferências e dados controlados pelo app.", "#/limpieza"],
+            ["Função", "Histórico", "Memória local de eventos para entender o que aconteceu e decidir melhor.", "#/historial"],
+            ["Função", "Guardião familiar", "Modo seguro para usuários com menos experiência sem controle oculto.", "#/guardian-familiar"]
           ]
         },
         pricing: {
-          badge: "Ramos de precos",
+          badge: "Ramos de preços",
           title: "Core, Valhalla e Ragnarok como vistas separadas",
-          body: "A comparacao geral esta aqui; cada edicao tambem tem sua propria vista para rever valor sem pressao.",
+          body: "A comparação geral está aqui; cada edição também tem sua própria vista para rever o valor sem pressão.",
           cards: [
-            ["Edicao", "Core", "Protecao essencial, scanner manual, historico basico, limpeza segura e Red Neo saneada.", "#/core"],
-            ["Edicao", "Valhalla", "Mais contexto, privacidade, permissoes, links, tendencias online e Bunker melhorado.", "#/valhalla"],
-            ["Edicao", "Ragnarok", "Experiencia completa para banca, credenciais, identidade digital e riscos complexos.", "#/ragnarok"]
+            ["Edição", "Core", "Proteção essencial, scanner manual, histórico básico, limpeza segura e Red Neo saneada.", "#/core"],
+            ["Edição", "Valhalla", "Mais contexto, privacidade, permissões, links, tendências online e Bunker melhorado.", "#/valhalla"],
+            ["Edição", "Ragnarok", "Experiência completa para banca, credenciais, identidade digital e riscos complexos.", "#/ragnarok"]
           ]
         }
       }
@@ -13019,48 +13169,48 @@
 
     const ROUTE_DETAIL_CONTENT = {
       es: {
-        funciones: ["Funciones", "Funciones de Zamazen Aegis", "Cada funcion importante vive en su propia pantalla para que el usuario explore sin recorrer una landing interminable.", [["Escaner", "Revision de llamadas, SMS, enlaces y senales de estafa con explicaciones claras.", "#/escaner"], ["Bunker", "Proteccion de secretos, registros bancarios y datos sensibles con limites honestos.", "#/bunker"], ["Red Neo", "Reportes comunitarios saneados, consentimiento y modo local si la red falla.", "#/red-neo"], ["Limpieza", "Acciones seguras para cache, preferencias y datos controlados por Zamazen Aegis.", "#/limpieza"], ["Historial", "Memoria local para comprender eventos recientes sin subir informacion innecesaria.", "#/historial"], ["Guardian familiar", "Modo claro para usuarios mayores o con menos experiencia digital.", "#/guardian-familiar"]], [["Volver al inicio", "#/inicio", "secondary"], ["Crear cuenta", "#/crear-cuenta", "primary"]]],
-        precios: ["Premium", "Precios: Core, Valhalla y Ragnarok", "Compara las ediciones desde una vista dedicada. Cada nivel tiene tambien su propia pantalla para revisar valor, limites y llamadas a la accion sin presion.", [["Core", "Proteccion esencial para empezar con escaner, historial basico, limpieza segura y Red Neo saneada.", "#/core"], ["Valhalla", "Mas contexto, privacidad, permisos, enlaces, tendencias online y Bunker mejorado.", "#/valhalla"], ["Ragnarok", "Experiencia completa para banca, credenciales, identidad digital y riesgos complejos.", "#/ragnarok"]], [["Crear cuenta", "#/crear-cuenta", "primary"], ["Ver funciones", "#/funciones", "secondary"]]],
-        cuenta: ["Cuenta", "Cuenta Zamazen", "La cuenta se divide en rutas claras: alta, acceso, recuperacion, perfil y ajustes. La web no simula sesiones ni guarda contrasenas localmente.", [["Crear cuenta", "Registro dedicado para activar perfil y sesiones cuando la API este disponible.", "#/crear-cuenta"], ["Iniciar sesion", "Acceso con copy honesto y sin prometer login local falso.", "#/login"], ["Recuperar contrasena", "Flujo de recuperacion separado para evitar confundirlo con el registro.", "#/recuperar-cuenta"], ["Perfil", "Resumen del usuario, nivel y estado de cuenta sin exponer datos sensibles.", "#/perfil"], ["Ajustes de cuenta", "Preferencias, datos, privacidad y eliminacion desde una pantalla propia.", "#/ajustes-cuenta"]], [["Crear cuenta", "#/crear-cuenta", "primary"], ["Seguridad de cuenta", "#/seguridad", "secondary"]]],
-        perfil: ["Cuenta", "Perfil", "Pantalla dedicada al perfil del usuario: identidad visible, nivel, estado de cuenta y enlaces a ajustes sin mezclarlo con toda la web.", [["Identidad", "Nombre y correo se tratan como datos sensibles y se muestran solo cuando existen en la sesion local."], ["Nivel", "Core, Valhalla o Ragnarok se explican como estado de producto, no como promesa absoluta."], ["Control", "El usuario conserva rutas claras para editar ajustes, revisar privacidad o eliminar cuenta."]], [["Ajustes de cuenta", "#/ajustes-cuenta", "primary"], ["Volver a cuenta", "#/cuenta", "secondary"]]],
-        "ajustes-cuenta": ["Cuenta", "Ajustes de cuenta", "Centro de control para privacidad, datos y seguridad de cuenta con rutas separadas para cada decision sensible.", [["Privacidad", "Explica que se recoge, que se evita y que queda bajo control del usuario.", "#/privacidad"], ["Datos", "Gestionar datos exportables, locales y asociados a soporte.", "#/datos"], ["Eliminar cuenta", "Ruta especifica para solicitar borrado de cuenta y datos.", "#/eliminar-cuenta"]], [["Gestionar datos", "#/datos", "primary"], ["Volver a cuenta", "#/cuenta", "secondary"]]],
-        seguridad: ["Seguridad", "Seguridad y control", "Vista dedicada a permisos, privacidad, datos y eliminacion. El usuario puede revisar cada area sin saltos ni bloques mezclados.", [["Permisos", "Que permisos puede necesitar Zamazen Aegis y por que Android puede limitarlos.", "#/permisos"], ["Privacidad", "Minimo dato, consentimiento claro y transparencia.", "#/privacidad"], ["Datos", "Gestion y eliminacion de informacion asociada a cuenta, soporte y dispositivo.", "#/datos"], ["Eliminar cuenta", "Solicitud de borrado con explicacion de plazos y limites legales.", "#/eliminar-cuenta"]], [["Ver permisos", "#/permisos", "primary"], ["Sobre el proyecto", "#/sobre-zamazenaegis", "secondary"]]],
-        permisos: ["Seguridad", "Permisos", "Zamazen Aegis debe explicar cada permiso antes de pedirlo y mantener modo PlaySafe cuando Android o Google Play no permitan automatizacion sensible.", [["PlaySafe", "Sin READ_CALL_LOG, RECEIVE_SMS, READ_PHONE_STATE ni lectura silenciosa de terceros cuando no corresponde."], ["Consentimiento", "Los permisos sensibles se solicitan solo si aportan valor real y el usuario entiende el motivo."], ["Modo manual", "Si una integracion no puede usarse de forma segura, la app guia al usuario en lugar de simular proteccion."]], [["Volver a seguridad", "#/seguridad", "primary"], ["Privacidad", "#/privacidad", "secondary"]]],
-        privacidad: ["Privacidad", "Privacidad por defecto", "Todo dato se considera sensible. Zamazen Aegis debe pedir lo minimo, almacenar lo minimo y explicar con claridad cada uso.", [["Minimo acceso", "No se leen conversaciones completas ni datos de terceros sin base tecnica, legal y consentimiento."], ["Red Neo", "Los reportes se saneanan antes de cualquier envio online."], ["Control", "El usuario puede revisar datos, cookies y eliminacion desde rutas propias."]], [["Gestionar datos", "#/gestionar-datos", "primary"], ["Eliminar cuenta", "#/eliminar-cuenta", "secondary"]]],
-        "gestionar-datos": ["Datos", "Gestionar datos", "Pantalla dedicada a datos de cuenta, soporte, preferencias locales, historial y elementos del Bunker cuando correspondan.", [["Datos locales", "Preferencias e historial local pueden limpiarse desde la app o al desinstalar."], ["Datos online", "Solo deben enviarse datos necesarios y saneados cuando exista consentimiento."], ["Soporte", "No se deben enviar contrasenas, codigos 2FA ni datos bancarios completos por correo."]], [["Privacidad", "#/privacidad", "primary"], ["Eliminar cuenta", "#/eliminar-cuenta", "secondary"]]],
-        "eliminar-cuenta": ["Cuenta", "Eliminar cuenta y datos", "Ruta separada para solicitar eliminacion de cuenta Zamazen y datos asociados sin esconderla dentro de una landing.", [["Solicitud", "El usuario puede escribir al soporte oficial para iniciar borrado y verificacion."], ["Plazos", "El proceso normalmente se completa en un plazo razonable tras verificar la solicitud."], ["Limites", "Puede conservarse informacion minima por obligaciones legales, seguridad o prevencion de fraude."]], [["Enviar correo", "mailto:zamazenaegissupport@gmail.com", "primary"], ["Volver a privacidad", "#/privacidad", "secondary"]]],
-        "politica-cookies": ["Privacidad", "Politica de cookies", "El sitio usa almacenamiento necesario para idioma, preferencias y consentimiento; las categorias opcionales quedan desactivadas hasta que el usuario las acepte.", [["Necesarias", "Siempre activas para funcionamiento basico."], ["Opcionales", "Analitica, personalizacion y marketing/producto solo con consentimiento."], ["Cambio", "Las preferencias pueden modificarse desde el pie de pagina."]], [["Contacto", "#/contacto", "primary"], ["Privacidad", "#/privacidad", "secondary"]]],
-        "politica-producto": ["Producto", "Politica de producto", "Zamazen Aegis ayuda a revisar senales de riesgo reportadas sin prometer seguridad total ni deteccion perfecta.", [["Limites honestos", "Ninguna app elimina todo riesgo ni sustituye el criterio del usuario."], ["Permisos", "Si una funcion necesita permisos o conexion, se explica antes."], ["Accion real", "Solo se bloquea o automatiza cuando existe funcion, permiso y consentimiento."]], [["Ver seguridad", "#/seguridad", "primary"], ["Ver funciones", "#/funciones", "secondary"]]],
-        "cobertura-wifi": ["Conexion", "Cobertura, internet movil y WiFi", "La app puede orientar ante problemas de red, pero no promete crear cobertura ni saltarse limites del operador.", [["Diagnostico", "Puede indicar perdida de conexion, WiFi debil o red abierta cuando Android lo permite."], ["Acciones reales", "Guia a modo avion, 4G/5G, llamadas WiFi o cambio de red segura."], ["Sin humo", "No promete cambiar antenas ni mejorar fisicamente la senal."]], [["Contacto", "#/contacto", "primary"], ["Politica de producto", "#/politica-producto", "secondary"]]],
-        "contrato-licencia": ["Legal", "Contrato de licencia / EULA", "Uso personal, limitado y sujeto a la ley, Play Store y terminos publicados de Zamazen Aegis.", [["Uso correcto", "No manipular, revender ni intentar romper sistemas de proteccion."], ["Planes", "Core, Valhalla y Ragnarok deben usarse respetando permisos y privacidad."], ["Evolucion", "Las funciones conectadas pueden cambiar para mejorar seguridad, estabilidad o cumplimiento."]], [["Contacto", "#/contacto", "primary"], ["Sobre el proyecto", "#/sobre-zamazenaegis", "secondary"]]],
-        "sobre-zamazenaegis": ["Proyecto", "Sobre Zamazen Aegis", "Zamazen Aegis existe para ayudar a personas reales frente a spam, phishing, estafas moviles y confusion digital, con claridad y sin vender proteccion absoluta.", [["Que protege", "Llamadas, SMS, enlaces, reportes, identidad digital, credenciales y decisiones sensibles dentro de los limites tecnicos reales."], ["Por que existe", "Para que la seguridad sea comprensible, accesible y util en el dia a dia."], ["Pilares", "Coraje, Verdad, Honor, Lealtad, Disciplina, Hospitalidad, Productividad, Perseverancia y Confianza guian cada decision."]], [["Ver equipo", "#/equipo", "primary"], ["Agradecimientos", "#/agradecimientos", "secondary"], ["Ver funciones", "#/funciones", "secondary"]]],
-        equipo: ["Equipo", "Equipo", "Pantalla dedicada a las personas y guardianes detras del proyecto, sin mezclarla con permisos, precios o formularios.", [["Francisco Javier Molina Moreno", "Creador y responsable de la vision de Zamazen Aegis."], ["Maria Isabel Rodriguez Sanchez", "Socia clave del proyecto y apoyo humano en la construccion de confianza."], ["Neo", "Guardian original de Zamazen Aegis: acompana, explica y protege sin convertir el riesgo en miedo."]], [["Sobre el proyecto", "#/sobre-zamazenaegis", "primary"], ["Contacto", "#/contacto", "secondary"]]],
-        faq: ["FAQ", "Preguntas frecuentes", "Respuestas rapidas en una pantalla propia para no obligar al usuario a recorrer toda la web.", [["Consume mucha bateria?", "Debe priorizar bajo consumo, foco de pantalla y trabajo minimo en segundo plano."], ["Funciona sin internet?", "Las capas locales siguen siendo utiles; lo online se degrada sin simular exito."], ["Pide permisos sensibles?", "Solo cuando aportan valor real, con explicacion y alternativa manual si corresponde."], ["Promete seguridad total?", "No. Zamazen Aegis ayuda a reducir riesgo, explicar senales y guiar decisiones."]], [["Contacto", "#/contacto", "primary"], ["Ver seguridad", "#/seguridad", "secondary"]]],
-        soporte: ["Ayuda", "Neo Ayuda y tickets", "Buscador local de respuestas y ticket saneado para soporte manual, sin publicar datos ni simular backend.", [["Buscador", "Respuestas preparadas sobre cuenta, privacidad, permisos, planes, Bunker y Red Neo."], ["Ticket", "Solo texto saneado, consentimiento y correo preparado hasta que exista backend protegido."], ["Privacidad", "El creador no puede ver cuentas privadas; solo lo que el usuario envia voluntariamente."]], [["Abrir contacto", "#/contacto", "primary"], ["Privacidad", "#/privacidad", "secondary"]]],
-        contacto: ["Contacto", "Ayuda y contacto", "Soporte, privacidad, cuentas y errores criticos tienen una pantalla directa. No envies secretos por correo.", [["Correo oficial", "zamazenaegissupport@gmail.com para soporte, privacidad, cuenta y documentacion."], ["Incidentes", "Priorizar seguridad, cuentas, pagos, borrado y errores criticos."], ["Privacidad", "No enviar contrasenas, codigos 2FA ni datos bancarios completos."]], [["Enviar correo", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
+        funciones: ["Funciones", "Funciones de Zamazen Aegis", "Cada función importante vive en su propia pantalla para que el usuario explore sin recorrer una landing interminable.", [["Escáner", "Revisión de llamadas, SMS, enlaces y señales de estafa con explicaciones claras.", "#/escaner"], ["Bunker", "Protección de secretos, registros bancarios y datos sensibles con límites honestos.", "#/bunker"], ["Red Neo", "Reportes comunitarios saneados, consentimiento y modo local si la red falla.", "#/red-neo"], ["Limpieza", "Acciones seguras para caché, preferencias y datos controlados por Zamazen Aegis.", "#/limpieza"], ["Historial", "Memoria local para comprender eventos recientes sin subir información innecesaria.", "#/historial"], ["Guardián familiar", "Modo claro para usuarios mayores o con menos experiencia digital.", "#/guardian-familiar"]], [["Volver al inicio", "#/inicio", "secondary"], ["Crear cuenta", "#/crear-cuenta", "primary"]]],
+        precios: ["Premium", "Precios: Core, Valhalla y Ragnarok", "Compara las ediciones desde una vista dedicada. Cada nivel tiene también su propia pantalla para revisar valor, límites y llamadas a la acción sin presión.", [["Core", "Protección esencial para empezar con escáner, historial básico, limpieza segura y Red Neo saneada.", "#/core"], ["Valhalla", "Más contexto, privacidad, permisos, enlaces, tendencias online y Bunker mejorado.", "#/valhalla"], ["Ragnarok", "Experiencia completa para banca, credenciales, identidad digital y riesgos complejos.", "#/ragnarok"]], [["Crear cuenta", "#/crear-cuenta", "primary"], ["Ver funciones", "#/funciones", "secondary"]]],
+        cuenta: ["Cuenta", "Cuenta Zamazen", "La cuenta se divide en rutas claras: alta, acceso, recuperación, perfil y ajustes. La web no simula sesiones ni guarda contraseñas localmente.", [["Crear cuenta", "Registro dedicado para activar perfil y sesiones cuando la API esté disponible.", "#/crear-cuenta"], ["Iniciar sesión", "Acceso con copy honesto y sin prometer login local falso.", "#/login"], ["Recuperar contraseña", "Flujo de recuperación separado para evitar confundirlo con el registro.", "#/recuperar-cuenta"], ["Perfil", "Resumen del usuario, nivel y estado de cuenta sin exponer datos sensibles.", "#/perfil"], ["Ajustes de cuenta", "Preferencias, datos, privacidad y eliminación desde una pantalla propia.", "#/ajustes-cuenta"]], [["Crear cuenta", "#/crear-cuenta", "primary"], ["Seguridad de cuenta", "#/seguridad", "secondary"]]],
+        perfil: ["Cuenta", "Perfil", "Pantalla dedicada al perfil del usuario: identidad visible, nivel, estado de cuenta y enlaces a ajustes sin mezclarlo con toda la web.", [["Identidad", "Nombre y correo se tratan como datos sensibles y se muestran solo cuando existen en la sesión local."], ["Nivel", "Core, Valhalla o Ragnarok se explican como estado de producto, no como promesa absoluta."], ["Control", "El usuario conserva rutas claras para editar ajustes, revisar privacidad o eliminar cuenta."]], [["Ajustes de cuenta", "#/ajustes-cuenta", "primary"], ["Volver a cuenta", "#/cuenta", "secondary"]]],
+        "ajustes-cuenta": ["Cuenta", "Ajustes de cuenta", "Centro de control para privacidad, datos y seguridad de cuenta con rutas separadas para cada decisión sensible.", [["Privacidad", "Explica qué se recoge, qué se evita y qué queda bajo control del usuario.", "#/privacidad"], ["Datos", "Gestionar datos exportables, locales y asociados a soporte.", "#/datos"], ["Eliminar cuenta", "Ruta específica para solicitar borrado de cuenta y datos.", "#/eliminar-cuenta"]], [["Gestionar datos", "#/datos", "primary"], ["Volver a cuenta", "#/cuenta", "secondary"]]],
+        seguridad: ["Seguridad", "Seguridad y control", "Vista dedicada a permisos, privacidad, datos y eliminación. El usuario puede revisar cada área sin saltos ni bloques mezclados.", [["Permisos", "Qué permisos puede necesitar Zamazen Aegis y por qué Android puede limitarlos.", "#/permisos"], ["Privacidad", "Mínimo dato, consentimiento claro y transparencia.", "#/privacidad"], ["Datos", "Gestión y eliminación de información asociada a cuenta, soporte y dispositivo.", "#/datos"], ["Eliminar cuenta", "Solicitud de borrado con explicación de plazos y límites legales.", "#/eliminar-cuenta"]], [["Ver permisos", "#/permisos", "primary"], ["Sobre el proyecto", "#/sobre-zamazenaegis", "secondary"]]],
+        permisos: ["Seguridad", "Permisos", "Zamazen Aegis debe explicar cada permiso antes de pedirlo y mantener modo PlaySafe cuando Android o Google Play no permitan automatización sensible.", [["PlaySafe", "Sin acceso al registro de llamadas, la recepción de SMS ni el estado del teléfono cuando no corresponde."], ["Consentimiento", "Los permisos sensibles se solicitan solo si aportan valor real y el usuario entiende el motivo."], ["Modo manual", "Si una integración no puede usarse de forma segura, la app guía al usuario en lugar de simular protección."]], [["Volver a seguridad", "#/seguridad", "primary"], ["Privacidad", "#/privacidad", "secondary"]]],
+        privacidad: ["Privacidad", "Privacidad por defecto", "Todo dato se considera sensible. Zamazen Aegis debe pedir lo mínimo, almacenar lo mínimo y explicar con claridad cada uso.", [["Mínimo acceso", "No se leen conversaciones completas ni datos de terceros sin base técnica, legal y consentimiento."], ["Red Neo", "Los reportes se sanean antes de cualquier envío online."], ["Control", "El usuario puede revisar datos, cookies y eliminación desde rutas propias."]], [["Gestionar datos", "#/gestionar-datos", "primary"], ["Eliminar cuenta", "#/eliminar-cuenta", "secondary"]]],
+        "gestionar-datos": ["Datos", "Gestionar datos", "Pantalla dedicada a datos de cuenta, soporte, preferencias locales, historial y elementos del Bunker cuando correspondan.", [["Datos locales", "Preferencias e historial local pueden limpiarse desde la app o al desinstalar."], ["Datos online", "Solo deben enviarse datos necesarios y saneados cuando exista consentimiento."], ["Soporte", "No se deben enviar contraseñas, códigos 2FA ni datos bancarios completos por correo."]], [["Privacidad", "#/privacidad", "primary"], ["Eliminar cuenta", "#/eliminar-cuenta", "secondary"]]],
+        "eliminar-cuenta": ["Cuenta", "Eliminar cuenta y datos", "Ruta separada para solicitar eliminación de cuenta Zamazen y datos asociados sin esconderla dentro de una landing.", [["Solicitud", "El usuario puede escribir al soporte oficial para iniciar borrado y verificación."], ["Plazos", "El proceso normalmente se completa en un plazo razonable tras verificar la solicitud."], ["Límites", "Puede conservarse información mínima por obligaciones legales, seguridad o prevención de fraude."]], [["Enviar correo", "mailto:zamazenaegissupport@gmail.com", "primary"], ["Volver a privacidad", "#/privacidad", "secondary"]]],
+        "politica-cookies": ["Privacidad", "Política de cookies", "El sitio usa almacenamiento necesario para idioma, preferencias y consentimiento; las categorías opcionales quedan desactivadas hasta que el usuario las acepte.", [["Necesarias", "Siempre activas para funcionamiento básico."], ["Opcionales", "Analítica, personalización y marketing/producto solo con consentimiento."], ["Cambio", "Las preferencias pueden modificarse desde el pie de página."]], [["Contacto", "#/contacto", "primary"], ["Privacidad", "#/privacidad", "secondary"]]],
+        "politica-producto": ["Producto", "Política de producto", "Zamazen Aegis ayuda a revisar señales de riesgo reportadas sin prometer seguridad total ni detección perfecta.", [["Límites honestos", "Ninguna app elimina todo riesgo ni sustituye el criterio del usuario."], ["Permisos", "Si una función necesita permisos o conexión, se explica antes."], ["Acción real", "Solo se bloquea o automatiza cuando existe función, permiso y consentimiento."]], [["Ver seguridad", "#/seguridad", "primary"], ["Ver funciones", "#/funciones", "secondary"]]],
+        "cobertura-wifi": ["Conexión", "Cobertura, internet móvil y WiFi", "La app puede orientar ante problemas de red, pero no promete crear cobertura ni saltarse límites del operador.", [["Diagnóstico", "Puede indicar pérdida de conexión, WiFi débil o red abierta cuando Android lo permite."], ["Acciones reales", "Guía a modo avión, 4G/5G, llamadas WiFi o cambio de red segura."], ["Sin humo", "No promete cambiar antenas ni mejorar físicamente la señal."]], [["Contacto", "#/contacto", "primary"], ["Política de producto", "#/politica-producto", "secondary"]]],
+        "contrato-licencia": ["Legal", "Contrato de licencia / EULA", "Uso personal, limitado y sujeto a la ley, Play Store y términos publicados de Zamazen Aegis.", [["Uso correcto", "No manipular, revender ni intentar romper sistemas de protección."], ["Planes", "Core, Valhalla y Ragnarok deben usarse respetando permisos y privacidad."], ["Evolución", "Las funciones conectadas pueden cambiar para mejorar seguridad, estabilidad o cumplimiento."]], [["Contacto", "#/contacto", "primary"], ["Sobre el proyecto", "#/sobre-zamazenaegis", "secondary"]]],
+        "sobre-zamazenaegis": ["Proyecto", "Sobre Zamazen Aegis", "Zamazen Aegis existe para ayudar a personas reales frente a spam, phishing, estafas móviles y confusión digital, con claridad y sin vender protección absoluta.", [["Qué protege", "Llamadas, SMS, enlaces, reportes, identidad digital, credenciales y decisiones sensibles dentro de los límites técnicos reales."], ["Por qué existe", "Para que la seguridad sea comprensible, accesible y útil en el día a día."], ["Pilares", "Coraje, Verdad, Honor, Lealtad, Disciplina, Hospitalidad, Productividad, Perseverancia y Confianza guían cada decisión."]], [["Ver equipo", "#/equipo", "primary"], ["Agradecimientos", "#/agradecimientos", "secondary"], ["Ver funciones", "#/funciones", "secondary"]]],
+        equipo: ["Equipo", "Equipo", "Pantalla dedicada a las personas y guardianes detrás del proyecto, sin mezclarla con permisos, precios o formularios.", [["Francisco Javier Molina Moreno", "Creador y responsable de la visión de Zamazen Aegis."], ["María Isabel Rodríguez Sánchez", "Socia clave del proyecto y apoyo humano en la construcción de confianza."], ["Neo", "Guardián original de Zamazen Aegis: acompaña, explica y protege sin convertir el riesgo en miedo."]], [["Sobre el proyecto", "#/sobre-zamazenaegis", "primary"], ["Contacto", "#/contacto", "secondary"]]],
+        faq: ["FAQ", "Preguntas frecuentes", "Respuestas rápidas en una pantalla propia para no obligar al usuario a recorrer toda la web.", [["¿Consume mucha batería?", "Debe priorizar bajo consumo, foco de pantalla y trabajo mínimo en segundo plano."], ["¿Funciona sin internet?", "Las capas locales siguen siendo útiles; lo online se degrada sin simular éxito."], ["¿Pide permisos sensibles?", "Solo cuando aportan valor real, con explicación y alternativa manual si corresponde."], ["¿Promete seguridad total?", "No. Zamazen Aegis ayuda a reducir riesgo, explicar señales y guiar decisiones."]], [["Contacto", "#/contacto", "primary"], ["Ver seguridad", "#/seguridad", "secondary"]]],
+        soporte: ["Ayuda", "Neo Ayuda y tickets", "Buscador local de respuestas y ticket saneado para soporte manual, sin publicar datos ni simular backend.", [["Buscador", "Respuestas preparadas sobre cuenta, privacidad, permisos, planes, Bunker y Red Neo."], ["Ticket", "Solo texto saneado, consentimiento y correo preparado hasta que exista backend protegido."], ["Privacidad", "El creador no puede ver cuentas privadas; solo lo que el usuario envía voluntariamente."]], [["Abrir contacto", "#/contacto", "primary"], ["Privacidad", "#/privacidad", "secondary"]]],
+        contacto: ["Contacto", "Ayuda y contacto", "Soporte, privacidad, cuentas y errores críticos tienen una pantalla directa. No envíes secretos por correo.", [["Correo oficial", "zamazenaegissupport@gmail.com para soporte, privacidad, cuenta y documentación."], ["Incidentes", "Priorizar seguridad, cuentas, pagos, borrado y errores críticos."], ["Privacidad", "No enviar contraseñas, códigos 2FA ni datos bancarios completos."]], [["Enviar correo", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
         "estado-proyecto": ["Estado", "Estado del proyecto", "Zamazen Aegis mantiene una web pública activa y una aplicación oficial que solo se anunciará cuando el canal de publicación sea real.", [["Web activa", "La web pública funciona como centro informativo y mapa del ecosistema."], ["App 1.6", "La aplicación se prepara con criterio de seguridad, privacidad y accesibilidad."], ["Canal oficial", "La aplicación oficial aparecerá aquí cuando exista una publicación real."]], [["Consultar el canal oficial", "#/descargar", "primary"], ["Ver novedades", "#/novedades", "secondary"]]],
         niofra: ["Ecosistema", "Niofra, la hermana del refugio", "Niofra es la futura hermana de Zamazen Aegis: cuidará desde dentro las rutinas, la organización, la calma, los recuerdos, la familia, las mascotas, el diario personal y la vida cotidiana. Todavía no es una aplicación descargable.", [["Desde dentro", "Mantendrá encendido el fuego del refugio y ayudará a ordenar lo cotidiano."], ["Junto a Aegis", "Aegis protege desde fuera; Niofra cuidará el interior sin mezclar misiones."], ["Estado honesto", "El proyecto está definido, pero aún no hay descarga ni fecha oficial de lanzamiento."]], [["Volver a Aegis", "#/inicio", "primary"], ["Ver el proyecto", "#/sobre-zamazenaegis", "secondary"]]],
-        confianza: ["Confianza", "Centro de confianza y privacidad", "Una pantalla clara para entender que protege Zamazen, que permisos puede pedir, que datos evita y que limites reales tiene Android.", [["Permisos explicados", "Nada sensible se pide sin utilidad, consentimiento y alternativa manual cuando haga falta."], ["Datos minimos", "No se publican secretos, correos ni reportes sin saneamiento."], ["Cero humo", "No se promete proteccion absoluta ni deteccion perfecta."]], [["Gestionar datos", "#/datos", "primary"], ["Ver permisos", "#/permisos", "secondary"]]],
-        novedades: ["Novedades", "Historial del Guardian", "Resumen de cambios recientes de la web, avances de la app y proximos pasos generales para demostrar que el proyecto esta vivo.", [["Web tipo arbol", "Las rutas internas sustituyen la landing interminable."], ["Perfil vivo", "Cuenta, avatar, nivel y sincronizacion preparada."], ["Comunidad segura", "Ideas y agradecimientos se revisan manualmente antes de aparecer."]], [["Estado del proyecto", "#/estado-proyecto", "primary"], ["Ideas", "#/ideas", "secondary"]]],
-        ideas: ["Ideas", "Ideas, mejoras y agradecimientos", "Recibe propuestas utiles de forma segura: sin archivos, sin scripts, sin publicacion automatica y siempre con revision manual.", [["Formulario controlado", "Solo texto limitado, validado y saneado."], ["Moderacion", "Nada aparece en agradecimientos sin permiso y revision."], ["Recompensas", "Los codigos o reconocimientos nunca son automaticos."]], [["Enviar propuesta", "#/ideas", "primary"], ["Estado del proyecto", "#/estado-proyecto", "secondary"]]],
-        "salon-guardianes": ["Comunidad", "Salón de Guardianes", "Reconocimiento publico preparado para quienes ayuden de verdad: puntos por impacto real, coronas, insignias y agradecimientos solo con permiso y revision manual.", [["Puntos", "No se ganan por enviar mucho; se asignan por utilidad real."], ["Coronas", "Ragnarok, Valhalla y Core Honorifico destacan aportaciones aprobadas."], ["Privacidad", "Alias, anonimo o no aparecer: siempre decide el usuario."]], [["Enviar idea", "#/ideas", "primary"], ["Panel privado", "#/admin", "secondary"]]],
+        confianza: ["Confianza", "Centro de confianza y privacidad", "Una pantalla clara para entender qué protege Zamazen, qué permisos puede pedir, qué datos evita y qué límites reales tiene Android.", [["Permisos explicados", "Nada sensible se pide sin utilidad, consentimiento y alternativa manual cuando haga falta."], ["Datos mínimos", "No se publican secretos, correos ni reportes sin saneamiento."], ["Cero humo", "No se promete protección absoluta ni detección perfecta."]], [["Gestionar datos", "#/datos", "primary"], ["Ver permisos", "#/permisos", "secondary"]]],
+        novedades: ["Novedades", "Historial del Guardián", "Resumen de cambios recientes de la web, avances de la app y próximos pasos generales para demostrar que el proyecto está vivo.", [["Web tipo árbol", "Las rutas internas sustituyen la landing interminable."], ["Perfil vivo", "Cuenta, avatar, nivel y sincronización preparada."], ["Comunidad segura", "Ideas y agradecimientos se revisan manualmente antes de aparecer."]], [["Estado del proyecto", "#/estado-proyecto", "primary"], ["Ideas", "#/ideas", "secondary"]]],
+        ideas: ["Ideas", "Ideas, mejoras y agradecimientos", "Recibe propuestas útiles de forma segura: sin archivos, sin publicación automática y siempre con revisión manual.", [["Formulario controlado", "Solo texto limitado, validado y saneado."], ["Moderación", "Nada aparece en agradecimientos sin permiso y revisión."], ["Recompensas", "Los códigos o reconocimientos nunca son automáticos."]], [["Enviar propuesta", "#/ideas", "primary"], ["Estado del proyecto", "#/estado-proyecto", "secondary"]]],
+        "salon-guardianes": ["Comunidad", "Salón de Guardianes", "Reconocimiento público preparado para quienes ayuden de verdad: puntos por impacto real, coronas, insignias y agradecimientos solo con permiso y revisión manual.", [["Puntos", "No se ganan por enviar mucho; se asignan por utilidad real."], ["Coronas", "Ragnarok, Valhalla y Core Honorífico destacan aportaciones aprobadas."], ["Privacidad", "Alias, anónimo o no aparecer: siempre decide el usuario."]], [["Enviar idea", "#/ideas", "primary"], ["Panel privado", "#/admin", "secondary"]]],
         admin: ["Privado", "Panel administrador protegido", "Pantalla bloqueada para dejar claro que la revisión de ideas y recompensas no vive en el frontend público.", [["Sin datos públicos", "No hay lista administrativa ni claves en el HTML."], ["Backend requerido", "El panel real necesitará login, roles, reglas y auditoría."], ["Revisión manual", "Las aportaciones solo se publican tras aprobación."]], [["Ideas", "#/ideas", "primary"], ["Inicio", "#/inicio", "secondary"]]],
-        legal: ["Legal", "Centro legal", "Entrada clara a privacidad, cookies, producto, datos, eliminacion de cuenta y licencia sin mezclarlo con la home.", [["Privacidad", "Que datos se usan y que datos no se publican.", "#/privacidad"], ["Cookies", "Preferencias necesarias y opcionales.", "#/politica-cookies"], ["Licencia", "Uso correcto de Core, Valhalla y Ragnarok.", "#/contrato-licencia"]], [["Privacidad", "#/privacidad", "primary"], ["Contacto", "#/contacto", "secondary"]]],
-        nube: ["Cuenta", "Nube y sincronizacion", "Vista preparada para datos sincronizados cuando la app movil y el backend esten conectados. Hoy muestra estados honestos, no datos inventados.", [["App movil", "Todavia no vinculada en esta web publica."], ["Bunker Cloud", "Solo aceptara paquetes cifrados por el usuario cuando este activo."], ["Control", "Exportar, borrar o desvincular requerira autenticacion real."]], [["Perfil", "#/perfil", "primary"], ["Datos", "#/datos", "secondary"]]],
-        demo: ["Demo", "Mira como actua Zamazen", "Demo visual de situaciones comunes: llamada sospechosa, SMS de phishing, enlace dudoso, permiso delicado y reporte Red Neo.", [["Neo explica", "Convierte senales de riesgo en pasos comprensibles."], ["Sin promesas falsas", "La demo muestra ayuda y decision, no magia."], ["Modo seguro", "Si falta permiso o conexion, la experiencia degrada con claridad."]], [["Crear cuenta", "#/crear-cuenta", "primary"], ["Ver funciones", "#/funciones", "secondary"]]],
-        neo: ["Neo", "Neo, el Guardian original", "Pantalla dedicada a Neo como guia protectora: explica riesgos, reduce miedo y ayuda a decidir sin ocultar limites.", [["Claridad", "Traduce senales tecnicas a lenguaje humano."], ["Privacidad", "No necesita exponer secretos para orientar al usuario."], ["Acompanamiento", "Su papel es ayudar, no sustituir el criterio del usuario."]], [["Red Neo", "#/red-neo", "primary"], ["Sobre el proyecto", "#/sobre-zamazenaegis", "secondary"]]],
-        runas: ["Identidad", "Runas del Guardian", "Pantalla para la identidad runica oficial de Zamazen Aegis: FEHU, URUZ, THURISAZ, ANSUZ, RAIDO, KENAZ, ALGIZ y OTHALA.", [["ALGIZ", "Proteccion y escudo."], ["ANSUZ", "Neo, verdad y explicacion."], ["OTHALA", "Bunker, hogar digital y datos sensibles."]], [["Sobre el proyecto", "#/sobre-zamazenaegis", "primary"], ["Equipo", "#/equipo", "secondary"]]],
-        "no-encontrado": ["404", "Neo no ha encontrado esta camara", "La ruta no existe o se movio. Puedes volver al inicio, abrir el mapa de funciones o contactar si crees que hay un enlace roto.", [["Volver", "Inicio y rutas principales siguen disponibles."], ["Mapa", "Funciones, cuenta, seguridad y planes tienen pantallas propias."], ["Aviso", "Si venias desde un enlace externo, puedes reportarlo."]], [["Volver al inicio", "#/inicio", "primary"], ["Mapa de funciones", "#/funciones", "secondary"]]],
-        core: ["Core", "Core: proteccion esencial", "La base de Zamazen Aegis protege sin castigar a quien empieza gratis.", [["Escaner manual", "Reportes de llamadas spam, SMS sospechosos y phishing basico."], ["Historial basico", "Memoria local suficiente para entender actividad reciente."], ["Red Neo saneada", "Envio online solo con consentimiento y datos minimos."]], [["Ver precios", "#/precios", "primary"], ["Crear cuenta", "#/crear-cuenta", "secondary"]]],
-        valhalla: ["Valhalla", "Valhalla: proteccion social y digital", "Valhalla refuerza contexto, permisos, privacidad y Bunker sin vender magia.", [["Contexto ampliado", "Mas senales para enlaces, apps y permisos excesivos."], ["Bunker mejorado", "Mas control para datos sensibles y modo banco seguro cuando aplica."], ["Red Neo avanzada", "Tendencias online y explicaciones mas utiles."]], [["Comparar ediciones", "#/precios", "primary"], ["Ver Bunker", "#/bunker", "secondary"]]],
-        ragnarok: ["Ragnarok", "Ragnarok: experiencia completa", "Ragnarok agrupa las capas mas avanzadas cuando Android, permisos y consentimiento lo permiten.", [["Identidad y banca", "Guia para credenciales, banca y riesgos digitales complejos."], ["Bunker total", "Proteccion reforzada para secretos y datos especialmente sensibles."], ["Red Neo prioritaria", "Mas contexto, historial profundo y resolucion guiada sin falsas reparaciones."]], [["Comparar ediciones", "#/precios", "primary"], ["Ver Red Neo", "#/red-neo", "secondary"]]],
-        escaner: ["Funcion", "Escaner de amenazas", "Revision clara de llamadas, SMS, enlaces y senales sospechosas sin prometer deteccion perfecta.", [["Llamadas", "Ayuda a identificar spam o fraude con avisos comprensibles."], ["SMS y enlaces", "Reconoce urgencia artificial, suplantacion y dominios dudosos."], ["Explicacion Neo", "Traduce el riesgo a pasos simples para decidir mejor."]], [["Ver funciones", "#/funciones", "primary"], ["Activar escudo", "#/descargar", "secondary"]]],
-        bunker: ["Funcion", "Bunker", "Una rama dedicada a secretos: credenciales, registros bancarios y datos sensibles tratados con privacidad por defecto.", [["Cifrado local", "Los datos sensibles se protegen antes de cualquier sincronizacion."], ["Cloud con sobre cifrado", "La nube solo acepta paquetes cifrados por el usuario."], ["Limites claros", "No se piden contrasenas por correo ni se prometen imposibles."]], [["Crear cuenta", "#/crear-cuenta", "primary"], ["Ver Valhalla", "#/valhalla", "secondary"]]],
-        "red-neo": ["Funcion", "Red Neo", "Red Neo permite que un reporte ayude a otros sin publicar secretos ni conversaciones completas.", [["Consentimiento", "El usuario decide cuando compartir indicadores."], ["Saneamiento", "Se eliminan tokens, codigos, emails sensibles, queries y datos privados."], ["Modo local", "Si la red falla, la cola segura conserva utilidad sin inventar estado online."]], [["Ver funciones", "#/funciones", "primary"], ["Ver cuenta", "#/login", "secondary"]]],
-        limpieza: ["Funcion", "Limpieza segura", "Limpieza se centra en elementos bajo control de Zamazen Aegis y evita borrar datos ajenos sin permiso real.", [["Cache y preferencias", "Acciones claras para datos locales de la app."], ["Guia Android", "Cuando Android limita una accion, la app guia a Ajustes."], ["Sin destruccion opaca", "Cada borrado debe ser comprensible y reversible cuando tenga sentido."]], [["Ver funciones", "#/funciones", "primary"], ["Gestionar datos", "#/gestionar-datos", "secondary"]]],
-        historial: ["Funcion", "Historial", "Historial ayuda a entender que paso, que decidio el usuario y que senales detecto el sistema.", [["Memoria local", "Eventos recientes sin subir informacion innecesaria."], ["Contexto util", "Explica llamadas, mensajes, enlaces y acciones de proteccion."], ["Control", "El usuario puede borrar datos desde la app cuando corresponda."]], [["Ver funciones", "#/funciones", "primary"], ["Privacidad", "#/privacidad", "secondary"]]],
-        "guardian-familiar": ["Funcion", "Guardian familiar", "Modo seguro para personas mayores, familias o usuarios con poca experiencia digital sin control parental oculto.", [["Estado seguro", "Activa modo simple, avisos importantes y bajo consumo."], ["Sin permisos silenciosos", "No cambia permisos Android por detras ni lee apps de terceros."], ["Reversible", "El usuario conserva control y explicaciones claras."]], [["Ver funciones", "#/funciones", "primary"], ["Sobre el proyecto", "#/sobre-zamazenaegis", "secondary"]]],
-        "ayuda-contacto": ["Ayuda", "Ayuda y contacto", "Soporte, privacidad, cuentas y errores criticos tienen una entrada clara sin obligarte a recorrer toda la web.", [["Correo oficial", "zamazenaegissupport@gmail.com para soporte, privacidad y cuentas."], ["FAQ", "Respuestas sobre bateria, conexion, permisos y seguridad."], ["Sin secretos", "Nunca envies contrasenas, codigos 2FA ni datos bancarios completos por correo."]], [["Enviar correo", "mailto:zamazenaegissupport@gmail.com", "primary"], ["Eliminar cuenta", "#/eliminar-cuenta", "secondary"]]]
+        legal: ["Legal", "Centro legal", "Entrada clara a privacidad, cookies, producto, datos, eliminación de cuenta y licencia sin mezclarlo con la home.", [["Privacidad", "Qué datos se usan y qué datos no se publican.", "#/privacidad"], ["Cookies", "Preferencias necesarias y opcionales.", "#/politica-cookies"], ["Licencia", "Uso correcto de Core, Valhalla y Ragnarok.", "#/contrato-licencia"]], [["Privacidad", "#/privacidad", "primary"], ["Contacto", "#/contacto", "secondary"]]],
+        nube: ["Cuenta", "Nube y sincronización", "Vista preparada para datos sincronizados cuando la app móvil y el backend estén conectados. Hoy muestra estados honestos, no datos inventados.", [["App móvil", "Todavía no vinculada en esta web pública."], ["Bunker Cloud", "Solo aceptará paquetes cifrados por el usuario cuando esté activo."], ["Control", "Exportar, borrar o desvincular requerirá autenticación real."]], [["Perfil", "#/perfil", "primary"], ["Datos", "#/datos", "secondary"]]],
+        demo: ["Demo", "Mira cómo actúa Zamazen", "Demo visual de situaciones comunes: llamada sospechosa, SMS de phishing, enlace dudoso, permiso delicado y reporte Red Neo.", [["Neo explica", "Convierte señales de riesgo en pasos comprensibles."], ["Sin promesas falsas", "La demo muestra ayuda y decisión, no magia."], ["Modo seguro", "Si falta permiso o conexión, la experiencia degrada con claridad."]], [["Crear cuenta", "#/crear-cuenta", "primary"], ["Ver funciones", "#/funciones", "secondary"]]],
+        neo: ["Neo", "Neo, el Guardián original", "Pantalla dedicada a Neo como guía protectora: explica riesgos, reduce miedo y ayuda a decidir sin ocultar límites.", [["Claridad", "Traduce señales técnicas a lenguaje humano."], ["Privacidad", "No necesita exponer secretos para orientar al usuario."], ["Acompañamiento", "Su papel es ayudar, no sustituir el criterio del usuario."]], [["Red Neo", "#/red-neo", "primary"], ["Sobre el proyecto", "#/sobre-zamazenaegis", "secondary"]]],
+        runas: ["Identidad", "Runas del Guardián", "Pantalla para la identidad rúnica oficial de Zamazen Aegis: FEHU, URUZ, THURISAZ, ANSUZ, RAIDO, KENAZ, ALGIZ y OTHALA.", [["ALGIZ", "Protección y escudo."], ["ANSUZ", "Neo, verdad y explicación."], ["OTHALA", "Bunker, hogar digital y datos sensibles."]], [["Sobre el proyecto", "#/sobre-zamazenaegis", "primary"], ["Equipo", "#/equipo", "secondary"]]],
+        "no-encontrado": ["404", "Neo no ha encontrado esta cámara", "La ruta no existe o se movió. Puedes volver al inicio, abrir el mapa de funciones o contactar si crees que hay un enlace roto.", [["Volver", "Inicio y rutas principales siguen disponibles."], ["Mapa", "Funciones, cuenta, seguridad y planes tienen pantallas propias."], ["Aviso", "Si venías desde un enlace externo, puedes reportarlo."]], [["Volver al inicio", "#/inicio", "primary"], ["Mapa de funciones", "#/funciones", "secondary"]]],
+        core: ["Core", "Core: protección esencial", "La base de Zamazen Aegis protege sin castigar a quien empieza gratis.", [["Escáner manual", "Reportes de llamadas spam, SMS sospechosos y phishing básico."], ["Historial básico", "Memoria local suficiente para entender actividad reciente."], ["Red Neo saneada", "Envío online solo con consentimiento y datos mínimos."]], [["Ver precios", "#/precios", "primary"], ["Crear cuenta", "#/crear-cuenta", "secondary"]]],
+        valhalla: ["Valhalla", "Valhalla: protección social y digital", "Valhalla refuerza contexto, permisos, privacidad y Bunker sin vender magia.", [["Contexto ampliado", "Más señales para enlaces, apps y permisos excesivos."], ["Bunker mejorado", "Más control para datos sensibles y modo banco seguro cuando aplica."], ["Red Neo avanzada", "Tendencias online y explicaciones más útiles."]], [["Comparar ediciones", "#/precios", "primary"], ["Ver Bunker", "#/bunker", "secondary"]]],
+        ragnarok: ["Ragnarok", "Ragnarok: experiencia completa", "Ragnarok agrupa las capas más avanzadas cuando Android, permisos y consentimiento lo permiten.", [["Identidad y banca", "Guía para credenciales, banca y riesgos digitales complejos."], ["Bunker total", "Protección reforzada para secretos y datos especialmente sensibles."], ["Red Neo prioritaria", "Más contexto, historial profundo y resolución guiada sin falsas reparaciones."]], [["Comparar ediciones", "#/precios", "primary"], ["Ver Red Neo", "#/red-neo", "secondary"]]],
+        escaner: ["Función", "Escáner de amenazas", "Revisión clara de llamadas, SMS, enlaces y señales sospechosas sin prometer detección perfecta.", [["Llamadas", "Ayuda a identificar spam o fraude con avisos comprensibles."], ["SMS y enlaces", "Reconoce urgencia artificial, suplantación y dominios dudosos."], ["Explicación Neo", "Traduce el riesgo a pasos simples para decidir mejor."]], [["Ver funciones", "#/funciones", "primary"], ["Activar escudo", "#/descargar", "secondary"]]],
+        bunker: ["Función", "Bunker", "Una rama dedicada a secretos: credenciales, registros bancarios y datos sensibles tratados con privacidad por defecto.", [["Cifrado local", "Los datos sensibles se protegen antes de cualquier sincronización."], ["Cloud con sobre cifrado", "La nube solo acepta paquetes cifrados por el usuario."], ["Límites claros", "No se piden contraseñas por correo ni se prometen imposibles."]], [["Crear cuenta", "#/crear-cuenta", "primary"], ["Ver Valhalla", "#/valhalla", "secondary"]]],
+        "red-neo": ["Función", "Red Neo", "Red Neo permite que un reporte ayude a otros sin públicar secretos ni conversaciones completas.", [["Consentimiento", "El usuario decide cuándo compartir indicadores."], ["Saneamiento", "Se eliminan tokens, códigos, emails sensibles, queries y datos privados."], ["Modo local", "Si la red falla, la cola segura conserva utilidad sin inventar estado online."]], [["Ver funciones", "#/funciones", "primary"], ["Ver cuenta", "#/login", "secondary"]]],
+        limpieza: ["Función", "Limpieza segura", "Limpieza se centra en elementos bajo control de Zamazen Aegis y evita borrar datos ajenos sin permiso real.", [["Cache y preferencias", "Acciones claras para datos locales de la app."], ["Guía Android", "Cuando Android limita una acción, la app guía a Ajustes."], ["Sin destrucción opaca", "Cada borrado debe ser comprensible y reversible cuando tenga sentido."]], [["Ver funciones", "#/funciones", "primary"], ["Gestionar datos", "#/gestionar-datos", "secondary"]]],
+        historial: ["Función", "Historial", "Historial ayuda a entender qué pasó, qué decidió el usuario y qué señales detectó el sistema.", [["Memoria local", "Eventos recientes sin subir información innecesaria."], ["Contexto útil", "Explica llamadas, mensajes, enlaces y acciones de protección."], ["Control", "El usuario puede borrar datos desde la app cuando corresponda."]], [["Ver funciones", "#/funciones", "primary"], ["Privacidad", "#/privacidad", "secondary"]]],
+        "guardian-familiar": ["Función", "Guardián familiar", "Modo seguro para personas mayores, familias o usuarios con poca experiencia digital sin control parental oculto.", [["Estado seguro", "Activa modo simple, avisos importantes y bajo consumo."], ["Sin permisos silenciosos", "No cambia permisos Android por detrás ni lee apps de terceros."], ["Reversible", "El usuario conserva control y explicaciones claras."]], [["Ver funciones", "#/funciones", "primary"], ["Sobre el proyecto", "#/sobre-zamazenaegis", "secondary"]]],
+        "ayuda-contacto": ["Ayuda", "Ayuda y contacto", "Soporte, privacidad, cuentas y errores críticos tienen una entrada clara sin obligarte a recorrer toda la web.", [["Correo oficial", "zamazenaegissupport@gmail.com para soporte, privacidad y cuentas."], ["FAQ", "Respuestas sobre batería, conexión, permisos y seguridad."], ["Sin secretos", "Nunca envíes contraseñas, códigos 2FA ni datos bancarios completos por correo."]], [["Enviar correo", "mailto:zamazenaegissupport@gmail.com", "primary"], ["Eliminar cuenta", "#/eliminar-cuenta", "secondary"]]]
       },
       en: {
         funciones: ["Features", "Zamazen Aegis features", "Every important feature lives on its own screen so people can explore without scrolling through an endless landing page.", [["Scanner", "Review calls, SMS, links and scam signals with clear explanations.", "#/escaner"], ["Bunker", "Protection for secrets, banking records and sensitive data with honest limits.", "#/bunker"], ["Neo Network", "Sanitized community reports, consent and local mode when the network fails.", "#/red-neo"], ["Cleaner", "Safe actions for cache, preferences and data controlled by Zamazen Aegis.", "#/limpieza"], ["History", "Local memory for recent events without uploading unnecessary information.", "#/historial"], ["Family Guardian", "Clear mode for older people or less experienced digital users.", "#/guardian-familiar"]], [["Back home", "#/inicio", "secondary"], ["Create account", "#/crear-cuenta", "primary"]]],
@@ -13069,7 +13219,7 @@
         perfil: ["Account", "Profile", "A dedicated profile screen for visible identity, level, account state and settings links without mixing it with the whole website.", [["Identity", "Name and email are treated as sensitive data and shown only when they exist in the local session."], ["Level", "Core, Valhalla or Ragnarok are explained as product state, not absolute promises."], ["Control", "The user keeps clear routes to edit settings, review privacy or delete the account."]], [["Account settings", "#/ajustes-cuenta", "primary"], ["Back to account", "#/cuenta", "secondary"]]],
         "ajustes-cuenta": ["Account", "Account settings", "Control center for privacy, data and account security with separate routes for every sensitive decision.", [["Privacy", "Explains what is collected, what is avoided and what remains under user control.", "#/privacidad"], ["Data", "Manage exportable, local and support-related data.", "#/datos"], ["Delete account", "Specific route to request account and data deletion.", "#/eliminar-cuenta"]], [["Manage data", "#/datos", "primary"], ["Back to account", "#/cuenta", "secondary"]]],
         seguridad: ["Security", "Security and control", "A dedicated view for permissions, privacy, data and deletion. The user can review each area without jumps or mixed blocks.", [["Permissions", "Which permissions Zamazen Aegis may need and why Android can limit them.", "#/permisos"], ["Privacy", "Minimal data, clear consent and transparency.", "#/privacidad"], ["Data", "Manage and delete information related to account, support and device.", "#/datos"], ["Delete account", "Deletion request with explanation of timing and legal limits.", "#/eliminar-cuenta"]], [["View permissions", "#/permisos", "primary"], ["About the project", "#/sobre-zamazenaegis", "secondary"]]],
-        permisos: ["Security", "Permissions", "Zamazen Aegis must explain each permission before asking for it and keep PlaySafe mode when Android or Google Play do not allow sensitive automation.", [["PlaySafe", "No READ_CALL_LOG, RECEIVE_SMS, READ_PHONE_STATE or silent third-party reading when it does not apply."], ["Consent", "Sensitive permissions are requested only when they bring real value and the user understands why."], ["Manual mode", "If an integration cannot be used safely, the app guides the user instead of faking protection."]], [["Back to security", "#/seguridad", "primary"], ["Privacy", "#/privacidad", "secondary"]]],
+        permisos: ["Security", "Permissions", "Zamazen Aegis must explain each permission before asking for it and keep PlaySafe mode when Android or Google Play do not allow sensitive automation.", [["PlaySafe", "No call-history, incoming-SMS or phone-status access when it does not apply."], ["Consent", "Sensitive permissions are requested only when they bring real value and the user understands why."], ["Manual mode", "If an integration cannot be used safely, the app guides the user instead of faking protection."]], [["Back to security", "#/seguridad", "primary"], ["Privacy", "#/privacidad", "secondary"]]],
         privacidad: ["Privacy", "Privacy by default", "Every piece of data is treated as sensitive. Zamazen Aegis should request the minimum, store the minimum and clearly explain every use.", [["Minimum access", "It does not read full conversations or third-party data without technical, legal and consent basis."], ["Neo Network", "Reports are sanitized before any online sending."], ["Control", "The user can review data, cookies and deletion through their own routes."]], [["Manage data", "#/gestionar-datos", "primary"], ["Delete account", "#/eliminar-cuenta", "secondary"]]],
         "gestionar-datos": ["Data", "Manage data", "A dedicated screen for account data, support, local preferences, history and Bunker items when applicable.", [["Local data", "Preferences and local history can be cleaned from the app or by uninstalling."], ["Online data", "Only necessary and sanitized data should be sent when consent exists."], ["Support", "Do not send passwords, 2FA codes or complete banking details by email."]], [["Privacy", "#/privacidad", "primary"], ["Delete account", "#/eliminar-cuenta", "secondary"]]],
         "eliminar-cuenta": ["Account", "Delete account and data", "A separate route to request deletion of the Zamazen account and associated data without hiding it inside a landing page.", [["Request", "The user can write to official support to start deletion and verification."], ["Timing", "The process is normally completed in a reasonable period after verifying the request."], ["Limits", "Minimal information may be kept for legal obligations, security or fraud prevention."]], [["Send email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["Back to privacy", "#/privacidad", "secondary"]]],
@@ -13108,48 +13258,48 @@
       }
     };
     ROUTE_DETAIL_CONTENT.fr = {
-      funciones: ["Fonctions", "Fonctions de Zamazen Aegis", "Chaque fonction importante dispose de sa propre vue pour explorer sans parcourir une page interminable.", [["Scanner", "Analyse appels, SMS, liens et signaux d'arnaque avec des explications claires.", "#/escaner"], ["Bunker", "Protection des secrets, donnees bancaires et informations sensibles avec des limites honnetes.", "#/bunker"], ["Reseau Neo", "Signalements communautaires assainis, consentement et mode local si le reseau echoue.", "#/red-neo"], ["Nettoyage", "Actions sures pour cache, preferences et donnees gerees par Zamazen Aegis.", "#/limpieza"], ["Historique", "Memoire locale pour comprendre les evenements recents sans envoi inutile.", "#/historial"], ["Gardien familial", "Mode clair pour personnes agees ou moins experimentees.", "#/guardian-familiar"]], [["Retour accueil", "#/inicio", "secondary"], ["Creer un compte", "#/crear-cuenta", "primary"]]],
-      precios: ["Premium", "Tarifs: Core, Valhalla et Ragnarok", "Comparez les editions dans une vue dediee. Chaque niveau a sa propre page pour comprendre valeur, limites et action suivante sans pression.", [["Core", "Protection essentielle pour commencer avec scanner, historique simple, nettoyage sur et Reseau Neo assaini.", "#/core"], ["Valhalla", "Plus de contexte, confidentialite, permissions, liens, tendances en ligne et Bunker ameliore.", "#/valhalla"], ["Ragnarok", "Experience complete pour banque, identifiants, identite numerique et risques complexes.", "#/ragnarok"]], [["Creer un compte", "#/crear-cuenta", "primary"], ["Voir fonctions", "#/funciones", "secondary"]]],
-      cuenta: ["Compte", "Compte Zamazen", "Le compte est separe en routes claires: creation, connexion, recuperation, profil et reglages. Le site ne simule pas de session et ne stocke pas de mot de passe localement.", [["Creer un compte", "Inscription dediee au profil et aux sessions quand l'API sera disponible.", "#/crear-cuenta"], ["Se connecter", "Acces clair sans promettre une fausse connexion locale.", "#/login"], ["Recuperer le mot de passe", "Flux separe pour ne pas le confondre avec l'inscription.", "#/recuperar-cuenta"], ["Profil", "Resume utilisateur, niveau et etat du compte sans exposer de donnees sensibles.", "#/perfil"], ["Reglages du compte", "Preferences, donnees, confidentialite et suppression dans une vue propre.", "#/ajustes-cuenta"]], [["Creer un compte", "#/crear-cuenta", "primary"], ["Securite du compte", "#/seguridad", "secondary"]]],
-      perfil: ["Compte", "Profil", "Vue dediee a l'identite visible, au niveau, a l'etat du compte et aux liens de reglage sans melanger tout le site.", [["Identite", "Nom et email sont traites comme donnees sensibles et affiches seulement s'ils existent dans la session locale."], ["Niveau", "Core, Valhalla ou Ragnarok sont expliques comme etat produit, pas comme promesse absolue."], ["Controle", "L'utilisateur garde des routes claires pour regler, verifier la confidentialite ou supprimer le compte."]], [["Reglages du compte", "#/ajustes-cuenta", "primary"], ["Retour au compte", "#/cuenta", "secondary"]]],
-      "ajustes-cuenta": ["Compte", "Reglages du compte", "Centre de controle pour confidentialite, donnees et securite du compte avec routes separees pour chaque decision sensible.", [["Confidentialite", "Explique ce qui est collecte, evite et reste sous controle utilisateur.", "#/privacidad"], ["Donnees", "Gerer les donnees exportables, locales et liees au support.", "#/datos"], ["Supprimer le compte", "Route specifique pour demander la suppression du compte et des donnees.", "#/eliminar-cuenta"]], [["Gerer les donnees", "#/datos", "primary"], ["Retour au compte", "#/cuenta", "secondary"]]],
-      seguridad: ["Securite", "Securite et controle", "Vue dediee aux permissions, a la confidentialite, aux donnees et a la suppression. Chaque zone se consulte sans sauts ni blocs melanges.", [["Permissions", "Quelles permissions Zamazen Aegis peut demander et pourquoi Android peut les limiter.", "#/permisos"], ["Confidentialite", "Donnees minimales, consentement clair et transparence.", "#/privacidad"], ["Donnees", "Gestion et suppression des informations liees au compte, support et appareil.", "#/datos"], ["Supprimer le compte", "Demande de suppression avec delais et limites legales expliques.", "#/eliminar-cuenta"]], [["Voir permissions", "#/permisos", "primary"], ["A propos", "#/sobre-zamazenaegis", "secondary"]]],
-      permisos: ["Securite", "Permissions", "Zamazen Aegis doit expliquer chaque permission avant de la demander et garder le mode PlaySafe quand Android ou Google Play limitent l'automatisation sensible.", [["PlaySafe", "Sans READ_CALL_LOG, RECEIVE_SMS, READ_PHONE_STATE ni lecture silencieuse de tiers quand ce n'est pas applicable."], ["Consentement", "Les permissions sensibles ne sont demandees que si elles apportent une valeur reelle et comprensible."], ["Mode manuel", "Si une integration n'est pas sure, l'app guide l'utilisateur au lieu de simuler une protection."]], [["Retour securite", "#/seguridad", "primary"], ["Confidentialite", "#/privacidad", "secondary"]]],
-      privacidad: ["Confidentialite", "Confidentialite par defaut", "Toute donnee est sensible. Zamazen Aegis doit demander le minimum, stocker le minimum et expliquer chaque usage.", [["Acces minimal", "Ne lit pas les conversations completes ni donnees de tiers sans base technique, legale et consentement."], ["Reseau Neo", "Les signalements sont assainis avant tout envoi en ligne."], ["Controle", "L'utilisateur peut revoir donnees, cookies et suppression depuis leurs routes."]], [["Gerer les donnees", "#/gestionar-datos", "primary"], ["Supprimer le compte", "#/eliminar-cuenta", "secondary"]]],
-      "gestionar-datos": ["Donnees", "Gerer les donnees", "Vue dediee aux donnees de compte, support, preferences locales, historique et elements du Bunker quand applicable.", [["Donnees locales", "Preferences et historique local peuvent etre nettoyes depuis l'app ou la desinstallation."], ["Donnees en ligne", "Seules les donnees necessaires et assainies sont envoyees avec consentement."], ["Support", "Ne pas envoyer mots de passe, codes 2FA ni donnees bancaires completes par email."]], [["Confidentialite", "#/privacidad", "primary"], ["Supprimer le compte", "#/eliminar-cuenta", "secondary"]]],
-      "eliminar-cuenta": ["Compte", "Supprimer compte et donnees", "Route separee pour demander la suppression du compte Zamazen et des donnees associees sans la cacher dans une landing.", [["Demande", "L'utilisateur peut ecrire au support officiel pour lancer suppression et verification."], ["Delais", "Le processus se termine normalement dans un delai raisonnable apres verification."], ["Limites", "Un minimum peut etre conserve pour obligations legales, securite ou prevention de fraude."]], [["Envoyer un email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["Retour confidentialite", "#/privacidad", "secondary"]]],
-      "politica-cookies": ["Confidentialite", "Politique de cookies", "Le site utilise un stockage necessaire pour langue, preferences et consentement; les categories optionnelles restent desactivees jusqu'a acceptation.", [["Necessaires", "Toujours actifs pour le fonctionnement de base."], ["Optionnels", "Analyse, personnalisation et marketing/produit seulement avec consentement."], ["Changement", "Les preferences peuvent etre modifiees depuis le pied de page."]], [["Contact", "#/contacto", "primary"], ["Confidentialite", "#/privacidad", "secondary"]]],
-      "politica-producto": ["Produit", "Politique produit", "Zamazen Aegis aide a revoir des signaux de risque sans promettre securite totale ni detection parfaite.", [["Limites honnetes", "Aucune app ne supprime tout risque ni ne remplace le jugement utilisateur."], ["Permissions", "Si une fonction exige permission ou connexion, c'est explique avant."], ["Action reelle", "Blocage ou automatisation seulement avec fonction, permission et consentement."]], [["Voir securite", "#/seguridad", "primary"], ["Voir fonctions", "#/funciones", "secondary"]]],
-      "cobertura-wifi": ["Connexion", "Couverture, internet mobile et WiFi", "L'app peut guider face aux problemes reseau, mais ne promet pas de creer couverture ni contourner l'operateur.", [["Diagnostic", "Peut indiquer perte de connexion, WiFi faible ou reseau ouvert quand Android l'autorise."], ["Actions reelles", "Guide vers mode avion, 4G/5G, appels WiFi ou changement de reseau sur."], ["Sans fumee", "Ne promet pas de changer les antennes ni d'ameliorer physiquement le signal."]], [["Contact", "#/contacto", "primary"], ["Politique produit", "#/politica-producto", "secondary"]]],
-      "contrato-licencia": ["Legal", "Contrat de licence / EULA", "Usage personnel et limite, soumis a la loi, au Play Store et aux conditions publiees de Zamazen Aegis.", [["Bon usage", "Ne pas manipuler, revendre ni tenter de casser les protections."], ["Plans", "Core, Valhalla et Ragnarok doivent respecter permissions et confidentialite."], ["Evolution", "Les fonctions connectees peuvent changer pour securite, stabilite ou conformite."]], [["Contact", "#/contacto", "primary"], ["A propos", "#/sobre-zamazenaegis", "secondary"]]],
-      "sobre-zamazenaegis": ["Projet", "A propos de Zamazen Aegis", "Zamazen Aegis existe pour aider des personnes reelles face au spam, phishing, arnaques mobiles et confusion numerique, sans vendre une protection absolue.", [["Ce qu'il protege", "Appels, SMS, liens, signalements, identite numerique, identifiants et decisions sensibles dans les limites techniques reelles."], ["Pourquoi il existe", "Pour rendre la securite comprehensible, accessible et utile au quotidien."], ["Piliers", "Courage, Verite, Honneur, Loyaute, Discipline, Hospitalite, Productivite, Perseverance et Confiance guident chaque decision."]], [["Voir l'equipe", "#/equipo", "primary"], ["Remerciements", "#/agradecimientos", "secondary"], ["Voir fonctions", "#/funciones", "secondary"]]],
-      equipo: ["Equipe", "Equipe", "Vue dediee aux personnes et gardiens derriere le projet, sans melanger permissions, tarifs ou formulaires.", [["Francisco Javier Molina Moreno", "Createur et responsable de la vision de Zamazen Aegis."], ["Maria Isabel Rodriguez Sanchez", "Partenaire cle du projet et soutien humain dans la construction de confiance."], ["Neo", "Gardien original de Zamazen Aegis: accompagne, explique et protege sans transformer le risque en peur."]], [["A propos", "#/sobre-zamazenaegis", "primary"], ["Contact", "#/contacto", "secondary"]]],
-      faq: ["FAQ", "Questions frequentes", "Reponses rapides dans une vue propre pour ne pas parcourir tout le site.", [["Consomme-t-il beaucoup de batterie?", "Il doit prioriser faible consommation, focus ecran et travail minimal en arriere-plan."], ["Fonctionne-t-il sans internet?", "Les couches locales restent utiles; l'online se degrade sans faux succes."], ["Demande-t-il des permissions sensibles?", "Seulement avec valeur reelle, explication et alternative manuelle si besoin."], ["Promet-il une securite totale?", "Non. Zamazen Aegis aide a reduire le risque, expliquer les signaux et guider les decisions."]], [["Contact", "#/contacto", "primary"], ["Voir securite", "#/seguridad", "secondary"]]],
-      soporte: ["Aide", "Aide Neo et tickets", "Recherche locale de réponses et ticket assaini pour support manuel, sans publier de données ni simuler un backend.", [["Recherche", "Réponses préparées sur compte, confidentialité, permissions, plans, Bunker et Red Neo."], ["Ticket", "Texte assaini, consentement et email préparé jusqu'à existence d'un backend protégé."], ["Confidentialité", "Le créateur ne voit pas les comptes privés; seulement ce que l'utilisateur envoie volontairement."]], [["Ouvrir contact", "#/contacto", "primary"], ["Confidentialité", "#/privacidad", "secondary"]]],
-      contacto: ["Contact", "Aide et contact", "Support, confidentialite, comptes et erreurs critiques ont une vue directe. N'envoyez pas de secrets par email.", [["Email officiel", "zamazenaegissupport@gmail.com pour support, confidentialite, compte et documentation."], ["Incidents", "Priorite a securite, comptes, paiements, suppression et erreurs critiques."], ["Confidentialite", "Ne pas envoyer mots de passe, codes 2FA ni donnees bancaires completes."]], [["Envoyer un email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
+      funciones: ["Fonctions", "Fonctions de Zamazen Aegis", "Chaque fonction importante dispose de sa propre vue pour explorer sans parcourir une page interminable.", [["Scanner", "Analyse des appels, SMS, liens et signaux d'arnaque avec des explications claires.", "#/escaner"], ["Bunker", "Protection des secrets, données bancaires et informations sensibles avec des limites honnêtes.", "#/bunker"], ["Réseau Neo", "Signalements communautaires assainis, consentement et mode local si le réseau échoue.", "#/red-neo"], ["Nettoyage", "Actions sûres pour le cache, les préférences et les données gérées par Zamazen Aegis.", "#/limpieza"], ["Historique", "Mémoire locale pour comprendre les événements récents sans envoi inutile.", "#/historial"], ["Gardien familial", "Mode clair pour les personnes âgées ou moins expérimentées.", "#/guardian-familiar"]], [["Retour à l'accueil", "#/inicio", "secondary"], ["Créer un compte", "#/crear-cuenta", "primary"]]],
+      precios: ["Premium", "Tarifs : Core, Valhalla et Ragnarok", "Comparez les éditions dans une vue dédiée. Chaque niveau a sa propre page pour comprendre sa valeur, ses limites et l'action suivante sans pression.", [["Core", "Protection essentielle pour commencer avec un scanner, un historique simple, un nettoyage sûr et le Réseau Neo assaini.", "#/core"], ["Valhalla", "Plus de contexte, de confidentialité, de permissions, de liens, de tendances en ligne et un Bunker amélioré.", "#/valhalla"], ["Ragnarok", "Expérience complète pour la banque, les identifiants, l'identité numérique et les risques complexes.", "#/ragnarok"]], [["Créer un compte", "#/crear-cuenta", "primary"], ["Voir les fonctions", "#/funciones", "secondary"]]],
+      cuenta: ["Compte", "Compte Zamazen", "Le compte est séparé en routes claires : création, connexion, récupération, profil et réglages. Le site ne simule pas de session et ne stocke pas de mot de passe localement.", [["Créer un compte", "Inscription dédiée au profil et aux sessions quand l'API sera disponible.", "#/crear-cuenta"], ["Se connecter", "Accès clair sans promettre une fausse connexion locale.", "#/login"], ["Récupérer le mot de passe", "Flux séparé pour ne pas le confondre avec l'inscription.", "#/recuperar-cuenta"], ["Profil", "Résumé de l'utilisateur, niveau et état du compte sans exposer de données sensibles.", "#/perfil"], ["Réglages du compte", "Préférences, données, confidentialité et suppression dans une vue propre.", "#/ajustes-cuenta"]], [["Créer un compte", "#/crear-cuenta", "primary"], ["Sécurité du compte", "#/seguridad", "secondary"]]],
+      perfil: ["Compte", "Profil", "Vue dédiée à l'identité visible, au niveau, à l'état du compte et aux liens de réglage sans mélanger tout le site.", [["Identité", "Le nom et l'email sont traités comme des données sensibles et affichés seulement s'ils existent dans la session locale."], ["Niveau", "Core, Valhalla ou Ragnarok sont expliqués comme un état du produit, pas comme une promesse absolue."], ["Contrôle", "L'utilisateur garde des routes claires pour régler, vérifier la confidentialité ou supprimer le compte."]], [["Réglages du compte", "#/ajustes-cuenta", "primary"], ["Retour au compte", "#/cuenta", "secondary"]]],
+      "ajustes-cuenta": ["Compte", "Réglages du compte", "Centre de contrôle pour la confidentialité, les données et la sécurité du compte, avec des routes séparées pour chaque décision sensible.", [["Confidentialité", "Explique ce qui est collecté, évité et reste sous le contrôle de l'utilisateur.", "#/privacidad"], ["Données", "Gérer les données exportables, locales et liées au support.", "#/datos"], ["Supprimer le compte", "Route spécifique pour demander la suppression du compte et des données.", "#/eliminar-cuenta"]], [["Gérer les données", "#/datos", "primary"], ["Retour au compte", "#/cuenta", "secondary"]]],
+      seguridad: ["Sécurité", "Sécurité et contrôle", "Vue dédiée aux permissions, à la confidentialité, aux données et à la suppression. Chaque zone se consulte sans sauts ni blocs mélangés.", [["Permissions", "Quelles permissions Zamazen Aegis peut demander et pourquoi Android peut les limiter.", "#/permisos"], ["Confidentialité", "Données minimales, consentement clair et transparence.", "#/privacidad"], ["Données", "Gestion et suppression des informations liées au compte, au support et à l'appareil.", "#/datos"], ["Supprimer le compte", "Demande de suppression avec des délais et des limites légales expliqués.", "#/eliminar-cuenta"]], [["Voir les permissions", "#/permisos", "primary"], ["À propos", "#/sobre-zamazenaegis", "secondary"]]],
+        permisos: ["Sécurité", "Permissions", "Zamazen Aegis doit expliquer chaque permission avant de la demander et garder le mode PlaySafe quand Android ou Google Play limitent l'automatisation sensible.", [["PlaySafe", "Sans accès au journal d’appels, à la réception des SMS ni à l’état du téléphone lorsque ce n’est pas applicable."], ["Consentement", "Les permissions sensibles ne sont demandées que si elles apportent une valeur réelle et compréhensible."], ["Mode manuel", "Si une intégration n'est pas sûre, l'app guide l'utilisateur au lieu de simuler une protection."]], [["Retour à la sécurité", "#/seguridad", "primary"], ["Confidentialité", "#/privacidad", "secondary"]]],
+      privacidad: ["Confidentialité", "Confidentialité par défaut", "Toute donnée est sensible. Zamazen Aegis doit demander le minimum, stocker le minimum et expliquer chaque usage.", [["Accès minimal", "Ne lit pas les conversations complètes ni les données de tiers sans base technique, légale et consentement."], ["Réseau Neo", "Les signalements sont assainis avant tout envoi en ligne."], ["Contrôle", "L'utilisateur peut revoir les données, les cookies et la suppression depuis leurs routes."]], [["Gérer les données", "#/gestionar-datos", "primary"], ["Supprimer le compte", "#/eliminar-cuenta", "secondary"]]],
+      "gestionar-datos": ["Données", "Gérer les données", "Vue dédiée aux données de compte, au support, aux préférences locales, à l'historique et aux éléments du Bunker quand ils sont concernés.", [["Données locales", "Les préférences et l'historique local peuvent être nettoyés depuis l'app ou après sa désinstallation."], ["Données en ligne", "Seules les données nécessaires et assainies sont envoyées avec consentement."], ["Support", "Ne pas envoyer de mots de passe, de codes 2FA ni de données bancaires complètes par email."]], [["Confidentialité", "#/privacidad", "primary"], ["Supprimer le compte", "#/eliminar-cuenta", "secondary"]]],
+      "eliminar-cuenta": ["Compte", "Supprimer le compte et les données", "Route séparée pour demander la suppression du compte Zamazen et des données associées sans la cacher dans une landing.", [["Demande", "L'utilisateur peut écrire au support officiel pour lancer la suppression et la vérification."], ["Délais", "Le processus se termine normalement dans un délai raisonnable après vérification."], ["Limites", "Un minimum peut être conservé pour des obligations légales, la sécurité ou la prévention de la fraude."]], [["Envoyer un email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["Retour à la confidentialité", "#/privacidad", "secondary"]]],
+      "politica-cookies": ["Confidentialité", "Politique de cookies", "Le site utilise un stockage nécessaire pour la langue, les préférences et le consentement ; les catégories optionnelles restent désactivées jusqu'à leur acceptation.", [["Nécessaires", "Toujours actives pour le fonctionnement de base."], ["Optionnelles", "Analyse, personnalisation et marketing/produit uniquement avec consentement."], ["Changement", "Les préférences peuvent être modifiées depuis le pied de page."]], [["Contact", "#/contacto", "primary"], ["Confidentialité", "#/privacidad", "secondary"]]],
+      "politica-producto": ["Produit", "Politique produit", "Zamazen Aegis aide à revoir des signaux de risque sans promettre une sécurité totale ni une détection parfaite.", [["Limites honnêtes", "Aucune app ne supprime tout risque ni ne remplace le jugement de l'utilisateur."], ["Permissions", "Si une fonction exige une permission ou une connexion, cela est expliqué avant."], ["Action réelle", "Blocage ou automatisation uniquement avec une fonction, une permission et un consentement."]], [["Voir la sécurité", "#/seguridad", "primary"], ["Voir les fonctions", "#/funciones", "secondary"]]],
+      "cobertura-wifi": ["Connexion", "Couverture, internet mobile et WiFi", "L'app peut guider face aux problèmes de réseau, mais ne promet pas de créer une couverture ni de contourner l'opérateur.", [["Diagnostic", "Peut indiquer une perte de connexion, un WiFi faible ou un réseau ouvert quand Android l'autorise."], ["Actions réelles", "Guide vers le mode avion, la 4G/5G, les appels WiFi ou un changement de réseau sûr."], ["Sans fumée", "Ne promet pas de changer les antennes ni d'améliorer physiquement le signal."]], [["Contact", "#/contacto", "primary"], ["Politique produit", "#/politica-producto", "secondary"]]],
+      "contrato-licencia": ["Légal", "Contrat de licence / EULA", "Usage personnel et limité, soumis à la loi, au Play Store et aux conditions publiées de Zamazen Aegis.", [["Bon usage", "Ne pas manipuler, revendre ni tenter de casser les protections."], ["Plans", "Core, Valhalla et Ragnarok doivent respecter les permissions et la confidentialité."], ["Évolution", "Les fonctions connectées peuvent changer pour améliorer la sécurité, la stabilité ou la conformité."]], [["Contact", "#/contacto", "primary"], ["À propos", "#/sobre-zamazenaegis", "secondary"]]],
+      "sobre-zamazenaegis": ["Projet", "À propos de Zamazen Aegis", "Zamazen Aegis existe pour aider des personnes réelles face au spam, au phishing, aux arnaques mobiles et à la confusion numérique, sans vendre une protection absolue.", [["Ce qu'il protège", "Appels, SMS, liens, signalements, identité numérique, identifiants et décisions sensibles dans les limites techniques réelles."], ["Pourquoi il existe", "Pour rendre la sécurité compréhensible, accessible et utile au quotidien."], ["Piliers", "Courage, Vérité, Honneur, Loyauté, Discipline, Hospitalité, Productivité, Persévérance et Confiance guident chaque décision."]], [["Voir l'équipe", "#/equipo", "primary"], ["Remerciements", "#/agradecimientos", "secondary"], ["Voir les fonctions", "#/funciones", "secondary"]]],
+      equipo: ["Équipe", "Équipe", "Vue dédiée aux personnes et aux gardiens derrière le projet, sans mélanger permissions, tarifs ou formulaires.", [["Francisco Javier Molina Moreno", "Créateur et responsable de la vision de Zamazen Aegis."], ["María Isabel Rodríguez Sánchez", "Partenaire clé du projet et soutien humain dans la construction de la confiance."], ["Neo", "Gardien original de Zamazen Aegis : il accompagne, explique et protège sans transformer le risque en peur."]], [["À propos", "#/sobre-zamazenaegis", "primary"], ["Contact", "#/contacto", "secondary"]]],
+      faq: ["FAQ", "Questions fréquentes", "Réponses rapides dans une vue propre pour ne pas parcourir tout le site.", [["Consomme-t-il beaucoup de batterie ?", "Il doit donner la priorité à une faible consommation, au focus d'écran et à un travail minimal en arrière-plan."], ["Fonctionne-t-il sans internet ?", "Les couches locales restent utiles ; l'online se dégrade sans faux succès."], ["Demande-t-il des permissions sensibles ?", "Seulement avec une valeur réelle, une explication et une alternative manuelle si nécessaire."], ["Promet-il une sécurité totale ?", "Non. Zamazen Aegis aide à réduire le risque, à expliquer les signaux et à guider les décisions."]], [["Contact", "#/contacto", "primary"], ["Voir la sécurité", "#/seguridad", "secondary"]]],
+      soporte: ["Aide", "Aide Neo et tickets", "Recherche locale de réponses et ticket assaini pour support manuel, sans publier de données ni simuler un backend.", [["Recherche", "Réponses préparées sur le compte, la confidentialité, les permissions, les plans, Bunker et Red Neo."], ["Ticket", "Texte assaini, consentement et email préparé jusqu'à l'existence d'un backend protégé."], ["Confidentialité", "Le créateur ne voit pas les comptes privés ; seulement ce que l'utilisateur envoie volontairement."]], [["Ouvrir le contact", "#/contacto", "primary"], ["Confidentialité", "#/privacidad", "secondary"]]],
+      contacto: ["Contact", "Aide et contact", "Support, confidentialité, comptes et erreurs critiques ont une vue directe. N'envoyez pas de secrets par email.", [["Email officiel", "zamazenaegissupport@gmail.com pour le support, la confidentialité, le compte et la documentation."], ["Incidents", "Priorité à la sécurité, aux comptes, aux paiements, à la suppression et aux erreurs critiques."], ["Confidentialité", "Ne pas envoyer de mots de passe, de codes 2FA ni de données bancaires complètes."]], [["Envoyer un email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["FAQ", "#/faq", "secondary"]]],
       "estado-proyecto": ["État", "État du projet", "Zamazen Aegis garde un site public actif ; l'application officielle sera annoncée uniquement lorsqu'un canal de publication réel existera.", [["Site actif", "Le site public sert de centre d'information et de carte de l'écosystème."], ["App 1.6", "L'application est préparée avec la sécurité, la confidentialité et l'accessibilité comme conditions de sortie."], ["Canal officiel", "L'application officielle apparaîtra après une publication réelle."]], [["Consulter le canal officiel", "#/descargar", "primary"], ["Voir les nouveautés", "#/novedades", "secondary"]]],
       niofra: ["Écosystème", "Niofra, la sœur du refuge", "Niofra est la future sœur de Zamazen Aegis : elle prendra soin de l'intérieur, des routines, de l'organisation, du calme, des souvenirs, de la famille, des animaux, du journal personnel et de la vie quotidienne. Elle n'est pas encore téléchargeable.", [["Depuis l'intérieur", "Elle gardera le feu du refuge allumé et aidera à organiser le quotidien."], ["Avec Aegis", "Aegis protège de l'extérieur ; Niofra prendra soin de l'intérieur sans mélanger les missions."], ["État honnête", "Le projet est défini, mais il n'y a ni téléchargement ni date officielle de sortie." ]], [["Retour à Aegis", "#/inicio", "primary"], ["Voir le projet", "#/sobre-zamazenaegis", "secondary"]]],
-      confianza: ["Confiance", "Centre de confiance et confidentialite", "Une vue claire pour comprendre ce que Zamazen protege, quelles permissions il peut demander, quelles donnees il evite et les limites d'Android.", [["Permissions expliquees", "Rien de sensible sans utilite, consentement et alternative manuelle."], ["Donnees minimales", "Aucun secret, email ou signalement publie sans assainissement."], ["Zero fumee", "Pas de promesse de protection absolue ni de detection parfaite."]], [["Gerer les donnees", "#/datos", "primary"], ["Voir permissions", "#/permisos", "secondary"]]],
-      novedades: ["Nouveautes", "Historique du Gardien", "Changements recents de la web, avancees de l'app et prochaines etapes pour montrer que le projet evolue avec ordre.", [["Web en arbre", "Les routes internes remplacent la landing interminable."], ["Profil vivant", "Compte, avatar, niveau et synchronisation prepares."], ["Communaute sure", "Idees et remerciements sont revus manuellement avant publication."]], [["Etat du projet", "#/estado-proyecto", "primary"], ["Idees", "#/ideas", "secondary"]]],
-      ideas: ["Idees", "Idees, ameliorations et remerciements", "Recevoir des propositions utiles en securite: pas de fichiers, pas de scripts, pas de publication automatique et toujours revue manuelle.", [["Formulaire controle", "Texte limite, valide et assaini."], ["Moderation", "Rien n'apparait en remerciements sans permission et revue."], ["Recompenses", "Codes ou reconnaissance ne sont jamais automatiques."]], [["Envoyer proposition", "#/ideas", "primary"], ["Etat du projet", "#/estado-proyecto", "secondary"]]],
-      "salon-guardianes": ["Communaute", "Salon des Gardiens", "Reconnaissance publique preparee pour celles et ceux qui aident vraiment: points par impact reel, couronnes, badges et remerciements seulement avec permission et revue manuelle.", [["Points", "Ils ne se gagnent pas par volume; ils sont attribues pour utilite reelle."], ["Couronnes", "Ragnarok, Valhalla et Core honorifique valorisent les contributions approuvees."], ["Confidentialite", "Alias, anonyme ou absent: l'utilisateur decide toujours."]], [["Envoyer une idee", "#/ideas", "primary"], ["Panneau prive", "#/admin", "secondary"]]],
-      admin: ["Prive", "Panneau administrateur protege", "Vue verrouillee: la revue des idees et recompenses ne vit pas dans le frontend public.", [["Aucune donnee publique", "Pas de liste admin ni de cles dans le HTML."], ["Backend requis", "Le vrai panneau exigera login, roles, regles et audit."], ["Revue manuelle", "Les contributions ne sont publiees qu'apres approbation."]], [["Idees", "#/ideas", "primary"], ["Accueil", "#/inicio", "secondary"]]],
-      legal: ["Legal", "Centre legal", "Entree claire vers confidentialite, cookies, politique produit, donnees, suppression de compte et licence sans melange avec l'accueil.", [["Confidentialite", "Quelles donnees sont utilisees et lesquelles ne sont pas publiees.", "#/privacidad"], ["Cookies", "Preferences necessaires et optionnelles.", "#/politica-cookies"], ["Licence", "Usage correct de Core, Valhalla et Ragnarok.", "#/contrato-licencia"]], [["Confidentialite", "#/privacidad", "primary"], ["Contact", "#/contacto", "secondary"]]],
-      nube: ["Compte", "Cloud et synchronisation", "Vue preparee pour les donnees synchronisees quand l'app mobile et le backend sont connectes. Aujourd'hui elle montre des etats honnetes, pas de donnees inventees.", [["App mobile", "Pas encore liee dans cette web publique."], ["Bunker Cloud", "N'acceptera que des paquets chiffres par l'utilisateur quand actif."], ["Controle", "Exporter, supprimer ou delier exigera une authentification reelle."]], [["Profil", "#/perfil", "primary"], ["Donnees", "#/datos", "secondary"]]],
-      demo: ["Demo", "Voir Zamazen en action", "Demo visuelle de situations courantes: appel suspect, SMS phishing, lien douteux, permission delicate et signalement Reseau Neo.", [["Neo explique", "Transforme les signaux de risque en etapes comprehensibles."], ["Sans fausses promesses", "La demo montre aide et decision, pas de magie."], ["Mode sur", "Si permission ou connexion manque, l'experience se degrade clairement."]], [["Creer un compte", "#/crear-cuenta", "primary"], ["Voir fonctions", "#/funciones", "secondary"]]],
-      neo: ["Neo", "Neo, le Gardien original", "Vue dediee a Neo comme guide protecteur: explique les risques, reduit la peur et aide a decider sans cacher les limites.", [["Clarte", "Traduit les signaux techniques en langage humain."], ["Confidentialite", "N'a pas besoin d'exposer des secrets pour guider."], ["Accompagnement", "Son role est d'aider, pas de remplacer le jugement utilisateur."]], [["Reseau Neo", "#/red-neo", "primary"], ["A propos", "#/sobre-zamazenaegis", "secondary"]]],
-      runas: ["Identite", "Runes du Gardien", "Vue de l'identite runique officielle de Zamazen Aegis: FEHU, URUZ, THURISAZ, ANSUZ, RAIDO, KENAZ, ALGIZ et OTHALA.", [["ALGIZ", "Protection et bouclier."], ["ANSUZ", "Neo, verite et explication."], ["OTHALA", "Bunker, foyer numerique et donnees sensibles."]], [["A propos", "#/sobre-zamazenaegis", "primary"], ["Equipe", "#/equipo", "secondary"]]],
-      "no-encontrado": ["404", "Neo n'a pas trouve cette chambre", "La route n'existe pas ou a bouge. Vous pouvez revenir a l'accueil, ouvrir la carte des fonctions ou contacter le support.", [["Retour", "Accueil et routes principales restent disponibles."], ["Carte", "Fonctions, compte, securite et plans ont leurs vues."], ["Signaler", "Si vous venez d'un lien externe, vous pouvez le signaler."]], [["Retour accueil", "#/inicio", "primary"], ["Carte des fonctions", "#/funciones", "secondary"]]],
-      core: ["Core", "Core: protection essentielle", "La base de Zamazen Aegis protege sans penaliser ceux qui commencent gratuitement.", [["Scanner manuel", "Signalements d'appels spam, SMS suspects et phishing basique."], ["Historique simple", "Memoire locale suffisante pour comprendre l'activite recente."], ["Reseau Neo assaini", "Envoi en ligne seulement avec consentement et donnees minimales."]], [["Voir tarifs", "#/precios", "primary"], ["Creer un compte", "#/crear-cuenta", "secondary"]]],
-      valhalla: ["Valhalla", "Valhalla: protection sociale et numerique", "Valhalla renforce contexte, permissions, confidentialite et Bunker sans vendre de magie.", [["Contexte elargi", "Plus de signaux pour liens, apps et permissions excessives."], ["Bunker ameliore", "Plus de controle pour donnees sensibles et mode bancaire sur si applicable."], ["Reseau Neo avance", "Tendances en ligne et explications plus utiles."]], [["Comparer editions", "#/precios", "primary"], ["Voir Bunker", "#/bunker", "secondary"]]],
-      ragnarok: ["Ragnarok", "Ragnarok: experience complete", "Ragnarok regroupe les couches les plus avancees quand Android, permissions et consentement le permettent.", [["Identite et banque", "Guidage pour identifiants, banque et risques numeriques complexes."], ["Bunker total", "Protection renforcee des secrets et donnees tres sensibles."], ["Reseau Neo prioritaire", "Plus de contexte, historique profond et resolution guidee sans faux correctifs."]], [["Comparer editions", "#/precios", "primary"], ["Voir Reseau Neo", "#/red-neo", "secondary"]]],
-      escaner: ["Fonction", "Scanner de menaces", "Analyse claire des appels, SMS, liens et signaux suspects sans promettre detection parfaite.", [["Appels", "Aide a identifier spam ou fraude avec avertissements comprehensibles."], ["SMS et liens", "Reconnait urgence artificielle, usurpation et domaines suspects."], ["Explication Neo", "Traduit le risque en etapes simples."]], [["Voir fonctions", "#/funciones", "primary"], ["Activer bouclier", "#/descargar", "secondary"]]],
-      bunker: ["Fonction", "Bunker", "Branche dediee aux secrets: identifiants, donnees bancaires et informations sensibles avec confidentialite par defaut.", [["Chiffrement local", "Les donnees sensibles sont protegees avant toute synchronisation."], ["Enveloppe cloud chiffree", "Le cloud n'accepte que des paquets chiffres par l'utilisateur."], ["Limites claires", "Pas de mots de passe par email ni promesses impossibles."]], [["Creer un compte", "#/crear-cuenta", "primary"], ["Voir Valhalla", "#/valhalla", "secondary"]]],
-      "red-neo": ["Fonction", "Reseau Neo", "Reseau Neo permet qu'un signalement aide d'autres personnes sans publier secrets ni conversations completes.", [["Consentement", "L'utilisateur decide quand partager des indicateurs."], ["Assainissement", "Tokens, codes, emails sensibles, requetes et donnees privees sont retires."], ["Mode local", "Si le reseau echoue, la file sure garde l'utilite sans inventer l'etat en ligne."]], [["Voir fonctions", "#/funciones", "primary"], ["Voir compte", "#/login", "secondary"]]],
-      limpieza: ["Fonction", "Nettoyage sur", "Le nettoyage se concentre sur les elements controles par Zamazen Aegis et evite de supprimer d'autres donnees sans permission reelle.", [["Cache et preferences", "Actions claires pour donnees locales de l'app."], ["Guide Android", "Quand Android limite l'action, l'app guide vers les Reglages."], ["Pas de destruction opaque", "Chaque suppression doit etre comprehensible et reversible quand possible."]], [["Voir fonctions", "#/funciones", "primary"], ["Gerer donnees", "#/gestionar-datos", "secondary"]]],
-      historial: ["Fonction", "Historique", "L'historique aide a comprendre ce qui s'est passe, ce que l'utilisateur a decide et quels signaux ont ete detectes.", [["Memoire locale", "Evenements recents sans envoi inutile."], ["Contexte utile", "Explique appels, messages, liens et actions de protection."], ["Controle", "L'utilisateur peut supprimer les donnees depuis l'app quand applicable."]], [["Voir fonctions", "#/funciones", "primary"], ["Confidentialite", "#/privacidad", "secondary"]]],
-      "guardian-familiar": ["Fonction", "Gardien familial", "Mode sur pour personnes agees, familles ou utilisateurs moins experimentes sans controle parental cache.", [["Etat sur", "Active mode simple, avertissements importants et faible consommation."], ["Pas de permissions silencieuses", "Ne change pas les permissions Android en arriere-plan et ne lit pas les apps tierces."], ["Reversible", "L'utilisateur garde controle et explications claires."]], [["Voir fonctions", "#/funciones", "primary"], ["A propos", "#/sobre-zamazenaegis", "secondary"]]],
-      "ayuda-contacto": ["Aide", "Aide et contact", "Support, confidentialite, comptes et erreurs critiques ont une entree claire sans parcourir tout le site.", [["Email officiel", "zamazenaegissupport@gmail.com pour support, confidentialite et comptes."], ["FAQ", "Reponses sur batterie, connectivite, permissions et securite."], ["Pas de secrets", "N'envoyez jamais mots de passe, codes 2FA ni donnees bancaires completes par email."]], [["Envoyer email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["Supprimer compte", "#/eliminar-cuenta", "secondary"]]]
+      confianza: ["Confiance", "Centre de confiance et de confidentialité", "Une vue claire pour comprendre ce que Zamazen protège, quelles permissions il peut demander, quelles données il évite et les limites d'Android.", [["Permissions expliquées", "Rien de sensible sans utilité, consentement et alternative manuelle."], ["Données minimales", "Aucun secret, e-mail ou signalement publié sans assainissement."], ["Zéro fumée", "Pas de promesse de protection absolue ni de détection parfaite."]], [["Gérer les données", "#/datos", "primary"], ["Voir les permissions", "#/permisos", "secondary"]]],
+      novedades: ["Nouveautés", "Historique du Gardien", "Changements récents du site, avancées de l'app et prochaines étapes pour montrer que le projet évolue avec ordre.", [["Site en arbre", "Les routes internes remplacent la page d'accueil interminable."], ["Profil vivant", "Compte, avatar, niveau et synchronisation préparés."], ["Communauté sûre", "Les idées et remerciements sont revus manuellement avant publication."]], [["État du projet", "#/estado-proyecto", "primary"], ["Idées", "#/ideas", "secondary"]]],
+      ideas: ["Idées", "Idées, améliorations et remerciements", "Recevez des propositions utiles en sécurité : pas de fichiers, pas de scripts, pas de publication automatique et toujours une revue manuelle.", [["Formulaire contrôlé", "Texte limité, validé et assaini."], ["Modération", "Rien n'apparaît dans les remerciements sans permission ni revue."], ["Récompenses", "Les codes et reconnaissances ne sont jamais automatiques."]], [["Envoyer une proposition", "#/ideas", "primary"], ["État du projet", "#/estado-proyecto", "secondary"]]],
+      "salon-guardianes": ["Communauté", "Salon des Gardiens", "Reconnaissance publique préparée pour celles et ceux qui aident vraiment : points selon l'impact réel, couronnes, badges et remerciements seulement avec permission et revue manuelle.", [["Points", "Ils ne se gagnent pas au volume ; ils sont attribués pour leur utilité réelle."], ["Couronnes", "Ragnarok, Valhalla et Core honorifique valorisent les contributions approuvées."], ["Confidentialité", "Alias, anonymat ou absence : l'utilisateur décide toujours."]], [["Envoyer une idée", "#/ideas", "primary"], ["Panneau privé", "#/admin", "secondary"]]],
+      admin: ["Privé", "Panneau administrateur protégé", "Vue verrouillée : la revue des idées et des récompenses ne vit pas dans le frontend public.", [["Aucune donnée publique", "Pas de liste administrative ni de clés dans le HTML."], ["Backend requis", "Le vrai panneau exigera une connexion, des rôles, des règles et un audit."], ["Revue manuelle", "Les contributions ne sont publiées qu'après approbation."]], [["Idées", "#/ideas", "primary"], ["Accueil", "#/inicio", "secondary"]]],
+      legal: ["Légal", "Centre légal", "Entrée claire vers la confidentialité, les cookies, la politique produit, les données, la suppression du compte et la licence, sans mélange avec l'accueil.", [["Confidentialité", "Quelles données sont utilisées et lesquelles ne sont pas publiées.", "#/privacidad"], ["Cookies", "Préférences nécessaires et facultatives.", "#/politica-cookies"], ["Licence", "Usage correct de Core, Valhalla et Ragnarok.", "#/contrato-licencia"]], [["Confidentialité", "#/privacidad", "primary"], ["Contact", "#/contacto", "secondary"]]],
+      nube: ["Compte", "Cloud et synchronisation", "Vue préparée pour les données synchronisées quand l'app mobile et le backend seront connectés. Aujourd'hui, elle montre des états honnêtes, pas des données inventées.", [["App mobile", "Pas encore liée à ce site public."], ["Bunker Cloud", "N'acceptera que des paquets chiffrés par l'utilisateur lorsqu'il sera actif."], ["Contrôle", "Exporter, supprimer ou dissocier exigera une authentification réelle."]], [["Profil", "#/perfil", "primary"], ["Données", "#/datos", "secondary"]]],
+      demo: ["Démo", "Voir Zamazen en action", "Démonstration visuelle de situations courantes : appel suspect, SMS de phishing, lien douteux, permission délicate et signalement au Réseau Neo.", [["Neo explique", "Transforme les signaux de risque en étapes compréhensibles."], ["Sans fausses promesses", "La démonstration montre l'aide et la décision, pas de magie."], ["Mode sûr", "S'il manque une permission ou une connexion, l'expérience le montre clairement."]], [["Créer un compte", "#/crear-cuenta", "primary"], ["Voir les fonctions", "#/funciones", "secondary"]]],
+      neo: ["Neo", "Neo, le Gardien original", "Vue dédiée à Neo comme guide protecteur : il explique les risques, réduit la peur et aide à décider sans cacher les limites.", [["Clarté", "Traduit les signaux techniques en langage humain."], ["Confidentialité", "Il n'a pas besoin d'exposer des secrets pour guider."], ["Accompagnement", "Son rôle est d'aider, pas de remplacer le jugement de l'utilisateur."]], [["Réseau Neo", "#/red-neo", "primary"], ["À propos", "#/sobre-zamazenaegis", "secondary"]]],
+      runas: ["Identité", "Runes du Gardien", "Vue de l'identité runique officielle de Zamazen Aegis : FEHU, URUZ, THURISAZ, ANSUZ, RAIDO, KENAZ, ALGIZ et OTHALA.", [["ALGIZ", "Protection et bouclier."], ["ANSUZ", "Neo, vérité et explication."], ["OTHALA", "Bunker, foyer numérique et données sensibles."]], [["À propos", "#/sobre-zamazenaegis", "primary"], ["Équipe", "#/equipo", "secondary"]]],
+      "no-encontrado": ["404", "Neo n'a pas trouvé cette page", "La route n'existe pas ou a été déplacée. Vous pouvez revenir à l'accueil, ouvrir la carte des fonctions ou contacter le support.", [["Retour", "L'accueil et les routes principales restent disponibles."], ["Carte", "Les fonctions, le compte, la sécurité et les plans ont leurs propres vues."], ["Signaler", "Si vous venez d'un lien externe, vous pouvez le signaler."]], [["Retour à l'accueil", "#/inicio", "primary"], ["Carte des fonctions", "#/funciones", "secondary"]]],
+      core: ["Core", "Core : protection essentielle", "La base de Zamazen Aegis protège sans pénaliser les personnes qui commencent gratuitement.", [["Scanner manuel", "Signalements d'appels indésirables, de SMS suspects et de phishing basique."], ["Historique simple", "Mémoire locale suffisante pour comprendre l'activité récente."], ["Réseau Neo assaini", "Envoi en ligne uniquement avec consentement et données minimales."]], [["Voir les tarifs", "#/precios", "primary"], ["Créer un compte", "#/crear-cuenta", "secondary"]]],
+      valhalla: ["Valhalla", "Valhalla : protection sociale et numérique", "Valhalla renforce le contexte, les permissions, la confidentialité et le Bunker sans vendre de magie.", [["Contexte élargi", "Plus de signaux pour les liens, les applications et les permissions excessives."], ["Bunker amélioré", "Plus de contrôle pour les données sensibles et le mode bancaire lorsque cela s'applique."], ["Réseau Neo avancé", "Tendances en ligne et explications plus utiles."]], [["Comparer les éditions", "#/precios", "primary"], ["Voir le Bunker", "#/bunker", "secondary"]]],
+      ragnarok: ["Ragnarok", "Ragnarok : expérience complète", "Ragnarok regroupe les couches les plus avancées quand Android, les permissions et le consentement le permettent.", [["Identité et banque", "Guidage pour les identifiants, la banque et les risques numériques complexes."], ["Bunker total", "Protection renforcée des secrets et des données très sensibles."], ["Réseau Neo prioritaire", "Plus de contexte, un historique approfondi et une résolution guidée sans faux correctifs."]], [["Comparer les éditions", "#/precios", "primary"], ["Voir le Réseau Neo", "#/red-neo", "secondary"]]],
+      escaner: ["Fonction", "Scanner de menaces", "Analyse claire des appels, SMS, liens et signaux suspects sans promettre une détection parfaite.", [["Appels", "Aide à identifier le spam ou la fraude avec des avertissements compréhensibles."], ["SMS et liens", "Reconnaît l'urgence artificielle, l'usurpation et les domaines suspects."], ["Explication Neo", "Traduit le risque en étapes simples."]], [["Voir les fonctions", "#/funciones", "primary"], ["Activer le bouclier", "#/descargar", "secondary"]]],
+      bunker: ["Fonction", "Bunker", "Branche dédiée aux secrets : identifiants, données bancaires et informations sensibles avec la confidentialité par défaut.", [["Chiffrement local", "Les données sensibles sont protégées avant toute synchronisation."], ["Enveloppe cloud chiffrée", "Le cloud n'accepte que des paquets chiffrés par l'utilisateur."], ["Limites claires", "Pas de mots de passe par e-mail ni de promesses impossibles."]], [["Créer un compte", "#/crear-cuenta", "primary"], ["Voir Valhalla", "#/valhalla", "secondary"]]],
+      "red-neo": ["Fonction", "Réseau Neo", "Le Réseau Neo permet qu'un signalement aide d'autres personnes sans publier de secrets ni de conversations complètes.", [["Consentement", "L'utilisateur décide quand partager des indicateurs."], ["Assainissement", "Les jetons, codes, e-mails sensibles, requêtes et données privées sont retirés."], ["Mode local", "Si le réseau échoue, la file sûre conserve son utilité sans inventer l'état en ligne."]], [["Voir les fonctions", "#/funciones", "primary"], ["Voir le compte", "#/login", "secondary"]]],
+      limpieza: ["Fonction", "Nettoyage sûr", "Le nettoyage se concentre sur les éléments contrôlés par Zamazen Aegis et évite de supprimer d'autres données sans permission réelle.", [["Cache et préférences", "Actions claires pour les données locales de l'app."], ["Guide Android", "Quand Android limite l'action, l'app guide vers les Réglages."], ["Pas de destruction opaque", "Chaque suppression doit être compréhensible et réversible quand c'est possible."]], [["Voir les fonctions", "#/funciones", "primary"], ["Gérer les données", "#/gestionar-datos", "secondary"]]],
+      historial: ["Fonction", "Historique", "L'historique aide à comprendre ce qui s'est passé, ce que l'utilisateur a décidé et quels signaux ont été détectés.", [["Mémoire locale", "Événements récents sans envoi inutile."], ["Contexte utile", "Explique les appels, les messages, les liens et les actions de protection."], ["Contrôle", "L'utilisateur peut supprimer les données depuis l'app lorsque c'est possible."]], [["Voir les fonctions", "#/funciones", "primary"], ["Confidentialité", "#/privacidad", "secondary"]]],
+      "guardian-familiar": ["Fonction", "Gardien familial", "Mode sûr pour les personnes âgées, les familles ou les utilisateurs moins expérimentés, sans contrôle parental caché.", [["État sûr", "Active le mode simple, les avertissements importants et une faible consommation."], ["Pas de permissions silencieuses", "Ne modifie pas les permissions Android en arrière-plan et ne lit pas les applications tierces."], ["Réversible", "L'utilisateur garde le contrôle et des explications claires."]], [["Voir les fonctions", "#/funciones", "primary"], ["À propos", "#/sobre-zamazenaegis", "secondary"]]],
+      "ayuda-contacto": ["Aide", "Aide et contact", "Le support, la confidentialité, les comptes et les erreurs critiques ont une entrée claire sans parcourir tout le site.", [["E-mail officiel", "zamazenaegissupport@gmail.com pour le support, la confidentialité et les comptes."], ["FAQ", "Réponses sur la batterie, la connectivité, les permissions et la sécurité."], ["Pas de secrets", "N'envoyez jamais de mots de passe, de codes 2FA ni de données bancaires complètes par e-mail."]], [["Envoyer un e-mail", "mailto:zamazenaegissupport@gmail.com", "primary"], ["Supprimer le compte", "#/eliminar-cuenta", "secondary"]]]
     };
     ROUTE_DETAIL_CONTENT.pt = {
       funciones: ["Funções", "Funções de Zamazen Aegis", "Cada função importante tem sua própria tela para explorar sem percorrer uma página interminável.", [["Scanner", "Revê chamadas, SMS, links e sinais de golpe com explicações claras.", "#/escaner"], ["Bunker", "Proteção de segredos, dados bancários e informações sensíveis com limites honestos.", "#/bunker"], ["Red Neo", "Relatos comunitários saneados, consentimento e modo local se a rede falhar.", "#/red-neo"], ["Limpeza", "Ações seguras para cache, preferências e dados controlados por Zamazen Aegis.", "#/limpieza"], ["Histórico", "Memória local para entender eventos recentes sem envio desnecessário.", "#/historial"], ["Guardião familiar", "Modo claro para pessoas idosas ou com menos experiência digital.", "#/guardian-familiar"]], [["Voltar ao início", "#/inicio", "secondary"], ["Criar conta", "#/crear-cuenta", "primary"]]],
@@ -13158,7 +13308,7 @@
       perfil: ["Conta", "Perfil", "Tela dedicada à identidade visível, nível, estado da conta e links de ajustes sem misturar toda a web.", [["Identidade", "Nome e email são tratados como dados sensíveis e mostrados apenas quando existem na sessão local."], ["Nível", "Core, Valhalla ou Ragnarok são explicados como estado do produto, não como promessa absoluta."], ["Controle", "O usuário mantém rotas claras para editar ajustes, rever privacidade ou eliminar a conta."]], [["Ajustes da conta", "#/ajustes-cuenta", "primary"], ["Voltar à conta", "#/cuenta", "secondary"]]],
       "ajustes-cuenta": ["Conta", "Ajustes da conta", "Centro de controle para privacidade, dados e segurança da conta com rotas separadas para cada decisão sensível.", [["Privacidade", "Explica o que é coletado, evitado e fica sob controle do usuário.", "#/privacidad"], ["Dados", "Gerenciar dados exportáveis, locais e relacionados ao suporte.", "#/datos"], ["Eliminar conta", "Rota específica para solicitar eliminação de conta e dados.", "#/eliminar-cuenta"]], [["Gerenciar dados", "#/datos", "primary"], ["Voltar à conta", "#/cuenta", "secondary"]]],
       seguridad: ["Segurança", "Segurança e controle", "Tela dedicada a permissões, privacidade, dados e eliminação. O usuário revisa cada área sem saltos ou blocos misturados.", [["Permissões", "Quais permissões Zamazen Aegis pode precisar e por que Android pode limitá-las.", "#/permisos"], ["Privacidade", "Dados mínimos, consentimento claro e transparência.", "#/privacidad"], ["Dados", "Gestão e eliminação de informações ligadas à conta, suporte e dispositivo.", "#/datos"], ["Eliminar conta", "Pedido de eliminação com explicação de prazos e limites legais.", "#/eliminar-cuenta"]], [["Ver permissões", "#/permisos", "primary"], ["Sobre o projeto", "#/sobre-zamazenaegis", "secondary"]]],
-      permisos: ["Segurança", "Permissões", "Zamazen Aegis deve explicar cada permissão antes de pedir e manter o modo PlaySafe quando Android ou Google Play limitam automação sensível.", [["PlaySafe", "Sem READ_CALL_LOG, RECEIVE_SMS, READ_PHONE_STATE nem leitura silenciosa de terceiros quando não se aplica."], ["Consentimento", "Permissões sensíveis só são pedidas quando trazem valor real e o usuário entende o motivo."], ["Modo manual", "Se uma integração não puder ser usada com segurança, a app guia o usuário em vez de simular proteção."]], [["Voltar à segurança", "#/seguridad", "primary"], ["Privacidade", "#/privacidad", "secondary"]]],
+      permisos: ["Segurança", "Permissões", "Zamazen Aegis deve explicar cada permissão antes de pedir e manter o modo PlaySafe quando Android ou Google Play limitam automação sensível.", [["PlaySafe", "Sem acesso ao registo de chamadas, à receção de SMS nem ao estado do telefone quando não se aplica."], ["Consentimento", "Permissões sensíveis só são pedidas quando trazem valor real e o usuário entende o motivo."], ["Modo manual", "Se uma integração não puder ser usada com segurança, a app guia o usuário em vez de simular proteção."]], [["Voltar à segurança", "#/seguridad", "primary"], ["Privacidade", "#/privacidad", "secondary"]]],
       privacidad: ["Privacidade", "Privacidade por padrão", "Todo dado é sensível. Zamazen Aegis deve pedir o mínimo, armazenar o mínimo e explicar cada uso.", [["Acesso mínimo", "Não lê conversas completas nem dados de terceiros sem base técnica, legal e consentimento."], ["Red Neo", "Os relatos são saneados antes de qualquer envio online."], ["Controle", "O usuário pode revisar dados, cookies e eliminação em rotas próprias."]], [["Gerenciar dados", "#/gestionar-datos", "primary"], ["Eliminar conta", "#/eliminar-cuenta", "secondary"]]],
       "gestionar-datos": ["Dados", "Gerenciar dados", "Tela dedicada a dados de conta, suporte, preferências locais, histórico e itens do Bunker quando aplicável.", [["Dados locais", "Preferências e histórico local podem ser limpos pela app ou desinstalação."], ["Dados online", "Só devem ser enviados dados necessários e saneados com consentimento."], ["Suporte", "Não envie senhas, códigos 2FA nem dados bancários completos por email."]], [["Privacidade", "#/privacidad", "primary"], ["Eliminar conta", "#/eliminar-cuenta", "secondary"]]],
       "eliminar-cuenta": ["Conta", "Eliminar conta e dados", "Rota separada para solicitar eliminação da conta Zamazen e dados associados sem esconder dentro de uma landing.", [["Pedido", "O usuário pode escrever ao suporte oficial para iniciar eliminação e verificação."], ["Prazos", "O processo normalmente termina em prazo razoável após verificar o pedido."], ["Limites", "Informação mínima pode ser mantida por obrigações legais, segurança ou prevenção de fraude."]], [["Enviar email", "mailto:zamazenaegissupport@gmail.com", "primary"], ["Voltar à privacidade", "#/privacidad", "secondary"]]],
@@ -13308,7 +13458,7 @@
 
       document.body.classList.add("is-language-switching");
       document.documentElement.lang = selectedLanguage;
-      if (openGraphLocale) openGraphLocale.content = openGraphLocales[selectedLanguage] || openGraphLocales.es;
+      if (openGraphLocale) openGraphLocale.content = openGraphLocales[selectedLanguage] || "";
 
       document.querySelectorAll("[data-i18n]").forEach((element) => {
         const key = element.dataset.i18n;
@@ -13483,7 +13633,7 @@
     }
 
     function translate(key, language = getCurrentLanguage()) {
-      return getTranslationValue(language, key) || getTranslationValue("es", key) || "";
+      return getTranslationValue(language, key) || "";
     }
 
     function setTranslatedText(element, key) {
@@ -13530,6 +13680,18 @@
     heroVisual?.addEventListener("pointerleave", resetHeroPointer, { passive: true });
     heroVisual?.addEventListener("pointercancel", resetHeroPointer, { passive: true });
     window.addEventListener("resize", resetHeroPointer, { passive: true });
+
+    function retriggerHeroAwakening() {
+      if (
+        !heroAwakeningScan
+        || document.body.classList.contains("motion-softened")
+        || window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) return;
+
+      heroAwakeningScan.classList.remove("is-active");
+      void heroAwakeningScan.offsetWidth;
+      heroAwakeningScan.classList.add("is-active");
+    }
 
     let arrivalStepIndex = -1;
 
@@ -13610,7 +13772,7 @@
     function renderRouteTree(routeName) {
       const treeKey = ROUTE_DEFINITIONS[routeName]?.tree;
       const language = getCurrentLanguage();
-      const content = treeKey && (ROUTE_TREE_CONTENT[language]?.[treeKey] || ROUTE_TREE_CONTENT.es[treeKey]);
+      const content = treeKey && ROUTE_TREE_CONTENT[language]?.[treeKey];
 
       if (!content || !routeTreeSection) return;
 
@@ -14028,13 +14190,13 @@
         return;
       }
       setRouteDetailVariant("");
-      const [, , , cards, actions] = content;
-      routeDetailBadge.textContent = "Estado";
-      routeDetailTitle.textContent = "Zamazen Aegis esta vivo y en fase final";
-      routeDetailBody.textContent = "La web esta activa como centro publico. La app 1.6 sigue en preparacion y publicacion responsable antes de prometer disponibilidad completa.";
+      const [badge, title, body, cards, actions] = content;
+      routeDetailBadge.textContent = badge;
+      routeDetailTitle.textContent = title;
+      routeDetailBody.textContent = body;
       routeDetailGrid.className = "experience-dashboard";
       routeDetailGrid.replaceChildren(
-        ...cards.map(([cardTitle, cardBody]) => createStatusCard(cardTitle, cardBody, "Estado"))
+        ...cards.map(([cardTitle, cardBody]) => createStatusCard(cardTitle, cardBody, badge))
       );
       routeDetailActions.replaceChildren(
         ...actions.map(([label, href, variant]) => createProfileAction(label, href, variant))
@@ -14049,15 +14211,15 @@
       setRouteDetailVariant("");
       routeDetailBadge.textContent = "Confianza";
       routeDetailTitle.textContent = "Centro de confianza y privacidad";
-      routeDetailBody.textContent = "La web explica lo importante sin revelar reglas internas sensibles: que protege, que permisos puede necesitar, que datos evita y que nunca promete.";
+      routeDetailBody.textContent = "La web explica lo importante sin revelar reglas internas sensibles: qué protege, qué permisos puede necesitar, qué datos evita y qué nunca promete.";
       routeDetailGrid.className = "experience-dashboard";
       routeDetailGrid.replaceChildren(
-        createStatusCard("Que protege", "Llamadas, SMS, enlaces, decisiones sensibles, identidad digital, Bunker y reportes saneados.", "Realista"),
+        createStatusCard("Qué protege", "Llamadas, SMS, enlaces, decisiones sensibles, identidad digital, Bunker y reportes saneados.", "Realista"),
         createStatusCard("Permisos", "Se explican antes de pedirlos y se degradan a modo manual cuando Android o Play Store lo limitan.", "Consentimiento"),
-        createStatusCard("Datos", "Minimo necesario, sin publicar correos, tokens, codigos, contrasenas ni datos bancarios completos.", "Privacidad"),
+        createStatusCard("Datos", "Mínimo necesario, sin publicar correos, tokens, códigos, contraseñas ni datos bancarios completos.", "Privacidad"),
         createStatusCard("Limites Android", "Ninguna app puede eliminar todo riesgo ni controlar todo el sistema sin permisos.", "Cero humo"),
-        createStatusCard("Borrado", "Datos, privacidad y eliminacion de cuenta viven en rutas propias.", "Control"),
-        createStatusCard("Seguridad web", "HTTPS, rutas claras, formularios limitados y nada de claves privadas en el cliente.", "Base publica")
+        createStatusCard("Borrado", "Datos, privacidad y eliminación de cuenta viven en rutas propias.", "Control"),
+        createStatusCard("Seguridad web", "HTTPS, rutas claras, formularios limitados y nada de claves privadas en el cliente.", "Base pública")
       );
       routeDetailActions.replaceChildren(
         createProfileAction("Ver permisos", "#/permisos", "primary"),
@@ -14079,10 +14241,10 @@
       timeline.append(createElement("h3", "", "Avances recientes"));
       timeline.append(createSecureNoteList([
         ["Web por pantallas internas", "Inicio, cuenta, seguridad, precios, equipo, FAQ y contacto se renderizan como rutas independientes."],
-        ["Perfil premium", "Avatar, foto local, nivel, estado de proteccion, sincronizacion y accesos de cuenta."],
-        ["Cuenta Zamazen + Google", "Zamazen se explica como experiencia completa; Google como acceso comodo sin llamarlo inseguro."],
-        ["Comunidad segura", "Ideas y agradecimientos preparados con validacion, no publicacion automatica y revision manual."],
-        ["Publicacion responsable", "No se declara online listo cuando DNS/backend o comprobaciones externas no lo demuestran."]
+        ["Perfil premium", "Avatar, foto local, nivel, estado de protección, sincronización y accesos de cuenta."],
+        ["Cuenta Zamazen + Google", "Zamazen se explica como experiencia completa; Google como acceso cómodo sin llamarlo inseguro."],
+        ["Comunidad segura", "Ideas y agradecimientos preparados con validación, no publicación automática y revisión manual."],
+        ["Publicación responsable", "No se declara online listo cuando DNS/backend o comprobaciones externas no lo demuestran."]
       ]));
       routeDetailGrid.className = "profile-dashboard";
       routeDetailGrid.replaceChildren(timeline);
@@ -14099,17 +14261,17 @@
       }
       setRouteDetailVariant("");
       routeDetailBadge.textContent = "Nube";
-      routeDetailTitle.textContent = "Nube y sincronizacion";
-      routeDetailBody.textContent = "Vista preparada para el futuro Centro del Guardian: hoy muestra estados honestos porque la web publica no debe inventar datos sincronizados.";
+      routeDetailTitle.textContent = "Nube y sincronización";
+      routeDetailBody.textContent = "Vista preparada para el futuro Centro del Guardián: hoy muestra estados honestos porque la web pública no debe inventar datos sincronizados.";
       const account = normalizeAccountPreview(readAccountPreview());
       routeDetailGrid.className = "experience-dashboard";
       routeDetailGrid.replaceChildren(
-        createStatusCard("Cuenta", account.provider === "zamazen-online-account" ? "Cuenta online detectada en esta vista." : "Vista local sin sesion online real.", account.level),
-        createStatusCard("App movil", account.deviceConnected ? account.deviceName : "App movil todavia no conectada.", account.devicePlatform),
-        createStatusCard("Ultima sincronizacion", account.lastSyncAt ? formatProfileDate(account.lastSyncAt) : "Sin sincronizacion real todavia.", "Pendiente"),
-        createStatusCard("Bunker Cloud", "Se activara solo con cifrado por usuario y reglas por cuenta.", "Protegido"),
-        createStatusCard("Exportar/borrar", "Requiere autenticacion real, confirmacion y backend con reglas de usuario.", "No simulado"),
-        createStatusCard("Red Neo", "Reportes online saneados y consentidos cuando la app este enlazada.", "Preparado")
+        createStatusCard("Cuenta", account.provider === "zamazen-online-account" ? "Cuenta online detectada en esta vista." : "Vista local sin sesión online real.", account.level),
+        createStatusCard("App móvil", account.deviceConnected ? account.deviceName : "App móvil todavía no conectada.", account.devicePlatform),
+        createStatusCard("Última sincronización", account.lastSyncAt ? formatProfileDate(account.lastSyncAt) : "Sin sincronización real todavía.", "Pendiente"),
+        createStatusCard("Bunker Cloud", "Se activará solo con cifrado por usuario y reglas por cuenta.", "Protegido"),
+        createStatusCard("Exportar/borrar", "Requiere autenticación real, confirmación y backend con reglas de usuario.", "No simulado"),
+        createStatusCard("Red Neo", "Reportes online saneados y consentidos cuando la app esté enlazada.", "Preparado")
       );
       routeDetailActions.replaceChildren(
         createProfileAction("Abrir perfil", "#/perfil", "primary"),
@@ -14133,23 +14295,23 @@
       setRouteDetailVariant("");
       routeDetailBadge.textContent = "Privado";
       routeDetailTitle.textContent = "Panel del Creador protegido";
-      routeDetailBody.textContent = "Esta ruta no expone datos administrativos si no existe una sesion real con rol creator o admin.";
+      routeDetailBody.textContent = "Esta ruta no expone datos administrativos si no existe una sesión real con rol creator o admin.";
       const locked = createElement("section", "locked-admin-card");
       const reason = account.provider === "zamazen-online-account"
-        ? "La sesion online actual no trae permiso creator/admin desde el backend o el token de esta pestana no esta disponible."
-        : "Inicia sesion con una cuenta Zamazen real autorizada para ver la bandeja privada.";
+        ? "La sesión online actual no trae permiso creator/admin desde el backend o el token de esta pestaña no está disponible."
+        : "Inicia sesión con una cuenta Zamazen real autorizada para ver la bandeja privada.";
       locked.append(
         createElement("span", "experience-status", "Acceso bloqueado"),
-        createElement("h3", "", "Nada sensible vive en el frontend publico"),
+        createElement("h3", "", "Nada sensible vive en el frontend público"),
         createElement("p", "", reason)
       );
       routeDetailGrid.className = "profile-dashboard";
       routeDetailGrid.replaceChildren(locked, createSecureNoteList([
-        ["Rol creator/admin", "Solo una cuenta con rol interno creator o admin debe ver el acceso privado. Los usuarios normales no deben ver botones, rutas ni menus administrativos."],
-        ["Correo operativo", "Las notificaciones y soporte deben usar zamazenaegissupport@gmail.com como canal publico, sin exponer credenciales en el frontend."],
-        ["Privacidad interna", "Ser creador no permite ver Bunker, contrasenas, archivos privados, conversaciones privadas ni cuentas ajenas completas."],
-        ["Revision manual", "Ideas, tickets, puntos, insignias, recompensas y Salon de Guardianes deben quedar pendientes hasta aprobacion del creador."],
-        ["Recompensas controladas", "Codigos temporales Valhalla/Ragnarok solo con caducidad, un solo uso, trazabilidad y confirmacion antes de acciones criticas."],
+        ["Rol creator/admin", "Solo una cuenta con rol interno creator o admin debe ver el acceso privado. Los usuarios normales no deben ver botones, rutas ni menús administrativos."],
+        ["Correo operativo", "Las notificaciones y soporte deben usar zamazenaegissupport@gmail.com como canal público, sin exponer credenciales en el frontend."],
+        ["Privacidad interna", "Ser creador no permite ver Bunker, contraseñas, archivos privados, conversaciones privadas ni cuentas ajenas completas."],
+        ["Revisión manual", "Ideas, tickets, puntos, insignias, recompensas y Salón de Guardianes deben quedar pendientes hasta aprobación del creador."],
+        ["Recompensas controladas", "Códigos temporales Valhalla/Ragnarok solo con caducidad, un solo uso, trazabilidad y confirmación antes de acciones críticas."],
         ["Base de datos futura", "profiles.role debe permitir user, admin y creator; support_tickets y contributions deben aplicar reglas estrictas por rol."]
       ]));
       routeDetailActions.replaceChildren(
@@ -14223,7 +14385,7 @@
           responseInput.value = "";
           onSaved();
         } else {
-          statusText.textContent = result.reason === "forbidden"
+        statusText.textContent = result.reason === "forbidden"
             ? "El backend no reconoce permiso creator/admin para esta sesión."
             : "No se pudo guardar ahora. No se simula ningún cambio.";
         }
@@ -14261,7 +14423,7 @@
       inbox.append(
         createElement("span", "experience-status", "Tickets privados"),
         createElement("h3", "", "Soporte recibido"),
-        createElement("p", "", "No aparece en el menu publico y no permite navegar por cuentas privadas. Solo revisa lo que el usuario envio al soporte."),
+        createElement("p", "", "No aparece en el menú público y no permite navegar por cuentas privadas. Solo revisa lo que el usuario envió al soporte."),
         refreshButton,
         statusText,
         ticketList
@@ -14280,9 +14442,9 @@
         communityList
       );
       const privacyRules = createSecureNoteList([
-        ["Minimo necesario", "El panel no muestra contrasenas, Bunker, archivos privados, conversaciones no enviadas al soporte ni cuentas completas."],
-        ["Respuesta responsable", "No pedir secretos, codigos 2FA, datos bancarios ni documentos sensibles."],
-        ["Nada automatico", "Marcar spam, cerrar o responder requiere accion manual y queda en el backend."],
+        ["Mínimo necesario", "El panel no muestra contraseñas, Bunker, archivos privados, conversaciones no enviadas al soporte ni cuentas completas."],
+        ["Respuesta responsable", "No pedir secretos, códigos 2FA, datos bancarios ni documentos sensibles."],
+        ["Nada automático", "Marcar spam, cerrar o responder requiere acción manual y queda en el backend."],
         ["Fallo cerrado", "Si el token caduca, la API falla o el rol no coincide, no se muestra bandeja ni se simulan cambios."]
       ]);
 
@@ -14307,8 +14469,8 @@
           ticketList.replaceChildren(...result.tickets.map((ticket) => createCreatorTicketCard(ticket, loadTickets)));
         } else {
           statusText.textContent = result.reason === "forbidden"
-            ? "El backend no reconoce rol creator/admin para esta sesion."
-            : "La bandeja privada no esta disponible ahora. No se muestran datos ni se simula conexion.";
+            ? "El backend no reconoce rol creator/admin para esta sesión."
+            : "La bandeja privada no está disponible ahora. No se muestran datos ni se simula conexión.";
         }
         refreshButton.disabled = false;
         refreshButton.removeAttribute("aria-disabled");
@@ -14406,7 +14568,7 @@
       }
       setRouteDetailVariant("");
       routeDetailBadge.textContent = "404";
-      routeDetailTitle.textContent = "Neo no ha encontrado esta camara";
+      routeDetailTitle.textContent = "Neo no ha encontrado esta cámara";
       routeDetailBody.textContent = "La ruta no existe o se ha movido. El arbol principal sigue disponible.";
       routeDetailGrid.className = "experience-dashboard";
       routeDetailGrid.replaceChildren(
@@ -14428,13 +14590,13 @@
       }
       setRouteDetailVariant("");
       routeDetailBadge.textContent = "Neo";
-      routeDetailTitle.textContent = "Neo, el Guardian original";
-      routeDetailBody.textContent = "Neo representa la parte humana del escudo: explicar, acompanar y reducir confusion sin convertir la seguridad en miedo.";
+      routeDetailTitle.textContent = "Neo, el Guardián original";
+      routeDetailBody.textContent = "Neo representa la parte humana del escudo: explicar, acompañar y reducir confusión sin convertir la seguridad en miedo.";
       routeDetailGrid.className = "experience-dashboard";
       routeDetailGrid.replaceChildren(
-        createStatusCard("Explica", "Traduce senales tecnicas a decisiones sencillas.", "ANSUZ"),
+        createStatusCard("Explica", "Traduce señales técnicas a decisiones sencillas.", "ANSUZ"),
         createStatusCard("Protege", "Avisa con contexto y limites claros.", "ALGIZ"),
-        createStatusCard("Acompana", "Ayuda a usuarios reales, mayores o vulnerables sin tratarlos como expertos.", "Confianza")
+        createStatusCard("Acompaña", "Ayuda a usuarios reales, mayores o vulnerables sin tratarlos como expertos.", "Confianza")
       );
       routeDetailActions.replaceChildren(
         createProfileAction("Ver Red Neo", "#/red-neo", "primary"),
@@ -14449,14 +14611,14 @@
       }
       setRouteDetailVariant("");
       routeDetailBadge.textContent = "Runas";
-      routeDetailTitle.textContent = "Runas oficiales del Guardian";
-      routeDetailBody.textContent = "La identidad visual usa runas canonicas con sentido, no decoracion aleatoria.";
+      routeDetailTitle.textContent = "Runas oficiales del Guardián";
+      routeDetailBody.textContent = "La identidad visual usa runas canónicas con sentido, no decoración aleatoria.";
       routeDetailGrid.className = "experience-dashboard";
       routeDetailGrid.replaceChildren(
-        createStatusCard("FEHU / URUZ", "Valor, energia y arranque del ecosistema.", "Base"),
-        createStatusCard("THURISAZ / ANSUZ", "Defensa frente a amenazas y verdad explicada por Neo.", "Proteccion"),
-        createStatusCard("RAIDO / KENAZ", "Camino guiado y claridad ante decisiones sensibles.", "Guia"),
-        createStatusCard("ALGIZ / OTHALA", "Escudo, hogar digital, Bunker y confianza.", "Guardian")
+        createStatusCard("FEHU / URUZ", "Valor, energía y arranque del ecosistema.", "Base"),
+        createStatusCard("THURISAZ / ANSUZ", "Defensa frente a amenazas y verdad explicada por Neo.", "Protección"),
+        createStatusCard("RAIDO / KENAZ", "Camino guiado y claridad ante decisiones sensibles.", "Guía"),
+        createStatusCard("ALGIZ / OTHALA", "Escudo, hogar digital, Bunker y confianza.", "Guardián")
       );
       routeDetailActions.replaceChildren(
         createProfileAction("Sobre el proyecto", "#/sobre-zamazenaegis", "primary"),
@@ -14500,7 +14662,7 @@
       emailInput.maxLength = MAX_EMAIL_LENGTH;
       emailInput.autocomplete = "email";
       const typeSelect = createElement("select", "form-input");
-      const typeOptions = COMMUNITY_TYPE_LABELS[getCurrentLanguage()] || COMMUNITY_TYPE_LABELS.es;
+      const typeOptions = COMMUNITY_TYPE_LABELS[getCurrentLanguage()] || [];
       typeOptions.forEach(([value, label]) => {
         const option = createElement("option", "", label);
         option.value = value;
@@ -14559,7 +14721,7 @@
         if (length >= 80) points += 10;
         if (length >= 220) points += 10;
         if (/(paso|reproduc|ejemplo|impact|problema|soluci|accesib|privacidad|seguridad)/i.test(messageInput.value)) points += 15;
-        const communityCopy = COMMUNITY_COPY[getCurrentLanguage()] || COMMUNITY_COPY.es;
+        const communityCopy = COMMUNITY_COPY[getCurrentLanguage()];
         scorePreview.textContent = formatTemplate(communityCopy.preview, { points: Math.min(80, points) });
       };
       typeSelect.addEventListener("change", updateScorePreview);
@@ -14606,7 +14768,7 @@
           createdAt: new Date().toISOString()
         };
         const submit = async () => {
-          const communityCopy = COMMUNITY_COPY[getCurrentLanguage()] || COMMUNITY_COPY.es;
+          const communityCopy = COMMUNITY_COPY[getCurrentLanguage()];
           const onlineResult = await submitCommunityContributionOnline(draft);
           appendLocalDraft(STORAGE_CONTRIBUTIONS_KEY, { ...draft, onlineId: onlineResult.id || "", onlineStatus: onlineResult.ok ? "received" : "manual_fallback" });
           markSecureFormSubmitted("ideas");
@@ -14977,11 +15139,9 @@
     function renderRouteDetail(detailKey) {
       const language = getCurrentLanguage();
       const content = detailKey === "agradecimientos"
-        ? (ACKNOWLEDGEMENTS_CONTENT[language] || ACKNOWLEDGEMENTS_CONTENT.en)
+        ? ACKNOWLEDGEMENTS_CONTENT[language]
         : detailKey && (
           ROUTE_DETAIL_CONTENT[language]?.[detailKey]
-          || ROUTE_DETAIL_CONTENT.en?.[detailKey]
-          || ROUTE_DETAIL_CONTENT.es?.[detailKey]
         );
 
       if (!content || !routeDetailSection) return;
@@ -15105,17 +15265,13 @@
     function routeTitleFor(routeName, definition) {
       const language = getCurrentLanguage();
       if (definition.detail === "agradecimientos") {
-        return (ACKNOWLEDGEMENTS_CONTENT[language] || ACKNOWLEDGEMENTS_CONTENT.en)[1];
+        return ACKNOWLEDGEMENTS_CONTENT[language]?.[1] || "";
       }
-      const detail = definition.detail && (
-        ROUTE_DETAIL_CONTENT[language]?.[definition.detail]
-        || ROUTE_DETAIL_CONTENT.en?.[definition.detail]
-        || ROUTE_DETAIL_CONTENT.es?.[definition.detail]
-      );
+      const detail = definition.detail && ROUTE_DETAIL_CONTENT[language]?.[definition.detail];
       if (detail) return detail[1];
 
       if (definition.tree) {
-        return ROUTE_TREE_CONTENT[language]?.[definition.tree]?.title || ROUTE_TREE_CONTENT.es[definition.tree].title;
+        return ROUTE_TREE_CONTENT[language]?.[definition.tree]?.title || "";
       }
 
       if (definition.authMode === "register") return translate("account.formTitle");
@@ -15166,6 +15322,7 @@
       if (definition.detail) renderRouteDetail(definition.detail);
       if (definition.authMode) setAuthMode(definition.authMode);
       if (definition.room) setActiveRoom(definition.room, { updateRoute: false });
+      if (routeName === "inicio") retriggerHeroAwakening();
 
       updateRouteLinks(routeName);
       document.title = routeTitleFor(routeName, definition).replace(/\s+/g, " ").trim() + " | Zamazen Aegis";
@@ -15255,7 +15412,7 @@
     function hasCreatorPanelSession(account = normalizeAccountPreview(readAccountPreview())) {
       return account.provider === "zamazen-online-account"
         && Boolean(account.permissions?.creatorPanel)
-        && Boolean(readOnlineSessionToken());
+        && webSessionAuthenticated;
     }
 
     function writeAccountPreview(account) {
@@ -15268,24 +15425,64 @@
       return normalized;
     }
 
-    function writeOnlineSessionToken(token = "") {
-      const cleanToken = String(token || "").trim();
+    function setWebSessionAuthenticated(value) {
+      webSessionAuthenticated = Boolean(value);
+      updateUserPanelPreview();
+    }
+
+    function webSessionHeaders(extra = {}) {
+      return {
+        "X-Zamazen-Client": "web",
+        ...extra
+      };
+    }
+
+    async function hydrateWebSession() {
+      const account = readAccountPreview();
+      if (!account || account.provider !== "zamazen-online-account") {
+        setWebSessionAuthenticated(false);
+        return false;
+      }
+
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), ACCOUNT_API_TIMEOUT_MS);
       try {
-        if (cleanToken) {
-          sessionStorage.setItem(STORAGE_ACCOUNT_SESSION_TOKEN_KEY, cleanToken);
-        } else {
-          sessionStorage.removeItem(STORAGE_ACCOUNT_SESSION_TOKEN_KEY);
-        }
+        const response = await fetch(`${ZAMAZEN_API_BASE_URL}/api/accounts/me`, {
+          headers: webSessionHeaders({ "Accept": "application/json" }),
+          credentials: "include",
+          cache: "no-store",
+          signal: controller.signal
+        });
+        const payload = await response.json().catch(() => ({}));
+        setWebSessionAuthenticated(Boolean(response.ok && payload?.ok));
+        return webSessionAuthenticated;
       } catch (error) {
-        /* Session storage can be disabled by the browser; support falls back to manual email. */
+        setWebSessionAuthenticated(false);
+        return false;
+      } finally {
+        window.clearTimeout(timeoutId);
       }
     }
 
-    function readOnlineSessionToken() {
+    async function revokeWebSession() {
+      const account = readAccountPreview();
+      if (!webSessionAuthenticated && account?.provider !== "zamazen-online-account") return;
+
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), ACCOUNT_API_TIMEOUT_MS);
       try {
-        return String(sessionStorage.getItem(STORAGE_ACCOUNT_SESSION_TOKEN_KEY) || "").trim();
+        await fetch(`${ZAMAZEN_API_BASE_URL}/api/accounts/logout`, {
+          method: "POST",
+          headers: webSessionHeaders({ "Accept": "application/json" }),
+          credentials: "include",
+          cache: "no-store",
+          signal: controller.signal
+        });
       } catch (error) {
-        return "";
+        /* The local session is still cleared when the API is unavailable. */
+      } finally {
+        window.clearTimeout(timeoutId);
+        setWebSessionAuthenticated(false);
       }
     }
 
@@ -15393,17 +15590,18 @@
       try {
         const response = await fetch(`${ZAMAZEN_API_BASE_URL}/api/accounts/google`, {
           method: "POST",
-          headers: {
+          headers: webSessionHeaders({
             "Accept": "application/json",
             "Content-Type": "application/json"
-          },
+          }),
+          credentials: "include",
           cache: "no-store",
           signal: controller.signal,
           body: JSON.stringify({ idToken, nonce })
         });
         const payload = await response.json().catch(() => ({}));
 
-        if (response.ok && payload && payload.ok && payload.session?.token) {
+        if (response.ok && payload && payload.ok && payload.session?.expiresAt) {
           return { ok: true, payload };
         }
 
@@ -15445,7 +15643,7 @@
       const payload = result.payload || {};
       const profile = payload.profile || {};
       const now = new Date().toISOString();
-      writeOnlineSessionToken(payload.session.token);
+      setWebSessionAuthenticated(true);
       writeAccountPreview({
         name: profile.name || profile.emailMasked || "",
         nameDisplayCode: profile.name || profile.emailMasked ? "" : "googleAccount",
@@ -15616,13 +15814,51 @@
       }
     }
 
+    function toLocalSubmissionReceipt(draft = {}) {
+      const receipt = {};
+      ["type", "priority", "level", "publicThanks", "anonymous", "onlineTicketId", "onlineId", "onlineStatus", "createdAt"].forEach((key) => {
+        if (draft[key] !== undefined && draft[key] !== null) {
+          receipt[key] = draft[key];
+        }
+      });
+      return receipt;
+    }
+
+    function sanitizeStoredSubmissionReceipts(storageKey) {
+      try {
+        const stored = JSON.parse(localStorage.getItem(storageKey) || "[]");
+        const receipts = Array.isArray(stored)
+          ? stored.map(toLocalSubmissionReceipt).filter((receipt) => Object.keys(receipt).length > 0)
+          : [];
+        if (receipts.length > 0) {
+          localStorage.setItem(storageKey, JSON.stringify(receipts.slice(0, 5)));
+        } else {
+          localStorage.removeItem(storageKey);
+        }
+      } catch (error) {
+        localStorage.removeItem(storageKey);
+      }
+    }
+
+    function sanitizeSensitiveSubmissionStorage() {
+      sanitizeStoredSubmissionReceipts(STORAGE_CONTRIBUTIONS_KEY);
+      sanitizeStoredSubmissionReceipts(STORAGE_SUPPORT_TICKETS_KEY);
+    }
+
     function appendLocalDraft(storageKey, draft) {
+      const receipt = toLocalSubmissionReceipt(draft);
+      if (Object.keys(receipt).length === 0) return;
       try {
         const drafts = JSON.parse(localStorage.getItem(storageKey) || "[]");
-        drafts.unshift(draft);
-        localStorage.setItem(storageKey, JSON.stringify(drafts.slice(0, 5)));
+        const receipts = Array.isArray(drafts) ? drafts.map(toLocalSubmissionReceipt) : [];
+        receipts.unshift(receipt);
+        localStorage.setItem(storageKey, JSON.stringify(receipts.slice(0, 5)));
       } catch (error) {
-        localStorage.setItem(storageKey, JSON.stringify([draft]));
+        try {
+          localStorage.setItem(storageKey, JSON.stringify([receipt]));
+        } catch (storageError) {
+          /* Sensitive submission content is never retained as a storage fallback. */
+        }
       }
     }
 
@@ -15647,8 +15883,7 @@
     }
 
     async function submitSupportTicketOnline(draft) {
-      const token = readOnlineSessionToken();
-      if (!token) {
+      if (!webSessionAuthenticated) {
         return { ok: false, reason: "missing_session" };
       }
 
@@ -15658,11 +15893,11 @@
       try {
         const response = await fetch(`${ZAMAZEN_API_BASE_URL}/api/support/tickets`, {
           method: "POST",
-          headers: {
+          headers: webSessionHeaders({
             "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          },
+            "Content-Type": "application/json"
+          }),
+          credentials: "include",
           cache: "no-store",
           signal: controller.signal,
           body: JSON.stringify({
@@ -15682,7 +15917,7 @@
         }
 
         if (response.status === 401 || response.status === 403) {
-          writeOnlineSessionToken("");
+          setWebSessionAuthenticated(false);
           return { ok: false, reason: "missing_session" };
         }
 
@@ -15725,13 +15960,13 @@
     }
 
     async function fetchCommunityContributions() {
-      const token = readOnlineSessionToken();
-      if (!token) return { ok: false, reason: "missing_session", contributions: [] };
+      if (!webSessionAuthenticated) return { ok: false, reason: "missing_session", contributions: [] };
       const controller = new AbortController();
       const timeoutId = window.setTimeout(() => controller.abort(), SUPPORT_API_TIMEOUT_MS);
       try {
         const response = await fetch(`${ZAMAZEN_API_BASE_URL}/api/community/contributions`, {
-          headers: { "Accept": "application/json", "Authorization": `Bearer ${token}` },
+          headers: webSessionHeaders({ "Accept": "application/json" }),
+          credentials: "include",
           cache: "no-store",
           signal: controller.signal
         });
@@ -15764,14 +15999,14 @@
     }
 
     async function patchCommunityContribution(contributionId, updates) {
-      const token = readOnlineSessionToken();
-      if (!token || !contributionId) return { ok: false, reason: "missing_session" };
+      if (!webSessionAuthenticated || !contributionId) return { ok: false, reason: "missing_session" };
       const controller = new AbortController();
       const timeoutId = window.setTimeout(() => controller.abort(), SUPPORT_API_TIMEOUT_MS);
       try {
         const response = await fetch(`${ZAMAZEN_API_BASE_URL}/api/community/contributions/${encodeURIComponent(contributionId)}`, {
           method: "PATCH",
-          headers: { "Accept": "application/json", "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+          headers: webSessionHeaders({ "Accept": "application/json", "Content-Type": "application/json" }),
+          credentials: "include",
           cache: "no-store",
           signal: controller.signal,
           body: JSON.stringify(updates)
@@ -15787,8 +16022,7 @@
     }
 
     async function fetchCreatorSupportTickets() {
-      const token = readOnlineSessionToken();
-      if (!token) {
+      if (!webSessionAuthenticated) {
         return { ok: false, reason: "missing_session", tickets: [] };
       }
 
@@ -15798,10 +16032,8 @@
       try {
         const response = await fetch(`${ZAMAZEN_API_BASE_URL}/api/support/tickets?limit=40`, {
           method: "GET",
-          headers: {
-            "Accept": "application/json",
-            "Authorization": `Bearer ${token}`
-          },
+          headers: webSessionHeaders({ "Accept": "application/json" }),
+          credentials: "include",
           cache: "no-store",
           signal: controller.signal
         });
@@ -15812,7 +16044,7 @@
         }
 
         if (response.status === 401) {
-          writeOnlineSessionToken("");
+          setWebSessionAuthenticated(false);
           updateUserPanelPreview();
           return { ok: false, reason: "missing_session", tickets: [] };
         }
@@ -15830,8 +16062,7 @@
     }
 
     async function patchCreatorSupportTicket(ticketId, updates) {
-      const token = readOnlineSessionToken();
-      if (!token || !ticketId) {
+      if (!webSessionAuthenticated || !ticketId) {
         return { ok: false, reason: "missing_session" };
       }
 
@@ -15841,11 +16072,11 @@
       try {
         const response = await fetch(`${ZAMAZEN_API_BASE_URL}/api/support/tickets/${encodeURIComponent(ticketId)}`, {
           method: "PATCH",
-          headers: {
+          headers: webSessionHeaders({
             "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          },
+            "Content-Type": "application/json"
+          }),
+          credentials: "include",
           cache: "no-store",
           signal: controller.signal,
           body: JSON.stringify(updates)
@@ -15857,7 +16088,7 @@
         }
 
         if (response.status === 401) {
-          writeOnlineSessionToken("");
+          setWebSessionAuthenticated(false);
           updateUserPanelPreview();
           return { ok: false, reason: "missing_session" };
         }
@@ -16051,7 +16282,7 @@
     let neoChatLastUnknownReply = "";
 
     function getNeoChatCopy() {
-      return NEO_CHAT_COPY[getCurrentLanguage()] || NEO_CHAT_COPY.es;
+      return NEO_CHAT_COPY[getCurrentLanguage()];
     }
 
     function updateNeoChatCopy() {
@@ -16152,7 +16383,10 @@
           headers: { "Accept": "application/json", "Content-Type": "application/json" },
           cache: "no-store",
           signal: controller.signal,
-          body: JSON.stringify({ message, context: { edition: "web" } })
+          body: JSON.stringify({
+            message,
+            context: { edition: "web", languageCode: getCurrentLanguage() }
+          })
         });
         const payload = await response.json().catch(() => ({}));
         return response.ok && payload?.ok && payload.reply
@@ -16489,8 +16723,11 @@
 
     if (userPanelLogout) {
       userPanelLogout.addEventListener("click", () => {
+        void revokeWebSession();
         localStorage.removeItem(STORAGE_ACCOUNT_KEY);
-        writeOnlineSessionToken("");
+        localStorage.removeItem(STORAGE_CONTRIBUTIONS_KEY);
+        localStorage.removeItem(STORAGE_SUPPORT_TICKETS_KEY);
+        setWebSessionAuthenticated(false);
         updateUserPanelPreview();
         closeUserPanel();
       });
@@ -16626,12 +16863,11 @@
         const password = String(formData.get("password") || "");
         const email = String(formData.get("email") || "").trim().toLowerCase();
 
-        const setStatus = (key) => {
-          loginStatus.textContent =
-            getTranslationValue(selectedLanguage, key) ||
-            getTranslationValue("es", key) ||
-            "";
-        };
+            const setStatus = (key) => {
+              loginStatus.textContent =
+                getTranslationValue(selectedLanguage, key) ||
+                "";
+            };
 
         setStatus("auth.loginPending");
         loginForm.setAttribute("aria-busy", "true");
@@ -16646,19 +16882,20 @@
         try {
           const response = await fetch(`${ZAMAZEN_API_BASE_URL}/api/accounts/login`, {
             method: "POST",
-            headers: {
+            headers: webSessionHeaders({
               "Accept": "application/json",
               "Content-Type": "application/json"
-            },
+            }),
+            credentials: "include",
             cache: "no-store",
             signal: controller.signal,
             body: JSON.stringify({ email, password })
           });
           const payload = await response.json().catch(() => ({}));
 
-          if (response.ok && payload && payload.ok) {
+          if (response.ok && payload && payload.ok && payload.session?.expiresAt) {
             const profile = payload.profile || {};
-            writeOnlineSessionToken(payload.session?.token || "");
+            setWebSessionAuthenticated(true);
             writeAccountPreview({
               name: profile.name || email,
               email: profile.email || email,
@@ -16677,15 +16914,15 @@
           }
 
           if (response.status === 401 && payload && payload.message === "two_factor_required") {
-            writeOnlineSessionToken("");
+            setWebSessionAuthenticated(false);
             setStatus("auth.twoFactorRequired");
             return;
           }
 
-          writeOnlineSessionToken("");
+          setWebSessionAuthenticated(false);
           setStatus("auth.loginError");
         } catch (error) {
-          writeOnlineSessionToken("");
+          setWebSessionAuthenticated(false);
           setStatus("auth.loginOffline");
         } finally {
           window.clearTimeout(timeoutId);
@@ -16703,10 +16940,9 @@
       recoveryForm.addEventListener("submit", (event) => {
         event.preventDefault();
         const selectedLanguage = document.documentElement.lang || localStorage.getItem(STORAGE_LANGUAGE_KEY) || "es";
-        recoveryStatus.textContent =
-          getTranslationValue(selectedLanguage, "auth.recoverGuidance") ||
-          getTranslationValue("es", "auth.recoverGuidance") ||
-          "";
+            recoveryStatus.textContent =
+              getTranslationValue(selectedLanguage, "auth.recoverGuidance") ||
+              "";
       });
     }
 
@@ -16726,12 +16962,11 @@
           provider: "zamazen-account-request-local-fallback"
         };
 
-        const setStatus = (key) => {
-          accountStatus.textContent =
-            getTranslationValue(selectedLanguage, key) ||
-            getTranslationValue("es", key) ||
-            "";
-        };
+            const setStatus = (key) => {
+              accountStatus.textContent =
+                getTranslationValue(selectedLanguage, key) ||
+                "";
+            };
 
         setStatus("account.pending");
         accountForm.setAttribute("aria-busy", "true");
@@ -16746,10 +16981,11 @@
         try {
           const response = await fetch(`${ZAMAZEN_API_BASE_URL}/api/accounts/register`, {
             method: "POST",
-            headers: {
+            headers: webSessionHeaders({
               "Accept": "application/json",
               "Content-Type": "application/json"
-            },
+            }),
+            credentials: "include",
             cache: "no-store",
             signal: controller.signal,
             body: JSON.stringify({
@@ -16760,8 +16996,8 @@
           });
           const payload = await response.json().catch(() => ({}));
 
-          if (response.ok && payload && payload.ok) {
-            writeOnlineSessionToken(payload.session?.token || "");
+          if (response.ok && payload && payload.ok && payload.session?.expiresAt) {
+            setWebSessionAuthenticated(true);
             writeAccountPreview({
               ...account,
               provider: "zamazen-online-account",
@@ -16783,10 +17019,10 @@
             return;
           }
 
-          writeOnlineSessionToken("");
+          setWebSessionAuthenticated(false);
           setStatus("account.error");
         } catch (error) {
-          writeOnlineSessionToken("");
+          setWebSessionAuthenticated(false);
           writeAccountPreview({
             ...account,
             attemptedOnlineAt: new Date().toISOString(),
@@ -16861,8 +17097,10 @@
     initializeNeoChat();
     initializeTextSize();
     initializeCookieConsent();
+    sanitizeSensitiveSubmissionStorage();
     renderCurrentRoute({ preserveScroll: true });
     updateUserPanelPreview();
+    void hydrateWebSession();
     initializeGoogleIdentityButtons({ silent: true });
     setLiveMotion(localStorage.getItem(STORAGE_MOTION_KEY) !== "off");
     addVisibleCadence(updateClock, 1000);
